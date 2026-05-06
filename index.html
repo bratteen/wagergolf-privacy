@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wager Golf — Integritetspolicy</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      color: #171411;
+      line-height: 1.6;
+      background: #f5f1e8;
+    }
+    h1 {
+      font-size: 32px;
+      color: #0a2e21;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 20px;
+      color: #0a3d2c;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+    h3 {
+      font-size: 16px;
+      color: #0a3d2c;
+      margin-top: 20px;
+    }
+    .meta {
+      font-size: 14px;
+      color: #736b62;
+      margin-bottom: 32px;
+    }
+    .lang-toggle {
+      margin-bottom: 24px;
+    }
+    .lang-toggle a {
+      color: #c9a961;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    a {
+      color: #16533c;
+    }
+    code {
+      background: #ebe4d3;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid #d9cfb8;
+      font-size: 13px;
+      color: #736b62;
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-toggle">
+    <strong>Svenska</strong> · <a href="#english">English</a>
+  </div>
+
+  <h1>Integritetspolicy för Wager Golf</h1>
+  <p class="meta">Senast uppdaterad: 6 maj 2026 · Version 1.0</p>
+
+  <h2>Sammanfattning</h2>
+  <p>
+    Wager Golf är en app för att hålla koll på vadslagning mellan golfkompisar.
+    All din data sparas <strong>lokalt på din enhet</strong>. Vi har ingen
+    server, samlar inte in personuppgifter, spårar dig inte, och delar
+    ingenting med tredje part (med ett undantag: vi hämtar publik bandata
+    från GolfAPI.io — inga personuppgifter skickas dit).
+  </p>
+
+  <h2>Vilken data lagras lokalt på enheten</h2>
+  <p>
+    Följande sparas i appens lokala lagring (AsyncStorage) på din telefon
+    och försvinner aldrig till en server:
+  </p>
+  <ul>
+    <li>
+      <strong>Profilinformation</strong>: namn, golfhandicap, valfritt
+      mobilnummer (används bara för Swish-länkar mellan kompisar i
+      uppgörelse-vyn).
+    </li>
+    <li>
+      <strong>Gäst-spelare du lägger till</strong>: namn och eventuellt
+      mobilnummer för dina kompisar.
+    </li>
+    <li>
+      <strong>Spelhistorik</strong>: scorekort, vinster/förluster, datum
+      och bana för dina avslutade rundor.
+    </li>
+    <li>
+      <strong>Pågående runda</strong>: tillfälligt sparad så du kan stänga
+      appen utan att tappa scoren.
+    </li>
+    <li>
+      <strong>Cachad bandata</strong>: par, stroke-index och GPS-koordinater
+      för svenska golfbanor (hämtas en gång från GolfAPI.io).
+    </li>
+  </ul>
+
+  <h2>Behörigheter (permissions)</h2>
+  <ul>
+    <li>
+      <strong>Plats (GPS)</strong>: används bara om du själv aktiverar
+      "GPS-avstånd"-funktionen i appen för att se avstånd till greenen.
+      Position används endast lokalt — den skickas aldrig någonstans och
+      sparas inte mellan sessioner.
+    </li>
+  </ul>
+  <p>
+    Inga andra känsliga behörigheter (kamera, mikrofon, kontakter, foton,
+    aviseringar) används.
+  </p>
+
+  <h2>Tredjepartstjänster</h2>
+  <h3>GolfAPI.io</h3>
+  <p>
+    Vi anropar <a href="https://www.golfapi.io">GolfAPI.io</a> för att hämta
+    publik information om svenska golfbanor (par, stroke-index, GPS-
+    koordinater). Inga personuppgifter eller spelhistorik skickas till
+    GolfAPI.io. Anropen sker bara när du väljer en bana för första gången
+    eller aktiverar GPS-avstånd.
+  </p>
+  <h3>Swish</h3>
+  <p>
+    Wager Golf integrerar inte direkt med Swish. När du trycker "Betala via
+    Swish" eller "Visa QR-kod" i uppgörelse-vyn skapar appen en
+    <code>swish://</code>-länk på din enhet som öppnar Swish-appen med
+    förifyllt belopp och meddelande. Inga uppgifter skickas via våra system
+    — kommunikationen är direkt mellan dig och Swish.
+  </p>
+
+  <h2>Vi spårar dig inte</h2>
+  <p>
+    Wager Golf använder ingen analyseringstjänst (Firebase, Mixpanel, Sentry,
+    Google Analytics, etc.) och spårar inte din användning. Vi visar inga
+    annonser. Vi har inga cookies eller liknande tekniker.
+  </p>
+
+  <h2>Dina rättigheter</h2>
+  <p>
+    Eftersom all data finns lokalt på din enhet har du fullständig kontroll:
+  </p>
+  <ul>
+    <li>
+      <strong>Visa din data</strong>: gå till Profil-fliken i appen.
+    </li>
+    <li>
+      <strong>Redigera</strong>: tap på din profil för att ändra namn, hcp
+      eller telefonnummer.
+    </li>
+    <li>
+      <strong>Ta bort all data</strong>: gå till Profil-fliken och tryck
+      "Ta bort all data". Allt raderas omedelbart från enheten.
+    </li>
+    <li>
+      <strong>Avinstallera appen</strong>: tar bort all data permanent.
+    </li>
+  </ul>
+
+  <h2>Barn under 13 år</h2>
+  <p>
+    Wager Golf är inte avsedd för barn under 13 år. Eftersom appen handlar om
+    pengarvad mellan vuxna golfare har vi rekommenderad åldersgräns 17+ i
+    App Store.
+  </p>
+
+  <h2>Ändringar i policyn</h2>
+  <p>
+    Om vi gör väsentliga ändringar uppdateras "senast uppdaterad"-datumet
+    överst. Stora ändringar (t.ex. om vi någonsin skulle introducera en
+    server eller analytics) meddelas i appen.
+  </p>
+
+  <h2>Kontakt</h2>
+  <p>
+    Frågor om denna policy eller hur dina data hanteras?<br>
+    Mejla <a href="mailto:bratt.gustaf@gmail.com">bratt.gustaf@gmail.com</a>.
+  </p>
+
+  <hr style="margin-top: 60px; border: none; border-top: 1px solid #d9cfb8;">
+
+  <h1 id="english">Privacy Policy — Wager Golf</h1>
+  <p class="meta">Last updated: May 6, 2026 · Version 1.0</p>
+
+  <h2>Summary</h2>
+  <p>
+    Wager Golf is an app for tracking wagers between golf friends. All your
+    data is stored <strong>locally on your device</strong>. We have no
+    server, collect no personal data, do not track you, and share nothing
+    with third parties (with one exception: we fetch public course data from
+    GolfAPI.io — no personal information is sent there).
+  </p>
+
+  <h2>What data is stored locally on your device</h2>
+  <ul>
+    <li>
+      <strong>Profile</strong>: name, golf handicap, optional phone number
+      (used only for Swish links between friends in the settlement view).
+    </li>
+    <li>
+      <strong>Guest players you add</strong>: name and optional phone number
+      for your friends.
+    </li>
+    <li>
+      <strong>Round history</strong>: scorecards, wins/losses, dates and
+      courses for your completed rounds.
+    </li>
+    <li>
+      <strong>Active round</strong>: temporarily saved so you can close the
+      app without losing your score.
+    </li>
+    <li>
+      <strong>Cached course data</strong>: par, stroke index and GPS
+      coordinates for Swedish golf courses (fetched once from GolfAPI.io).
+    </li>
+  </ul>
+
+  <h2>Permissions</h2>
+  <ul>
+    <li>
+      <strong>Location (GPS)</strong>: used only if you explicitly enable
+      "GPS distance" in the app to see distance to the green. Location is
+      used locally only — never sent anywhere, never persisted between
+      sessions.
+    </li>
+  </ul>
+  <p>
+    No other sensitive permissions (camera, microphone, contacts, photos,
+    notifications) are used.
+  </p>
+
+  <h2>Third-party services</h2>
+  <h3>GolfAPI.io</h3>
+  <p>
+    We call <a href="https://www.golfapi.io">GolfAPI.io</a> to fetch public
+    information about Swedish golf courses (par, stroke index, GPS
+    coordinates). No personal information or game history is sent to
+    GolfAPI.io. Calls are made only when you select a course for the first
+    time or activate GPS distance.
+  </p>
+  <h3>Swish</h3>
+  <p>
+    Wager Golf does not integrate directly with Swish. When you tap "Pay via
+    Swish" or "Show QR code" in the settlement view, the app creates a
+    <code>swish://</code> link on your device that opens the Swish app with
+    pre-filled amount and message. No data is sent through our systems —
+    the communication is directly between you and Swish.
+  </p>
+
+  <h2>We do not track you</h2>
+  <p>
+    Wager Golf uses no analytics service (Firebase, Mixpanel, Sentry, Google
+    Analytics, etc.) and does not track your usage. We display no ads. We
+    have no cookies or similar technologies.
+  </p>
+
+  <h2>Your rights</h2>
+  <p>
+    Since all data is local on your device, you have full control:
+  </p>
+  <ul>
+    <li>
+      <strong>View your data</strong>: go to the Profile tab in the app.
+    </li>
+    <li>
+      <strong>Edit</strong>: tap your profile to change name, handicap, or
+      phone number.
+    </li>
+    <li>
+      <strong>Delete all data</strong>: go to the Profile tab and tap
+      "Delete all data". Everything is erased immediately from the device.
+    </li>
+    <li>
+      <strong>Uninstall the app</strong>: removes all data permanently.
+    </li>
+  </ul>
+
+  <h2>Children under 13</h2>
+  <p>
+    Wager Golf is not intended for children under 13. Since the app deals
+    with monetary wagers between adult golfers, we use a 17+ recommended
+    age rating in the App Store.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    If we make material changes, the "last updated" date at the top is
+    updated. Major changes (e.g., if we ever introduce a server or
+    analytics) will be communicated in the app.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions about this policy or how your data is handled?<br>
+    Email <a href="mailto:bratt.gustaf@gmail.com">bratt.gustaf@gmail.com</a>.
+  </p>
+
+  <div class="footer">
+    Wager Golf · Integritetspolicy / Privacy Policy · 2026
+  </div>
+</body>
+</html>
