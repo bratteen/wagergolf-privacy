@@ -67,7 +67,7 @@
   </div>
 
   <h1>Integritetspolicy för Wager Golf</h1>
-  <p class="meta">Senast uppdaterad: 6 maj 2026 · Version 1.0</p>
+  <p class="meta">Senast uppdaterad: 7 maj 2026 · Version 1.1</p>
 
   <h2>Sammanfattning</h2>
   <p>
@@ -122,13 +122,22 @@
   </p>
 
   <h2>Tredjepartstjänster</h2>
+  <h3>Wager Golf-server (Cloudflare Worker)</h3>
+  <p>
+    Vi har en liten egen serverkomponent (en Cloudflare Worker) som proxar
+    bana-data från GolfAPI.io. När appen behöver hämta en bana skickas
+    följande till denna server: ett <strong>anonymt slumpmässigt enhets-id</strong>
+    (genereras lokalt på din enhet, kopplas inte till namn, telefon eller
+    annan identifierande info) och ett <strong>kurs-ID</strong> för banan
+    du valt. Enhets-id används enbart för rate-limiting, kursdata cachas
+    för att minska upstream-anrop. Inga personuppgifter, spelhistorik eller
+    positionsdata skickas till servern.
+  </p>
   <h3>GolfAPI.io</h3>
   <p>
-    Vi anropar <a href="https://www.golfapi.io">GolfAPI.io</a> för att hämta
-    publik information om svenska golfbanor (par, stroke-index, GPS-
-    koordinater). Inga personuppgifter eller spelhistorik skickas till
-    GolfAPI.io. Anropen sker bara när du väljer en bana för första gången
-    eller aktiverar GPS-avstånd.
+    Servern anropar i sin tur <a href="https://www.golfapi.io">GolfAPI.io</a>
+    för publik banadata (par, stroke-index, GPS-koordinater). Inga
+    personuppgifter eller enhets-id vidarebefordras till GolfAPI.io.
   </p>
   <h3>Swish</h3>
   <p>
@@ -190,7 +199,7 @@
   <hr style="margin-top: 60px; border: none; border-top: 1px solid #d9cfb8;">
 
   <h1 id="english">Privacy Policy · Wager Golf</h1>
-  <p class="meta">Last updated: May 6, 2026 · Version 1.0</p>
+  <p class="meta">Last updated: May 7, 2026 · Version 1.1</p>
 
   <h2>Summary</h2>
   <p>
@@ -240,13 +249,23 @@
   </p>
 
   <h2>Third-party services</h2>
+  <h3>Wager Golf server (Cloudflare Worker)</h3>
+  <p>
+    We operate a small server component (a Cloudflare Worker) that proxies
+    course data from GolfAPI.io. When the app needs course data, the
+    following is sent to this server: an <strong>anonymous random device
+    ID</strong> (generated locally on your device, not linked to your name,
+    phone number, or other identifying info) and the <strong>course ID</strong>
+    of the course you selected. The device ID is used solely for rate-
+    limiting, and course data is cached to reduce upstream calls. No
+    personal information, game history, or location data is sent to the
+    server.
+  </p>
   <h3>GolfAPI.io</h3>
   <p>
-    We call <a href="https://www.golfapi.io">GolfAPI.io</a> to fetch public
-    information about Swedish golf courses (par, stroke index, GPS
-    coordinates). No personal information or game history is sent to
-    GolfAPI.io. Calls are made only when you select a course for the first
-    time or activate GPS distance.
+    Our server in turn calls <a href="https://www.golfapi.io">GolfAPI.io</a>
+    for public Swedish course data (par, stroke index, GPS coordinates).
+    No personal information or device ID is forwarded to GolfAPI.io.
   </p>
   <h3>Swish</h3>
   <p>
