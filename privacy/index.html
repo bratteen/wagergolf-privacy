@@ -67,43 +67,90 @@
   </div>
 
   <h1>Integritetspolicy för Wager Golf</h1>
-  <p class="meta">Senast uppdaterad: 7 maj 2026 · Version 1.1</p>
+  <p class="meta">Senast uppdaterad: 18 maj 2026 · Version 2.0</p>
 
   <h2>Sammanfattning</h2>
   <p>
     Wager Golf är en app för att hålla koll på vadslagning mellan golfkompisar.
-    All din data sparas <strong>lokalt på din enhet</strong>. Vi har ingen
-    server, samlar inte in personuppgifter, spårar dig inte, och delar
-    ingenting med tredje part (med ett undantag: vi hämtar publik bandata
-    från GolfAPI.io. Inga personuppgifter skickas dit).
+    För att kunna spela live mellan flera enheter, skicka push-notiser, och
+    dela rundor med vänner sparar vi viss data på en server hos
+    <strong>Supabase</strong> (EU-baserad). Du loggar in med Apple Sign-In.
+    Vi spårar dig inte, visar inga annonser, och delar ingen data med tredje
+    part i marknadsföringssyfte. Du kan när som helst radera ditt konto från
+    appen.
   </p>
 
-  <h2>Vilken data lagras lokalt på enheten</h2>
-  <p>
-    Följande sparas i appens lokala lagring (AsyncStorage) på din telefon
-    och försvinner aldrig till en server:
-  </p>
+  <h2>Vilken data vi samlar in</h2>
+
+  <h3>Profil</h3>
   <ul>
     <li>
-      <strong>Profilinformation</strong>: namn, golfhandicap, valfritt
-      mobilnummer (används bara för Swish-länkar mellan kompisar i
-      uppgörelse-vyn).
+      <strong>Namn (display name)</strong>: visas för dig själv och dina
+      vänner i appen.
     </li>
     <li>
-      <strong>Gäst-spelare du lägger till</strong>: namn och eventuellt
-      mobilnummer för dina kompisar.
+      <strong>Handle</strong> (unik <code>@användarnamn</code>): valt vid
+      registrering, används för att kompisar ska kunna hitta dig.
     </li>
     <li>
-      <strong>Spelhistorik</strong>: scorekort, vinster/förluster, datum
-      och bana för dina avslutade rundor.
+      <strong>Handicap</strong>: golf-handicap, används för WHS-baserad
+      slag-fördelning i avräkningen.
     </li>
     <li>
-      <strong>Pågående runda</strong>: tillfälligt sparad så du kan stänga
-      appen utan att tappa scoren.
+      <strong>Kön (m/w)</strong>: krävs för korrekt slope/CR-beräkning
+      eftersom röd tee oftast har separata värden för damer.
     </li>
     <li>
-      <strong>Cachad bandata</strong>: par, stroke-index och GPS-koordinater
-      för svenska golfbanor (hämtas en gång från GolfAPI.io).
+      <strong>Mobilnummer</strong> (valfritt): används bara för Swish-länkar
+      mellan dig och dina vänner i uppgörelse-vyn. Visas bara för accepterade
+      vänner.
+    </li>
+    <li>
+      <strong>Profilbild</strong> (valfri): laddas upp till Supabase Storage
+      och visas för dig + dina vänner i appen.
+    </li>
+  </ul>
+
+  <h3>Identifierare</h3>
+  <ul>
+    <li>
+      <strong>Apple Sign-In identifier</strong>: anonym ID från Apple som
+      kopplar din inloggning till ditt konto. Vi får ingen email om du valt
+      "Hide my email" hos Apple.
+    </li>
+    <li>
+      <strong>Push-notification-token</strong>: en handle från Expo Push
+      Service som låter oss skicka notiser till din telefon. Innehåller
+      ingen personidentifierande information i sig.
+    </li>
+  </ul>
+
+  <h3>Spelaktivitet</h3>
+  <ul>
+    <li>
+      <strong>Pågående rundor</strong>: bana, valda spelformat, insatser,
+      poäng per hål, deltagare. Synliga för dig själv, dina deltagare och
+      eventuellt vänner som du delar rundan med.
+    </li>
+    <li>
+      <strong>Spelhistorik</strong>: avslutade rundor, vinster/förluster,
+      datum och bana. Sparas både lokalt på enheten och på servern.
+    </li>
+    <li>
+      <strong>Cheers och kommentarer</strong>: reaktioner och meddelanden
+      som du eller dina vänner skickar på en runda.
+    </li>
+  </ul>
+
+  <h3>Sociala relationer</h3>
+  <ul>
+    <li>
+      <strong>Vänskapsrelationer</strong>: vilka konton du är vän med på
+      Wager Golf. Vänskap kräver ömsesidigt accept.
+    </li>
+    <li>
+      <strong>Notiser-inställningar</strong>: vilka push-notiser du valt
+      att ta emot.
     </li>
   </ul>
 
@@ -112,125 +159,238 @@
     <li>
       <strong>Plats (GPS)</strong>: används bara om du själv aktiverar
       "GPS-avstånd"-funktionen i appen för att se avstånd till greenen.
-      Position används endast lokalt. Den skickas aldrig någonstans och
-      sparas inte mellan sessioner.
+      Position används endast lokalt på din enhet.
+    </li>
+    <li>
+      <strong>Foton</strong>: krävs om du vill välja en profilbild eller
+      lägga till en bild på gänget i ett delat resultatkort.
+    </li>
+    <li>
+      <strong>Kamera</strong>: krävs om du vill ta en ny bild för
+      profilbild eller resultatkort istället för att välja en befintlig.
+    </li>
+    <li>
+      <strong>Push-notiser</strong>: krävs för att skicka aviseringar om
+      vänners birdies, kommentarer, vänförfrågningar, etc. Du kan toggla av
+      enskilda kategorier i appens notis-inställningar.
     </li>
   </ul>
+
+  <h2>Var data lagras</h2>
   <p>
-    Inga andra känsliga behörigheter (kamera, mikrofon, kontakter, foton,
-    aviseringar) används.
+    Appen lagrar data på två platser:
   </p>
+  <ul>
+    <li>
+      <strong>Lokalt på din enhet</strong> (AsyncStorage): cache av profil,
+      bana-data, pågående runda. Försvinner om du avinstallerar appen.
+    </li>
+    <li>
+      <strong>Supabase (EU-baserad server)</strong>: din profil, dina
+      avslutade rundor, vänskaps-relationer, cheers, kommentarer och
+      profilbild. Detta är vad som synkas mellan dina enheter och som dina
+      vänner kan se delar av enligt åtkomstreglerna.
+    </li>
+  </ul>
 
   <h2>Tredjepartstjänster</h2>
-  <h3>Wager Golf-server (Cloudflare Worker)</h3>
+
+  <h3>Supabase</h3>
   <p>
-    Vi har en liten egen serverkomponent (en Cloudflare Worker) som proxar
-    bana-data från GolfAPI.io. När appen behöver hämta en bana skickas
-    följande till denna server: ett <strong>anonymt slumpmässigt enhets-id</strong>
-    (genereras lokalt på din enhet, kopplas inte till namn, telefon eller
-    annan identifierande info) och ett <strong>kurs-ID</strong> för banan
-    du valt. Enhets-id används enbart för rate-limiting, kursdata cachas
-    för att minska upstream-anrop. Inga personuppgifter, spelhistorik eller
-    positionsdata skickas till servern.
+    All molnlagrad data ligger hos <a href="https://supabase.com">Supabase</a>
+    i EU-region. Supabase fungerar som vår backend (databas, autentisering,
+    Storage för profilbilder). De har egen integritetspolicy som du hittar
+    på deras webbplats.
   </p>
+
+  <h3>Apple Sign-In</h3>
+  <p>
+    Vi använder Apple Sign-In för inloggning. Apple delar enbart de uppgifter
+    du själv godkänner (namn, eventuellt email). Om du valt "Hide my email"
+    får vi en anonym relay-adress, inte din riktiga email.
+  </p>
+
+  <h3>Expo Push Service / APNs</h3>
+  <p>
+    Push-notiser levereras via <a href="https://docs.expo.dev/push-notifications/overview/">
+    Expo Push Service</a> som vidarebefordrar till Apple Push Notification
+    service (APNs). Vi skickar bara notis-innehåll (typ "Natasha gjorde
+    birdie!") + din push-token. Inget annat personligt data går genom dessa
+    tjänster.
+  </p>
+
   <h3>GolfAPI.io</h3>
   <p>
-    Servern anropar i sin tur <a href="https://www.golfapi.io">GolfAPI.io</a>
-    för publik banadata (par, stroke-index, GPS-koordinater). Inga
-    personuppgifter eller enhets-id vidarebefordras till GolfAPI.io.
+    Bandata (par, stroke-index, GPS-koordinater för svenska golfbanor)
+    hämtas via vår egen Cloudflare Worker-proxy som anropar
+    <a href="https://www.golfapi.io">GolfAPI.io</a>. Inga personuppgifter
+    eller spelhistorik skickas dit, bara bana-ID och ett anonymt device-ID
+    för rate-limiting.
   </p>
+
   <h3>Swish</h3>
   <p>
     Wager Golf integrerar inte direkt med Swish. När du trycker "Betala via
     Swish" eller "Visa QR-kod" i uppgörelse-vyn skapar appen en
     <code>swish://</code>-länk på din enhet som öppnar Swish-appen med
     förifyllt belopp och meddelande. Inga uppgifter skickas via våra system.
-    Kommunikationen är direkt mellan dig och Swish.
   </p>
 
   <h2>Vi spårar dig inte</h2>
   <p>
     Wager Golf använder ingen analyseringstjänst (Firebase, Mixpanel, Sentry,
     Google Analytics, etc.) och spårar inte din användning. Vi visar inga
-    annonser. Vi har inga cookies eller liknande tekniker.
+    annonser och säljer aldrig data till tredje part. Vi har inga cookies
+    eller liknande tekniker.
   </p>
 
-  <h2>Dina rättigheter</h2>
+  <h2>Dina rättigheter (GDPR)</h2>
   <p>
-    Eftersom all data finns lokalt på din enhet har du fullständig kontroll:
+    Du har följande rättigheter enligt EU-dataskyddsförordningen:
   </p>
   <ul>
     <li>
-      <strong>Visa din data</strong>: gå till Profil-fliken i appen.
+      <strong>Visa din data</strong>: gå till Profil-fliken i appen för att
+      se din profil och historik.
     </li>
     <li>
-      <strong>Redigera</strong>: tap på din profil för att ändra namn, hcp
-      eller telefonnummer.
+      <strong>Redigera</strong>: tap på profil för att ändra namn, hcp,
+      telefon, kön eller bild. Tap på "Notiser" för att toggla aviseringar.
     </li>
     <li>
-      <strong>Ta bort all data</strong>: gå till Profil-fliken och tryck
-      "Ta bort all data". Allt raderas omedelbart från enheten.
+      <strong>Radera ditt konto</strong>: gå till Profil-fliken och tryck
+      "Ta bort all data". Detta raderar all din data både lokalt på enheten
+      och från Supabase. Kan inte ångras.
     </li>
     <li>
-      <strong>Avinstallera appen</strong>: tar bort all data permanent.
+      <strong>Exportera data</strong>: kontakta oss via mejl (se nedan) om
+      du vill ha en kopia av din data i strukturerat format.
+    </li>
+    <li>
+      <strong>Begära rättelse eller invändning</strong>: kontakta oss om
+      du anser att något är fel eller vill invända mot behandlingen.
+    </li>
+    <li>
+      <strong>Klaga till tillsynsmyndighet</strong>: i Sverige är detta
+      <a href="https://www.imy.se">Integritetsskyddsmyndigheten (IMY)</a>.
     </li>
   </ul>
 
+  <h2>Hur länge data sparas</h2>
+  <p>
+    Data sparas så länge ditt konto är aktivt. När du raderar ditt konto
+    raderas alla dina personuppgifter från Supabase. Activity-rader som
+    refererar till dig (t.ex. en notis till en vän om att du startade en
+    runda) får ligga kvar i deras feed med ditt namn anonymiserat.
+  </p>
+
   <h2>Barn under 13 år</h2>
   <p>
-    Wager Golf är inte avsedd för barn under 13 år. Eftersom appen handlar om
-    pengarvad mellan vuxna golfare har vi rekommenderad åldersgräns 17+ i
-    App Store.
+    Wager Golf är inte avsedd för barn under 13 år. Eftersom appen handlar
+    om pengarvad mellan vuxna golfare har vi rekommenderad åldersgräns 17+
+    i App Store.
   </p>
 
   <h2>Ändringar i policyn</h2>
   <p>
     Om vi gör väsentliga ändringar uppdateras "senast uppdaterad"-datumet
-    överst. Stora ändringar (t.ex. om vi någonsin skulle introducera en
-    server eller analytics) meddelas i appen.
+    överst och versionsnumret bumpas. Stora ändringar (t.ex. nya
+    tredjepartstjänster eller datainsamlings-kategorier) meddelas i appen.
   </p>
 
   <h2>Kontakt</h2>
   <p>
-    Frågor om denna policy eller hur dina data hanteras?<br>
+    Frågor om denna policy, hur dina data hanteras, eller önskemål om
+    radering/export?<br>
     Mejla <a href="mailto:bratt.gustaf@gmail.com">bratt.gustaf@gmail.com</a>.
   </p>
 
   <hr style="margin-top: 60px; border: none; border-top: 1px solid #d9cfb8;">
 
   <h1 id="english">Privacy Policy · Wager Golf</h1>
-  <p class="meta">Last updated: May 7, 2026 · Version 1.1</p>
+  <p class="meta">Last updated: May 18, 2026 · Version 2.0</p>
 
   <h2>Summary</h2>
   <p>
-    Wager Golf is an app for tracking wagers between golf friends. All your
-    data is stored <strong>locally on your device</strong>. We have no
-    server, collect no personal data, do not track you, and share nothing
-    with third parties (with one exception: we fetch public course data from
-    GolfAPI.io. No personal information is sent there).
+    Wager Golf is an app for tracking wagers between golf friends. To enable
+    multi-device live scoring, push notifications, and sharing rounds with
+    friends, we store some data on a server hosted by
+    <strong>Supabase</strong> (EU-based). You sign in with Apple Sign-In.
+    We do not track you, show no ads, and share no data with third parties
+    for marketing purposes. You can delete your account from the app at any
+    time.
   </p>
 
-  <h2>What data is stored locally on your device</h2>
+  <h2>What data we collect</h2>
+
+  <h3>Profile</h3>
   <ul>
     <li>
-      <strong>Profile</strong>: name, golf handicap, optional phone number
-      (used only for Swish links between friends in the settlement view).
+      <strong>Display name</strong>: shown to you and your friends in the app.
     </li>
     <li>
-      <strong>Guest players you add</strong>: name and optional phone number
-      for your friends.
+      <strong>Handle</strong> (unique <code>@username</code>): chosen at
+      registration, used so friends can find you.
     </li>
     <li>
-      <strong>Round history</strong>: scorecards, wins/losses, dates and
-      courses for your completed rounds.
+      <strong>Handicap</strong>: golf handicap, used for WHS-based stroke
+      allocation in settlement.
     </li>
     <li>
-      <strong>Active round</strong>: temporarily saved so you can close the
-      app without losing your score.
+      <strong>Gender (m/w)</strong>: required for correct slope/CR
+      calculation since the red tee usually has separate values for women.
     </li>
     <li>
-      <strong>Cached course data</strong>: par, stroke index and GPS
-      coordinates for Swedish golf courses (fetched once from GolfAPI.io).
+      <strong>Phone number</strong> (optional): used only for Swish links
+      between you and your friends in the settlement view. Visible only to
+      accepted friends.
+    </li>
+    <li>
+      <strong>Profile picture</strong> (optional): uploaded to Supabase
+      Storage and shown to you + your friends in the app.
+    </li>
+  </ul>
+
+  <h3>Identifiers</h3>
+  <ul>
+    <li>
+      <strong>Apple Sign-In identifier</strong>: anonymous ID from Apple
+      that links your sign-in to your account. We do not receive an email if
+      you chose "Hide my email" with Apple.
+    </li>
+    <li>
+      <strong>Push notification token</strong>: a handle from Expo Push
+      Service that lets us deliver notifications to your phone. Contains no
+      personally identifying information on its own.
+    </li>
+  </ul>
+
+  <h3>Game activity</h3>
+  <ul>
+    <li>
+      <strong>Active rounds</strong>: course, selected game formats, stakes,
+      scores per hole, participants. Visible to you, your participants and
+      potentially friends you share the round with.
+    </li>
+    <li>
+      <strong>Round history</strong>: completed rounds, wins/losses, dates
+      and courses. Stored both locally and on the server.
+    </li>
+    <li>
+      <strong>Cheers and comments</strong>: reactions and messages you or
+      your friends send on a round.
+    </li>
+  </ul>
+
+  <h3>Social relationships</h3>
+  <ul>
+    <li>
+      <strong>Friendships</strong>: which accounts you are friends with on
+      Wager Golf. Friendship requires mutual acceptance.
+    </li>
+    <li>
+      <strong>Notification preferences</strong>: which push notifications
+      you have chosen to receive.
     </li>
   </ul>
 
@@ -239,70 +399,128 @@
     <li>
       <strong>Location (GPS)</strong>: used only if you explicitly enable
       "GPS distance" in the app to see distance to the green. Location is
-      used locally only. Never sent anywhere, never persisted between
-      sessions.
+      used locally only.
+    </li>
+    <li>
+      <strong>Photos</strong>: required if you want to pick a profile
+      picture or add a photo of the group to a shared result card.
+    </li>
+    <li>
+      <strong>Camera</strong>: required if you want to take a new picture
+      for profile or result card instead of selecting an existing one.
+    </li>
+    <li>
+      <strong>Push notifications</strong>: required to send alerts about
+      friends' birdies, comments, friend requests, etc. You can toggle
+      individual categories in the app's notification settings.
     </li>
   </ul>
+
+  <h2>Where data is stored</h2>
   <p>
-    No other sensitive permissions (camera, microphone, contacts, photos,
-    notifications) are used.
+    The app stores data in two places:
   </p>
+  <ul>
+    <li>
+      <strong>Locally on your device</strong> (AsyncStorage): cache of
+      profile, course data, active round. Removed if you uninstall the app.
+    </li>
+    <li>
+      <strong>Supabase (EU-based server)</strong>: your profile, completed
+      rounds, friendships, cheers, comments and profile picture. This is
+      what syncs between your devices and what your friends can see parts of
+      according to access rules.
+    </li>
+  </ul>
 
   <h2>Third-party services</h2>
-  <h3>Wager Golf server (Cloudflare Worker)</h3>
+
+  <h3>Supabase</h3>
   <p>
-    We operate a small server component (a Cloudflare Worker) that proxies
-    course data from GolfAPI.io. When the app needs course data, the
-    following is sent to this server: an <strong>anonymous random device
-    ID</strong> (generated locally on your device, not linked to your name,
-    phone number, or other identifying info) and the <strong>course ID</strong>
-    of the course you selected. The device ID is used solely for rate-
-    limiting, and course data is cached to reduce upstream calls. No
-    personal information, game history, or location data is sent to the
-    server.
+    All cloud-stored data lives with <a href="https://supabase.com">Supabase</a>
+    in EU region. Supabase acts as our backend (database, auth, Storage for
+    profile pictures). They have their own privacy policy on their site.
   </p>
+
+  <h3>Apple Sign-In</h3>
+  <p>
+    We use Apple Sign-In for authentication. Apple shares only what you
+    explicitly approve (name, optionally email). If you chose "Hide my
+    email" we get an anonymous relay address, not your real email.
+  </p>
+
+  <h3>Expo Push Service / APNs</h3>
+  <p>
+    Push notifications are delivered via <a href="https://docs.expo.dev/push-notifications/overview/">
+    Expo Push Service</a> which forwards to Apple Push Notification service
+    (APNs). We send only notification content (e.g. "Natasha made birdie!")
+    + your push token. No other personal data goes through these services.
+  </p>
+
   <h3>GolfAPI.io</h3>
   <p>
-    Our server in turn calls <a href="https://www.golfapi.io">GolfAPI.io</a>
-    for public Swedish course data (par, stroke index, GPS coordinates).
-    No personal information or device ID is forwarded to GolfAPI.io.
+    Course data (par, stroke index, GPS coordinates for Swedish golf
+    courses) is fetched via our own Cloudflare Worker proxy which calls
+    <a href="https://www.golfapi.io">GolfAPI.io</a>. No personal information
+    or game history is sent there, only course ID and an anonymous device
+    ID for rate-limiting.
   </p>
+
   <h3>Swish</h3>
   <p>
-    Wager Golf does not integrate directly with Swish. When you tap "Pay via
-    Swish" or "Show QR code" in the settlement view, the app creates a
+    Wager Golf does not integrate directly with Swish. When you tap "Pay
+    via Swish" or "Show QR code" in the settlement view, the app creates a
     <code>swish://</code> link on your device that opens the Swish app with
     pre-filled amount and message. No data is sent through our systems.
-    the communication is directly between you and Swish.
   </p>
 
   <h2>We do not track you</h2>
   <p>
-    Wager Golf uses no analytics service (Firebase, Mixpanel, Sentry, Google
-    Analytics, etc.) and does not track your usage. We display no ads. We
-    have no cookies or similar technologies.
+    Wager Golf uses no analytics service (Firebase, Mixpanel, Sentry,
+    Google Analytics, etc.) and does not track your usage. We display no
+    ads and never sell data to third parties. We have no cookies or similar
+    technologies.
   </p>
 
-  <h2>Your rights</h2>
+  <h2>Your rights (GDPR)</h2>
   <p>
-    Since all data is local on your device, you have full control:
+    You have the following rights under the EU data protection regulation:
   </p>
   <ul>
     <li>
-      <strong>View your data</strong>: go to the Profile tab in the app.
+      <strong>View your data</strong>: go to the Profile tab in the app to
+      see your profile and history.
     </li>
     <li>
-      <strong>Edit</strong>: tap your profile to change name, handicap, or
-      phone number.
+      <strong>Edit</strong>: tap your profile to change name, handicap,
+      phone, gender or picture. Tap "Notifications" to toggle alerts.
     </li>
     <li>
-      <strong>Delete all data</strong>: go to the Profile tab and tap
-      "Delete all data". Everything is erased immediately from the device.
+      <strong>Delete your account</strong>: go to the Profile tab and tap
+      "Delete all data". This deletes all your data both locally on the
+      device and from Supabase. Cannot be undone.
     </li>
     <li>
-      <strong>Uninstall the app</strong>: removes all data permanently.
+      <strong>Export data</strong>: contact us by email (see below) if you
+      want a copy of your data in a structured format.
+    </li>
+    <li>
+      <strong>Request correction or object</strong>: contact us if you
+      believe something is wrong or want to object to processing.
+    </li>
+    <li>
+      <strong>Complain to a supervisory authority</strong>: in Sweden this
+      is <a href="https://www.imy.se">Integritetsskyddsmyndigheten (IMY)</a>.
     </li>
   </ul>
+
+  <h2>How long data is kept</h2>
+  <p>
+    Data is kept as long as your account is active. When you delete your
+    account all your personal data is removed from Supabase. Activity rows
+    referencing you (e.g. a notification to a friend that you started a
+    round) may remain in their feed with your name anonymized.
+  </p>
 
   <h2>Children under 13</h2>
   <p>
@@ -314,13 +532,15 @@
   <h2>Changes to this policy</h2>
   <p>
     If we make material changes, the "last updated" date at the top is
-    updated. Major changes (e.g., if we ever introduce a server or
-    analytics) will be communicated in the app.
+    updated and the version number is bumped. Major changes (e.g., new
+    third-party services or data collection categories) will be
+    communicated in the app.
   </p>
 
   <h2>Contact</h2>
   <p>
-    Questions about this policy or how your data is handled?<br>
+    Questions about this policy, how your data is handled, or requests for
+    deletion/export?<br>
     Email <a href="mailto:bratt.gustaf@gmail.com">bratt.gustaf@gmail.com</a>.
   </p>
 
