@@ -54,6 +54,30 @@
       border-radius: 999px;
       letter-spacing: 0.3px;
     }
+    .cta-wrap {
+      margin-top: 28px;
+    }
+    .cta {
+      display: inline-block;
+      padding: 14px 28px;
+      background: #0a2e21;
+      color: #f5efe3;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .cta:hover {
+      background: #16533c;
+      transform: translateY(-1px);
+    }
+    .cta-sub {
+      display: block;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #8a7d6e;
+    }
     .features {
       margin: 48px 0;
       display: grid;
@@ -106,7 +130,14 @@
     </div>
     <h1>Wager Golf</h1>
     <p class="tagline">Betting mellan golfkompisar, utan papper och miniräknare.</p>
-    <span class="status">Lanseras snart i App Store</span>
+    <span class="status">Beta öppen för testare</span>
+
+    <div class="cta-wrap">
+      <a class="cta" href="https://testflight.apple.com/join/ZVUjUeUP">
+        Gå med i betan
+      </a>
+      <span class="cta-sub">Kräver iPhone och Apple TestFlight-appen</span>
+    </div>
 
     <div class="features">
       <div class="feature">
