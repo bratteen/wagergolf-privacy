@@ -67,7 +67,7 @@
   </div>
 
   <h1>Integritetspolicy för Wager Golf</h1>
-  <p class="meta">Senast uppdaterad: 27 maj 2026 · Version 3.0</p>
+  <p class="meta">Senast uppdaterad: 27 maj 2026 · Version 3.1</p>
 
   <h2>Sammanfattning</h2>
   <p>
@@ -283,18 +283,31 @@
     reportaproblem.apple.com</a>.
   </p>
 
-  <h2>Vi spårar dig inte</h2>
+  <h3>Sentry (crash-rapportering)</h3>
+  <p>
+    Om appen kraschar skickar vi en anonym crash-rapport till
+    <a href="https://sentry.io">Sentry</a> så vi kan diagnosticera och fixa
+    buggen. Rapporten innehåller stack trace, iOS-version, modellnamn (typ
+    "iPhone 15"), app-version och en tidsstämpel. Den innehåller INTE ditt
+    namn, e-post, telefonnummer eller golfdata. Vi skickar inget user-id —
+    krascher är inte kopplade till en specifik användare. E-mail-adresser
+    och telefonnummer som av misstag skulle hamna i en feltext skrubbas
+    automatiskt innan rapporten skickas.
+  </p>
+
+  <h2>Vi spårar inte din användning</h2>
   <p>
     Wager Golf använder ingen analyseringstjänst (Firebase Analytics,
-    Mixpanel, Sentry, Google Analytics, etc.) för att tracka din användning.
-    Vi visar inga annonser och säljer aldrig data till tredje part. Vi
-    triggar ingen ATT-prompt eftersom vi inte spårar mellan apps eller
-    websidor. Vi har inga cookies.
+    Mixpanel, Google Analytics, etc.) för att tracka beteende. Vi visar
+    inga annonser och säljer aldrig data till tredje part. Vi triggar
+    ingen ATT-prompt eftersom vi inte spårar mellan apps eller websidor.
+    Vi har inga cookies.
   </p>
   <p>
     RevenueCat samlar viss subscription-relaterad data (prenumerationsstatus,
-    förnyelsedatum, prov-period) men det är nödvändigt för att Pro ska
-    fungera, inte tracking i Apples bemärkelse.
+    förnyelsedatum, prov-period) och Sentry tar emot crash-rapporter, men
+    det är nödvändigt för att Pro och bug-fixning ska fungera — inte
+    tracking i Apples bemärkelse.
   </p>
 
   <h2>Dina rättigheter (GDPR)</h2>
@@ -361,7 +374,7 @@
   <hr style="margin-top: 60px; border: none; border-top: 1px solid #d9cfb8;">
 
   <h1 id="english">Privacy Policy · Wager Golf</h1>
-  <p class="meta">Last updated: May 27, 2026 · Version 3.0</p>
+  <p class="meta">Last updated: May 27, 2026 · Version 3.1</p>
 
   <h2>Summary</h2>
   <p>
@@ -574,18 +587,31 @@
     <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.
   </p>
 
-  <h2>We do not track you</h2>
+  <h3>Sentry (crash reporting)</h3>
+  <p>
+    If the app crashes we send an anonymous crash report to
+    <a href="https://sentry.io">Sentry</a> so we can diagnose and fix the
+    bug. The report contains stack trace, iOS version, device model
+    name (e.g. "iPhone 15"), app version and a timestamp. It does NOT
+    contain your name, email, phone number or golf data. We do not send
+    a user ID — crashes are not tied to a specific user. Email addresses
+    and phone numbers that might accidentally end up in an error text
+    are automatically scrubbed before the report is sent.
+  </p>
+
+  <h2>We do not track your usage</h2>
   <p>
     Wager Golf uses no analytics service (Firebase Analytics, Mixpanel,
-    Sentry, Google Analytics, etc.) to track your usage. We display no
-    ads and never sell data to third parties. We do not trigger the ATT
-    prompt because we do not track you across apps or websites. We have
-    no cookies.
+    Google Analytics, etc.) to track behavior. We display no ads and
+    never sell data to third parties. We do not trigger the ATT prompt
+    because we do not track you across apps or websites. We have no
+    cookies.
   </p>
   <p>
     RevenueCat collects some subscription-related data (subscription
-    status, renewal date, trial period) but this is necessary for Pro
-    to work, not tracking in Apple's sense.
+    status, renewal date, trial period) and Sentry receives crash
+    reports, but this is necessary for Pro and bug-fixing to work — not
+    tracking in Apple's sense.
   </p>
 
   <h2>Your rights (GDPR)</h2>
