@@ -67,17 +67,19 @@
   </div>
 
   <h1>Integritetspolicy för Wager Golf</h1>
-  <p class="meta">Senast uppdaterad: 18 maj 2026 · Version 2.0</p>
+  <p class="meta">Senast uppdaterad: 27 maj 2026 · Version 3.0</p>
 
   <h2>Sammanfattning</h2>
   <p>
-    Wager Golf är en app för att hålla koll på vadslagning mellan golfkompisar.
-    För att kunna spela live mellan flera enheter, skicka push-notiser, och
-    dela rundor med vänner sparar vi viss data på en server hos
-    <strong>Supabase</strong> (EU-baserad). Du loggar in med Apple Sign-In.
-    Vi spårar dig inte, visar inga annonser, och delar ingen data med tredje
-    part i marknadsföringssyfte. Du kan när som helst radera ditt konto från
-    appen.
+    Wager Golf är en app för att räkna scorer och hålla koll på poäng
+    mellan golfkompisar. För att synka rundor mellan enheter, skicka
+    push-notiser, och dela med vänner sparar vi viss data på en server
+    hos <strong>Supabase</strong> (EU-baserad). Du loggar in med Apple
+    Sign-In. Vi visar inga annonser och säljer aldrig data till tredje
+    part. Du kan när som helst radera ditt konto från appen.
+  </p>
+  <p>
+    Användarvillkoren hittar du <a href="../terms/">här</a>.
   </p>
 
   <h2>Vilken data vi samlar in</h2>
@@ -151,6 +153,31 @@
     <li>
       <strong>Notiser-inställningar</strong>: vilka push-notiser du valt
       att ta emot.
+    </li>
+  </ul>
+
+  <h3>Prenumeration (Pro)</h3>
+  <ul>
+    <li>
+      <strong>Prenumerations-status</strong>: om/när du köpt Pro,
+      provperiod-status, förnyelsedatum. Hanteras av RevenueCat (se nedan)
+      och knyts till ditt anonyma RevenueCat-ID + ditt Supabase-konto.
+    </li>
+    <li>
+      <strong>Köp-historik</strong>: själva köptransaktionen lagras hos
+      Apple, inte hos oss. Vi ser bara entitlements-status ("är Pro
+      aktiv?") via RevenueCat-SDK:n.
+    </li>
+  </ul>
+
+  <h3>Bandata-rapporter</h3>
+  <ul>
+    <li>
+      <strong>Fel-rapporter på bandata</strong>: om du rapporterar att
+      par, stroke-index eller GPS-koordinater är fel via dots-menyn i
+      pågående runda sparas rapporten (din text + ditt konto-ID + bana-ID)
+      på Supabase så vi kan följa upp och fixa. Synlig bara för oss
+      (Wager Golf-administration).
     </li>
   </ul>
 
@@ -236,12 +263,38 @@
     förifyllt belopp och meddelande. Inga uppgifter skickas via våra system.
   </p>
 
+  <h3>RevenueCat</h3>
+  <p>
+    Pro-prenumerationen hanteras via <a href="https://www.revenuecat.com">
+    RevenueCat</a>, som ligger mellan Apple StoreKit och vår app.
+    RevenueCat verifierar köp, håller koll på förnyelser och provperioder,
+    och berättar för appen om du har Pro aktivt. Vi skickar bara ditt
+    anonyma Supabase user-id till RevenueCat så att din prenumeration följer
+    med mellan dina enheter. Inga golfdata, namn eller andra personuppgifter
+    delas. Se RevenueCats egen integritetspolicy för detaljer.
+  </p>
+
+  <h3>Apple StoreKit / App Store</h3>
+  <p>
+    Själva köpet och förnyelsen av Pro hanteras av Apple via App Store.
+    Vi ser aldrig dina betalningsuppgifter, kortnummer eller faktureringsadress
+    — bara att köpet genomförts (via RevenueCat-SDK:n). Återbetalningar och
+    fakturering hanteras av Apple på <a href="https://reportaproblem.apple.com">
+    reportaproblem.apple.com</a>.
+  </p>
+
   <h2>Vi spårar dig inte</h2>
   <p>
-    Wager Golf använder ingen analyseringstjänst (Firebase, Mixpanel, Sentry,
-    Google Analytics, etc.) och spårar inte din användning. Vi visar inga
-    annonser och säljer aldrig data till tredje part. Vi har inga cookies
-    eller liknande tekniker.
+    Wager Golf använder ingen analyseringstjänst (Firebase Analytics,
+    Mixpanel, Sentry, Google Analytics, etc.) för att tracka din användning.
+    Vi visar inga annonser och säljer aldrig data till tredje part. Vi
+    triggar ingen ATT-prompt eftersom vi inte spårar mellan apps eller
+    websidor. Vi har inga cookies.
+  </p>
+  <p>
+    RevenueCat samlar viss subscription-relaterad data (prenumerationsstatus,
+    förnyelsedatum, prov-period) men det är nödvändigt för att Pro ska
+    fungera, inte tracking i Apples bemärkelse.
   </p>
 
   <h2>Dina rättigheter (GDPR)</h2>
@@ -308,17 +361,19 @@
   <hr style="margin-top: 60px; border: none; border-top: 1px solid #d9cfb8;">
 
   <h1 id="english">Privacy Policy · Wager Golf</h1>
-  <p class="meta">Last updated: May 18, 2026 · Version 2.0</p>
+  <p class="meta">Last updated: May 27, 2026 · Version 3.0</p>
 
   <h2>Summary</h2>
   <p>
-    Wager Golf is an app for tracking wagers between golf friends. To enable
-    multi-device live scoring, push notifications, and sharing rounds with
-    friends, we store some data on a server hosted by
+    Wager Golf is an app for scoring and tracking points between golf
+    friends. To enable multi-device sync, push notifications, and sharing
+    rounds with friends, we store some data on a server hosted by
     <strong>Supabase</strong> (EU-based). You sign in with Apple Sign-In.
-    We do not track you, show no ads, and share no data with third parties
-    for marketing purposes. You can delete your account from the app at any
-    time.
+    We show no ads and never sell data to third parties. You can delete
+    your account from the app at any time.
+  </p>
+  <p>
+    Terms of Service are available <a href="../terms/">here</a>.
   </p>
 
   <h2>What data we collect</h2>
@@ -391,6 +446,31 @@
     <li>
       <strong>Notification preferences</strong>: which push notifications
       you have chosen to receive.
+    </li>
+  </ul>
+
+  <h3>Subscription (Pro)</h3>
+  <ul>
+    <li>
+      <strong>Subscription status</strong>: whether/when you bought Pro,
+      trial status, renewal date. Managed by RevenueCat (see below) and
+      linked to your anonymous RevenueCat ID + your Supabase account.
+    </li>
+    <li>
+      <strong>Purchase history</strong>: the actual purchase transaction
+      is stored by Apple, not by us. We only see entitlement status
+      ("is Pro active?") via the RevenueCat SDK.
+    </li>
+  </ul>
+
+  <h3>Course data reports</h3>
+  <ul>
+    <li>
+      <strong>Course data error reports</strong>: if you report that par,
+      stroke index or GPS coordinates are wrong via the dots menu in an
+      active round, the report (your text + your account ID + course ID)
+      is saved to Supabase so we can follow up and fix. Visible only to
+      us (Wager Golf administration).
     </li>
   </ul>
 
@@ -474,12 +554,38 @@
     pre-filled amount and message. No data is sent through our systems.
   </p>
 
+  <h3>RevenueCat</h3>
+  <p>
+    The Pro subscription is managed via <a href="https://www.revenuecat.com">
+    RevenueCat</a>, which sits between Apple StoreKit and our app. RevenueCat
+    verifies purchases, tracks renewals and trial periods, and tells the app
+    whether you have Pro active. We send only your anonymous Supabase user ID
+    to RevenueCat so your subscription follows you between devices. No golf
+    data, names or other personal information is shared. See RevenueCat's own
+    privacy policy for details.
+  </p>
+
+  <h3>Apple StoreKit / App Store</h3>
+  <p>
+    The actual purchase and renewal of Pro is handled by Apple via the App
+    Store. We never see your payment details, card numbers or billing
+    address — only that the purchase went through (via the RevenueCat SDK).
+    Refunds and billing are handled by Apple at
+    <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.
+  </p>
+
   <h2>We do not track you</h2>
   <p>
-    Wager Golf uses no analytics service (Firebase, Mixpanel, Sentry,
-    Google Analytics, etc.) and does not track your usage. We display no
-    ads and never sell data to third parties. We have no cookies or similar
-    technologies.
+    Wager Golf uses no analytics service (Firebase Analytics, Mixpanel,
+    Sentry, Google Analytics, etc.) to track your usage. We display no
+    ads and never sell data to third parties. We do not trigger the ATT
+    prompt because we do not track you across apps or websites. We have
+    no cookies.
+  </p>
+  <p>
+    RevenueCat collects some subscription-related data (subscription
+    status, renewal date, trial period) but this is necessary for Pro
+    to work, not tracking in Apple's sense.
   </p>
 
   <h2>Your rights (GDPR)</h2>
