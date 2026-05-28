@@ -67,7 +67,7 @@
   </div>
 
   <h1>Integritetspolicy för Wager Golf</h1>
-  <p class="meta">Senast uppdaterad: 27 maj 2026 · Version 3.1</p>
+  <p class="meta">Senast uppdaterad: 28 maj 2026 · Version 3.2</p>
 
   <h2>Sammanfattning</h2>
   <p>
@@ -283,16 +283,28 @@
     reportaproblem.apple.com</a>.
   </p>
 
-  <h3>Sentry (crash-rapportering)</h3>
+  <h3>Sentry (crash-rapportering + diagnos)</h3>
   <p>
     Om appen kraschar skickar vi en anonym crash-rapport till
     <a href="https://sentry.io">Sentry</a> så vi kan diagnosticera och fixa
     buggen. Rapporten innehåller stack trace, iOS-version, modellnamn (typ
-    "iPhone 15"), app-version och en tidsstämpel. Den innehåller INTE ditt
-    namn, e-post, telefonnummer eller golfdata. Vi skickar inget user-id —
-    krascher är inte kopplade till en specifik användare. E-mail-adresser
-    och telefonnummer som av misstag skulle hamna i en feltext skrubbas
-    automatiskt innan rapporten skickas.
+    "iPhone 15"), app-version och en tidsstämpel.
+  </p>
+  <p>
+    Utöver krascher samlar Sentry också anonym diagnostik-data om hur
+    appen presterar: vilka skärmar som renderas, hur lång tid det tar,
+    och vilka knappar du trycker. Detta hjälper oss hitta långsamma flöden
+    och förstå vad som hände precis innan en bugg. Allt är fortfarande
+    anonymt och täcks av "Diagnostics"-kategorin i Apple App Privacy,
+    inte "Tracking" — vi triggar ingen ATT-prompt och kopplar inte data
+    till annonsering.
+  </p>
+  <p>
+    Sentry-rapporterna innehåller INTE ditt namn, e-post, telefonnummer
+    eller golfdata. Vi skickar inget user-id — diagnostik är inte kopplad
+    till en specifik användare. E-mail-adresser och telefonnummer som av
+    misstag skulle hamna i en feltext skrubbas automatiskt innan rapporten
+    skickas.
   </p>
 
   <h2>Vi spårar inte din användning</h2>
@@ -374,7 +386,7 @@
   <hr style="margin-top: 60px; border: none; border-top: 1px solid #d9cfb8;">
 
   <h1 id="english">Privacy Policy · Wager Golf</h1>
-  <p class="meta">Last updated: May 27, 2026 · Version 3.1</p>
+  <p class="meta">Last updated: May 28, 2026 · Version 3.2</p>
 
   <h2>Summary</h2>
   <p>
@@ -587,16 +599,27 @@
     <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.
   </p>
 
-  <h3>Sentry (crash reporting)</h3>
+  <h3>Sentry (crash reporting + diagnostics)</h3>
   <p>
     If the app crashes we send an anonymous crash report to
     <a href="https://sentry.io">Sentry</a> so we can diagnose and fix the
     bug. The report contains stack trace, iOS version, device model
-    name (e.g. "iPhone 15"), app version and a timestamp. It does NOT
-    contain your name, email, phone number or golf data. We do not send
-    a user ID — crashes are not tied to a specific user. Email addresses
-    and phone numbers that might accidentally end up in an error text
-    are automatically scrubbed before the report is sent.
+    name (e.g. "iPhone 15"), app version and a timestamp.
+  </p>
+  <p>
+    Beyond crashes, Sentry also collects anonymous diagnostic data about
+    app performance: which screens render, how long they take, and which
+    buttons you tap. This helps us find slow flows and understand what
+    happened just before a bug. Everything stays anonymous and falls
+    under "Diagnostics" in Apple App Privacy, not "Tracking" — we do
+    not trigger the ATT prompt and we do not link data to advertising.
+  </p>
+  <p>
+    Sentry reports do NOT contain your name, email, phone number or
+    golf data. We do not send a user ID — diagnostics are not tied to
+    a specific user. Email addresses and phone numbers that might
+    accidentally end up in an error text are automatically scrubbed
+    before the report is sent.
   </p>
 
   <h2>We do not track your usage</h2>
