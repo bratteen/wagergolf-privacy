@@ -9,4 +9,9 @@ module.exports = {
   // injektion i Cloudflare Pages-dashboarden istället. Fyll i token här för
   // explicit beacon (Web Analytics > sajt > "JS snippet" > token-värdet).
   cfBeaconToken: "",
+  // Umami: cookielös, self-hosted analytics (egen server). Tom websiteId = av.
+  umami: {
+    src: "https://analytics.bratt.se/script.js",
+    websiteId: "ae56fbfa-4ce4-480b-af6a-62f20282b414",
+  },
 };
