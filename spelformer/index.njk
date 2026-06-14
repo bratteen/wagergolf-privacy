@@ -46,7 +46,7 @@ structuredData: |
     <div class="hub-grid">
       {%- for g in inCat %}
       <a class="hub-card" href="{{ g.url }}">
-        <h3>{{ g.data.format }}</h3>
+        <h3>{{ g.data.format }}{% if g.data.altName %} ({{ g.data.altName }}){% endif %}</h3>
         <p>{{ g.data.cardText or g.data.lede }}</p>
         <span class="meta">{{ g.data.players }}</span>
       </a>

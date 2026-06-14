@@ -1,12 +1,13 @@
 ---
 slug: split-sixes
 format: Split Sixes
+altName: Köpenhamnare
 category: Hålspel
 players: "3 spelare"
 order: 3
 title: "Split Sixes (Köpenhamnare): regler och poäng | Wager Golf"
 description: "Split Sixes, även kallat Köpenhamnare, för tre spelare. Sex poäng delas varje hål efter placering. Regler, hur poängen delas vid lika och uträkning."
-h1: "Split Sixes"
+h1: "Split Sixes (Köpenhamnare)"
 lede: "Tre spelare, sex poäng att dela varje hål. Bäst på hålet tar fyra, tvåan tar två, trean blir lottlös. Lika placeringar delar poängen jämnt."
 cardText: "Tre spelare delar sex poäng per hål efter placering. 4, 2 och 0."
 faq:
