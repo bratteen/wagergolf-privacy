@@ -2,7 +2,7 @@
 slug: bingo-bango-bongo
 format: Bingo Bango Bongo
 category: Hålspel
-players: "3 till 4 spelare"
+players: "2 till 4 spelare"
 order: 2
 title: "Bingo Bango Bongo: regler och poäng | Wager Golf"
 description: "Bingo Bango Bongo förklarat. Tre poäng per hål: först på green, närmast flaggan och först i hål. Regler, varför det passar alla nivåer och uträkning."

@@ -2,7 +2,7 @@
 slug: nassau
 format: Nassau
 category: Klassiker
-players: "2 spelare"
+players: "2 till 4 spelare"
 order: 3
 title: "Nassau i golf: regler, press och uträkning | Wager Golf"
 description: "Nassau är tre vad i ett: första nio, andra nio och hela ronden. Så fungerar reglerna, vad en press är och hur Nassau räknas ut, steg för steg."
@@ -28,6 +28,7 @@ Nassau är en av golfens äldsta och mest älskade vadformer. Istället för ett
 ## Så spelar du Nassau
 
 - Tre separata vad med samma insats: första nio, andra nio och hela 18.
+- Spelas av 2 till 4 spelare. Klassiskt är det en duell mellan två, men med tre eller fyra måste du vara ensam om lägsta slaget för att vinna hålet.
 - Varje segment avgörs som ett matchspel, hål mot hål. Flest vunna hål i segmentet tar segmentets pott.
 - Blir ett segment oavgjort går insatsen tillbaka för det segmentet.
 - Ligger du under kan du trycka en press och starta ett nytt parallellt vad.
