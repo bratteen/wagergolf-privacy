@@ -50,3 +50,18 @@ Det är den här fördelningen som gör att en 28-handicappare och en 9-handicap
 36 poäng är referensen. Det betyder att du i snitt gjort par netto på varje hål, alltså spelat precis till din handicap. Kommer du över 36 har du haft en riktigt bra dag. De flesta klubbrundor landar någonstans mellan 30 och 34.
 
 I ett vad lägger alla en insats, och den som har flest poäng när ronden är slut tar potten. Är det lika delas potten. Wager Golf räknar poängen hål för hål med rätt WHS-slag, visar ställningen live och gör upp potten automatiskt när ni går in.
+
+## När passar Stableford?
+
+Stableford lyser när gänget spelar på olika nivå, eller när ni vill hålla tempot uppe. Eftersom ett uselt hål bara ger noll behöver ingen skriva en nia, ni plockar upp och går vidare. Det är därför nästan alla klubbtävlingar och sällskapsrundor körs som poängbogey. Vill du ha rak slagräkning där varje slag räknas, välj slaggolf i stället.
+
+## Vanliga missförstånd
+
+- **Du behöver inte spela alla 18 hål för att det ska räknas.** Poängen är oberoende per hål, så en avbruten runda går fortfarande att göra upp på de hål ni hann med.
+- **Poängen sätts på net, inte brutto.** En bogey på ett hål där du har ett slag blir par netto och ger 2 poäng. Många underskattar sin poäng för att de räknar brutto.
+- **Noll poäng är inte ett misslyckande.** Det är hela poängen med formatet. Lägg upp bollen och spara energin till nästa hål.
+
+<figure class="guide-figure">
+  <img src="/assets/shots/live.webp" alt="Wager Golf scorekort som räknar Stableford-poäng" width="640" height="1306" loading="lazy">
+  <figcaption>I Wager Golf knappar du in slagen, appen räknar Stableford-poängen och håller ställningen live.</figcaption>
+</figure>

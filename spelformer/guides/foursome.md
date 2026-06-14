@@ -49,3 +49,13 @@ Valet av vem som slår ut på udda respektive jämna hål är Foursomes viktigas
 Tre format förväxlas ofta. I Foursome slår bara en av er ut och ni delar boll. I Greensome slår båda ut, ni väljer bästa drive och delar sedan boll. I bästboll (four-ball) spelar alla sin egen boll hela vägen. Foursome är alltså det renaste delade spelet, och det mest krävande.
 
 Wager Golf håller reda på vems tur det är att slå ut, räknar lag-allowance och avgör matchen åt er.
+
+## Vanliga misstag
+
+- **Att inte planera vem som slår ut var.** Fördela udda och jämna hål efter vad som passar er bäst, vem är säkrast på par 3-orna, vem är längst på par 5-orna. Det kan vara värt flera slag.
+- **Att be om ursäkt för varje miss.** I Foursome spelar du alltid partnerns läge. Ältar ni misstagen tappar båda fokus. Spela vidare, nästa slag är ditt.
+
+<figure class="guide-figure">
+  <img src="/assets/shots/live.webp" alt="Wager Golf scorekort under en foursome-match" width="640" height="1306" loading="lazy">
+  <figcaption>Appen håller reda på vems tur det är att slå ut och visar matchställningen live.</figcaption>
+</figure>

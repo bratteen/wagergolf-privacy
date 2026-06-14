@@ -35,3 +35,17 @@ Bästboll, eller four-ball, är den lagform där du behåller mest frihet. Du sp
 Bästboll avgörs oftast som matchspel mellan de två lagen. Vinner ditt lag hålet går ni ett upp, och när ledningen är större än antalet hål som återstår är matchen avgjord, precis som i vanligt matchspel.
 
 Med handicap får varje spelare sina slag fördelade enligt banans stroke-index, och net-scoren bestämmer lagets bästa boll på hålet. Det gör bästboll till ett utmärkt val för fyra spelare på olika nivå. Wager Golf räknar varje spelares net-score, plockar lagets bästa boll och håller matchställningen åt er.
+
+## När passar bästboll?
+
+Bästboll är det perfekta valet när fyra spelare på olika nivå vill spela tillsammans men ändå tävla på lika villkor. Var och en spelar sin egen boll, så ingen behöver känna sig som en belastning, och en het dag från lagets svagare spelare kan avgöra hela matchen.
+
+## Taktik och vanliga misstag
+
+- **Båda i laget ska våga.** Eftersom bara bästa bollen räknar är det slöseri om båda spelar säkert. Ligger din partner redan bra till, gå för flaggan.
+- **Turas om att ta riskerna.** Vet en av er att partnern har par i hus kan den andra attackera utan rädsla. Det är där bästboll vinns, inte i att båda spelar försiktigt.
+
+<figure class="guide-figure">
+  <img src="/assets/shots/live.webp" alt="Wager Golf scorekort med fyra spelare" width="640" height="1306" loading="lazy">
+  <figcaption>Alla fyra spelarna på ett scorekort, appen plockar lagets bästa boll per hål.</figcaption>
+</figure>

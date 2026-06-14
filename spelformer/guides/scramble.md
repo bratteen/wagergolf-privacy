@@ -55,3 +55,13 @@ Texas Scramble är den vanligaste varianten, och den många söker på specifikt
 Låt den minst pressade spelaren slå sitt utslag först, så den längsta eller säkraste kan gå för det med vetskap om att en boll redan är i spel. På green är ordningen tvärtom värdefull: låt en spelare putta först som lodning, så får nästa läsa putten på din boll. Små marginaler, men de avgör tajta matcher.
 
 Wager Golf räknar lag-allowance, lagens score per hål och uppgörelsen åt er, så ni bara behöver välja bästa bollen.
+
+## Vanliga misstag
+
+- **Att alltid välja det längsta utslaget.** Ett kortare slag med bättre vinkel mot flaggan, eller fritt läge på fairway, är ofta värt mer. Välj läge, inte bara längd.
+- **Att slarva med ordningen på green.** Låt en spelare putta först som lodning, sedan läser nästa av samma linje. Det är gratis information som vinner hål.
+
+<figure class="guide-figure">
+  <img src="/assets/shots/settlement.webp" alt="Wager Golf uppgörelse efter en scramble" width="640" height="1306" loading="lazy">
+  <figcaption>Appen räknar lag-allowance och gör upp uppgörelsen, ni fokuserar på bästa bollen.</figcaption>
+</figure>

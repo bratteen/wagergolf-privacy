@@ -35,3 +35,17 @@ Slaggolf, eller slagspel, är golf i sin renaste form. Du räknar varje slag du 
 I ett blandat gäng spelas slaggolf på netto. Du får dina handicap-slag fördelade på de svåraste hålen enligt banans stroke-index, och de dras av från din bruttototal. Det är så en 20-handicappare och en 8-handicappare kan göra upp på samma villkor. Utan handicap är det rena brutto-slag som gäller, alltså lägst faktisk total.
 
 Wager Golf summerar slagen hål för hål, räknar netto med rätt WHS-slag och gör upp potten automatiskt, även om ni väljer att avsluta tidigt.
+
+## När passar slaggolf?
+
+Slaggolf passar när ni vill ha det renaste, mest tävlingslika spelet, eller när gänget är jämnt i nivå. Det är samtidigt obarmhärtigt: ett enda blowuphål följer med hela vägen till sista green. Är nivåskillnaderna stora, eller vill ni hålla tempot uppe, är Stableford oftast roligare för alla.
+
+## Vanliga misstag
+
+- **Att jaga igen ett dåligt hål direkt.** I slaggolf kostar varje extra slag, och desperationen efter en dubbelbogey leder ofta rakt in i nästa. Spela hålet framför dig.
+- **Att glömma handicapen.** Utan handicap vinner nästan alltid den lägsta spelaren. Spela på netto om gänget spretar i nivå, då blir det en match.
+
+<figure class="guide-figure">
+  <img src="/assets/shots/settlement.webp" alt="Wager Golf uppgörelse efter en slaggolfrunda" width="640" height="1306" loading="lazy">
+  <figcaption>När ronden är slut räknar appen ut nettot per spelare och vem som är skyldig vem.</figcaption>
+</figure>

@@ -338,3 +338,8 @@ footer { background: var(--green-900); color: rgba(245,239,227,0.7); padding: 54
 .related-links { display: flex; gap: 12px; flex-wrap: wrap; }
 .related-links a { font-family: var(--sans); font-size: 15px; color: var(--green-800); text-decoration: none; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; transition: border-color .15s ease, color .15s ease; }
 .related-links a:hover { border-color: var(--brass); color: var(--green-900); }
+
+/* Guide-bild (app-skärmdump i artikel) */
+.article .guide-figure { margin: 34px auto; max-width: 240px; text-align: center; }
+.article .guide-figure img { width: 100%; height: auto; border-radius: 20px; box-shadow: 0 18px 40px rgba(10,46,33,0.18); }
+.article .guide-figure figcaption { margin: 12px 0 0; font-family: var(--mono); font-size: 12px; line-height: 1.55; letter-spacing: .3px; color: var(--ink-faint); }

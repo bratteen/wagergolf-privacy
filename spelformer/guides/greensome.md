@@ -50,3 +50,12 @@ Lag-handicapen i Greensome är 60 procent av den lägre handicapen plus 40 proce
 Frestelsen är att alltid välja det längsta utslaget, men tänk ett slag till. Ett något kortare utslag som ligger på fairway med fri väg till green är ofta värt mer än ett långt utslag i halvruff. Tänk också på vem som ska slå nästa slag: väljer ni den enes drive är det partnern som slår infärden, så välj det utslag som ger er starkaste spelare den boll den helst vill ha.
 
 Wager Golf räknar allowance, håller koll på vems tur det är och avgör matchen automatiskt.
+
+## När passar greensome?
+
+Greensome är ofta den bästa lagformen för blandade gäng och tävlingar. Den tar bort skräcken för ett ensamt dåligt utslag, eftersom båda slår, men behåller spänningen i den delade bollen. Vill ni ha något ännu snällare kör ni scramble. Vill ni ha den hårdaste och mest krävande varianten är Foursome svaret.
+
+<figure class="guide-figure">
+  <img src="/assets/shots/home.webp" alt="Wager Golf säsongssaldo och topplista" width="640" height="1306" loading="lazy">
+  <figcaption>Lagmatcherna sparas, så ni kan följa vem som leder gänget över hela säsongen.</figcaption>
+</figure>
