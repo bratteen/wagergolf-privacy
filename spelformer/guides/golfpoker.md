@@ -4,7 +4,7 @@ format: Golfpoker
 category: Sidobet
 players: "2 till 4 spelare"
 order: 6
-title: "Golfpoker: regler, kort per hål och bästa hand | Wager Golf"
+title: "Golfpoker: regler, kort och bästa hand | Wager Golf"
 description: "Golfpoker förklarat. Tjäna spelkort genom bra spel och puttar, bästa femkortshand vinner potten. Regler, hur kort delas ut och putt-bonusarna."
 h1: "Golfpoker"
 lede: "Spela bra och tjäna spelkort. Par ger ett kort, birdie två, eagle tre, och bra puttning ger bonuskort. Bästa femkortshand vid ronden slut tar potten."

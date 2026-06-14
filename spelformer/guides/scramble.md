@@ -4,7 +4,7 @@ format: Scramble
 category: Lag
 players: "4 spelare, 2 lag"
 order: 1
-title: "Scramble i golf: regler, varianter och lag-handicap | Wager Golf"
+title: "Scramble i golf: regler, varianter, handicap | Wager Golf"
 description: "Scramble förklarat. Båda i laget slår, ni väljer bästa läget och spelar vidare därifrån. Regler, varianter som Texas Scramble, lag-handicap enligt WHS och taktik."
 h1: "Scramble i golf"
 lede: "Alla i laget slår, ni tar det bästa läget och spelar vidare därifrån. En förlåtande och social form där laget bara har en boll att bry sig om."

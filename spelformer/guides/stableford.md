@@ -5,7 +5,7 @@ altName: Poängbogey
 category: Klassiker
 players: "2 till 4 spelare"
 order: 4
-title: "Stableford och poängbogey: poäng, tabell och regler | Wager Golf"
+title: "Stableford och poängbogey: regler och tabell | Wager Golf"
 description: "Stableford, även kallat poängbogey, förklarat: poängtabellen hål för hål, hur poängen räknas med handicap och vad som är en bra poäng. Komplett guide med tabell."
 h1: "Stableford (poängbogey) i golf"
 lede: "I Stableford, eller poängbogey som det heter på svenska, samlar du poäng istället för att räkna slag. Bra hål ger poäng, riktigt dåliga hål kostar dig inget mer än noll. Du kan lägga upp bollen och gå vidare."

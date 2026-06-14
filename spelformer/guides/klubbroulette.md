@@ -4,7 +4,7 @@ format: Klubbroulette
 category: Hålspel
 players: "2 till 4 spelare"
 order: 4
-title: "Klubbroulette i golf: regler för slumpad klubba | Wager Golf"
+title: "Klubbroulette: regler för slumpad klubba | Wager Golf"
 description: "Klubbroulette, det lekfulla spelet där du lottas en klubba att spela hela hålet med, utom putten. Regler, hur potten avgörs och varför det är så kul."
 h1: "Klubbroulette"
 lede: "På valda hål lottas du en enda klubba att spela hela vägen fram med, putten undantagen. Bäst score på hålet tar potten. Skratten ingår."

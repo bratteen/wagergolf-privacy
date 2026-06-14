@@ -4,7 +4,7 @@ format: Foursome
 category: Lag
 players: "4 spelare, 2 lag"
 order: 2
-title: "Foursome i golf: regler, taktik och lag-handicap | Wager Golf"
+title: "Foursome i golf: regler, taktik och handicap | Wager Golf"
 description: "Foursome, alternate shot, förklarat. En boll per lag, partners slår varannat slag. Regler, vem som slår ut på vilka hål, taktik och lag-handicap enligt WHS."
 h1: "Foursome i golf"
 lede: "En boll per lag, och ni slår vartannat slag. Den ena slår ut på udda hål, den andra på jämna. Inget format binder ett lag tätare samman."
