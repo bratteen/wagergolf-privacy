@@ -41,9 +41,12 @@ Två lag ställs mot varandra. Lägst sammanlagd score vinner, antingen hål fö
 
 För att jämna ut mellan olika starka lag används en lag-handicap enligt WHS: 35 procent av den lägre handicapen i laget plus 15 procent av den högre.
 
-## Varianter av scramble
+## Texas Scramble
 
-- **Texas Scramble:** ett minsta antal av varje spelares utslag måste användas under ronden, till exempel fyra drives per person på 18 hål. Det tvingar laget att använda alla, inte bara den längsta.
+Texas Scramble är den vanligaste varianten, och den många söker på specifikt. Regeln är att ett minsta antal av varje spelares utslag måste användas under ronden, till exempel fyra drives per person på 18 hål. Det tvingar laget att använda alla, inte bara den längsta slagaren, och lägger till ett taktiskt lager: när under ronden ska ni passa på att använda de kortare spelarnas drives?
+
+## Andra scramble-varianter
+
 - **Florida Scramble (Step Aside):** den spelare vars boll valdes står över nästa slag. Med bara en boll i spel åt gången blir det mer krävande än vanlig scramble.
 - **Ambrose:** scramble med lag-handicap, vanlig i Australien, ofta använd när nivåskillnaderna i laget är stora.
 
