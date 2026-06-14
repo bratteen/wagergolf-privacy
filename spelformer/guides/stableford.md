@@ -4,12 +4,14 @@ format: Stableford
 category: Klassiker
 players: "2 till 4 spelare"
 order: 4
-title: "Stableford i golf: poäng, tabell och uträkning | Wager Golf"
-description: "Stableford förklarat: poängtabellen hål för hål, hur poängen räknas med handicap och vad som är en bra poäng. Komplett guide med tabell och vanliga frågor."
+title: "Stableford och poängbogey: poäng, tabell och regler | Wager Golf"
+description: "Stableford, även kallat poängbogey, förklarat: poängtabellen hål för hål, hur poängen räknas med handicap och vad som är en bra poäng. Komplett guide med tabell."
 h1: "Stableford i golf"
-lede: "I Stableford samlar du poäng istället för att räkna slag. Bra hål ger poäng, riktigt dåliga hål kostar dig inget mer än noll. Du kan lägga upp bollen och gå vidare."
+lede: "I Stableford, eller poängbogey som det heter på svenska, samlar du poäng istället för att räkna slag. Bra hål ger poäng, riktigt dåliga hål kostar dig inget mer än noll. Du kan lägga upp bollen och gå vidare."
 cardText: "Poäng istället för slag. Birdie ger 3, par 2, bogey 1. Flest poäng vinner."
 faq:
+  - q: "Är poängbogey och Stableford samma sak?"
+    a: "Ja. Poängbogey är det svenska namnet på Stableford, exakt samma poängsystem. Du möter båda namnen i klubbtävlingar och appar, men reglerna och poängen är identiska."
   - q: "Hur många poäng ger ett par i Stableford?"
     a: "Ett par ger 2 poäng. Birdie ger 3, eagle 4 och en bogey 1 poäng. Dubbelbogey eller sämre ger 0 poäng, då plockar du upp bollen och går vidare."
   - q: "Hur räknas Stableford med handicap?"
@@ -23,7 +25,7 @@ related: [skins, nassau, matchspel]
 
 ## Vad är Stableford?
 
-Stableford är ett poängsystem istället för ren slagräkning. Du får poäng efter hur bra du spelar varje hål i förhållande till par, justerat för din handicap. Det geniala är att ett riktigt dåligt hål bara ger noll poäng. Du behöver aldrig skriva en sjua, du plockar upp bollen och går vidare. Det gör Stableford snabbt, snällt mot nybörjaren och perfekt för blandade gäng.
+Stableford, på svenska ofta kallat poängbogey, är ett poängsystem istället för ren slagräkning. Du får poäng efter hur bra du spelar varje hål i förhållande till par, justerat för din handicap. Det geniala är att ett riktigt dåligt hål bara ger noll poäng. Du behöver aldrig skriva en sjua, du plockar upp bollen och går vidare. Det gör Stableford snabbt, snällt mot nybörjaren och perfekt för blandade gäng.
 
 ## Poängtabellen
 
