@@ -6,7 +6,7 @@
   "scripts": {
     "build": "eleventy",
     "dev": "eleventy --serve",
-    "deploy": "eleventy && wrangler pages deploy _site --project-name=wagergolf --branch=main"
+    "deploy": "eleventy && npx wrangler pages deploy _site --project-name=wagergolf --branch=main"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6"
