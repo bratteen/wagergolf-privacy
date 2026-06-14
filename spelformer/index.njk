@@ -1,0 +1,58 @@
+---
+layout: base.njk
+title: "Golfspel och spelformer: regler och uträkning | Wager Golf"
+description: "Guider till golfens spelformer. Skins, matchspel, Nassau, Stableford och fler, med regler, så räknas det och hur du spelar dem med rätt handicap."
+ogTitle: "Spelformer i golf"
+ogDescription: "Regler och uträkning för golfens spelformer: skins, matchspel, Nassau, Stableford med fler."
+permalink: /spelformer/
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://wagergolf.se/" },
+          { "@type": "ListItem", "position": 2, "name": "Spelformer", "item": "https://wagergolf.se/spelformer/" }
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "name": "Spelformer i golf",
+        "url": "https://wagergolf.se/spelformer/",
+        "inLanguage": "sv-SE",
+        "isPartOf": { "@id": "https://wagergolf.se/#org" }
+      }
+    ]
+  }
+---
+<main>
+  <section class="subhero">
+    <div class="subhero-inner">
+      <div class="breadcrumb">
+        <a href="/">Hem</a><span class="sep">/</span><span>Spelformer</span>
+      </div>
+      <h1>Spelformer i golf, <span class="accent">förklarade.</span></h1>
+      <p>Hur funkar skins, matchspel och Nassau egentligen, och hur räknas poängen? Här är guider till golfens spelformer, med reglerna, uträkningen och hur du spelar dem med rätt handicap.</p>
+    </div>
+  </section>
+
+  <div class="wrap hub-section">
+    {%- set cats = ["Klassiker", "Hålspel", "Lag", "Sidobet"] %}
+    {%- for cat in cats %}
+    {%- set inCat = collections.guides | byCategory(cat) %}
+    {%- if inCat.length %}
+    <div class="hub-cat">{{ cat }}</div>
+    <div class="hub-grid">
+      {%- for g in inCat %}
+      <a class="hub-card" href="{{ g.url }}">
+        <h3>{{ g.data.format }}</h3>
+        <p>{{ g.data.cardText or g.data.lede }}</p>
+        <span class="meta">{{ g.data.players }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+</main>

@@ -14,6 +14,13 @@ module.exports = function (eleventyConfig) {
   // Datum-helper för sitemap.
   eleventyConfig.addFilter("isoDate", (d) => (d || new Date()).toISOString());
 
+  // Guider i en given kategori, sorterade på order (för pelarsidan).
+  eleventyConfig.addFilter("byCategory", (guides, cat) =>
+    (guides || [])
+      .filter((g) => g.data.category === cat)
+      .sort((a, b) => (a.data.order || 99) - (b.data.order || 99)),
+  );
+
   return {
     dir: {
       input: ".",
