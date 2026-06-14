@@ -3,6 +3,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("privacy");
   eleventyConfig.addPassthroughCopy("terms");
+  // Cloudflare Pages-headers (säkerhet + cache) måste ligga i output-roten.
+  eleventyConfig.addPassthroughCopy("_headers");
 
   // privacy/terms är färdig HTML, ska INTE processas som mallar.
   // docs/ är specar, inte sidor.

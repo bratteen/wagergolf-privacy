@@ -4,9 +4,9 @@
   "private": true,
   "description": "wagergolf.se, marknadssajt + integritetspolicy + villkor (11ty)",
   "scripts": {
-    "build": "eleventy",
+    "build": "rm -rf _site && eleventy",
     "dev": "eleventy --serve",
-    "deploy": "eleventy && npx wrangler pages deploy _site --project-name=wagergolf --branch=main"
+    "deploy": "rm -rf _site && eleventy && npx wrangler pages deploy _site --project-name=wagergolf --branch=main"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6"
