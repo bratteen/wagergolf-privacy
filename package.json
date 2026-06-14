@@ -1,0 +1,14 @@
+{
+  "name": "wagergolf-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "wagergolf.se, marknadssajt + integritetspolicy + villkor (11ty)",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "deploy": "eleventy && wrangler pages deploy _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6"
+  }
+}

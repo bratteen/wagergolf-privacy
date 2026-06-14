@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+  <meta name="theme-color" content="#0a2e21">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+  <meta property="og:title" content="{{ ogTitle or title }}">
+  <meta property="og:description" content="{{ ogDescription or description }}">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ ogImage or site.ogImage }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ ogTitle or title }}">
+  <meta name="twitter:description" content="{{ ogDescription or description }}">
+  <meta name="twitter:image" content="{{ ogImage or site.ogImage }}">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <link rel="preload" href="/assets/fonts/playfair-display-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/ibm-plex-mono-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/fonts/fonts.css">
+  <link rel="stylesheet" href="/assets/css/site.css">
+
+  {% if structuredData %}<script type="application/ld+json">{{ structuredData | safe }}</script>{% endif %}
+  {% if extraHead %}{{ extraHead | safe }}{% endif %}
+  {% if site.cfBeaconToken %}<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cfBeaconToken }}"}'></script>{% endif %}
+</head>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+  <header>
+    <div class="wrap nav">
+      <a class="brandmark" href="/" aria-label="Wager Golf">
+        <img src="/assets/logo.png" alt="" width="42" height="42">
+        <span>WAGER GOLF</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/#funktioner">Funktioner</a>
+        <a href="/#spelformer">Spelformer</a>
+        <a class="nav-cta" href="{{ site.appStoreUrl }}">Ladda ner</a>
+      </nav>
+    </div>
+  </header>
+
+  {{ content | safe }}
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <img src="/assets/logo.png" alt="" width="34" height="34">
+          <span>Wager Golf</span>
+        </div>
+        <nav class="foot-links">
+          <a href="/#spelformer">Spelformer</a>
+          <a href="/privacy/">Integritetspolicy</a>
+          <a href="/terms/">Användarvillkor</a>
+          <a href="mailto:{{ site.email }}">Kontakt</a>
+        </nav>
+      </div>
+      <div class="foot-bottom">
+        <span>© Gustaf Bratt</span>
+        <span>Byggd i Sverige, för golfgänget</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.documentElement.classList.add('js');
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (e) { e.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+  </script>
+</body>
+</html>
