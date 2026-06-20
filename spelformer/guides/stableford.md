@@ -6,7 +6,7 @@ category: Klassiker
 players: "2 till 4 spelare"
 order: 4
 title: "Stableford och poängbogey: regler och tabell | Wager Golf"
-description: "Stableford, även kallat poängbogey, förklarat: poängtabellen hål för hål, hur poängen räknas med handicap och vad som är en bra poäng. Komplett guide med tabell."
+description: "Stableford, även kallat poängbogey: poängtabellen, hur poängen räknas med handicap och vad som är en bra poäng. Komplett guide med tabell."
 h1: "Stableford (poängbogey) i golf"
 lede: "I Stableford, eller poängbogey som det heter på svenska, samlar du poäng istället för att räkna slag. Bra hål ger poäng, riktigt dåliga hål kostar dig inget mer än noll. Du kan lägga upp bollen och gå vidare."
 cardText: "Poäng istället för slag. Birdie ger 3, par 2, bogey 1. Flest poäng vinner."
@@ -32,11 +32,19 @@ Stableford, på svenska ofta kallat poängbogey, är ett poängsystem istället 
 
 Poängen sätts mot par på hålet, efter att dina handicap-slag räknats av:
 
-- Eagle eller bättre, alltså 2 under par: 4 poäng
-- Birdie, 1 under par: 3 poäng
-- Par: 2 poäng
-- Bogey, 1 över par: 1 poäng
-- Dubbelbogey eller sämre: 0 poäng
+<table>
+  <caption>Stableford-poäng per hål (net mot par)</caption>
+  <thead>
+    <tr><th>Resultat på hålet</th><th>Mot par</th><th>Poäng</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Eagle eller bättre</td><td>2 under</td><td>4</td></tr>
+    <tr><td>Birdie</td><td>1 under</td><td>3</td></tr>
+    <tr><td>Par</td><td>Par</td><td>2</td></tr>
+    <tr><td>Bogey</td><td>1 över</td><td>1</td></tr>
+    <tr><td>Dubbelbogey eller sämre</td><td>2 över eller mer</td><td>0</td></tr>
+  </tbody>
+</table>
 
 Skalan fortsätter uppåt för de riktigt ovanliga hålen. Albatross ger 5 poäng och en hole in one på en par 5 hela 6.
 
@@ -54,7 +62,7 @@ I ett vad lägger alla en insats, och den som har flest poäng när ronden är s
 
 ## När passar Stableford?
 
-Stableford lyser när gänget spelar på olika nivå, eller när ni vill hålla tempot uppe. Eftersom ett uselt hål bara ger noll behöver ingen skriva en nia, ni plockar upp och går vidare. Det är därför nästan alla klubbtävlingar och sällskapsrundor körs som poängbogey. Vill du ha rak slagräkning där varje slag räknas, välj slaggolf i stället.
+Stableford lyser när gänget spelar på olika nivå, eller när ni vill hålla tempot uppe. Eftersom ett uselt hål bara ger noll behöver ingen skriva en nia, ni plockar upp och går vidare. Det är därför nästan alla klubbtävlingar och sällskapsrundor körs som poängbogey. Vill du ha rak slagräkning där varje slag räknas, välj [slaggolf](/spelformer/slaggolf/) i stället. Se också [Stableford vs slaggolf](/spelformer/stableford-vs-slaggolf/) för en full jämförelse av formaten.
 
 ## Vanliga missförstånd
 

@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 title: "Wager Golf, golfvad utan papper och miniräknare"
-description: "Wager Golf håller räkningen när gänget spelar om pengar på banan. 21 spelformer, automatisk avräkning och Swish-uppgörelse. 705 svenska banor. Finns på App Store."
+description: "Wager Golf håller räkningen när gänget spelar om pengar på banan. 21 spelformer, automatisk avräkning och Swish-uppgörelse på 705 svenska banor."
 ogTitle: "Wager Golf"
 ogDescription: "Golfvad utan papper och miniräknare. 21 spelformer, automatisk avräkning, Swish-uppgörelse."
 structuredData: |
@@ -13,7 +13,29 @@ structuredData: |
         "@id": "https://wagergolf.se/#org",
         "name": "Wager Golf",
         "url": "https://wagergolf.se",
-        "logo": "https://wagergolf.se/assets/logo.png"
+        "email": "bratt.gustaf@gmail.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "founder": { "@id": "https://wagergolf.se/#person" },
+        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "sv-SE",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://wagergolf.se/#person",
+        "name": "Gustaf Bratt",
+        "url": "https://wagergolf.se/om/"
       },
       {
         "@type": "SoftwareApplication",
@@ -21,6 +43,7 @@ structuredData: |
         "operatingSystem": "iOS",
         "applicationCategory": "SportsApplication",
         "url": "https://apps.apple.com/se/app/id6767638917",
+        "sameAs": "https://apps.apple.com/se/app/id6767638917",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "SEK" },
         "publisher": { "@id": "https://wagergolf.se/#org" }
       }
@@ -47,7 +70,7 @@ structuredData: |
           </div>
         </div>
         <div class="hero-phone">
-          <img src="/assets/shots/live.webp" alt="Wager Golf live-scorekort på iPhone" loading="eager" width="640" height="1306">
+          <img src="/assets/shots/live.webp" alt="Wager Golf live-scorekort på iPhone" loading="eager" fetchpriority="high" width="640" height="1306">
           <span class="hero-stamp">Hål för hål, i realtid</span>
         </div>
       </div>

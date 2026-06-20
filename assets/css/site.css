@@ -69,7 +69,7 @@ header {
   border-radius: 8px; font-family: var(--sans) !important; font-size: 13px !important;
   letter-spacing: 0 !important; text-transform: none !important; font-weight: 600;
 }
-@media (max-width: 720px) { .nav-links a:not(.nav-cta) { display: none; } }
+@media (max-width: 720px) { .nav-links a:not(.nav-cta):not(.nav-keep) { display: none; } }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -304,6 +304,9 @@ footer { background: var(--green-900); color: rgba(245,239,227,0.7); padding: 54
 .hub-card p { font-size: 14.5px; color: var(--ink-soft); }
 .hub-card .meta { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-faint); margin-top: 12px; }
 @media (max-width: 680px) { .hub-grid { grid-template-columns: 1fr; } }
+.hub-extra { margin: 8px auto 48px; }
+.hub-extra p { font-size: 16px; color: var(--ink-soft); padding-top: 24px; border-top: 1px solid var(--line); }
+.hub-extra a { color: var(--green-700); text-decoration: underline; text-underline-offset: 2px; }
 
 /* Guide-artikel */
 .article-wrap { max-width: 760px; margin: 0 auto; padding: 50px 28px 8px; }
@@ -315,6 +318,26 @@ footer { background: var(--green-900); color: rgba(245,239,227,0.7); padding: 54
 .article li { margin: 0 0 8px; }
 .article strong { color: var(--ink); }
 .article a { color: var(--green-700); text-decoration: underline; text-underline-offset: 2px; }
+
+/* Tabeller i guide-artiklar (t.ex. Stableford-poängtabellen) */
+.article table { width: 100%; border-collapse: collapse; margin: 8px 0 24px; font-size: 16.5px; }
+.article table caption { text-align: left; font-family: var(--mono); font-size: 12px; letter-spacing: .5px; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 10px; }
+.article th, .article td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+.article thead th { font-family: var(--mono); font-size: 12px; letter-spacing: .5px; text-transform: uppercase; color: var(--green-900); background: var(--cream-card); border-bottom: 2px solid rgba(201,169,97,0.5); }
+.article tbody tr:last-child td { border-bottom: none; }
+.article td:last-child, .article th:last-child { font-variant-numeric: tabular-nums; }
+
+/* By-line ligger i subhero (mörk grön bakgrund), därför ljus text. */
+/* Ordlista (definitionslista) */
+.article dl { margin: 8px 0 24px; }
+.article dt { font-family: var(--serif); font-weight: 700; font-size: 19px; color: var(--green-900); margin: 22px 0 4px; }
+.article dd { margin: 0; padding: 0 0 0 0; }
+.article dt:first-of-type { margin-top: 0; }
+
+/* By-line ligger i subhero (mörk grön bakgrund), därför ljus text. */
+.guide-byline { font-family: var(--mono); font-size: 12.5px; letter-spacing: .3px; color: rgba(245,239,227,0.6); margin-top: 18px; }
+.guide-byline a { color: var(--brass); text-decoration: none; }
+.guide-byline a:hover { text-decoration: underline; }
 
 .guide-meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
 .guide-chip { font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--green-900); background: var(--brass); padding: 7px 13px; border-radius: 7px; font-weight: 600; }

@@ -5,7 +5,7 @@ category: Klassiker
 players: "2 till 4 spelare"
 order: 5
 title: "Quota i golf: så funkar poängbogey med mål | Wager Golf"
-description: "Quota, även kallat 36-poäng eller Chicago. Alla får ett eget poängmål efter handicap och försöker slå det. Regler, uträkning och varför det passar blandade gäng."
+description: "Quota, även kallat 36-poäng eller Chicago. Alla får ett poängmål efter handicap och försöker slå det. Regler, uträkning och varför det passar blandade gäng."
 h1: "Quota i golf"
 lede: "Alla får ett eget poängmål baserat på sin handicap. Den som överträffar sitt mål mest vinner. Ett av de bästa sätten att spela när nivåerna spretar."
 cardText: "Eget poängmål efter handicap. Den som slår sitt mål mest vinner."

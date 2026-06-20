@@ -16,6 +16,8 @@ faq:
     a: "Då rör sig inga pengar. I pott-varianten betalas insatserna tillbaka, ingen vinner och ingen förlorar."
   - q: "Finns det en variant där varje birdie betalas direkt?"
     a: "Ja. Istället för en pott kan ni köra så att varje birdie ger betalt direkt: de övriga spelarna betalar birdie-spelaren insatsen var, varje gång. Då känns varje birdie direkt i plånboken."
+  - q: "Hur stor brukar insatsen vara i en birdiepott?"
+    a: "Det bestämmer ni själva. Vanligt är mellan 20 och 100 kr per spelare. Med fyra spelare och 50 kr var blir potten 200 kr, så vinnaren går plus 150 kr efter avdrag för egen insats."
 related: [snake, sandie, golfpoker]
 ---
 
@@ -36,3 +38,16 @@ Birdiepott är det perfekta lilla sidobetet, lätt att lägga ovanpå vilken huv
 Istället för en pott kan ni köra birdies som direktbetalning. Då betalar de andra spelarna birdie-spelaren insatsen var, varje gång någon gör birdie. Den varianten ger snabbare feedback och kan svänga mer, eftersom en spelare som birdar tre hål plockar in från alla andra tre gånger.
 
 Wager Golf håller reda på birdies hål för hål, räknar både pott- och per-birdie-varianten och gör upp automatiskt när ronden är slut.
+
+## Ett exempel med pengar
+
+Säg att ni är fyra spelare och lägger 50 kr var i potten. Potten blir insats gånger antal spelare, alltså 50 × 4 = 200 kr.
+
+Under ronden gör Anna tre birdies, Bea en, och de andra två ingen. Anna har flest och tar hela potten på 200 kr. Eftersom hon själv la in 50 kr blir hennes nettovinst 150 kr. De tre andra förlorar sin insats och ligger 50 kr back var.
+
+- Anna: +150 kr (potten 200 kr minus egen insats 50 kr)
+- Bea: −50 kr
+- Spelare 3: −50 kr
+- Spelare 4: −50 kr
+
+Summan blir noll, potten är pott-neutral. Hade två spelare gjort lika många birdies hade de delat potten, 100 kr var, och landat på +50 kr var medan de andra två fortfarande ligger −50 kr. Wager Golf räknar birdies hål för hål och gör upp summan med Swish när ronden är slut.
