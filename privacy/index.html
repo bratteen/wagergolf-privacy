@@ -75,7 +75,7 @@
   </div>
 
   <h1>Integritetspolicy för Wager Golf</h1>
-  <p class="meta">Senast uppdaterad: 2 juni 2026 · Version 3.3</p>
+  <p class="meta">Senast uppdaterad: 27 juni 2026 · Version 3.4</p>
 
   <h2>Sammanfattning</h2>
   <p>
@@ -83,7 +83,7 @@
     mellan golfkompisar. För att synka rundor mellan enheter, skicka
     push-notiser, och dela med vänner sparar vi viss data på en server
     hos <strong>Supabase</strong> (EU-baserad). Du loggar in med Apple
-    Sign-In. Vi visar inga annonser och säljer aldrig data till tredje
+    Sign-In (iOS) eller Google Sign-In (Android). Vi visar inga annonser och säljer aldrig data till tredje
     part. Du kan när som helst radera ditt konto från appen.
   </p>
   <p>
@@ -173,7 +173,7 @@
     </li>
     <li>
       <strong>Köp-historik</strong>: själva köptransaktionen lagras hos
-      Apple, inte hos oss. Vi ser bara entitlements-status ("är Pro
+      Apple (iOS) respektive Google (Android), inte hos oss. Vi ser bara entitlements-status ("är Pro
       aktiv?") via RevenueCat-SDK:n.
     </li>
   </ul>
@@ -186,6 +186,21 @@
       pågående runda sparas rapporten (din text + ditt konto-ID + bana-ID)
       på Supabase så vi kan följa upp och fixa. Synlig bara för oss
       (Wager Golf-administration).
+    </li>
+  </ul>
+
+  <h3>Blockeringar och innehållsrapporter</h3>
+  <ul>
+    <li>
+      <strong>Blockeringar</strong>: om du blockerar en användare sparas det
+      (vem du blockat) på Supabase så vi kan dölja innehåll och hindra
+      kontakt. Bara du ser dina egna blockeringar, den blockade får inte veta.
+    </li>
+    <li>
+      <strong>Innehållsrapporter</strong>: om du rapporterar en kommentar,
+      cheer eller användare sparas rapporten (ditt konto-ID, vad som
+      rapporterats och vald orsak) på Supabase så vi kan granska och åtgärda.
+      Synlig bara för oss (Wager Golf-administration).
     </li>
   </ul>
 
@@ -222,9 +237,9 @@
     </li>
     <li>
       <strong>Supabase (EU-baserad server)</strong>: din profil, dina
-      avslutade rundor, vänskaps-relationer, cheers, kommentarer och
-      profilbild. Detta är vad som synkas mellan dina enheter och som dina
-      vänner kan se delar av enligt åtkomstreglerna.
+      avslutade rundor, vänskaps-relationer, cheers, kommentarer,
+      blockeringar, rapporter och profilbild. Detta är vad som synkas mellan
+      dina enheter och som dina vänner kan se delar av enligt åtkomstreglerna.
     </li>
   </ul>
 
@@ -238,9 +253,9 @@
     på deras webbplats.
   </p>
 
-  <h3>Apple Sign-In</h3>
+  <h3>Apple Sign-In (iOS) och Google Sign-In (Android)</h3>
   <p>
-    Vi använder Apple Sign-In för inloggning. Apple delar enbart de uppgifter
+    Vi använder Apple Sign-In (på iOS) och Google Sign-In (på Android) för inloggning. Apple respektive Google delar enbart de uppgifter
     du själv godkänner (namn, eventuellt email). Om du valt "Hide my email"
     får vi en anonym relay-adress, inte din riktiga email.
   </p>
@@ -274,7 +289,7 @@
   <h3>RevenueCat</h3>
   <p>
     Pro-prenumerationen hanteras via <a href="https://www.revenuecat.com">
-    RevenueCat</a>, som ligger mellan Apple StoreKit och vår app.
+    RevenueCat</a>, som ligger mellan Apple StoreKit (iOS) respektive Google Play Billing (Android) och vår app.
     RevenueCat verifierar köp, håller koll på förnyelser och provperioder,
     och berättar för appen om du har Pro aktivt. Vi skickar bara ditt
     anonyma Supabase user-id till RevenueCat så att din prenumeration följer
@@ -282,20 +297,21 @@
     delas. Se RevenueCats egen integritetspolicy för detaljer.
   </p>
 
-  <h3>Apple StoreKit / App Store</h3>
+  <h3>Apple StoreKit / App Store (iOS) och Google Play Billing (Android)</h3>
   <p>
-    Själva köpet och förnyelsen av Pro hanteras av Apple via App Store.
-    Vi ser aldrig dina betalningsuppgifter, kortnummer eller faktureringsadress
-    — bara att köpet genomförts (via RevenueCat-SDK:n). Återbetalningar och
-    fakturering hanteras av Apple på <a href="https://reportaproblem.apple.com">
-    reportaproblem.apple.com</a>.
+    Själva köpet och förnyelsen av Pro hanteras av Apple via App Store (iOS)
+    respektive Google via Google Play (Android). Vi ser aldrig dina
+    betalningsuppgifter, kortnummer eller faktureringsadress, bara att köpet
+    genomförts (via RevenueCat-SDK:n). Återbetalningar och fakturering hanteras
+    av Apple (<a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>)
+    respektive Google Play.
   </p>
 
   <h3>Sentry (crash-rapportering + diagnos)</h3>
   <p>
     Om appen kraschar skickar vi en anonym crash-rapport till
     <a href="https://sentry.io">Sentry</a> så vi kan diagnosticera och fixa
-    buggen. Rapporten innehåller stack trace, iOS-version, modellnamn (typ
+    buggen. Rapporten innehåller stack trace, iOS- eller Android-version, modellnamn (typ
     "iPhone 15"), app-version och en tidsstämpel.
   </p>
   <p>
@@ -348,7 +364,7 @@
     </li>
     <li>
       <strong>Radera ditt konto</strong>: gå till Profil-fliken och tryck
-      "Ta bort all data". Detta raderar all din data både lokalt på enheten
+      "Ta bort kontot". Detta raderar all din data både lokalt på enheten
       och från Supabase. Kan inte ångras.
     </li>
     <li>
@@ -397,14 +413,14 @@
   <hr style="margin-top: 60px; border: none; border-top: 1px solid #d9cfb8;">
 
   <h2 id="english" lang="en">Privacy Policy · Wager Golf</h2>
-  <p class="meta">Last updated: June 2, 2026 · Version 3.3</p>
+  <p class="meta">Last updated: June 27, 2026 · Version 3.4</p>
 
   <h2>Summary</h2>
   <p>
     Wager Golf is an app for scoring and tracking points between golf
     friends. To enable multi-device sync, push notifications, and sharing
     rounds with friends, we store some data on a server hosted by
-    <strong>Supabase</strong> (EU-based). You sign in with Apple Sign-In.
+    <strong>Supabase</strong> (EU-based). You sign in with Apple Sign-In (iOS) or Google Sign-In (Android).
     We show no ads and never sell data to third parties. You can delete
     your account from the app at any time.
   </p>
@@ -494,7 +510,7 @@
     </li>
     <li>
       <strong>Purchase history</strong>: the actual purchase transaction
-      is stored by Apple, not by us. We only see entitlement status
+      is stored by Apple (iOS) or Google (Android), not by us. We only see entitlement status
       ("is Pro active?") via the RevenueCat SDK.
     </li>
   </ul>
@@ -507,6 +523,21 @@
       active round, the report (your text + your account ID + course ID)
       is saved to Supabase so we can follow up and fix. Visible only to
       us (Wager Golf administration).
+    </li>
+  </ul>
+
+  <h3>Blocks and content reports</h3>
+  <ul>
+    <li>
+      <strong>Blocks</strong>: if you block a user, the block (who you blocked)
+      is saved to Supabase so we can hide content and prevent contact. Only you
+      see your own blocks, the blocked person is not notified.
+    </li>
+    <li>
+      <strong>Content reports</strong>: if you report a comment, cheer or user,
+      the report (your account ID, what was reported and the chosen reason) is
+      saved to Supabase so we can review and act on it. Visible only to us
+      (Wager Golf administration).
     </li>
   </ul>
 
@@ -543,9 +574,9 @@
     </li>
     <li>
       <strong>Supabase (EU-based server)</strong>: your profile, completed
-      rounds, friendships, cheers, comments and profile picture. This is
-      what syncs between your devices and what your friends can see parts of
-      according to access rules.
+      rounds, friendships, cheers, comments, blocks, reports and profile
+      picture. This is what syncs between your devices and what your friends
+      can see parts of according to access rules.
     </li>
   </ul>
 
@@ -558,9 +589,9 @@
     profile pictures). They have their own privacy policy on their site.
   </p>
 
-  <h3>Apple Sign-In</h3>
+  <h3>Apple Sign-In (iOS) and Google Sign-In (Android)</h3>
   <p>
-    We use Apple Sign-In for authentication. Apple shares only what you
+    We use Apple Sign-In (on iOS) and Google Sign-In (on Android) for authentication. Apple and Google share only what you
     explicitly approve (name, optionally email). If you chose "Hide my
     email" we get an anonymous relay address, not your real email.
   </p>
@@ -593,7 +624,7 @@
   <h3>RevenueCat</h3>
   <p>
     The Pro subscription is managed via <a href="https://www.revenuecat.com">
-    RevenueCat</a>, which sits between Apple StoreKit and our app. RevenueCat
+    RevenueCat</a>, which sits between Apple StoreKit (iOS) or Google Play Billing (Android) and our app. RevenueCat
     verifies purchases, tracks renewals and trial periods, and tells the app
     whether you have Pro active. We send only your anonymous Supabase user ID
     to RevenueCat so your subscription follows you between devices. No golf
@@ -601,20 +632,21 @@
     privacy policy for details.
   </p>
 
-  <h3>Apple StoreKit / App Store</h3>
+  <h3>Apple StoreKit / App Store (iOS) and Google Play Billing (Android)</h3>
   <p>
     The actual purchase and renewal of Pro is handled by Apple via the App
-    Store. We never see your payment details, card numbers or billing
-    address — only that the purchase went through (via the RevenueCat SDK).
-    Refunds and billing are handled by Apple at
-    <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.
+    Store (iOS) and by Google via Google Play (Android). We never see your
+    payment details, card numbers or billing address, only that the purchase
+    went through (via the RevenueCat SDK). Refunds and billing are handled by
+    Apple (<a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>)
+    and Google Play.
   </p>
 
   <h3>Sentry (crash reporting + diagnostics)</h3>
   <p>
     If the app crashes we send an anonymous crash report to
     <a href="https://sentry.io">Sentry</a> so we can diagnose and fix the
-    bug. The report contains stack trace, iOS version, device model
+    bug. The report contains stack trace, iOS or Android version, device model
     name (e.g. "iPhone 15"), app version and a timestamp.
   </p>
   <p>
@@ -666,7 +698,7 @@
     </li>
     <li>
       <strong>Delete your account</strong>: go to the Profile tab and tap
-      "Delete all data". This deletes all your data both locally on the
+      "Ta bort kontot" (Delete account). This deletes all your data both locally on the
       device and from Supabase. Cannot be undone.
     </li>
     <li>
