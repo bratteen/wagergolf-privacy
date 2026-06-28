@@ -2,6 +2,8 @@ module.exports = {
   name: "Wager Golf",
   url: "https://wagergolf.se",
   appStoreUrl: "https://apps.apple.com/se/app/id6767638917",
+  playStoreUrl: "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf",
+  api: "https://api.wagergolf.se",
   email: "bratt.gustaf@gmail.com",
   // Site-bred delningsbild (1200x630). Skapas i Fas 1.
   ogImage: "https://wagergolf.se/assets/og-image.png",

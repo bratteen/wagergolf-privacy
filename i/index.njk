@@ -1,0 +1,43 @@
+---
+permalink: /i/index.html
+layout: base.njk
+title: Du har blivit inbjuden till Wager Golf
+description: Spela om något med dina golfkompisar, vi räknar ut allt åt er.
+eleventyExcludeFromCollections: true
+---
+<main class="invite" style="max-width:520px;margin:0 auto;padding:48px 20px 80px;text-align:center">
+  <div id="invite-card">
+    <p class="eyebrow" style="letter-spacing:2px;text-transform:uppercase;color:#b08d57;font-size:12px;margin-bottom:16px">Inbjudan</p>
+    <h1 id="invite-title" style="font-size:clamp(1.4rem,5vw,2rem);margin-bottom:16px">Du har blivit inbjuden till Wager Golf</h1>
+    <p id="invite-sub" style="color:#555;margin-bottom:32px">Spela om något med dina golfkompisar, vi räknar ut allt åt er.</p>
+    <a id="dl" href="{{ site.appStoreUrl }}" class="btn" style="display:inline-block;background:#0a2e21;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:1rem">Ladda ner appen</a>
+  </div>
+  <script>
+    (function () {
+      var API = "{{ site.api }}";
+      var IOS = "{{ site.appStoreUrl }}";
+      var ANDROID = "{{ site.playStoreUrl }}";
+      var m = window.location.pathname.match(/\/i\/([A-Za-z0-9_]+)/);
+      var handle = m ? m[1] : null;
+      var ua = navigator.userAgent || "";
+      var store = /android/i.test(ua) ? ANDROID : IOS;
+      var dl = document.getElementById("dl");
+      dl.setAttribute("href", store);
+      if (handle) {
+        dl.addEventListener("click", function () {
+          try { navigator.clipboard.writeText("wgolf-invite:" + handle); } catch (e) {}
+          if (window.umami) { try { umami.track("invite_landing_download", { handle: handle }); } catch (e) {} }
+        });
+        fetch(API + "/api/invite/" + handle)
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (p) {
+            if (!p) return;
+            var name = (p.display_name && p.display_name.trim()) || ("@" + handle);
+            document.getElementById("invite-title").textContent = name + " har bjudit in dig till Wager Golf";
+          })
+          .catch(function () {});
+        if (window.umami) { try { umami.track("invite_landing_viewed", { handle: handle }); } catch (e) {} }
+      }
+    })();
+  </script>
+</main>
