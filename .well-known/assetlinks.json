@@ -4,7 +4,7 @@
     "target": {
       "namespace": "android_app",
       "package_name": "com.bratteen.wagergolf",
-      "sha256_cert_fingerprints": ["__ANDROID_SHA256__"]
+      "sha256_cert_fingerprints": ["48:C1:6B:3F:3D:91:00:A3:B5:C2:2F:05:E6:37:A1:EB:9E:FC:71:B1:C5:CF:B9:D8:AB:50:43:5C:C0:39:DC:E8"]
     }
   }
 ]
