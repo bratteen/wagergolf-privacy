@@ -17,26 +17,26 @@ eleventyExcludeFromCollections: true
       var API = "{{ site.api }}";
       var IOS = "{{ site.appStoreUrl }}";
       var ANDROID = "{{ site.playStoreUrl }}";
-      var m = window.location.pathname.match(/\/i\/([A-Za-z0-9_]+)/);
-      var handle = m ? m[1] : null;
+      var m = window.location.pathname.match(/\/i\/([A-Za-z0-9_-]{8})/);
+      var token = m ? m[1] : null;
       var ua = navigator.userAgent || "";
       var store = /android/i.test(ua) ? ANDROID : IOS;
       var dl = document.getElementById("dl");
       dl.setAttribute("href", store);
-      if (handle) {
+      if (token) {
         dl.addEventListener("click", function () {
-          try { navigator.clipboard.writeText("wgolf-invite:" + handle); } catch (e) {}
-          if (window.umami) { try { umami.track("invite_landing_download", { handle: handle }); } catch (e) {} }
+          try { navigator.clipboard.writeText("wgolf-invite:" + token); } catch (e) {}
+          if (window.umami) { try { umami.track("invite_landing_download"); } catch (e) {} }
         });
-        fetch(API + "/api/invite/" + handle)
+        fetch(API + "/api/invite/" + token)
           .then(function (r) { return r.ok ? r.json() : null; })
           .then(function (p) {
             if (!p) return;
-            var name = (p.display_name && p.display_name.trim()) || ("@" + handle);
+            var name = (p.display_name && p.display_name.trim()) || "En golfkompis";
             document.getElementById("invite-title").textContent = name + " har bjudit in dig till Wager Golf";
           })
           .catch(function () {});
-        if (window.umami) { try { umami.track("invite_landing_viewed", { handle: handle }); } catch (e) {} }
+        if (window.umami) { try { umami.track("invite_landing_viewed"); } catch (e) {} }
       }
     })();
   </script>
