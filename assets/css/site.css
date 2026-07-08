@@ -55,7 +55,7 @@ header {
 .brandmark img { width: 42px; height: 42px; }
 .brandmark span {
   font-family: var(--mono); font-weight: 600; font-size: 14px;
-  letter-spacing: 2px; color: var(--green-900);
+  letter-spacing: 2px; color: var(--green-900); white-space: nowrap;
 }
 .nav-links { display: flex; align-items: center; gap: 30px; }
 .nav-links a {
@@ -68,8 +68,16 @@ header {
   padding: 9px 16px; background: var(--green-900); color: var(--cream) !important;
   border-radius: 8px; font-family: var(--sans) !important; font-size: 13px !important;
   letter-spacing: 0 !important; text-transform: none !important; font-weight: 600;
+  white-space: nowrap;
 }
-@media (max-width: 720px) { .nav-links a:not(.nav-cta):not(.nav-keep) { display: none; } }
+@media (max-width: 720px) {
+  .nav-links a:not(.nav-cta):not(.nav-keep) { display: none; }
+  .nav.wrap { padding-left: 18px; padding-right: 18px; }
+  .nav-links { gap: 16px; }
+  .brandmark span { font-size: 13px; letter-spacing: 1px; }
+  .nav-cta { padding: 8px 14px; }
+}
+@media (max-width: 360px) { .brandmark span { display: none; } }
 
 /* ---------- Hero ---------- */
 .hero {
