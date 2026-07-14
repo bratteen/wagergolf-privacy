@@ -79,7 +79,7 @@
   </div>
 
   <h1>Integritetspolicy för Wager Golf</h1>
-  <p class="meta">Senast uppdaterad: 14 juli 2026 · Version 3.7</p>
+  <p class="meta">Senast uppdaterad: 14 juli 2026 · Version 3.8</p>
 
   <h2>Sammanfattning</h2>
   <p>
@@ -563,7 +563,11 @@
     Aktiv kontodata sparas så länge kontot finns eller så länge den behövs för
     tjänsten. Vid kontoradering gäller pseudonymisering och tekniska tidsfrister
     ovan. Den extra backupen av public-schemat är en åtkomstbegränsad GitHub
-    Actions-artifact med 90 dagars retention. Supabase leverantörsbackup/PITR
+    Actions-artifact med 90 dagars retention. En separat krypterad kopia av
+    raderingsregistret sparas i 14 dagar; eftersom identifierande journalfält
+    normalt nollas efter cirka 90 dagar kan sådana fält finnas kvar i en äldre
+    kopia i högst cirka 104 dagar efter raderingen. Supabase
+    leverantörsbackup/PITR
     följer leverantörens separat konfigurerade backupfönster; kontakta oss för
     det aktuella fönstret. Backuper används för återställning, verifiering och
     incidenthantering. Registrerade raderingar återappliceras efter en
@@ -600,7 +604,7 @@
 
   <section lang="en">
   <h2 id="english">Privacy Policy · Wager Golf</h2>
-  <p class="meta">Last updated: July 14, 2026 · Version 3.7</p>
+  <p class="meta">Last updated: July 14, 2026 · Version 3.8</p>
 
   <h2>Summary</h2>
   <p>
@@ -1080,7 +1084,11 @@
     Active account data is kept while the account exists or while needed for
     the service. The pseudonymisation and technical time limits above apply to
     account deletion. The additional public-schema backup is an
-    access-restricted GitHub Actions artifact with 90-day retention. Supabase
+    access-restricted GitHub Actions artifact with 90-day retention. A
+    separate encrypted deletion-ledger copy is retained for 14 days; because
+    identifying ledger fields are normally cleared after approximately 90
+    days, such fields may remain in an older copy for up to approximately 104
+    days after deletion. Supabase
     provider backups/PITR follow separately configured provider windows;
     contact us for the current window. Backups are used for restoration,
     verification and incident response. Recorded deletions are reapplied after

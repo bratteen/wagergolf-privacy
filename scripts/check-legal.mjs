@@ -38,7 +38,7 @@ for (const [name, text] of Object.entries(files)) {
 
 for (const name of ['privacySource', 'privacyBuilt']) {
   const text = files[name];
-  requireCount(name, text, 'Version 3.7', 2);
+  requireCount(name, text, 'Version 3.8', 2);
   requireText(name, text, 'Senast uppdaterad: 14 juli 2026');
   requireText(name, text, 'Last updated: July 14, 2026');
   requireText(name, text, '<section lang="en">');
@@ -48,12 +48,14 @@ for (const name of ['privacySource', 'privacyBuilt']) {
   requireText(name, text, 'Sentry-projektets konfigurerade lagringstid');
   requireText(name, text, 'Raderad spelare');
   requireText(name, text, 'olänkbart slump-ID');
+  requireText(name, text, 'högst cirka 104 dagar');
   requireText(name, text, 'identitetsverifiering kan krävas');
   requireText(name, text, 'AES-256-GCM');
   requireText(name, text, 'appversion 1.5');
   requireText(name, text, 'Google Sign-In-identifierare');
   requireText(name, text, 'daily workflow');
   requireText(name, text, 'fixed expiry');
+  requireText(name, text, 'for up to approximately 104');
   requireText(name, text, 'deleting your account does not cancel');
 }
 
