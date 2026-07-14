@@ -11,7 +11,6 @@
   <meta property="og:url" content="https://wagergolf.se/privacy/">
   <meta property="og:image" content="https://wagergolf.se/assets/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <script defer src="https://analytics.bratt.se/script.js" data-website-id="ae56fbfa-4ce4-480b-af6a-62f20282b414"></script>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -67,6 +66,11 @@
       font-size: 13px;
       color: #736b62;
     }
+    .section-divider {
+      margin-top: 60px;
+      border: 0;
+      border-top: 1px solid #d9cfb8;
+    }
   </style>
 </head>
 <body>
@@ -75,7 +79,7 @@
   </div>
 
   <h1>Integritetspolicy för Wager Golf</h1>
-  <p class="meta">Senast uppdaterad: 27 juni 2026 · Version 3.4</p>
+  <p class="meta">Senast uppdaterad: 14 juli 2026 · Version 3.7</p>
 
   <h2>Sammanfattning</h2>
   <p>
@@ -84,10 +88,27 @@
     push-notiser, och dela med vänner sparar vi viss data på en server
     hos <strong>Supabase</strong> (EU-baserad). Du loggar in med Apple
     Sign-In (iOS) eller Google Sign-In (Android). Vi visar inga annonser och säljer aldrig data till tredje
-    part. Du kan när som helst radera ditt konto från appen.
+    part. Kontoradering kan begäras i en appversion som stöder det säkra
+    flödet eller via kontaktvägen längst ned på sidan.
   </p>
   <p>
     Användarvillkoren hittar du <a href="../terms/">här</a>.
+  </p>
+
+  <h2>Ikraftträdande för det nya raderingsflödet</h2>
+  <p>
+    Policyn gäller från 14 juli 2026. Det detaljerade, checkpointade
+    raderingsflödet i avsnittet "Så fungerar kontoradering" gäller först när
+    Wager Golfs säkra radering för appversion 1.5 har aktiverats och verifierats
+    i produktion. Fram till dess används den raderingsväg som stöds av din
+    aktuella appversion eller kontaktvägen nedan. Sidan uppdateras med
+    aktiveringsdatum när produktionsaktiveringen är klar.
+  </p>
+
+  <h2>Personuppgiftsansvarig</h2>
+  <p>
+    Gustaf Bratt, Sverige, är personuppgiftsansvarig för Wager Golf. Du når
+    oss på <a href="mailto:bratt.gustaf@gmail.com">bratt.gustaf@gmail.com</a>.
   </p>
 
   <h2>Vilken data vi samlar in</h2>
@@ -95,43 +116,73 @@
   <h3>Profil</h3>
   <ul>
     <li>
-      <strong>Namn (display name)</strong>: visas för dig själv och dina
-      vänner i appen.
+      <strong>Namn (display name)</strong>: visas i appen för andra inloggade
+      användare, vänner och runddeltagare. Namnet kan också visas utan
+      inloggning för den som öppnar en giltig, aktiv inbjudningslänk.
     </li>
     <li>
       <strong>Handle</strong> (unik <code>@användarnamn</code>): valt vid
-      registrering, används för att kompisar ska kunna hitta dig.
+      registrering, visas för andra inloggade användare, används för att
+      kompisar ska kunna hitta dig och som supportnamn hos RevenueCat. Handle
+      lämnas inte ut via en publik inbjudningslänk.
     </li>
     <li>
       <strong>Handicap</strong>: golf-handicap, används för WHS-baserad
-      slag-fördelning i avräkningen.
+      slagfördelning i avräkningen och kan visas för andra inloggade
+      användare, vänner och runddeltagare.
     </li>
     <li>
-      <strong>Kön (m/w)</strong>: krävs för korrekt slope/CR-beräkning
-      eftersom röd tee oftast har separata värden för damer.
+      <strong>Kön (m/w)</strong>: används för korrekt slope/CR-beräkning och
+      kan vara tillgängligt för andra inloggade användare, vänner och
+      runddeltagare.
+    </li>
+    <li>
+      <strong>Pro-status</strong>: om du har Pro kan det visas som en Pro-markör
+      för andra inloggade användare.
     </li>
     <li>
       <strong>Mobilnummer</strong> (valfritt): används bara för Swish-länkar
-      mellan dig och dina vänner i uppgörelse-vyn. Visas bara för accepterade
-      vänner.
+      i uppgörelse-vyn. Det kan visas för accepterade vänner och för
+      runddeltagare som du uttryckligen ger betalningsåtkomst. Gästers nummer
+      lagras bara lokalt på den enhet där gästen skapades.
     </li>
     <li>
-      <strong>Profilbild</strong> (valfri): laddas upp till Supabase Storage
-      och visas för dig + dina vänner i appen.
+      <strong>Profilbild</strong> (valfri): laddas upp till en publik URL i
+      Supabase Storage och visas i appen. Den kan även visas utan inloggning
+      för den som öppnar en giltig, aktiv inbjudningslänk.
     </li>
   </ul>
 
   <h3>Identifierare</h3>
   <ul>
     <li>
-      <strong>Apple Sign-In identifier</strong>: anonym ID från Apple som
-      kopplar din inloggning till ditt konto. Vi får ingen email om du valt
-      "Hide my email" hos Apple.
+      <strong>Apple Sign-In-identifierare</strong>: ett pseudonymt ID från
+      Apple som kopplar inloggningen till ditt konto. Vid första inloggningen
+      kan Apple även lämna din e-post eller en privat relay-adress beroende på
+      vad du väljer hos Apple.
     </li>
     <li>
-      <strong>Push-notification-token</strong>: en handle från Expo Push
-      Service som låter oss skicka notiser till din telefon. Innehåller
-      ingen personidentifierande information i sig.
+      <strong>Google Sign-In-identifierare</strong>: ett pseudonymt Google-ID
+      som kopplar Android-inloggningen till ditt konto. Google kan även lämna
+      namn och e-post enligt de behörigheter du godkänner.
+    </li>
+    <li>
+      <strong>Push-token</strong>: en pseudonym leveransadress från Expo Push
+      Service som låter oss skicka notiser till din appinstallation.
+    </li>
+    <li>
+      <strong>Installations-ID</strong>: ett slumpmässigt, pseudonymt ID per
+      appinstallation. Det används för rate limiting hos vår Cloudflare
+      Worker och för att undvika att en enhet läser tillbaka sina egna
+      Supabase-ändringar i rundkonfiguration, scorer och events som nya
+      ändringar. ID:t roteras vid verkligt kontobyte och kontoradering;
+      anti-echo-markörer nollas i bevarade delade rundor vid radering.
+    </li>
+    <li>
+      <strong>Tekniska säkerhets- och raderingsposter</strong>: begränsade
+      auditposter, raderingsstatus, recovery-kvitton och markörer för borttagna
+      rundor används för säkerhet, felsökning och för att hindra raderad data
+      från att återkomma efter offline-synk eller backupåterläsning.
     </li>
   </ul>
 
@@ -149,6 +200,12 @@
     <li>
       <strong>Cheers och kommentarer</strong>: reaktioner och meddelanden
       som du eller dina vänner skickar på en runda.
+    </li>
+    <li>
+      <strong>Potter och uppgörelser</strong>: deltagare, insatser, fryst netto
+      per runda, status, tidsstämplar, vem som skapade eller gjorde upp potten,
+      beräknade betalningar och uttryckliga åtkomstgivningar till
+      betalningskontakt. Wager Golf håller inte pengarna.
     </li>
   </ul>
 
@@ -168,13 +225,14 @@
   <ul>
     <li>
       <strong>Prenumerations-status</strong>: om/när du köpt Pro,
-      provperiod-status, förnyelsedatum. Hanteras av RevenueCat (se nedan)
-      och knyts till ditt anonyma RevenueCat-ID + ditt Supabase-konto.
+      provperiodsstatus och förnyelsedatum. Hanteras av RevenueCat (se nedan)
+      och knyts till ditt Supabase-UUID och handle.
     </li>
     <li>
-      <strong>Köp-historik</strong>: själva köptransaktionen lagras hos
-      Apple (iOS) respektive Google (Android), inte hos oss. Vi ser bara entitlements-status ("är Pro
-      aktiv?") via RevenueCat-SDK:n.
+      <strong>Köpdata</strong>: själva betalningen ligger hos Apple eller
+      Google. RevenueCat behandlar kvitto-/transaktionshistorik,
+      prenumerationsstatus och teknisk app-/enhetsinformation för att
+      verifiera köp. Vi ser inte kort- eller bankuppgifter.
     </li>
   </ul>
 
@@ -183,9 +241,10 @@
     <li>
       <strong>Fel-rapporter på bandata</strong>: om du rapporterar att
       par, stroke-index eller GPS-koordinater är fel via dots-menyn i
-      pågående runda sparas rapporten (din text + ditt konto-ID + bana-ID)
-      på Supabase så vi kan följa upp och fixa. Synlig bara för oss
-      (Wager Golf-administration).
+      pågående runda sparas bland annat ditt konto-ID, bana, runda, hål,
+      rapporttyp, text, aktuellt och föreslaget värde, status och tidsstämplar
+      på Supabase. Du kan läsa din egen rapport och dess granskningsfält;
+      endast administration kan ändra och hantera granskningen.
     </li>
   </ul>
 
@@ -197,19 +256,27 @@
       kontakt. Bara du ser dina egna blockeringar, den blockade får inte veta.
     </li>
     <li>
-      <strong>Innehållsrapporter</strong>: om du rapporterar en kommentar,
-      cheer eller användare sparas rapporten (ditt konto-ID, vad som
-      rapporterats och vald orsak) på Supabase så vi kan granska och åtgärda.
-      Synlig bara för oss (Wager Golf-administration).
+      <strong>Innehållsrapporter</strong>: om du rapporterar en kommentar eller
+      användare sparas rapporten (ditt konto-ID, vad som
+      rapporterats, vald orsak, status och granskningsmetadata) på Supabase så
+      vi kan granska och åtgärda. Du kan läsa din egen rapport och dess
+      granskningsfält; endast Wager Golf-administration kan ändra och hantera
+      granskningen.
     </li>
   </ul>
+  <p>
+    Displaynamn, kommentarer och gästnamn kan kontrolleras automatiskt mot ett
+    begränsat innehållsfilter för att hindra uppenbara hot, trakasserier och
+    förbjudet innehåll.
+  </p>
 
   <h2>Behörigheter (permissions)</h2>
   <ul>
     <li>
-      <strong>Plats (GPS)</strong>: används bara om du själv aktiverar
-      "GPS-avstånd"-funktionen i appen för att se avstånd till greenen.
-      Position används endast lokalt på din enhet.
+      <strong>Plats (GPS)</strong>: används om du godkänner platsbehörighet
+      för att sortera och visa golfbanor nära dig. Den exakta positionen
+      används under appsessionen och skickas inte till Wager Golf, PostHog,
+      Supabase eller GolfAPI.io.
     </li>
     <li>
       <strong>Foton</strong>: krävs om du vill välja en profilbild eller
@@ -228,18 +295,26 @@
 
   <h2>Var data lagras</h2>
   <p>
-    Appen lagrar data på två platser:
+    Primär appdata lagras lokalt och hos Supabase. Andra tjänster behandlar
+    begränsade uppgifter enligt avsnittet nedan.
   </p>
   <ul>
     <li>
-      <strong>Lokalt på din enhet</strong> (AsyncStorage): cache av profil,
-      bana-data, pågående runda. Försvinner om du avinstallerar appen.
+      <strong>Lokalt på din enhet</strong> (AsyncStorage och SecureStore):
+      auth-/refresh-token, profil och telefon, gäster och deras eventuella
+      nummer, bandata, rundor och historik, osynkade ändringar,
+      inbjudningstoken, installations-ID, analyssamtycke, appinställningar och
+      skyddat raderingskvitto. Kontospecifika uppgifter rensas vid verifierad
+      kontoradering. AsyncStorage och vanliga appfiler tas normalt bort vid
+      avinstallation, medan en skyddad Keychain/SecureStore-post på iOS kan
+      finnas kvar efter ominstallation tills appen uttryckligen rensar den.
     </li>
     <li>
-      <strong>Supabase (EU-baserad server)</strong>: din profil, dina
-      avslutade rundor, vänskaps-relationer, cheers, kommentarer,
-      blockeringar, rapporter och profilbild. Detta är vad som synkas mellan
-      dina enheter och som dina vänner kan se delar av enligt åtkomstreglerna.
+      <strong>Supabase (EU-baserad server)</strong>: din profil, aktiva och
+      avslutade rundor, scorer, events, rundkonfiguration, potter,
+      betalningskontakter, vänskapsrelationer, cheers, kommentarer,
+      blockeringar, rapporter och profilbild. Detta synkas mellan dina enheter;
+      andra användare ser bara de delar som åtkomstreglerna tillåter.
     </li>
   </ul>
 
@@ -247,43 +322,53 @@
 
   <h3>Supabase</h3>
   <p>
-    All molnlagrad data ligger hos <a href="https://supabase.com">Supabase</a>
-    i EU-region. Supabase fungerar som vår backend (databas, autentisering,
-    Storage för profilbilder). De har egen integritetspolicy som du hittar
-    på deras webbplats.
+    Primär app- och kontodata ligger hos
+    <a href="https://supabase.com/privacy">Supabase</a> i EU-region. Supabase
+    fungerar som vår backend (databas, autentisering och Storage för
+    profilbilder). Andra typer av data behandlas av tjänsterna nedan.
   </p>
 
   <h3>Apple Sign-In (iOS) och Google Sign-In (Android)</h3>
   <p>
     Vi använder Apple Sign-In (på iOS) och Google Sign-In (på Android) för inloggning. Apple respektive Google delar enbart de uppgifter
-    du själv godkänner (namn, eventuellt email). Om du valt "Hide my email"
-    får vi en anonym relay-adress, inte din riktiga email.
+    du själv godkänner (namn, eventuellt e-post). Om du valt "Hide my email"
+    får vi en privat, pseudonym relay-adress, inte din riktiga e-post.
   </p>
 
   <h3>Expo Push Service / APNs</h3>
   <p>
     Push-notiser levereras via <a href="https://docs.expo.dev/push-notifications/overview/">
     Expo Push Service</a> som vidarebefordrar till Apple Push Notification
-    service (APNs). Vi skickar bara notis-innehåll (typ "Natasha gjorde
-    birdie!") + din push-token. Inget annat personligt data går genom dessa
-    tjänster.
+    service (APNs) eller Google Firebase Cloud Messaging (FCM). Vi skickar
+    push-token, notistext och, beroende på notistyp, tekniska ID:n för exempelvis
+    aktivitet, aktör, runda eller rapport.
+    Notistexten kan innehålla namn, bana, hål, en förhandsvisning av en
+    användarskriven kommentar samt vinnare och netto i kronor efter avslutad
+    runda. Vi lägger inte till telefon, e-post, bank-, kort- eller
+    Swish-referens som separata tekniska fält, men en kommentar kan innehålla
+    det avsändaren själv skriver. Hur mycket som syns på låsskärmen styrs av
+    telefonens notisinställningar.
   </p>
 
   <h3>GolfAPI.io</h3>
   <p>
     Bandata (par, stroke-index, GPS-koordinater för svenska golfbanor)
     hämtas via vår egen Cloudflare Worker-proxy som anropar
-    <a href="https://www.golfapi.io">GolfAPI.io</a>. Inga personuppgifter
-    eller spelhistorik skickas dit, bara bana-ID och ett anonymt device-ID
-    för rate-limiting.
+    <a href="https://www.golfapi.io">GolfAPI.io</a>. Till GolfAPI.io går bara
+    valt bana-ID via proxyn, inte personuppgifter, GPS-position eller
+    spelhistorik. Proxyn behandlar installations-ID och en Pro-signal för rate
+    limiting. Vid inbjudningsuppslag kan token och IP-/enhetsfallback användas
+    för rate limiting i cirka 24 timmar, och namn/profilbild kan cachas i cirka
+    60 sekunder.
   </p>
 
   <h3>Swish</h3>
   <p>
-    Wager Golf integrerar inte direkt med Swish. När du trycker "Betala via
-    Swish" eller "Visa QR-kod" i uppgörelse-vyn skapar appen en
-    <code>swish://</code>-länk på din enhet som öppnar Swish-appen med
-    förifyllt belopp och meddelande. Inga uppgifter skickas via våra system.
+    Wager Golf håller eller förmedlar inga insatser och tar ingen andel av en
+    uppgörelse. När du trycker "Betala via Swish" eller "Visa QR-kod" skapar
+    appen en <code>swish://</code>-länk eller QR-kod på din enhet med
+    förifyllt belopp, mottagarnummer och meddelande. Betalningen sker i din
+    betalapp; betalningsuppgifter skickas inte via Wager Golfs servrar.
   </p>
 
   <h3>RevenueCat</h3>
@@ -291,10 +376,14 @@
     Pro-prenumerationen hanteras via <a href="https://www.revenuecat.com">
     RevenueCat</a>, som ligger mellan Apple StoreKit (iOS) respektive Google Play Billing (Android) och vår app.
     RevenueCat verifierar köp, håller koll på förnyelser och provperioder,
-    och berättar för appen om du har Pro aktivt. Vi skickar bara ditt
-    anonyma Supabase user-id till RevenueCat så att din prenumeration följer
-    med mellan dina enheter. Inga golfdata, namn eller andra personuppgifter
-    delas. Se RevenueCats egen integritetspolicy för detaljer.
+    och berättar för appen om du har Pro aktivt. RevenueCat får ditt
+    Supabase-UUID som App User ID och ditt <code>@handle</code> som
+    support-displaynamn. Det gör att prenumerationen följer kontot mellan
+    enheter. Vid vanlig utloggning växlar SDK:n till ett anonymt RevenueCat-ID.
+    RevenueCat behandlar även butikskvitton, transaktionshistorik och teknisk
+    app-/enhetsinformation för köpverifiering. Inga golfdata, telefonnummer,
+    kort- eller bankuppgifter skickas från Wager Golf till RevenueCat. Se
+    RevenueCats egen integritetspolicy för detaljer.
   </p>
 
   <h3>Apple StoreKit / App Store (iOS) och Google Play Billing (Android)</h3>
@@ -307,46 +396,77 @@
     respektive Google Play.
   </p>
 
-  <h3>Sentry (crash-rapportering + diagnos)</h3>
+  <h3>Sentry (krasch- och felrapportering)</h3>
   <p>
-    Om appen kraschar skickar vi en anonym crash-rapport till
+    Om appen kraschar eller ett tekniskt fel inträffar skickar vi en
+    felrapport till
     <a href="https://sentry.io">Sentry</a> så vi kan diagnosticera och fixa
-    buggen. Rapporten innehåller stack trace, iOS- eller Android-version, modellnamn (typ
-    "iPhone 15"), app-version och en tidsstämpel.
+    buggen. Rapporten kan innehålla stack trace, iOS- eller Android-version,
+    enhetsmodell, appversion och tidsstämpel. Automatisk prestanda-,
+    navigations- och touchspårning är avstängd.
   </p>
   <p>
-    Utöver krascher samlar Sentry också anonym diagnostik-data om hur
-    appen presterar: vilka skärmar som renderas, hur lång tid det tar,
-    och vilka knappar du trycker. Detta hjälper oss hitta långsamma flöden
-    och förstå vad som hände precis innan en bugg. Allt är fortfarande
-    anonymt och täcks av "Diagnostics"-kategorin i Apple App Privacy,
-    inte "Tracking" — vi triggar ingen ATT-prompt och kopplar inte data
-    till annonsering.
+    UUID, handle, telefonnummer, e-post, JWT/token, URL:er och lokala
+    round-ID:n av formen <code>r_...</code> skrubbas rekursivt innan
+    rapporten skickas. Sentry används inte för annonsering eller spårning
+    mellan appar. Eftersom Wager Golf-konto-ID inte skickas riktar det
+    automatiska kontoraderingsflödet ingen separat radering mot redan lagrade
+    Sentry-poster. De följer Sentry-projektets konfigurerade lagringstid;
+    kontakta oss om du vill veta den aktuella perioden.
   </p>
+
+  <h3>GitHub Actions (backup)</h3>
   <p>
-    Sentry-rapporterna innehåller INTE ditt namn, e-post, telefonnummer
-    eller golfdata. Vi skickar inget user-id — diagnostik är inte kopplad
-    till en specifik användare. E-mail-adresser och telefonnummer som av
-    misstag skulle hamna i en feltext skrubbas automatiskt innan rapporten
-    skickas.
+    En åtkomstbegränsad backup av Supabase public-schema lagras som en krypterad
+    GitHub Actions-artifact i 90 dagar för återställning och incidenthantering.
+    Den kan innehålla de personuppgifter som finns i databasschemat. Se
+    <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHubs integritetspolicy</a>.
+  </p>
+
+  <h3>Behandling utanför EU/EES</h3>
+  <p>
+    Supabase och PostHog är konfigurerade för EU-lagring. Vissa andra
+    leverantörer, exempelvis Apple, Google, RevenueCat, Expo, Sentry, Cloudflare
+    och GitHub, kan
+    behandla uppgifter utanför EU/EES. Leverantörernas publicerade villkor och
+    integritetstexter beskriver de skydd som gäller för deras överföringar,
+    exempelvis adekvansbeslut eller EU:s standardavtalsklausuler. Kontakta oss
+    om du vill veta vilken mekanism som gäller för en viss behandling.
   </p>
 
   <h2>Användningsstatistik</h2>
   <p>
-    För att förstå hur appen används och kunna förbättra den använder vi
-    PostHog, ett produktanalys-verktyg med datalagring inom EU. Vi loggar
-    händelser som vilka skärmar och spelformat som används samt när rundor
-    startas och avslutas. Statistiken kopplas till ett pseudonymt konto-id,
-    aldrig ditt namn, mejladress, telefonnummer eller @-handle, och vi
-    skickar aldrig insats- eller vinstbelopp. Vi visar inga annonser, säljer
-    aldrig data till tredje part, och spårar dig inte mellan andra appar
-    eller websidor (därför ingen ATT-prompt). Vi har inga cookies i appen.
+    PostHog används bara om du själv slår på frivillig användningsstatistik i
+    Profil. Samtycket sparas per konto och är av som standard. Vi kan då logga
+    tillåtelseliste-styrda händelser, till exempel vilka skärmar och
+    spelformat som används och när rundor startas eller avslutas. GeoIP,
+    automatiska URL-/livscykelhändelser, session replay och autocapture är
+    avstängda. Ditt Supabase-UUID används då som ett pseudonymt distinct ID
+    för att hålla samma kontos events samman.
   </p>
   <p>
-    RevenueCat samlar viss subscription-relaterad data (prenumerationsstatus,
-    förnyelsedatum, prov-period) och Sentry tar emot crash-rapporter, men
-    det är nödvändigt för att Pro och bug-fixning ska fungera — inte
-    tracking i Apples bemärkelse.
+    GPS-position, valt bana-ID, inbjudningslänk eller token, konto-, runda-
+    eller spelar-ID samt insats- och vinstbelopp skickas inte som explicita
+    eventfält. PostHog-SDK:n kan skicka pseudonymt device-/session-ID,
+    appversion/build, operativsystem och version, SDK-version och
+    skärmdimensioner. Enhetsmodell/tillverkare, språk/locale, tidszon,
+    appnamn/namespace och emulatorflagga tas bort. Namn, handle, e-post och
+    telefonnummer skickas inte. Du kan stänga av statistiken igen; då stoppas
+    SDK:n och oskickade lokala köer töms.
+  </p>
+
+  <h2>Varför vi behandlar data</h2>
+  <p>
+    Profil, konto, rundor, sociala funktioner och Pro-status behandlas för att
+    leverera den tjänst du använder och för att fullgöra avtalet med dig.
+    Plats, foton, kamera, push och PostHog-statistik används bara efter ditt
+    val eller samtycke. Säkerhetsloggar, rate limiting, innehållsmoderering och
+    nödvändig felrapportering bygger på vårt berättigade intresse att skydda
+    och förbättra tjänsten. Delad rundhistorik bevaras pseudonymiserad utifrån
+    vårt och övriga deltagares berättigade intresse av en korrekt gemensam
+    historik; direktidentifierare tas bort och aliaset begränsas till en runda
+    för att minska integritetsintrånget. Du kan återkalla frivilliga val i
+    appen eller i telefonens inställningar.
   </p>
 
   <h2>Dina rättigheter (GDPR)</h2>
@@ -364,8 +484,8 @@
     </li>
     <li>
       <strong>Radera ditt konto</strong>: gå till Profil-fliken och tryck
-      "Ta bort kontot". Detta raderar all din data både lokalt på enheten
-      och från Supabase. Kan inte ångras.
+      "Ta bort kontot". Privat kontodata raderas och delade rundor
+      pseudonymiseras enligt avsnittet nedan. Raderingen kan inte ångras.
     </li>
     <li>
       <strong>Exportera data</strong>: kontakta oss via mejl (se nedan) om
@@ -381,39 +501,105 @@
     </li>
   </ul>
 
-  <h2>Hur länge data sparas</h2>
+  <h2>Så fungerar kontoradering</h2>
   <p>
-    Data sparas så länge ditt konto är aktivt. När du raderar ditt konto
-    raderas alla dina personuppgifter från Supabase. Activity-rader som
-    refererar till dig (t.ex. en notis till en vän om att du startade en
-    runda) får ligga kvar i deras feed med ditt namn anonymiserat.
+    Kontoradering tar bort ditt Wager Golf-konto och din inloggningsidentitet,
+    profil, profilbild, vänskapsrelationer, privata rundor, kommentarer,
+    cheers, aktivitet, betalningskontaktuppgifter och annan privat kontodata.
+    På den enhet där raderingen slutförs eller verifieras rensas kontospecifik
+    lokal data och analyssamtycke, och installationens pseudonyma ID roteras.
+    Andra offline-enheter kan inte fjärrensas; deras lokala data rensas vid
+    kontobyte, avinstallation eller när de återupptar raderingen med sitt
+    kvitto. Det checkpointade, säkra flödet
+    används i appversioner som stöder det. Om appen kräver en uppdatering som
+    du inte kan installera kan du kontakta oss så hjälper vi dig hitta en
+    tillgänglig raderingsväg och hantera din rättighetsbegäran. Vi kan behöva
+    verifiera din identitet.
+  </p>
+  <p>
+    För Sign in with Apple begär vi en färsk Apple-auktorisering. Koden växlas
+    mot en återkallningstoken som lagras med AES-256-GCM bara så länge den
+    behövs för att bekräfta eller återuppta återkallelsen. Avsikten att radera
+    RevenueCat-kunden checkpointas före borttagning av den privata
+    kontodatabasen. RevenueCat-kundprofilen, inklusive Wager Golf App User ID,
+    handle-displaynamn och RevenueCats köphistorik, raderas. Om du samtyckt
+    till PostHog stoppas klienten och den lokala kön rensas; vi köar radering
+    av personen, tillhörande events och eventuella inspelningar och försöker
+    igen vid tillfälliga fel. Ett dagligt workflow återupptar inaktuella,
+    ofullständiga steg och söker om externa system i cirka 30 dagar.
+  </p>
+  <p>
+    Delade rundor bevaras för de andra deltagarnas historik. Ditt namn,
+    handle, profilbild och globala konto-ID ersätts där med
+    <strong>Raderad spelare</strong> och ett rundlokalt alias som inte längre
+    är kopplat till kontot. Nya alias slumpas normalt; äldre rundlokala ID:n
+    kan finnas kvar. Scorer, events, resultat/uppgörelse samt fryst handicap
+    och kön kan ligga kvar som historisk rundkontext så att resultat inte
+    räknas om. En per-runda saltad
+    envägshash kan användas för att mappa en gammal offline-ändring till samma
+    alias, men inte för att länka dig mellan olika rundor.
+  </p>
+  <p>
+    Appen sparar ett skyddat återställningskvitto så en enhet kan kontrollera
+    att raderingen blev klar även efter att inloggningen försvunnit. Kvitton
+    på flera enheter kan fortsätta ge slutstatus för samma radering; en
+    kontroll på en enhet ogiltigförklarar inte de andra. Efter
+    cirka 90 dagar tas rått konto-ID, tidsstämplar och operativa checkpoints
+    normalt bort. Om en extern radering ännu inte kan verifieras behålls den
+    länkade felinformationen tills felet är löst. Därefter återstår bara ett
+    olänkbart slump-ID och envägshashar av kvittona utan fast sluttid, enbart
+    för att gamla offline-enheter ska kunna få beskedet "raderat". De kan inte
+    användas för att identifiera dig eller återskapa kontot.
+  </p>
+  <p>
+    <strong>Viktigt om Pro:</strong> kontoradering avslutar inte en aktiv
+    prenumeration i App Store eller Google Play. Den måste sägas upp separat i
+    ditt Apple- eller Google-konto för att stoppa framtida förnyelser.
   </p>
 
-  <h2>Barn under 13 år</h2>
+  <h2>Hur länge data sparas</h2>
   <p>
-    Wager Golf är inte avsedd för barn under 13 år. Eftersom appen handlar
-    om pengarvad mellan vuxna golfare har vi rekommenderad åldersgräns 17+
-    i App Store.
+    Aktiv kontodata sparas så länge kontot finns eller så länge den behövs för
+    tjänsten. Vid kontoradering gäller pseudonymisering och tekniska tidsfrister
+    ovan. Den extra backupen av public-schemat är en åtkomstbegränsad GitHub
+    Actions-artifact med 90 dagars retention. Supabase leverantörsbackup/PITR
+    följer leverantörens separat konfigurerade backupfönster; kontakta oss för
+    det aktuella fönstret. Backuper används för återställning, verifiering och
+    incidenthantering. Registrerade raderingar återappliceras efter en
+    återläsning i den utsträckning de täcks av den senaste verifierade kopian
+    av raderingsregistret. Tillfälliga manuella kopior loggas med checksumma,
+    ansvarig, syfte och sista raderingsdag, åtkomstbegränsas och raderas direkt
+    efter arbetet, senast när källbackupen löper ut.
+  </p>
+
+  <h2>Ålder</h2>
+  <p>
+    Wager Golf är avsedd för personer som är minst 17 år. Appens
+    åldersklassning och tillgänglighet kan också styras av App Store och
+    Google Play i respektive land.
   </p>
 
   <h2>Ändringar i policyn</h2>
   <p>
     Om vi gör väsentliga ändringar uppdateras "senast uppdaterad"-datumet
-    överst och versionsnumret bumpas. Stora ändringar (t.ex. nya
-    tredjepartstjänster eller datainsamlings-kategorier) meddelas i appen.
+    överst och versionsnumret ändras. När det krävs informerar vi före
+    ikraftträdandet via appen, butikssidan eller annan lämplig kanal.
   </p>
 
   <h2>Kontakt</h2>
   <p>
     Frågor om denna policy, hur dina data hanteras, eller önskemål om
-    radering/export?<br>
+    radering/export? Om du inte kan installera den appversion som krävs för
+    säker kontoradering hjälper vi dig hitta en tillgänglig raderingsväg och
+    hantera din rättighetsbegäran; identitetsverifiering kan krävas.<br>
     Mejla <a href="mailto:bratt.gustaf@gmail.com">bratt.gustaf@gmail.com</a>.
   </p>
 
-  <hr style="margin-top: 60px; border: none; border-top: 1px solid #d9cfb8;">
+  <hr class="section-divider">
 
-  <h2 id="english" lang="en">Privacy Policy · Wager Golf</h2>
-  <p class="meta">Last updated: June 27, 2026 · Version 3.4</p>
+  <section lang="en">
+  <h2 id="english">Privacy Policy · Wager Golf</h2>
+  <p class="meta">Last updated: July 14, 2026 · Version 3.7</p>
 
   <h2>Summary</h2>
   <p>
@@ -421,11 +607,28 @@
     friends. To enable multi-device sync, push notifications, and sharing
     rounds with friends, we store some data on a server hosted by
     <strong>Supabase</strong> (EU-based). You sign in with Apple Sign-In (iOS) or Google Sign-In (Android).
-    We show no ads and never sell data to third parties. You can delete
-    your account from the app at any time.
+    We show no ads and never sell data to third parties. Account deletion can
+    be requested in an app version that supports the secure flow or through
+    the contact route at the end of this page.
   </p>
   <p>
     Terms of Service are available <a href="../terms/">here</a>.
+  </p>
+
+  <h2>Effective date for the new deletion flow</h2>
+  <p>
+    This policy applies from July 14, 2026. The detailed checkpointed flow in
+    "How account deletion works" applies only after Wager Golf's secure
+    deletion service for app version 1.5 has been activated and verified in
+    production. Until then, use the deletion route supported by your current
+    app version or the contact route below. This page will be updated with the
+    activation date after production activation is complete.
+  </p>
+
+  <h2>Data controller</h2>
+  <p>
+    Gustaf Bratt, Sweden, is the data controller for Wager Golf. Contact us at
+    <a href="mailto:bratt.gustaf@gmail.com">bratt.gustaf@gmail.com</a>.
   </p>
 
   <h2>What data we collect</h2>
@@ -433,42 +636,72 @@
   <h3>Profile</h3>
   <ul>
     <li>
-      <strong>Display name</strong>: shown to you and your friends in the app.
+      <strong>Display name</strong>: shown in the app to other signed-in
+      users, friends and round participants. It may also be shown without
+      sign-in to someone who opens a valid, active invitation link.
     </li>
     <li>
       <strong>Handle</strong> (unique <code>@username</code>): chosen at
-      registration, used so friends can find you.
+      registration, shown to other signed-in users, used so friends can find
+      you and as a support display name in RevenueCat. Your handle is not
+      returned by a public invitation link.
     </li>
     <li>
-      <strong>Handicap</strong>: golf handicap, used for WHS-based stroke
-      allocation in settlement.
+      <strong>Handicap</strong>: used for WHS-based stroke allocation and may
+      be shown to other signed-in users, friends and round participants.
     </li>
     <li>
-      <strong>Gender (m/w)</strong>: required for correct slope/CR
-      calculation since the red tee usually has separate values for women.
+      <strong>Gender (m/w)</strong>: used for correct slope/CR calculations
+      and may be available to other signed-in users, friends and round
+      participants.
     </li>
     <li>
-      <strong>Phone number</strong> (optional): used only for Swish links
-      between you and your friends in the settlement view. Visible only to
-      accepted friends.
+      <strong>Pro status</strong>: if you have Pro, a Pro badge may be shown to
+      other signed-in users.
     </li>
     <li>
-      <strong>Profile picture</strong> (optional): uploaded to Supabase
-      Storage and shown to you + your friends in the app.
+      <strong>Phone number</strong> (optional): used for Swish links in the
+      settlement view. It may be shown to accepted friends and round
+      participants you explicitly grant payment access to. Guest phone
+      numbers are stored only on the device where the guest was created.
+    </li>
+    <li>
+      <strong>Profile picture</strong> (optional): uploaded to a public URL in
+      Supabase Storage and shown in the app. It may also be shown without
+      sign-in to someone who opens a valid, active invitation link.
     </li>
   </ul>
 
   <h3>Identifiers</h3>
   <ul>
     <li>
-      <strong>Apple Sign-In identifier</strong>: anonymous ID from Apple
-      that links your sign-in to your account. We do not receive an email if
-      you chose "Hide my email" with Apple.
+      <strong>Apple Sign-In identifier</strong>: a pseudonymous ID from Apple
+      that links the sign-in to your account. On first sign-in, Apple may also
+      provide your email address or a private relay address, depending on your
+      choice with Apple.
     </li>
     <li>
-      <strong>Push notification token</strong>: a handle from Expo Push
-      Service that lets us deliver notifications to your phone. Contains no
-      personally identifying information on its own.
+      <strong>Google Sign-In identifier</strong>: a pseudonymous Google ID
+      that links Android sign-in to your account. Google may also provide your
+      name and email address under the permissions you approve.
+    </li>
+    <li>
+      <strong>Push token</strong>: a pseudonymous delivery address from Expo
+      Push Service that lets us deliver notifications to your app installation.
+    </li>
+    <li>
+      <strong>Installation ID</strong>: a random, pseudonymous ID for each app
+      installation. It is used for rate limiting in our Cloudflare Worker and
+      to prevent a device from treating its own Supabase writes to round
+      configuration, scores and events as new remote changes. The ID rotates
+      on a real account switch and account deletion; anti-echo markers are
+      cleared from retained shared rounds on deletion.
+    </li>
+    <li>
+      <strong>Technical security and deletion records</strong>: limited audit
+      records, deletion status, recovery receipts and deleted-round markers
+      are used for security, troubleshooting and to prevent deleted data from
+      returning after offline sync or a backup restore.
     </li>
   </ul>
 
@@ -486,6 +719,12 @@
     <li>
       <strong>Cheers and comments</strong>: reactions and messages you or
       your friends send on a round.
+    </li>
+    <li>
+      <strong>Pots and settlements</strong>: participants, stakes, frozen net
+      per round, status, timestamps, who created or settled the pot, calculated
+      payments and explicit grants to payment-contact data. Wager Golf does not
+      hold the funds.
     </li>
   </ul>
 
@@ -505,13 +744,14 @@
   <ul>
     <li>
       <strong>Subscription status</strong>: whether/when you bought Pro,
-      trial status, renewal date. Managed by RevenueCat (see below) and
-      linked to your anonymous RevenueCat ID + your Supabase account.
+      trial status and renewal date. Managed by RevenueCat (see below) and
+      linked to your Supabase UUID and handle.
     </li>
     <li>
-      <strong>Purchase history</strong>: the actual purchase transaction
-      is stored by Apple (iOS) or Google (Android), not by us. We only see entitlement status
-      ("is Pro active?") via the RevenueCat SDK.
+      <strong>Purchase data</strong>: payment itself is held by Apple or
+      Google. RevenueCat processes receipt/transaction history, subscription
+      status and technical app/device data to verify purchases. We do not see
+      card or bank details.
     </li>
   </ul>
 
@@ -519,10 +759,11 @@
   <ul>
     <li>
       <strong>Course data error reports</strong>: if you report that par,
-      stroke index or GPS coordinates are wrong via the dots menu in an
-      active round, the report (your text + your account ID + course ID)
-      is saved to Supabase so we can follow up and fix. Visible only to
-      us (Wager Golf administration).
+      stroke index or GPS coordinates are wrong via the dots menu in an active
+      round, we save fields including your account ID, course, round, hole,
+      report kind, text, current and suggested value, status and timestamps in
+      Supabase. You can read your own report and review fields; only
+      administration can change and handle the review.
     </li>
   </ul>
 
@@ -534,19 +775,26 @@
       see your own blocks, the blocked person is not notified.
     </li>
     <li>
-      <strong>Content reports</strong>: if you report a comment, cheer or user,
-      the report (your account ID, what was reported and the chosen reason) is
-      saved to Supabase so we can review and act on it. Visible only to us
-      (Wager Golf administration).
+      <strong>Content reports</strong>: if you report a comment or user,
+      the report (your account ID, the target, chosen reason, status and review
+      metadata) is saved to Supabase so we can review and act. You can read your
+      own report and review fields; only Wager Golf administration can change
+      and handle the review.
     </li>
   </ul>
+  <p>
+    Display names, comments and guest names may be checked automatically by a
+    limited content filter to prevent obvious threats, harassment and prohibited
+    content.
+  </p>
 
   <h2>Permissions</h2>
   <ul>
     <li>
-      <strong>Location (GPS)</strong>: used only if you explicitly enable
-      "GPS distance" in the app to see distance to the green. Location is
-      used locally only.
+      <strong>Location (GPS)</strong>: used if you grant location permission
+      to sort and show golf courses near you. Your precise position is used
+      during the app session and is not sent to Wager Golf, PostHog, Supabase
+      or GolfAPI.io.
     </li>
     <li>
       <strong>Photos</strong>: required if you want to pick a profile
@@ -565,18 +813,26 @@
 
   <h2>Where data is stored</h2>
   <p>
-    The app stores data in two places:
+    Primary app data is stored locally and with Supabase. Other services process
+    limited data as described below.
   </p>
   <ul>
     <li>
-      <strong>Locally on your device</strong> (AsyncStorage): cache of
-      profile, course data, active round. Removed if you uninstall the app.
+      <strong>Locally on your device</strong> (AsyncStorage and SecureStore):
+      auth/refresh token, profile and phone, guests and any phone numbers,
+      course data, rounds and history, unsent changes, invitation token,
+      installation ID, analytics consent, app settings and a protected
+      deletion receipt. Account-specific data is cleared after verified
+      account deletion. AsyncStorage and ordinary app files are normally
+      removed on uninstall, while a protected iOS Keychain/SecureStore entry
+      may survive reinstallation until the app explicitly clears it.
     </li>
     <li>
-      <strong>Supabase (EU-based server)</strong>: your profile, completed
-      rounds, friendships, cheers, comments, blocks, reports and profile
-      picture. This is what syncs between your devices and what your friends
-      can see parts of according to access rules.
+      <strong>Supabase (EU-based server)</strong>: your profile, active and
+      completed rounds, scores, events, round configuration, pots, payment
+      contacts, friendships, cheers, comments, blocks, reports and profile
+      picture. This syncs between your devices; other users see only the parts
+      allowed by the access rules.
     </li>
   </ul>
 
@@ -584,41 +840,53 @@
 
   <h3>Supabase</h3>
   <p>
-    All cloud-stored data lives with <a href="https://supabase.com">Supabase</a>
-    in EU region. Supabase acts as our backend (database, auth, Storage for
-    profile pictures). They have their own privacy policy on their site.
+    Primary app and account data is stored with
+    <a href="https://supabase.com/privacy">Supabase</a> in the EU region.
+    Supabase is our backend for database, authentication and profile-image
+    Storage. Other data types are processed by the services below.
   </p>
 
   <h3>Apple Sign-In (iOS) and Google Sign-In (Android)</h3>
   <p>
     We use Apple Sign-In (on iOS) and Google Sign-In (on Android) for authentication. Apple and Google share only what you
     explicitly approve (name, optionally email). If you chose "Hide my
-    email" we get an anonymous relay address, not your real email.
+    email" we receive a private, pseudonymous relay address, not your real
+    email address.
   </p>
 
   <h3>Expo Push Service / APNs</h3>
   <p>
     Push notifications are delivered via <a href="https://docs.expo.dev/push-notifications/overview/">
     Expo Push Service</a> which forwards to Apple Push Notification service
-    (APNs). We send only notification content (e.g. "Natasha made birdie!")
-    + your push token. No other personal data goes through these services.
+    (APNs) or Google Firebase Cloud Messaging (FCM). We send the push token,
+    notification text and, depending on notification type, technical IDs for
+    items such as the activity, actor, round or report.
+    The text may include a name, course, hole, a preview of a user-written
+    comment, and the winner and net amount in SEK after a completed round. We
+    do not add phone, email, bank, card or Swish references as separate
+    technical fields, but a comment can contain whatever its author writes.
+    Your phone's notification settings control what appears on the lock screen.
   </p>
 
   <h3>GolfAPI.io</h3>
   <p>
     Course data (par, stroke index, GPS coordinates for Swedish golf
     courses) is fetched via our own Cloudflare Worker proxy which calls
-    <a href="https://www.golfapi.io">GolfAPI.io</a>. No personal information
-    or game history is sent there, only course ID and an anonymous device
-    ID for rate-limiting.
+    <a href="https://www.golfapi.io">GolfAPI.io</a>. Only the selected course
+    ID is sent to GolfAPI.io through the proxy, not personal information, GPS
+    position or game history. The proxy processes the installation ID and a Pro
+    signal for rate limiting. Invitation lookups may use the token and an
+    IP/device fallback for rate limiting for approximately 24 hours, and may
+    cache the name/profile picture for approximately 60 seconds.
   </p>
 
   <h3>Swish</h3>
   <p>
-    Wager Golf does not integrate directly with Swish. When you tap "Pay
-    via Swish" or "Show QR code" in the settlement view, the app creates a
-    <code>swish://</code> link on your device that opens the Swish app with
-    pre-filled amount and message. No data is sent through our systems.
+    Wager Golf does not hold or transfer stakes and takes no share of a
+    settlement. When you tap "Pay via Swish" or "Show QR code", the app
+    creates a <code>swish://</code> link or QR code on your device with a
+    pre-filled amount, recipient number and message. Payment happens in your
+    payment app; payment data is not sent through Wager Golf's servers.
   </p>
 
   <h3>RevenueCat</h3>
@@ -626,10 +894,14 @@
     The Pro subscription is managed via <a href="https://www.revenuecat.com">
     RevenueCat</a>, which sits between Apple StoreKit (iOS) or Google Play Billing (Android) and our app. RevenueCat
     verifies purchases, tracks renewals and trial periods, and tells the app
-    whether you have Pro active. We send only your anonymous Supabase user ID
-    to RevenueCat so your subscription follows you between devices. No golf
-    data, names or other personal information is shared. See RevenueCat's own
-    privacy policy for details.
+    whether you have Pro active. RevenueCat receives your Supabase UUID as its
+    App User ID and your <code>@handle</code> as a support display name so the
+    subscription follows your account between devices. On ordinary logout,
+    the SDK switches to an anonymous RevenueCat ID. RevenueCat also processes
+    store receipts, transaction history and technical app/device data for
+    purchase verification. Wager Golf does not send golf data, phone numbers,
+    card or bank details to RevenueCat. See RevenueCat's privacy policy for
+    details.
   </p>
 
   <h3>Apple StoreKit / App Store (iOS) and Google Play Billing (Android)</h3>
@@ -642,45 +914,75 @@
     and Google Play.
   </p>
 
-  <h3>Sentry (crash reporting + diagnostics)</h3>
+  <h3>Sentry (crash and error reporting)</h3>
   <p>
-    If the app crashes we send an anonymous crash report to
+    If the app crashes or a technical error occurs, we send an error report to
     <a href="https://sentry.io">Sentry</a> so we can diagnose and fix the
-    bug. The report contains stack trace, iOS or Android version, device model
-    name (e.g. "iPhone 15"), app version and a timestamp.
+    bug. The report may contain a stack trace, iOS or Android version, device
+    model, app version and timestamp. Automatic performance, navigation and
+    touch tracking is disabled.
   </p>
   <p>
-    Beyond crashes, Sentry also collects anonymous diagnostic data about
-    app performance: which screens render, how long they take, and which
-    buttons you tap. This helps us find slow flows and understand what
-    happened just before a bug. Everything stays anonymous and falls
-    under "Diagnostics" in Apple App Privacy, not "Tracking" — we do
-    not trigger the ATT prompt and we do not link data to advertising.
+    UUIDs, handles, phone numbers, email addresses, JWTs/tokens, URLs and local
+    round IDs in the form <code>r_...</code> are recursively scrubbed before
+    the report is sent. Sentry is not used for advertising or cross-app
+    tracking. Because the Wager Golf account ID is not sent, the automated
+    account-deletion flow does not target already stored Sentry records for a
+    separate deletion. They follow the Sentry project's configured retention
+    period; contact us for the current period.
   </p>
+
+  <h3>GitHub Actions (backup)</h3>
   <p>
-    Sentry reports do NOT contain your name, email, phone number or
-    golf data. We do not send a user ID — diagnostics are not tied to
-    a specific user. Email addresses and phone numbers that might
-    accidentally end up in an error text are automatically scrubbed
-    before the report is sent.
+    An access-restricted backup of the Supabase public schema is stored as an
+    encrypted GitHub Actions artifact for 90 days for restoration and incident
+    response. It may contain the personal data present in the database schema.
+    See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>.
+  </p>
+
+  <h3>Processing outside the EU/EEA</h3>
+  <p>
+    Supabase and PostHog are configured for EU data storage. Some other
+    providers, including Apple, Google, RevenueCat, Expo, Sentry, Cloudflare and
+    GitHub, may
+    process data outside the EU/EEA. The providers' published terms and
+    privacy notices describe the safeguards that apply to their transfers,
+    such as an adequacy decision or the EU Standard Contractual Clauses.
+    Contact us for the mechanism that applies to a particular processing.
   </p>
 
   <h2>Usage analytics</h2>
   <p>
-    To understand how the app is used and improve it, we use PostHog, a
-    product-analytics tool with data stored within the EU. We log events
-    such as which screens and game formats are used and when rounds are
-    started and finished. The statistics are tied to a pseudonymous account
-    id, never your name, email, phone number or @handle, and we never send
-    stake or winning amounts. We display no ads, never sell data to third
-    parties, and do not track you across other apps or websites (so no ATT
-    prompt). We have no cookies in the app.
+    PostHog is used only if you enable optional usage analytics in Profile.
+    Consent is stored per account and is off by default. We may then log
+    allowlisted events, such as which screens and game formats are used and
+    when rounds start or finish. GeoIP, automatic URL/lifecycle events,
+    session replay and autocapture are disabled. Your Supabase UUID is then
+    used as a pseudonymous distinct ID to group events for the same account.
   </p>
   <p>
-    RevenueCat collects some subscription-related data (subscription
-    status, renewal date, trial period) and Sentry receives crash
-    reports, but this is necessary for Pro and bug-fixing to work — not
-    tracking in Apple's sense.
+    GPS position, selected course ID, invitation link or token, account,
+    round or player IDs, and stake or winning amounts are not sent as explicit
+    event properties. The PostHog SDK may send a pseudonymous device/session
+    ID, app version/build, operating system and version, SDK version and screen
+    dimensions. Device model/manufacturer, locale, timezone, app name/namespace
+    and emulator flag are removed. Names, handles, email addresses and phone
+    numbers are not sent. You can turn analytics off again; the SDK is stopped
+    and unsent local queues are cleared.
+  </p>
+
+  <h2>Why we process data</h2>
+  <p>
+    Profile, account, round, social and Pro data is processed to provide the
+    service you use and perform our contract with you. Location, photos,
+    camera, push and PostHog analytics are used only after your choice or
+    consent. Security logs, rate limiting, content moderation and necessary
+    error reporting rely on our legitimate interest in protecting and
+    improving the service. Shared round history is retained in pseudonymised
+    form based on our and the other participants' legitimate interest in an
+    accurate shared history; direct identifiers are removed and the alias is
+    limited to one round to reduce the privacy impact. You can withdraw
+    optional choices in the app or your phone's settings.
   </p>
 
   <h2>Your rights (GDPR)</h2>
@@ -698,8 +1000,9 @@
     </li>
     <li>
       <strong>Delete your account</strong>: go to the Profile tab and tap
-      "Ta bort kontot" (Delete account). This deletes all your data both locally on the
-      device and from Supabase. Cannot be undone.
+      "Ta bort kontot" (Delete account). Private account data is deleted and
+      shared rounds are pseudonymised as described below. Deletion cannot be
+      undone.
     </li>
     <li>
       <strong>Export data</strong>: contact us by email (see below) if you
@@ -715,38 +1018,102 @@
     </li>
   </ul>
 
-  <h2>How long data is kept</h2>
+  <h2>How account deletion works</h2>
   <p>
-    Data is kept as long as your account is active. When you delete your
-    account all your personal data is removed from Supabase. Activity rows
-    referencing you (e.g. a notification to a friend that you started a
-    round) may remain in their feed with your name anonymized.
+    Account deletion removes your Wager Golf account and authentication
+    identity, profile, profile picture, friend relationships, private rounds,
+    comments, cheers, activity, payment-contact data and other private account
+    data. On the device where deletion is completed or verified,
+    account-specific local data and analytics consent are cleared and the
+    installation's pseudonymous ID rotates. Other offline installations cannot
+    be wiped remotely; their local data is cleared on account switch, uninstall,
+    or when they resume deletion with their receipt. The
+    checkpointed secure flow is used by app versions that support it. If the
+    app requires an update you cannot install, contact us and we will help you
+    find an available deletion route and handle your rights request. We may
+    need to verify your identity.
+  </p>
+  <p>
+    For Sign in with Apple, we request fresh Apple authorisation. The code is
+    exchanged for a revocation token that is stored with AES-256-GCM only as
+    long as needed to confirm or resume revocation. The intent to delete the
+    RevenueCat customer is checkpointed before the private account database is
+    deleted. The RevenueCat customer profile, including the Wager Golf App
+    User ID, handle display name and RevenueCat purchase history, is deleted.
+    If you consented to PostHog, the client is stopped and its local queue is
+    cleared; we queue deletion of the person, associated events and any
+    recordings and retry temporary failures. A daily workflow resumes stale,
+    incomplete steps and resweeps external systems for approximately 30 days.
+  </p>
+  <p>
+    Shared rounds are retained for the other participants' history. Your
+    name, handle, profile picture and global account ID are replaced with
+    <strong>Deleted player</strong> and a round-local alias no longer linked
+    to the account. New aliases are normally randomised; older round-local IDs
+    may remain. Scores, events, results/settlement, and frozen handicap and
+    gender may remain as historical round context so results are not
+    recalculated. A per-round salted one-way hash may map an
+    old offline change to the same alias, but cannot link you across rounds.
+  </p>
+  <p>
+    The app stores a protected recovery receipt so a device can confirm that
+    deletion finished after sign-in is gone. Receipts on multiple devices can
+    continue to return terminal status for the same deletion; checking on one
+    device does not invalidate the others. After approximately 90 days, the
+    raw account ID, timestamps and operational checkpoints are normally
+    removed. If an external deletion cannot yet be verified, linked error
+    information is retained until the issue is resolved. Only an unlinkable
+    random request ID and one-way hashes of the receipts then remain without a
+    fixed expiry, solely so old offline devices can receive a terminal
+    "deleted" status. They cannot identify you or restore the account.
+  </p>
+  <p>
+    <strong>Important for Pro:</strong> deleting your account does not cancel
+    an active App Store or Google Play subscription. You must cancel it
+    separately in your Apple or Google account to stop future renewals.
   </p>
 
-  <h2>Children under 13</h2>
+  <h2>How long data is kept</h2>
   <p>
-    Wager Golf is not intended for children under 13. Since the app deals
-    with monetary wagers between adult golfers, we use a 17+ recommended
-    age rating in the App Store.
+    Active account data is kept while the account exists or while needed for
+    the service. The pseudonymisation and technical time limits above apply to
+    account deletion. The additional public-schema backup is an
+    access-restricted GitHub Actions artifact with 90-day retention. Supabase
+    provider backups/PITR follow separately configured provider windows;
+    contact us for the current window. Backups are used for restoration,
+    verification and incident response. Recorded deletions are reapplied after
+    a restore to the extent covered by the latest verified deletion-ledger
+    copy. Temporary manual copies are logged with checksum, owner, purpose and
+    expiry, access restricted and removed immediately after the work, no later
+    than the source backup's expiry.
+  </p>
+
+  <h2>Age</h2>
+  <p>
+    Wager Golf is intended for people aged 17 or older. Availability and age
+    ratings may also be set by the App Store and Google Play in each country.
   </p>
 
   <h2>Changes to this policy</h2>
   <p>
     If we make material changes, the "last updated" date at the top is
-    updated and the version number is bumped. Major changes (e.g., new
-    third-party services or data collection categories) will be
-    communicated in the app.
+    updated and the version number changes. Where required, we will give
+    notice before the change takes effect through the app, store listing or
+    another appropriate channel.
   </p>
 
   <h2>Contact</h2>
   <p>
     Questions about this policy, how your data is handled, or requests for
-    deletion/export?<br>
+    deletion/export? If you cannot install the app version required for secure
+    account deletion, we can help you find an available deletion route and
+    handle your rights request; identity verification may be required.<br>
     Email <a href="mailto:bratt.gustaf@gmail.com">bratt.gustaf@gmail.com</a>.
   </p>
 
   <div class="footer">
     Wager Golf · Integritetspolicy / Privacy Policy · 2026
   </div>
+  </section>
 </body>
 </html>
