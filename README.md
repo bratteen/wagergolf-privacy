@@ -39,12 +39,23 @@ scripts/fetch-fonts.js hämtar woff2 från Google Fonts → assets/fonts/ (kör 
 docs/                  specar (byggs inte)
 ```
 
-## Uppdatera integritetspolicyn
+## Uppdatera juridiksidorna
 
-1. Editera `privacy/index.html` (sv + en), bumpa "Senast uppdaterad" + Version.
-2. `git add . && git commit -m "..." && git push` (historik).
-3. `npm run deploy`
-4. Verifiera: `curl -s https://wagergolf.se/privacy/ | grep "Version"`
+1. Editera `privacy/index.html` och/eller `terms/index.html` på både svenska och
+   engelska. Uppdatera datum och versionsnummer i båda språkdelarna.
+2. Kör `npm run check`. Det bygger sajten och stoppar gamla versioner,
+   felaktigt antal spelformer, hårdkodade priser/provperioder och analysscript
+   på juridiksidorna.
+3. Committa och pusha ändringen så historiken finns på GitHub.
+4. Kör `npm run deploy`. Kommandot kör kontrollerna igen och deployar endast
+   den byggda `_site/`-mappen.
+5. Verifiera båda språkdelarna live i ett privat fönster. Kontrollera även att
+   sidkällan och nätverkstrafiken saknar `analytics.bratt.se`,
+   `beacon.min.js` och `/cdn-cgi/rum` på `/privacy/` och `/terms/`.
+
+Cloudflare Pages kan injicera Web Analytics från dashboarden. De sökvägsspecifika
+CSP-reglerna i `_headers` blockerar script på juridiksidorna, men kontrollera
+även dashboardens automatiska Web Analytics-inställning efter deploy.
 
 ## Byta typsnitt
 
