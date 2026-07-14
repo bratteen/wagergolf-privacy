@@ -304,8 +304,9 @@
       auth-/refresh-token, profil och telefon, gäster och deras eventuella
       nummer, bandata, rundor och historik, osynkade ändringar,
       inbjudningstoken, installations-ID, analyssamtycke, appinställningar och
-      skyddat raderingskvitto. Kontospecifika uppgifter rensas vid verifierad
-      kontoradering. AsyncStorage och vanliga appfiler tas normalt bort vid
+      skyddat raderingskvitto. Kontospecifika uppgifter rensas på den
+      installation där raderingen slutförs eller verifieras. AsyncStorage och
+      vanliga appfiler tas normalt bort vid
       avinstallation, medan en skyddad Keychain/SecureStore-post på iOS kan
       finnas kvar efter ominstallation tills appen uttryckligen rensar den.
     </li>
@@ -417,8 +418,8 @@
 
   <h3>GitHub Actions (backup)</h3>
   <p>
-    En åtkomstbegränsad backup av Supabase public-schema lagras som en krypterad
-    GitHub Actions-artifact i 90 dagar för återställning och incidenthantering.
+    En åtkomstbegränsad backup av Supabase public-schema lagras som en GitHub
+    Actions-artifact i 90 dagar för återställning och incidenthantering.
     Den kan innehålla de personuppgifter som finns i databasschemat. Se
     <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHubs integritetspolicy</a>.
   </p>
@@ -521,7 +522,7 @@
     mot en återkallningstoken som lagras med AES-256-GCM bara så länge den
     behövs för att bekräfta eller återuppta återkallelsen. Avsikten att radera
     RevenueCat-kunden checkpointas före borttagning av den privata
-    kontodatabasen. RevenueCat-kundprofilen, inklusive Wager Golf App User ID,
+    kontodata ur databasen. RevenueCat-kundprofilen, inklusive Wager Golf App User ID,
     handle-displaynamn och RevenueCats köphistorik, raderas. Om du samtyckt
     till PostHog stoppas klienten och den lokala kön rensas; vi köar radering
     av personen, tillhörande events och eventuella inspelningar och försöker
@@ -822,8 +823,9 @@
       auth/refresh token, profile and phone, guests and any phone numbers,
       course data, rounds and history, unsent changes, invitation token,
       installation ID, analytics consent, app settings and a protected
-      deletion receipt. Account-specific data is cleared after verified
-      account deletion. AsyncStorage and ordinary app files are normally
+      deletion receipt. Account-specific data is cleared on the installation
+      where deletion is completed or verified. AsyncStorage and ordinary app
+      files are normally
       removed on uninstall, while a protected iOS Keychain/SecureStore entry
       may survive reinstallation until the app explicitly clears it.
     </li>
@@ -934,9 +936,9 @@
 
   <h3>GitHub Actions (backup)</h3>
   <p>
-    An access-restricted backup of the Supabase public schema is stored as an
-    encrypted GitHub Actions artifact for 90 days for restoration and incident
-    response. It may contain the personal data present in the database schema.
+    An access-restricted backup of the Supabase public schema is stored as a
+    GitHub Actions artifact for 90 days for restoration and incident response.
+    It may contain the personal data present in the database schema.
     See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>.
   </p>
 
@@ -1037,8 +1039,8 @@
     For Sign in with Apple, we request fresh Apple authorisation. The code is
     exchanged for a revocation token that is stored with AES-256-GCM only as
     long as needed to confirm or resume revocation. The intent to delete the
-    RevenueCat customer is checkpointed before the private account database is
-    deleted. The RevenueCat customer profile, including the Wager Golf App
+    RevenueCat customer is checkpointed before private account data is deleted
+    from the database. The RevenueCat customer profile, including the Wager Golf App
     User ID, handle display name and RevenueCat purchase history, is deleted.
     If you consented to PostHog, the client is stopped and its local queue is
     cleared; we queue deletion of the person, associated events and any
