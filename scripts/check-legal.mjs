@@ -38,9 +38,11 @@ for (const [name, text] of Object.entries(files)) {
 
 for (const name of ['privacySource', 'privacyBuilt']) {
   const text = files[name];
-  requireCount(name, text, 'Version 3.8', 2);
-  requireText(name, text, 'Senast uppdaterad: 14 juli 2026');
-  requireText(name, text, 'Last updated: July 14, 2026');
+  requireCount(name, text, 'Version 3.9', 2);
+  requireText(name, text, 'Senast uppdaterad: 17 juli 2026');
+  requireText(name, text, 'Last updated: July 17, 2026');
+  requireText(name, text, 'aktiverades och verifierades i produktion den 17 juli 2026');
+  requireText(name, text, 'activated and verified in production on');
   requireText(name, text, '<section lang="en">');
   requireText(name, text, 'giltig, aktiv inbjudningslänk');
   requireText(name, text, 'anti-echo-markörer');
