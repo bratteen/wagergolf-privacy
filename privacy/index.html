@@ -79,7 +79,7 @@
   </div>
 
   <h1>Integritetspolicy för Wager Golf</h1>
-  <p class="meta">Senast uppdaterad: 17 juli 2026 · Version 3.9</p>
+  <p class="meta">Senast uppdaterad: 25 juli 2026 · Version 4.0</p>
 
   <h2>Sammanfattning</h2>
   <p>
@@ -97,7 +97,7 @@
 
   <h2>Ikraftträdande för det nya raderingsflödet</h2>
   <p>
-    Policyn gäller från 14 juli 2026. Det detaljerade, checkpointade
+    Policyn gäller från 25 juli 2026. Det detaljerade, checkpointade
     raderingsflödet i avsnittet "Så fungerar kontoradering" för appversion 1.5
     aktiverades och verifierades i produktion den 17 juli 2026. Flödet används
     av appversioner som stöder det. Om din app kräver en uppdatering som du
@@ -174,7 +174,8 @@
       appinstallation. Det används för rate limiting hos vår Cloudflare
       Worker och för att undvika att en enhet läser tillbaka sina egna
       Supabase-ändringar i rundkonfiguration, scorer och events som nya
-      ändringar. ID:t roteras vid verkligt kontobyte och kontoradering;
+      ändringar. Den vanliga rate-limit-posten i Cloudflare KV sparas i cirka
+      25 timmar. ID:t roteras vid verkligt kontobyte och kontoradering;
       anti-echo-markörer nollas i bevarade delade rundor vid radering.
     </li>
     <li>
@@ -302,7 +303,7 @@
       <strong>Lokalt på din enhet</strong> (AsyncStorage och SecureStore):
       auth-/refresh-token, profil och telefon, gäster och deras eventuella
       nummer, bandata, rundor och historik, osynkade ändringar,
-      inbjudningstoken, installations-ID, analyssamtycke, appinställningar och
+      inbjudningstoken, installations-ID, appinställningar och
       skyddat raderingskvitto. Kontospecifika uppgifter rensas på den
       installation där raderingen slutförs eller verifieras. AsyncStorage och
       vanliga appfiler tas normalt bort vid
@@ -357,7 +358,8 @@
     <a href="https://www.golfapi.io">GolfAPI.io</a>. Till GolfAPI.io går bara
     valt bana-ID via proxyn, inte personuppgifter, GPS-position eller
     spelhistorik. Proxyn behandlar installations-ID och en Pro-signal för rate
-    limiting. Vid inbjudningsuppslag kan token och IP-/enhetsfallback användas
+    limiting. Den vanliga rate-limit-posten i Cloudflare KV sparas i cirka
+    25 timmar. Vid inbjudningsuppslag kan token och IP-/enhetsfallback användas
     för rate limiting i cirka 24 timmar, och namn/profilbild kan cachas i cirka
     60 sekunder.
   </p>
@@ -402,13 +404,14 @@
     felrapport till
     <a href="https://sentry.io">Sentry</a> så vi kan diagnosticera och fixa
     buggen. Rapporten kan innehålla stack trace, iOS- eller Android-version,
-    enhetsmodell, appversion och tidsstämpel. Automatisk prestanda-,
+    enhetsmodell, appversion och tidsstämpel. Automatisk prestanda-, nätverks-,
     navigations- och touchspårning är avstängd.
   </p>
   <p>
     UUID, handle, telefonnummer, e-post, JWT/token, URL:er och lokala
     round-ID:n av formen <code>r_...</code> skrubbas rekursivt innan
-    rapporten skickas. Sentry används inte för annonsering eller spårning
+    rapporten skickas. Om saneringen misslyckas släpps rapporten i stället
+    för att skickas. Sentry används inte för annonsering eller spårning
     mellan appar. Eftersom Wager Golf-konto-ID inte skickas riktar det
     automatiska kontoraderingsflödet ingen separat radering mot redan lagrade
     Sentry-poster. De följer Sentry-projektets konfigurerade lagringstid;
@@ -436,13 +439,15 @@
 
   <h2>Användningsstatistik</h2>
   <p>
-    PostHog används bara om du själv slår på frivillig användningsstatistik i
-    Profil. Samtycket sparas per konto och är av som standard. Vi kan då logga
-    tillåtelseliste-styrda händelser, till exempel vilka skärmar och
-    spelformat som används och när rundor startas eller avslutas. GeoIP,
+    När du är inloggad och kontoraderingskontrollen är klar använder Wager Golf
+    automatiskt dataminimerad produktanalys i PostHog med EU-lagring. Appens
+    produkt- och användningshändelser styrs av en tillåtelselista, till exempel
+    vilka skärmar och spelformat som används och när rundor startas eller
+    avslutas. Det finns
+    inget anonymt analysflöde före inloggning. GeoIP, remote config, surveys,
     automatiska URL-/livscykelhändelser, session replay och autocapture är
-    avstängda. Ditt Supabase-UUID används då som ett pseudonymt distinct ID
-    för att hålla samma kontos events samman.
+    avstängda. Ditt Supabase-UUID används som ett pseudonymt distinct ID för
+    att hålla samma kontos events samman.
   </p>
   <p>
     GPS-position, valt bana-ID, inbjudningslänk eller token, konto-, runda-
@@ -451,22 +456,32 @@
     appversion/build, operativsystem och version, SDK-version och
     skärmdimensioner. Enhetsmodell/tillverkare, språk/locale, tidszon,
     appnamn/namespace och emulatorflagga tas bort. Namn, handle, e-post och
-    telefonnummer skickas inte. Du kan stänga av statistiken igen; då stoppas
-    SDK:n och oskickade lokala köer töms.
+    telefonnummer skickas inte. Klienten använder minneslagring. Vid
+    utloggning, verkligt kontobyte eller kontoradering stoppas den och
+    oskickade köer töms, så att ett konto inte kan ärva ett annat kontos
+    analysdata. PostHog används inte för annonser eller spårning mellan appar
+    eller webbplatser.
   </p>
 
   <h2>Varför vi behandlar data</h2>
   <p>
     Profil, konto, rundor, sociala funktioner och Pro-status behandlas för att
     leverera den tjänst du använder och för att fullgöra avtalet med dig.
-    Plats, foton, kamera, push och PostHog-statistik används bara efter ditt
-    val eller samtycke. Säkerhetsloggar, rate limiting, innehållsmoderering och
-    nödvändig felrapportering bygger på vårt berättigade intresse att skydda
-    och förbättra tjänsten. Delad rundhistorik bevaras pseudonymiserad utifrån
-    vårt och övriga deltagares berättigade intresse av en korrekt gemensam
-    historik; direktidentifierare tas bort och aliaset begränsas till en runda
-    för att minska integritetsintrånget. Du kan återkalla frivilliga val i
-    appen eller i telefonens inställningar.
+    Plats, foton, kamera och push används bara efter ditt val eller samtycke.
+    Den dataminimerade PostHog-analysen behandlas utifrån vårt berättigade
+    intresse att förstå hur appen används, hitta produktproblem och förbättra
+    tjänsten. Behandlingen är begränsad till appens tillåtelselistade produkt-
+    och användningshändelser samt pseudonym teknisk data, utan anonym analys
+    före inloggning, GeoIP, GPS, fritext, kontaktuppgifter eller belopp.
+    Säkerhetsloggar, rate limiting,
+    innehållsmoderering och nödvändig felrapportering bygger på vårt
+    berättigade intresse att skydda och förbättra tjänsten. Delad rundhistorik
+    bevaras pseudonymiserad utifrån vårt och övriga deltagares berättigade
+    intresse av en korrekt gemensam historik; direktidentifierare tas bort och
+    aliaset begränsas till en runda för att minska integritetsintrånget. Du kan
+    återkalla frivilliga val i appen eller telefonens inställningar och
+    invända mot behandling som bygger på berättigat intresse via
+    kontaktuppgifterna nedan.
   </p>
 
   <h2>Dina rättigheter (GDPR)</h2>
@@ -507,7 +522,8 @@
     profil, profilbild, vänskapsrelationer, privata rundor, kommentarer,
     cheers, aktivitet, betalningskontaktuppgifter och annan privat kontodata.
     På den enhet där raderingen slutförs eller verifieras rensas kontospecifik
-    lokal data och analyssamtycke, och installationens pseudonyma ID roteras.
+    lokal data, analysklienten stoppas och dess oskickade minneskö rensas, och
+    installationens pseudonyma ID roteras.
     Andra offline-enheter kan inte fjärrensas; deras lokala data rensas vid
     kontobyte, avinstallation eller när de återupptar raderingen med sitt
     kvitto. Det checkpointade, säkra flödet
@@ -522,10 +538,10 @@
     behövs för att bekräfta eller återuppta återkallelsen. Avsikten att radera
     RevenueCat-kunden checkpointas före borttagning av den privata
     kontodata ur databasen. RevenueCat-kundprofilen, inklusive Wager Golf App User ID,
-    handle-displaynamn och RevenueCats köphistorik, raderas. Om du samtyckt
-    till PostHog stoppas klienten och den lokala kön rensas; vi köar radering
-    av personen, tillhörande events och eventuella inspelningar och försöker
-    igen vid tillfälliga fel. Ett dagligt workflow återupptar inaktuella,
+    handle-displaynamn och RevenueCats köphistorik, raderas. PostHog-klienten
+    stoppas och den lokala kön rensas; vi köar radering av personen,
+    tillhörande events och eventuella inspelningar och försöker igen vid
+    tillfälliga fel. Ett dagligt workflow återupptar inaktuella,
     ofullständiga steg och söker om externa system i cirka 30 dagar.
   </p>
   <p>
@@ -603,7 +619,7 @@
 
   <section lang="en">
   <h2 id="english">Privacy Policy · Wager Golf</h2>
-  <p class="meta">Last updated: July 17, 2026 · Version 3.9</p>
+  <p class="meta">Last updated: July 25, 2026 · Version 4.0</p>
 
   <h2>Summary</h2>
   <p>
@@ -621,7 +637,7 @@
 
   <h2>Effective date for the new deletion flow</h2>
   <p>
-    This policy applies from July 14, 2026. The detailed checkpointed flow in
+    This policy applies from July 25, 2026. The detailed checkpointed flow in
     "How account deletion works" was activated and verified in production on
     July 17, 2026. The flow is used by app versions that support it. If your
     app requires an update you cannot install, you can use the contact route
@@ -696,9 +712,10 @@
       <strong>Installation ID</strong>: a random, pseudonymous ID for each app
       installation. It is used for rate limiting in our Cloudflare Worker and
       to prevent a device from treating its own Supabase writes to round
-      configuration, scores and events as new remote changes. The ID rotates
-      on a real account switch and account deletion; anti-echo markers are
-      cleared from retained shared rounds on deletion.
+      configuration, scores and events as new remote changes.
+      The ordinary Cloudflare KV rate-limit record is retained for about
+      25 hours. The ID rotates on a real account switch and account deletion;
+      anti-echo markers are cleared from retained shared rounds on deletion.
     </li>
     <li>
       <strong>Technical security and deletion records</strong>: limited audit
@@ -824,7 +841,7 @@
       <strong>Locally on your device</strong> (AsyncStorage and SecureStore):
       auth/refresh token, profile and phone, guests and any phone numbers,
       course data, rounds and history, unsent changes, invitation token,
-      installation ID, analytics consent, app settings and a protected
+      installation ID, app settings and a protected
       deletion receipt. Account-specific data is cleared on the installation
       where deletion is completed or verified. AsyncStorage and ordinary app
       files are normally
@@ -879,7 +896,8 @@
     <a href="https://www.golfapi.io">GolfAPI.io</a>. Only the selected course
     ID is sent to GolfAPI.io through the proxy, not personal information, GPS
     position or game history. The proxy processes the installation ID and a Pro
-    signal for rate limiting. Invitation lookups may use the token and an
+    signal for rate limiting. The ordinary Cloudflare KV rate-limit record is
+    retained for about 25 hours. Invitation lookups may use the token and an
     IP/device fallback for rate limiting for approximately 24 hours, and may
     cache the name/profile picture for approximately 60 seconds.
   </p>
@@ -923,13 +941,14 @@
     If the app crashes or a technical error occurs, we send an error report to
     <a href="https://sentry.io">Sentry</a> so we can diagnose and fix the
     bug. The report may contain a stack trace, iOS or Android version, device
-    model, app version and timestamp. Automatic performance, navigation and
-    touch tracking is disabled.
+    model, app version and timestamp. Automatic performance, network,
+    navigation and touch tracking is disabled.
   </p>
   <p>
     UUIDs, handles, phone numbers, email addresses, JWTs/tokens, URLs and local
     round IDs in the form <code>r_...</code> are recursively scrubbed before
-    the report is sent. Sentry is not used for advertising or cross-app
+    the report is sent. If sanitisation fails, the report is dropped instead
+    of being sent. Sentry is not used for advertising or cross-app
     tracking. Because the Wager Golf account ID is not sent, the automated
     account-deletion flow does not target already stored Sentry records for a
     separate deletion. They follow the Sentry project's configured retention
@@ -957,12 +976,15 @@
 
   <h2>Usage analytics</h2>
   <p>
-    PostHog is used only if you enable optional usage analytics in Profile.
-    Consent is stored per account and is off by default. We may then log
-    allowlisted events, such as which screens and game formats are used and
-    when rounds start or finish. GeoIP, automatic URL/lifecycle events,
-    session replay and autocapture are disabled. Your Supabase UUID is then
-    used as a pseudonymous distinct ID to group events for the same account.
+    Once you are signed in and the account-deletion check has cleared, Wager
+    Golf automatically uses data-minimised product analytics in PostHog with
+    EU data storage. The app's product and usage events are controlled by an
+    allowlist, such as which screens and game formats are used and when rounds
+    start or finish. There is no
+    anonymous analytics flow before sign-in. GeoIP, remote config, surveys,
+    automatic URL/lifecycle events, session replay and autocapture are
+    disabled. Your Supabase UUID is used as a pseudonymous distinct ID to
+    group events for the same account.
   </p>
   <p>
     GPS position, selected course ID, invitation link or token, account,
@@ -971,22 +993,32 @@
     ID, app version/build, operating system and version, SDK version and screen
     dimensions. Device model/manufacturer, locale, timezone, app name/namespace
     and emulator flag are removed. Names, handles, email addresses and phone
-    numbers are not sent. You can turn analytics off again; the SDK is stopped
-    and unsent local queues are cleared.
+    numbers are not sent. The client uses in-memory persistence. On sign-out,
+    a real account switch or account deletion, it is stopped and unsent queues
+    are cleared so one account cannot inherit another account's analytics
+    data. PostHog is not used for advertising or tracking across apps or
+    websites.
   </p>
 
   <h2>Why we process data</h2>
   <p>
     Profile, account, round, social and Pro data is processed to provide the
     service you use and perform our contract with you. Location, photos,
-    camera, push and PostHog analytics are used only after your choice or
-    consent. Security logs, rate limiting, content moderation and necessary
-    error reporting rely on our legitimate interest in protecting and
-    improving the service. Shared round history is retained in pseudonymised
-    form based on our and the other participants' legitimate interest in an
-    accurate shared history; direct identifiers are removed and the alias is
-    limited to one round to reduce the privacy impact. You can withdraw
-    optional choices in the app or your phone's settings.
+    camera and push are used only after your choice or consent. The
+    data-minimised PostHog analytics is processed on the basis of our
+    legitimate interest in understanding how the app is used, finding product
+    problems and improving the service. Processing is limited to the app's
+    allowlisted product and usage events and pseudonymous technical data,
+    without anonymous analytics before sign-in, GeoIP, GPS, free text,
+    contact details or amounts. Security logs,
+    rate limiting, content moderation and necessary error reporting rely on
+    our legitimate interest in protecting and improving the service. Shared
+    round history is retained in pseudonymised form based on our and the other
+    participants' legitimate interest in an accurate shared history; direct
+    identifiers are removed and the alias is limited to one round to reduce
+    the privacy impact. You can withdraw optional choices in the app or your
+    phone's settings and object to processing based on legitimate interest
+    using the contact details below.
   </p>
 
   <h2>Your rights (GDPR)</h2>
@@ -1028,8 +1060,9 @@
     identity, profile, profile picture, friend relationships, private rounds,
     comments, cheers, activity, payment-contact data and other private account
     data. On the device where deletion is completed or verified,
-    account-specific local data and analytics consent are cleared and the
-    installation's pseudonymous ID rotates. Other offline installations cannot
+    account-specific local data is cleared, the analytics client is stopped
+    and its unsent in-memory queue is cleared, and the installation's
+    pseudonymous ID rotates. Other offline installations cannot
     be wiped remotely; their local data is cleared on account switch, uninstall,
     or when they resume deletion with their receipt. The
     checkpointed secure flow is used by app versions that support it. If the
@@ -1044,8 +1077,8 @@
     RevenueCat customer is checkpointed before private account data is deleted
     from the database. The RevenueCat customer profile, including the Wager Golf App
     User ID, handle display name and RevenueCat purchase history, is deleted.
-    If you consented to PostHog, the client is stopped and its local queue is
-    cleared; we queue deletion of the person, associated events and any
+    The PostHog client is stopped and its local queue is cleared; we queue
+    deletion of the person, associated events and any
     recordings and retry temporary failures. A daily workflow resumes stale,
     incomplete steps and resweeps external systems for approximately 30 days.
   </p>
