@@ -38,11 +38,19 @@ for (const [name, text] of Object.entries(files)) {
 
 for (const name of ['privacySource', 'privacyBuilt']) {
   const text = files[name];
-  requireCount(name, text, 'Version 3.9', 2);
-  requireText(name, text, 'Senast uppdaterad: 17 juli 2026');
-  requireText(name, text, 'Last updated: July 17, 2026');
+  requireCount(name, text, 'Version 4.0', 2);
+  requireText(name, text, 'Senast uppdaterad: 25 juli 2026');
+  requireText(name, text, 'Last updated: July 25, 2026');
+  requireText(name, text, 'Policyn gäller från 25 juli 2026');
+  requireText(name, text, 'This policy applies from July 25, 2026');
   requireText(name, text, 'aktiverades och verifierades i produktion den 17 juli 2026');
   requireText(name, text, 'activated and verified in production on');
+  requireText(name, text, 'automatiskt dataminimerad produktanalys');
+  requireText(name, text, 'produkt- och användningshändelser styrs av en tillåtelselista');
+  requireText(name, text, 'berättigade intresse');
+  requireText(name, text, 'automatically uses data-minimised product analytics');
+  requireText(name, text, 'product and usage events are controlled by an');
+  requireText(name, text, 'legitimate interest');
   requireText(name, text, '<section lang="en">');
   requireText(name, text, 'giltig, aktiv inbjudningslänk');
   requireText(name, text, 'anti-echo-markörer');
@@ -59,6 +67,17 @@ for (const name of ['privacySource', 'privacyBuilt']) {
   requireText(name, text, 'fixed expiry');
   requireText(name, text, 'for up to approximately 104');
   requireText(name, text, 'deleting your account does not cancel');
+  forbidText(name, text, 'Version 3.9');
+  forbidText(name, text, 'PostHog används bara om du själv slår på');
+  forbidText(name, text, 'frivillig användningsstatistik');
+  forbidText(name, text, 'Samtycket sparas per konto');
+  forbidText(name, text, 'Du kan stänga av statistiken igen');
+  forbidText(name, text, 'Om du samtyckt till PostHog');
+  forbidText(name, text, 'PostHog is used only if you enable');
+  forbidText(name, text, 'optional usage analytics');
+  forbidText(name, text, 'Consent is stored per account');
+  forbidText(name, text, 'You can turn analytics off again');
+  forbidText(name, text, 'If you consented to PostHog');
 }
 
 for (const name of ['termsSource', 'termsBuilt']) {
