@@ -24,8 +24,8 @@
 
   <link rel="preload" href="/assets/fonts/playfair-display-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-mono-600.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/fonts/fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/fonts/fonts.css{% if assets.fonts %}?v={{ assets.fonts }}{% endif %}">
+  <link rel="stylesheet" href="/assets/css/site.css{% if assets.css %}?v={{ assets.css }}{% endif %}">
 
   {% if structuredData %}<script type="application/ld+json">{{ structuredData | safe }}</script>{% endif %}
   {% if extraHead %}{{ extraHead | safe }}{% endif %}
