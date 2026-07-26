@@ -375,3 +375,37 @@ footer { background: var(--green-900); color: rgba(245,239,227,0.7); padding: 54
 .article .guide-figure { margin: 34px auto; max-width: 240px; text-align: center; }
 .article .guide-figure img { width: 100%; height: auto; border-radius: 20px; box-shadow: 0 18px 40px rgba(10,46,33,0.18); }
 .article .guide-figure figcaption { margin: 12px 0 0; font-family: var(--mono); font-size: 12px; line-height: 1.55; letter-spacing: .3px; color: var(--ink-faint); }
+
+/* ---------- Omdömen (voices) ---------- */
+.voices { padding: 8px 0 64px; }
+.voices .head { text-align: center; max-width: 620px; margin: 0 auto 40px; }
+.voices .head h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(28px,4vw,42px); color: var(--green-900); letter-spacing: -.6px; margin: 14px 0 0; }
+.voices-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.voice {
+  position: relative; padding: 30px 26px 26px; background: var(--cream-card);
+  border: 1px solid var(--line); border-radius: 16px; display: flex; flex-direction: column;
+}
+.voice::before {
+  content: "\201C"; position: absolute; top: 8px; left: 20px;
+  font-family: var(--serif); font-size: 64px; line-height: 1; color: var(--brass);
+  opacity: .38; pointer-events: none;
+}
+.voice blockquote {
+  font-family: var(--serif); font-size: 19px; line-height: 1.5; color: var(--green-900);
+  margin: 12px 0 20px; position: relative; z-index: 1; flex: 1;
+}
+.voice figcaption { display: flex; flex-direction: column; gap: 2px; margin-top: auto; }
+.voice .v-name { font-weight: 700; font-size: 15px; color: var(--ink); }
+.voice .v-meta { font-family: var(--mono); font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-faint); }
+@media (max-width: 860px) { .voices-grid { grid-template-columns: 1fr; gap: 16px; } .voices { padding: 8px 0 48px; } }
+
+/* ---------- Startsidans FAQ ---------- */
+.home-faq { padding: 56px 0 72px; background: var(--green-900); }
+.faq-wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+.home-faq .head { text-align: center; margin: 0 auto 32px; }
+.home-faq .eyebrow { color: var(--brass); }
+.home-faq .head h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(30px,4.5vw,44px); color: #fff; letter-spacing: -.8px; margin: 14px 0 0; }
+.home-faq .faq-item { border-top: 1px solid rgba(245,239,227,0.14); padding: 20px 0; }
+.home-faq .faq-item:last-child { border-bottom: 1px solid rgba(245,239,227,0.14); }
+.home-faq .faq-q { font-family: var(--serif); font-weight: 700; font-size: 20px; color: #fff; margin: 0 0 8px; letter-spacing: -.3px; }
+.home-faq .faq-a { font-size: 16px; color: rgba(245,239,227,0.78); line-height: 1.6; }

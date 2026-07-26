@@ -40,12 +40,43 @@ structuredData: |
       {
         "@type": "SoftwareApplication",
         "name": "Wager Golf",
-        "operatingSystem": "iOS",
+        "operatingSystem": "iOS, Android",
         "applicationCategory": "SportsApplication",
         "url": "https://apps.apple.com/se/app/id6767638917",
         "sameAs": "https://apps.apple.com/se/app/id6767638917",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "SEK" },
         "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://wagergolf.se/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Måste alla i gänget ha appen?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Nej. En person kan sköta hela rundan och scora för alla, de andra läggs till som gäster. Vill ni följa varandras rundor live och få notiser laddar fler ner appen, men det räcker att en har den." }
+          },
+          {
+            "@type": "Question",
+            "name": "Är Wager Golf gratis?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja, appen är gratis att ladda ner och spela. Alla 21 spelformer och uppgörelsen ingår. Det finns en frivillig Pro-nivå, men du behöver inte betala för att göra upp en runda med gänget." }
+          },
+          {
+            "@type": "Question",
+            "name": "Ni spelar om pengar, är det tillåtet?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Wager Golf är inget spelbolag och rör aldrig pengarna. Appen håller bara räkningen på det ni redan kommit överens om er emellan och gör uppgörelsen enkel med Swish, precis som när ni redan gör upp efter rundan." }
+          },
+          {
+            "@type": "Question",
+            "name": "Funkar min bana?",
+            "acceptedAnswer": { "@type": "Answer", "text": "705 svenska banor finns inlagda med par och stroke-index, så du väljer bara bana och börjar scora. Slaggolf, Front 9 eller Back 9, appen sköter resten." }
+          },
+          {
+            "@type": "Question",
+            "name": "Räknar appen med rätt handicap?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Spelhandicap räknas enligt WHS per bana och tee, och slagen fördelas på rätt hål via stroke-index. Ett blandat gäng med olika handicap kan mötas rättvist i samma runda." }
+          }
+        ]
       }
     ]
   }
@@ -57,7 +88,7 @@ structuredData: |
         <div class="hero-copy">
           <span class="eyebrow on-dark">Nu på App Store och Google Play</span>
           <h1>Spela om <span class="accent">mer än äran.</span></h1>
-          <p class="lede">Wager Golf håller räkningen när gänget gör upp på banan. 21 spelformer, automatisk uträkning och Swish när rundan är slut, utan papper och miniräknare.</p>
+          <p class="lede">Wager Golf håller räkningen när gänget gör upp på banan. 21 spelformer räknas automatiskt och Swish gör upp potten när rundan är slut. Inget papper, ingen miniräknare, inget tjafs vid 19:e.</p>
           <div class="cta-row">
             {% set storePlats = "startsida" %}
             {% include "store-badges.njk" %}
@@ -122,6 +153,31 @@ structuredData: |
             <h3>Gör upp med Swish</h3>
             <p>När ni går in räknar appen ut vem som är skyldig vem och öppnar Swish med rätt belopp. Inga tvister vid 19:e.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OMDOMEN / ROSTER -->
+    <!-- Alla tre = riktiga omdömen. Kort 1 + 2 = App Store-recensioner (Eric J Karlsson · Nacka Golf, Taashiie/Natasha · Troxhammar GK), kort 3 = Philip · Golfstar. -->
+    <section class="voices">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Från gänget</span>
+          <h2>Golfare som slutat räkna för hand</h2>
+        </div>
+        <div class="voices-grid reveal">
+          <figure class="voice">
+            <blockquote>Funkar bra med många format och smidig uträkning på slutet av rundan.</blockquote>
+            <figcaption><span class="v-name">Eric K.</span><span class="v-meta">Nacka Golf</span></figcaption>
+          </figure>
+          <figure class="voice">
+            <blockquote>Bra och rolig app! Massa olika spelformer.</blockquote>
+            <figcaption><span class="v-name">Natasha</span><span class="v-meta">Troxhammar GK</span></figcaption>
+          </figure>
+          <figure class="voice">
+            <blockquote>Otroligt innovativ och rolig app, gör verkligen golfen lite roligare.</blockquote>
+            <figcaption><span class="v-name">Philip</span><span class="v-meta">Golfstar</span></figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -203,6 +259,38 @@ structuredData: |
               <li><a href="/spelformer/birdiepott/">Birdiepott</a></li><li><a href="/spelformer/snake/">Snake</a></li><li><a href="/spelformer/sandie/">Sandie</a></li>
               <li><a href="/spelformer/narmast-flaggan/">Närmast flaggan</a></li><li><a href="/spelformer/langst-drive/">Längst drive</a></li><li><a href="/spelformer/golfpoker/">Golfpoker</a></li>
             </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="home-faq">
+      <div class="faq-wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Innan du laddar ner</span>
+          <h2>Vanliga frågor</h2>
+        </div>
+        <div class="faqlist reveal">
+          <div class="faq-item">
+            <p class="faq-q">Måste alla i gänget ha appen?</p>
+            <p class="faq-a">Nej. En person kan sköta hela rundan och scora för alla, de andra läggs till som gäster. Vill ni följa varandras rundor live och få notiser laddar fler ner appen, men det räcker att en har den.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Är det gratis?</p>
+            <p class="faq-a">Ja, appen är gratis att ladda ner och spela. Alla 21 spelformer och uppgörelsen ingår. Det finns en frivillig Pro-nivå, men du behöver inte betala för att göra upp en runda med gänget.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Ni spelar om pengar, är det tillåtet?</p>
+            <p class="faq-a">Wager Golf är inget spelbolag och rör aldrig pengarna. Appen håller bara räkningen på det ni redan kommit överens om er emellan och gör uppgörelsen enkel med Swish, precis som när ni redan gör upp efter rundan.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Funkar min bana?</p>
+            <p class="faq-a">705 svenska banor finns inlagda med par och stroke-index, så du väljer bara bana och börjar scora. Slaggolf, Front 9 eller Back 9, appen sköter resten.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Räknar appen med rätt handicap?</p>
+            <p class="faq-a">Ja. Spelhandicap räknas enligt WHS per bana och tee, och slagen fördelas på rätt hål via stroke-index. Ett blandat gäng med olika handicap kan mötas rättvist i samma runda.</p>
           </div>
         </div>
       </div>
