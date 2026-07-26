@@ -2,13 +2,26 @@
   "name": "wagergolf-site",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=24.8.0"
+  },
   "description": "wagergolf.se, marknadssajt + integritetspolicy + villkor (11ty)",
   "scripts": {
     "build": "rm -rf _site && eleventy",
+    "check:legal": "node scripts/check-legal.mjs",
+    "validate:html": "html-validate _site/privacy/index.html _site/terms/index.html",
+    "check": "npm run build && npm run check:legal && npm run validate:html",
     "dev": "eleventy --serve",
-    "deploy": "rm -rf _site && eleventy && npx wrangler pages deploy _site --project-name=wagergolf --branch=main"
+    "deploy": "npm run check && npx wrangler pages deploy _site --project-name=wagergolf --branch=main"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.6"
+    "@11ty/eleventy": "^3.1.6",
+    "html-validate": "11.5.6",
+    "wrangler": "4.114.0"
+  },
+  "overrides": {
+    "@11ty/recursive-copy": {
+      "minimatch": "10.2.5"
+    }
   }
 }

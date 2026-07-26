@@ -1,5 +1,10 @@
 # wagergolf.se för användarförvärv, design
 
+> **Historisk designspec.** Den beskriver besluten den 14 juni 2026 men är
+> inte längre driftinstruktion. [README.md](../../../README.md) är
+> auktoritativ: deploy sker endast med `npm run deploy`, marknadssidan använder
+> Umami och `/privacy/` samt `/terms/` är avsiktligt fria från webb-analytics.
+
 Datum: 2026-06-14
 Repo: `wagergolf-privacy` (serverar hela wagergolf.se, inte bara privacy)
 Mål: göra landningssidan till en kanal som drar in användare, via SEO och konvertering.
@@ -10,7 +15,8 @@ wagergolf.se är idag en enda handskriven `index.html` med all CSS inline,
 plus `/privacy/` och `/terms/`. Snyggt byggd (golfklubb-estetik: skogsgrön,
 mässing, cream, Playfair Display + IBM Plex Mono) men gör lite för att bli
 *hittad* eller för att maximera nedladdningar. Deploy sker manuellt via
-`wrangler pages deploy .` (ingen git-koppling till Cloudflare).
+`npm run deploy`, som bygger, kontrollerar och deployar endast `_site/`
+(ingen git-koppling till Cloudflare).
 
 ## Låsta beslut (från brainstorm)
 
