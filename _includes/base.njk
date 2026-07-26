@@ -30,7 +30,8 @@
   {% if structuredData %}<script type="application/ld+json">{{ structuredData | safe }}</script>{% endif %}
   {% if extraHead %}{{ extraHead | safe }}{% endif %}
   {% if site.cfBeaconToken %}<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cfBeaconToken }}"}'></script>{% endif %}
-  {% if site.umami.websiteId %}<script defer src="{{ site.umami.src }}" data-website-id="{{ site.umami.websiteId }}"></script>{% endif %}
+  {% if site.umami.websiteId %}<script defer src="{{ site.umami.src }}" data-website-id="{{ site.umami.websiteId }}"></script>
+  {% if site.umami.recorderSrc %}<script defer src="{{ site.umami.recorderSrc }}" data-website-id="{{ site.umami.websiteId }}"></script>{% endif %}{% endif %}
 </head>
 <body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
   <header>

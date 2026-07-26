@@ -12,8 +12,11 @@ module.exports = {
   // explicit beacon (Web Analytics > sajt > "JS snippet" > token-värdet).
   cfBeaconToken: "",
   // Umami: cookielös, self-hosted analytics (egen server). Tom websiteId = av.
+  // recorderSrc laddar session replay/heatmap ovanpå script.js (kräver den, läser
+  // sessionen från window.umami). Lämna tom för att stänga av inspelningen.
   umami: {
     src: "https://analytics.bratt.se/script.js",
+    recorderSrc: "https://analytics.bratt.se/recorder.js",
     websiteId: "ae56fbfa-4ce4-480b-af6a-62f20282b414",
   },
 };
