@@ -390,6 +390,8 @@ footer { background: var(--green-900); color: rgba(245,239,227,0.7); padding: 54
   font-family: var(--serif); font-size: 64px; line-height: 1; color: var(--brass);
   opacity: .38; pointer-events: none;
 }
+.voice-stars { display: flex; gap: 3px; margin-bottom: 7px; }
+.voice-stars svg { width: 15px; height: 15px; fill: var(--brass); flex: none; }
 .voice blockquote {
   font-family: var(--serif); font-size: 19px; line-height: 1.5; color: var(--green-900);
   margin: 12px 0 20px; position: relative; z-index: 1; flex: 1;

@@ -165,14 +165,15 @@ structuredData: |
           <span class="eyebrow">Från gänget</span>
           <h2>Golfare som slutat räkna för hand</h2>
         </div>
+        {% macro stars() %}<div class="voice-stars" role="img" aria-label="5 av 5 stjärnor">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</div>{% endmacro %}
         <div class="voices-grid reveal">
           <figure class="voice">
             <blockquote>Funkar bra med många format och smidig uträkning på slutet av rundan.</blockquote>
-            <figcaption><span class="v-name">Eric K.</span><span class="v-meta">Nacka Golf</span></figcaption>
+            <figcaption>{{ stars() }}<span class="v-name">Eric K.</span><span class="v-meta">Nacka Golf · App Store</span></figcaption>
           </figure>
           <figure class="voice">
             <blockquote>Bra och rolig app! Massa olika spelformer.</blockquote>
-            <figcaption><span class="v-name">Natasha</span><span class="v-meta">Troxhammar GK</span></figcaption>
+            <figcaption>{{ stars() }}<span class="v-name">Natasha</span><span class="v-meta">Troxhammar GK · App Store</span></figcaption>
           </figure>
           <figure class="voice">
             <blockquote>Otroligt innovativ och rolig app, gör verkligen golfen lite roligare.</blockquote>
