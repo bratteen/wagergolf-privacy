@@ -17,6 +17,10 @@ module.exports = {
   umami: {
     src: "https://analytics.bratt.se/script.js",
     recorderSrc: "https://analytics.bratt.se/recorder.js",
+    // Andel besökare som spelas in (0-1). 0 stänger av inspelningen helt.
+    // Inspelaren är 190 kB uppackad, så varje inspelad besökare kostar
+    // bandbredd och lite huvudtråd. Höj om du behöver fler inspelningar.
+    replaySampleRate: 0.25,
     websiteId: "ae56fbfa-4ce4-480b-af6a-62f20282b414",
   },
 };

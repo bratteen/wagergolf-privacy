@@ -22,4 +22,5 @@ function hash(relPath) {
 module.exports = {
   css: hash("assets/css/site.css"),
   fonts: hash("assets/fonts/fonts.css"),
+  replay: hash("assets/js/replay-sample.js"),
 };
