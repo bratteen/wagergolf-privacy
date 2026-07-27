@@ -90,10 +90,14 @@ structuredData: |
           <h1>Spela om <span class="accent">mer än äran.</span></h1>
           <p class="lede">Wager Golf håller räkningen när gänget gör upp på banan. 21 spelformer räknas automatiskt och Swish gör upp potten när rundan är slut. Inget papper, ingen miniräknare, inget tjafs vid 19:e.</p>
           <div class="cta-row">
-            {% set storePlats = "startsida" %}
+            {% set storePlats = "startsida-hero" %}
             {% include "store-badges.njk" %}
             <span class="cta-note">Gratis, för iPhone och Android</span>
           </div>
+          <p class="hero-proof">
+            <span class="hero-proof-stars" role="img" aria-label="5 av 5 stjärnor">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</span>
+            <span class="hero-proof-text">5,0 av 5 i App Store, 4 betyg</span>
+          </p>
         </div>
         <div class="hero-phone">
           <img src="/assets/shots/live.webp" alt="Wager Golf live-scorekort på iPhone" loading="eager" fetchpriority="high" width="640" height="1306">
@@ -305,7 +309,7 @@ structuredData: |
         <span class="eyebrow">Redo för nästa runda</span>
         <h2 style="margin-top:14px">Gör upp på <span class="accent">en sekund.</span></h2>
         <p>Ladda ner gratis, lägg till gänget och börja spela.</p>
-        {% set storePlats = "startsida" %}
+        {% set storePlats = "startsida-avslut" %}
         {% include "store-badges.njk" %}
       </div>
     </section>
