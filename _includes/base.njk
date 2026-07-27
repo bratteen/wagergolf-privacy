@@ -43,7 +43,7 @@
       <nav class="nav-links">
         <a href="/#funktioner">Funktioner</a>
         <a class="nav-keep" href="/spelformer/">Spelformer</a>
-        <a class="nav-cta" href="/#top" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">Ladda ner</a>
+        <a class="nav-cta" href="/ladda-ner" data-download-link data-ios-url="{{ site.appStoreUrl }}" data-android-url="{{ site.playStoreUrl }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">Ladda ner</a>
       </nav>
     </div>
   </header>
@@ -74,5 +74,6 @@
   </footer>
 
   <script defer src="/assets/js/reveal.js"></script>
+  <script defer src="/assets/js/download-link.js{% if assets.download %}?v={{ assets.download }}{% endif %}"></script>
 </body>
 </html>
