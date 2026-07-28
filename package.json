@@ -12,7 +12,8 @@
     "validate:html": "html-validate _site/privacy/index.html _site/terms/index.html",
     "check": "npm run build && npm run check:legal && npm run validate:html",
     "dev": "eleventy --serve",
-    "deploy": "npm run check && npx wrangler pages deploy _site --project-name=wagergolf --branch=main"
+    "deploy": "npm run check && npx wrangler pages deploy _site --project-name=wagergolf --branch=main && npm run indexnow",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",

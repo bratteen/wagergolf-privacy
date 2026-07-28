@@ -11,6 +11,10 @@ module.exports = {
   // injektion i Cloudflare Pages-dashboarden istället. Fyll i token här för
   // explicit beacon (Web Analytics > sajt > "JS snippet" > token-värdet).
   cfBeaconToken: "",
+  // IndexNow: pingar Bing och Yandex om nya och ändrade sidor vid deploy.
+  // Nyckeln verifieras genom att samma värde ligger på /<nyckel>.txt, vilket
+  // indexnow-key.njk genererar. Byt nyckel = byt här, filen följer med.
+  indexNowKey: "9805c5c7f3a5db12b21946ca4bf08f89",
   // Umami: cookielös, self-hosted analytics (egen server). Tom websiteId = av.
   // recorderSrc laddar session replay/heatmap ovanpå script.js (kräver den, läser
   // sessionen från window.umami). Lämna tom för att stänga av inspelningen.
