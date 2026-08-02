@@ -1,8 +1,46 @@
+// Rena butikslänkar utan mätparametrar. Strukturerad data ska peka på appens
+// kanoniska adress, inte på en spårad variant.
+const APP_STORE_URL = "https://apps.apple.com/se/app/id6767638917";
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf";
+
+// Kampanjnamnet som butikernas rapporter grupperar på. Umami mäter klicket på
+// knappen, det här mäter vad som händer sedan: hur många som faktiskt laddade
+// ner. Utan den siffran syns inte om tappet ligger på butikssidan eller i appen.
+const STORE_CAMPAIGN = "webb";
+
+// Hämtas i App Store Connect under App Analytics. Apple knyter nedladdningen
+// till kontot via provider-token, så utan den lämnas App Store-länken omärkt
+// hellre än att se mätt ut utan att vara det. Google Play behöver ingen token.
+const APPLE_PROVIDER_TOKEN = "";
+
+/** App Store-länk med kampanjmärkning. Faller tillbaka på den rena länken så
+ *  länge provider-token saknas. */
+function taggedAppStoreUrl() {
+  if (!APPLE_PROVIDER_TOKEN) return APP_STORE_URL;
+  const params = new URLSearchParams({
+    pt: APPLE_PROVIDER_TOKEN,
+    ct: STORE_CAMPAIGN,
+    mt: "8",
+  });
+  return `${APP_STORE_URL}?${params}`;
+}
+
+/** Google Play-länk med kampanjmärkning. Play vill ha utm-paren som EN
+ *  urlencodad sträng i referrer, inte som separata query-parametrar. */
+function taggedPlayStoreUrl() {
+  const referrer = `utm_source=wagergolf.se&utm_medium=referral&utm_campaign=${STORE_CAMPAIGN}`;
+  return `${PLAY_STORE_URL}&referrer=${encodeURIComponent(referrer)}`;
+}
+
 module.exports = {
   name: "Wager Golf",
   url: "https://wagergolf.se",
-  appStoreUrl: "https://apps.apple.com/se/app/id6767638917",
-  playStoreUrl: "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf",
+  // Klickbara länkar är kampanjmärkta, de kanoniska används i schema.org.
+  appStoreUrl: taggedAppStoreUrl(),
+  playStoreUrl: taggedPlayStoreUrl(),
+  appStoreUrlCanonical: APP_STORE_URL,
+  playStoreUrlCanonical: PLAY_STORE_URL,
   api: "https://api.wagergolf.se",
   email: "bratt.gustaf@gmail.com",
   // Site-bred delningsbild (1200x630). Skapas i Fas 1.

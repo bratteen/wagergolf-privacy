@@ -5,8 +5,22 @@
 // Görs server-side i stället för med klient-JS så länken fungerar även utan
 // JavaScript och kan användas rakt i annonser, mejl och QR-koder. En och samma
 // URL landar då alltid rätt.
-const APP_STORE = 'https://apps.apple.com/se/app/id6767638917';
-const PLAY_STORE = 'https://play.google.com/store/apps/details?id=com.bratteen.wagergolf';
+//
+// Butikslänkarna är kampanjmärkta så App Store Connect och Play Console kan
+// visa hur många som faktiskt laddade ner via sajten, inte bara hur många som
+// klickade. Håll värdena i synk med _data/site.js. Cloudflare-funktioner byggs
+// separat från Eleventy, så de kan inte dela modul.
+const STORE_CAMPAIGN = 'webb';
+const APPLE_PROVIDER_TOKEN = '';
+
+const APP_STORE = APPLE_PROVIDER_TOKEN
+  ? `https://apps.apple.com/se/app/id6767638917?pt=${APPLE_PROVIDER_TOKEN}&ct=${STORE_CAMPAIGN}&mt=8`
+  : 'https://apps.apple.com/se/app/id6767638917';
+const PLAY_STORE =
+  'https://play.google.com/store/apps/details?id=com.bratteen.wagergolf&referrer=' +
+  encodeURIComponent(
+    `utm_source=wagergolf.se&utm_medium=referral&utm_campaign=${STORE_CAMPAIGN}`,
+  );
 const FALLBACK = '/#top';
 
 export function onRequestGet({ request }) {

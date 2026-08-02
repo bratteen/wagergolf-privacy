@@ -16,8 +16,10 @@ eleventyExcludeFromCollections: true
   <script>
     (function () {
       var API = "{{ site.api }}";
-      var IOS = "{{ site.appStoreUrl }}";
-      var ANDROID = "{{ site.playStoreUrl }}";
+      // safe krävs här: butikslänkarna är kampanjmärkta och innehåller &, som
+      // annars escapas till &amp; inuti JS-strängen och ger en trasig URL.
+      var IOS = "{{ site.appStoreUrl | safe }}";
+      var ANDROID = "{{ site.playStoreUrl | safe }}";
       var m = window.location.pathname.match(/\/i\/([A-Za-z0-9_-]{8})/);
       var token = m ? m[1] : null;
       var ua = navigator.userAgent || "";
