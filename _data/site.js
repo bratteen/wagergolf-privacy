@@ -9,10 +9,17 @@ const PLAY_STORE_URL =
 // ner. Utan den siffran syns inte om tappet ligger på butikssidan eller i appen.
 const STORE_CAMPAIGN = "webb";
 
-// Hämtas i App Store Connect under App Analytics. Apple knyter nedladdningen
-// till kontot via provider-token, så utan den lämnas App Store-länken omärkt
-// hellre än att se mätt ut utan att vara det. Google Play behöver ingen token.
-const APPLE_PROVIDER_TOKEN = "";
+// Provider-token från App Store Connect > Analytics > Acquisition > Campaigns.
+// Apple knyter nedladdningen till kontot via den, så utan token lämnas
+// App Store-länken omärkt hellre än att se mätt ut utan att vara det.
+// Google Play behöver ingen motsvarighet.
+const APPLE_PROVIDER_TOKEN = "128879444";
+
+// Kampanjlänkar använder Apples egen bas-URL, inte den landsprefixade. Det är
+// formen App Store Connect själv genererar, och den som attributionen är
+// verifierad mot. Butiken väljer ändå land utifrån besökarens konto.
+const APP_STORE_CAMPAIGN_BASE =
+  "https://apps.apple.com/app/apple-store/id6767638917";
 
 /** App Store-länk med kampanjmärkning. Faller tillbaka på den rena länken så
  *  länge provider-token saknas. */
@@ -23,7 +30,7 @@ function taggedAppStoreUrl() {
     ct: STORE_CAMPAIGN,
     mt: "8",
   });
-  return `${APP_STORE_URL}?${params}`;
+  return `${APP_STORE_CAMPAIGN_BASE}?${params}`;
 }
 
 /** Google Play-länk med kampanjmärkning. Play vill ha utm-paren som EN

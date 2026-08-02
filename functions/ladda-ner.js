@@ -11,10 +11,12 @@
 // klickade. Håll värdena i synk med _data/site.js. Cloudflare-funktioner byggs
 // separat från Eleventy, så de kan inte dela modul.
 const STORE_CAMPAIGN = 'webb';
-const APPLE_PROVIDER_TOKEN = '';
+const APPLE_PROVIDER_TOKEN = '128879444';
 
+// Kampanjlänken använder Apples egen bas-URL, inte den landsprefixade, precis
+// som App Store Connect genererar den.
 const APP_STORE = APPLE_PROVIDER_TOKEN
-  ? `https://apps.apple.com/se/app/id6767638917?pt=${APPLE_PROVIDER_TOKEN}&ct=${STORE_CAMPAIGN}&mt=8`
+  ? `https://apps.apple.com/app/apple-store/id6767638917?pt=${APPLE_PROVIDER_TOKEN}&ct=${STORE_CAMPAIGN}&mt=8`
   : 'https://apps.apple.com/se/app/id6767638917';
 const PLAY_STORE =
   'https://play.google.com/store/apps/details?id=com.bratteen.wagergolf&referrer=' +
