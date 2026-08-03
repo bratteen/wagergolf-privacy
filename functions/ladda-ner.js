@@ -13,10 +13,11 @@
 const STORE_CAMPAIGN = 'webb';
 const APPLE_PROVIDER_TOKEN = '128879444';
 
-// Kampanjlänken använder Apples egen bas-URL, inte den landsprefixade, precis
-// som App Store Connect genererar den.
+// Bygg alltid på den landsprefixade adressen. App Store Connects egen
+// kampanjlänkgenerator ger formen /app/apple-store/id..., men den svarar 404 i
+// vanlig webbläsare. pt och ct läses av Apple oavsett sökväg.
 const APP_STORE = APPLE_PROVIDER_TOKEN
-  ? `https://apps.apple.com/app/apple-store/id6767638917?pt=${APPLE_PROVIDER_TOKEN}&ct=${STORE_CAMPAIGN}&mt=8`
+  ? `https://apps.apple.com/se/app/id6767638917?pt=${APPLE_PROVIDER_TOKEN}&ct=${STORE_CAMPAIGN}&mt=8`
   : 'https://apps.apple.com/se/app/id6767638917';
 const PLAY_STORE =
   'https://play.google.com/store/apps/details?id=com.bratteen.wagergolf&referrer=' +

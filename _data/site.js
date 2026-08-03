@@ -15,14 +15,13 @@ const STORE_CAMPAIGN = "webb";
 // Google Play behöver ingen motsvarighet.
 const APPLE_PROVIDER_TOKEN = "128879444";
 
-// Kampanjlänkar använder Apples egen bas-URL, inte den landsprefixade. Det är
-// formen App Store Connect själv genererar, och den som attributionen är
-// verifierad mot. Butiken väljer ändå land utifrån besökarens konto.
-const APP_STORE_CAMPAIGN_BASE =
-  "https://apps.apple.com/app/apple-store/id6767638917";
-
 /** App Store-länk med kampanjmärkning. Faller tillbaka på den rena länken så
- *  länge provider-token saknas. */
+ *  länge provider-token saknas.
+ *
+ *  Bygg ALLTID på den landsprefixade adressen. App Store Connects egen
+ *  kampanjlänkgenerator ger formen /app/apple-store/id..., men den svarar 404
+ *  i vanlig webbläsare och fungerar bara inuti App Store-appen. Parametrarna
+ *  pt och ct läses av Apple oavsett sökväg. */
 function taggedAppStoreUrl() {
   if (!APPLE_PROVIDER_TOKEN) return APP_STORE_URL;
   const params = new URLSearchParams({
@@ -30,7 +29,7 @@ function taggedAppStoreUrl() {
     ct: STORE_CAMPAIGN,
     mt: "8",
   });
-  return `${APP_STORE_CAMPAIGN_BASE}?${params}`;
+  return `${APP_STORE_URL}?${params}`;
 }
 
 /** Google Play-länk med kampanjmärkning. Play vill ha utm-paren som EN
