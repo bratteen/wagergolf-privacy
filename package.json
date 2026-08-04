@@ -9,8 +9,11 @@
   "scripts": {
     "build": "rm -rf _site && eleventy",
     "check:legal": "node scripts/check-legal.mjs",
+    "check:sv": "node scripts/check-sv-unchanged.mjs",
+    "baseline:sv": "node scripts/check-sv-unchanged.mjs --write",
+    "test": "node --test tests/",
     "validate:html": "html-validate _site/privacy/index.html _site/terms/index.html",
-    "check": "npm run build && npm run check:legal && npm run validate:html",
+    "check": "npm run build && npm run check:legal && npm run check:sv && npm run validate:html",
     "dev": "eleventy --serve",
     "deploy": "npm run check && npx wrangler pages deploy _site --project-name=wagergolf --branch=main && npm run indexnow",
     "indexnow": "node scripts/indexnow.mjs"
