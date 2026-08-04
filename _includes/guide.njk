@@ -9,7 +9,7 @@ layout: base.njk
       </div>
       <h1>{{ h1 or title }}</h1>
       {% if lede %}<p>{{ lede }}</p>{% endif %}
-      <p class="guide-byline">Av <a href="/om/">Gustaf Bratt</a>{% if updated %} · Uppdaterad {{ updated | svDate }}{% endif %}</p>
+      <p class="guide-byline">Av <a href="/om/">Gustaf Bratt</a>{% if updated %} · Uppdaterad {{ updated | localDate(lang) }}{% endif %}</p>
       <div class="guide-meta-row">
         {% if players %}<span class="guide-chip">{{ players }}</span>{% endif %}
         {% if category %}<span class="guide-chip outline">{{ category }}</span>{% endif %}

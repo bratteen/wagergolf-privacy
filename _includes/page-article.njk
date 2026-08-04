@@ -12,7 +12,7 @@ layout: base.njk
       {% endif %}
       <h1>{{ h1 or title }}</h1>
       {% if lede %}<p>{{ lede }}</p>{% endif %}
-      {% if byline %}<p class="guide-byline">Av <a href="/om/">Gustaf Bratt</a>{% if updated %} · Uppdaterad {{ updated | svDate }}{% endif %}</p>{% endif %}
+      {% if byline %}<p class="guide-byline">Av <a href="/om/">Gustaf Bratt</a>{% if updated %} · Uppdaterad {{ updated | localDate(lang) }}{% endif %}</p>{% endif %}
     </div>
   </section>
 

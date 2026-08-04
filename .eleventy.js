@@ -27,18 +27,9 @@ module.exports = function (eleventyConfig) {
   // Datum-helper för sitemap.
   eleventyConfig.addFilter("isoDate", (d) => (d || new Date()).toISOString());
 
-  // Svenskt läsbart datum för by-line ("2026-06-20" -> "20 juni 2026").
-  const SV_MONTHS = [
-    "januari", "februari", "mars", "april", "maj", "juni",
-    "juli", "augusti", "september", "oktober", "november", "december",
-  ];
-  eleventyConfig.addFilter("svDate", (d) => {
-    if (!d) return "";
-    const s = String(d).slice(0, 10);
-    const [y, m, day] = s.split("-").map(Number);
-    if (!y || !m || !day) return s;
-    return `${day} ${SV_MONTHS[m - 1]} ${y}`;
-  });
+  // Läsbart datum per språk för by-line ("2026-06-20" -> "20 juni 2026").
+  const { localDate } = require("./lib/local-date.js");
+  eleventyConfig.addFilter("localDate", localDate);
 
   // Guider i en given kategori, sorterade på order (för pelarsidan).
   eleventyConfig.addFilter("byCategory", (guides, cat) =>
