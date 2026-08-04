@@ -49,6 +49,7 @@ språkberoende härleds från de två.
 | `_data/terms.js` | Termordlista sv→nb→da→en för golftermer |
 | `lib/structured-data.js` | JSON-LD-byggare, delad av alla språk |
 | `lib/alternates.js` | Grupperar sidor på `key` → hreflang-alternativ |
+| `functions/go.js` | Universell kampanjlänk: språkval + kampanjmärkning |
 | `scripts/check-sv-unchanged.mjs` | Regressionsskydd för svenskans output |
 | `no/no.11tydata.js`, `dk/…`, `en/…` | Sätter `lang` per katalog |
 
@@ -170,6 +171,65 @@ modulen. Den behåller sin duplicerade konstantuppsättning (som i dag) men
 utökas med marknad, härledd från sökvägen (`/no/last-ned`) med
 `Accept-Language` som fallback. Kommentaren om att hålla värdena i synk med
 `_data/site.js` gäller fortsatt och skärps.
+
+### `/go` — kampanjlänken
+
+`functions/go.js`, en Pages Function som tar emot en universell länk och
+skickar besökaren till rätt språkversion med kampanjmärkning.
+
+Avsedd för kanaler där en enda URL måste fungera för alla marknader: QR-koder
+på tryck, poddar, radio, kläder, mässor. **Digitala annonser ska inte peka
+hit** — de ska peka direkt på `/dk/`, `/no/` eller `/en/`, eftersom en
+landningssida på annonsens eget språk ger högre relevansbetyg och därmed lägre
+klickpris.
+
+```
+/go?c=podd-golfsnack&l=da
+   ↓
+/dk/?utm_source=podd-golfsnack&utm_medium=offline&utm_campaign=podd-golfsnack
+   ↓  besökaren klickar Ladda ner
+App Store /dk/ med ct=podd-golfsnack
+```
+
+**Parametrar**
+
+- `c` — kanalslug, kort och gemener (`qr-scorekort`, `podd-golfsnack`,
+  `troja`). Blir `utm_source`, `utm_campaign` och senare butikens `ct`. Håll
+  slugen kort; butikernas kampanjfält är fritext men trivs inte med långa
+  värden.
+- `l` — tvingar språk (`sv`, `nb`, `da`, `en`). Utan den härleds språket från
+  `Accept-Language` med Cloudflares `request.cf.country` som stöd. En dansk
+  podd ska landa på danska även när lyssnarens telefon står på engelska,
+  därför finns den.
+
+Okänt eller saknat `c` ger en ren omdirigering utan utm-parametrar i stället
+för fel. En trasig QR-kod ska landa någonstans vettigt.
+
+**Kampanjen vidare till butiken.** Landningssidan bär kampanjen i query-
+strängen. `download-link.js` läser den ur `location.search` och ersätter det
+generiska `ct=webb-dk` med kanalslugen. Det gör att App Store Connect kan visa
+faktiska nedladdningar per offline-kanal, inte bara klick — en siffra som annars
+inte går att få för en tryckt QR-kod.
+
+**Ingen klientlagring.** Kampanjen lever i URL:en, inte i cookie eller
+`sessionStorage`. Det håller ihop med att Umami är cookielöst och med vad
+integritetspolicyn säger. Konsekvensen är att kampanjen tappas om besökaren
+navigerar vidare innan nedladdning; de flesta konverteringar sker på
+landningssidan, och det är en bättre avvägning än att börja lagra i webbläsaren.
+
+**Cachning.** Svaret varierar per besökare. `Cache-Control: no-store` och
+`Vary: Accept-Language`, samma mönster som `functions/ladda-ner.js` redan
+använder för sin enhetsstyrda omdirigering.
+
+**Indexering.** `/go` läggs som `Disallow` i `robots.njk`. De utm-märkta
+landningssidorna är redan skyddade: `base.njk` sätter `canonical` till
+`{{ site.url }}{{ page.url }}` utan query, så `/dk/?utm_source=…`
+konsolideras mot `/dk/`. Ingen ändring behövs där.
+
+**Omdirigerbarhet.** En tryckt QR-kod kan aldrig ändras. Genom att den pekar på
+`/go?c=…` i stället för direkt på en landningssida kan destinationen ändras
+efteråt genom en redigering i funktionen. Kampanjslugar som en gång tryckts får
+därför aldrig återanvändas för något annat.
 
 ### Språkväljare
 
@@ -323,7 +383,10 @@ Ej översatta: `privacy`, `terms`, `robots.njk`, `sitemap.njk`,
 Varje våg är ett eget arbetspaket som deployas för sig.
 
 **Våg 1 — infrastruktur.** Alla nya filer ovan, mallarna omskrivna,
-språkväljaren, hreflang, sitemap-alternativ. Inga nya språk publiceras.
+språkväljaren, bannern, `/go`, hreflang, sitemap-alternativ. Inga nya språk
+publiceras. `/go` respekterar `publishedLocales` och faller tillbaka på svenska
+för språk som ännu inte rullats ut, så en kampanjlänk kan tryckas innan
+översättningen är klar utan att leda till en tom katalog.
 Acceptanskriterium: `check-sv-unchanged.mjs` visar byte-identisk svensk output.
 
 **Våg 2 — termordlista.** `_data/terms.js` byggs och granskas av användaren.
@@ -354,6 +417,13 @@ informeras om de nya sidorna.
 - Bannern testad med `navigator.languages` satt till danska på en svensk sida:
   ska visas en gång, sedan aldrig efter att den stängts
 - Bannern får inte visas för ett opublicerat språk
+- `/go?l=da` landar på `/dk/`, `/go?l=nb` på `/no/`, `/go` utan parametrar
+  följer `Accept-Language`
+- `/go?c=test` ger utm-parametrar på landningssidan och `ct=test` i
+  butikslänken; `/go` utan `c` ger en ren URL utan utm
+- `/go` med okänd `c` omdirigerar ändå, felar inte
+- `/go` blockerad i `robots.txt`, och `/dk/?utm_source=x` har `canonical`
+  mot `/dk/`
 - Butikslänkarna testade per marknad när apputrullningen är klar
 
 ## Avgränsningar
