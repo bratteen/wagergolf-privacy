@@ -1,19 +1,27 @@
 // Rena butikslänkar utan mätparametrar. Strukturerad data ska peka på appens
 // kanoniska adress, inte på en spårad variant.
-const APP_STORE_URL = "https://apps.apple.com/se/app/id6767638917";
+const APP_ID = "id6767638917";
+const PLAY_ID = "com.bratteen.wagergolf";
+const APP_STORE_URL = `https://apps.apple.com/se/app/${APP_ID}`;
 const PLAY_STORE_URL =
-  "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf";
-
-// Kampanjnamnet som butikernas rapporter grupperar på. Umami mäter klicket på
-// knappen, det här mäter vad som händer sedan: hur många som faktiskt laddade
-// ner. Utan den siffran syns inte om tappet ligger på butikssidan eller i appen.
-const STORE_CAMPAIGN = "webb";
+  `https://play.google.com/store/apps/details?id=${PLAY_ID}`;
 
 // Provider-token från App Store Connect > Analytics > Acquisition > Campaigns.
 // Apple knyter nedladdningen till kontot via den, så utan token lämnas
 // App Store-länken omärkt hellre än att se mätt ut utan att vara det.
 // Google Play behöver ingen motsvarighet.
 const APPLE_PROVIDER_TOKEN = "128879444";
+
+// En storefront och ett kampanjnamn per marknad. Kampanjnamnen är
+// marknadsbaserade, precis som sökvägarna, eftersom butikernas
+// förvärvsrapporter är indelade per storefront. Utan uppdelningen klumpas all
+// webbtrafik ihop och det går inte att se om Danmark fungerar.
+const MARKETS = {
+  sv: { store: "se", play: "sv", gl: "SE", campaign: "webb" },
+  nb: { store: "no", play: "no", gl: "NO", campaign: "webb-no" },
+  da: { store: "dk", play: "da", gl: "DK", campaign: "webb-dk" },
+  en: { store: "us", play: "en", gl: "US", campaign: "webb-en" },
+};
 
 /** App Store-länk med kampanjmärkning. Faller tillbaka på den rena länken så
  *  länge provider-token saknas.
@@ -22,29 +30,49 @@ const APPLE_PROVIDER_TOKEN = "128879444";
  *  kampanjlänkgenerator ger formen /app/apple-store/id..., men den svarar 404
  *  i vanlig webbläsare och fungerar bara inuti App Store-appen. Parametrarna
  *  pt och ct läses av Apple oavsett sökväg. */
-function taggedAppStoreUrl() {
-  if (!APPLE_PROVIDER_TOKEN) return APP_STORE_URL;
+function taggedAppStoreUrl(market) {
+  const base = `https://apps.apple.com/${market.store}/app/${APP_ID}`;
+  if (!APPLE_PROVIDER_TOKEN) return base;
   const params = new URLSearchParams({
     pt: APPLE_PROVIDER_TOKEN,
-    ct: STORE_CAMPAIGN,
+    ct: market.campaign,
     mt: "8",
   });
-  return `${APP_STORE_URL}?${params}`;
+  return `${base}?${params}`;
 }
 
 /** Google Play-länk med kampanjmärkning. Play vill ha utm-paren som EN
  *  urlencodad sträng i referrer, inte som separata query-parametrar. */
-function taggedPlayStoreUrl() {
-  const referrer = `utm_source=wagergolf.se&utm_medium=referral&utm_campaign=${STORE_CAMPAIGN}`;
-  return `${PLAY_STORE_URL}&referrer=${encodeURIComponent(referrer)}`;
+function taggedPlayStoreUrl(market) {
+  const referrer = `utm_source=wagergolf.se&utm_medium=referral&utm_campaign=${market.campaign}`;
+  const params = new URLSearchParams({
+    id: PLAY_ID,
+    hl: market.play,
+    gl: market.gl,
+    referrer,
+  });
+  return `https://play.google.com/store/apps/details?${params}`;
 }
+
+const storeUrls = Object.fromEntries(
+  Object.entries(MARKETS).map(([lang, market]) => [
+    lang,
+    {
+      appStore: taggedAppStoreUrl(market),
+      playStore: taggedPlayStoreUrl(market),
+      campaign: market.campaign,
+    },
+  ]),
+);
 
 module.exports = {
   name: "Wager Golf",
   url: "https://wagergolf.se",
-  // Klickbara länkar är kampanjmärkta, de kanoniska används i schema.org.
-  appStoreUrl: taggedAppStoreUrl(),
-  playStoreUrl: taggedPlayStoreUrl(),
+  // En butikslänk per marknad. Mallarna använder storeUrls[lang].
+  storeUrls,
+  // Alias för svenskan, så äldre referenser inte går sönder.
+  appStoreUrl: storeUrls.sv.appStore,
+  playStoreUrl: storeUrls.sv.playStore,
   appStoreUrlCanonical: APP_STORE_URL,
   playStoreUrlCanonical: PLAY_STORE_URL,
   api: "https://api.wagergolf.se",

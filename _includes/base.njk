@@ -51,7 +51,10 @@
       <nav class="nav-links">
         <a href="{{ routes.homeFor(lang) }}#funktioner">{{ t.nav.features }}</a>
         <a class="nav-keep" href="{{ routes.pathFor(lang, 'formats') }}">{{ t.nav.formats }}</a>
-        <a class="nav-cta" href="{{ routes.locales[lang].prefix }}/{{ routes.locales[lang].download }}" data-download-link data-ios-url="{{ site.appStoreUrl }}" data-android-url="{{ site.playStoreUrl }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
+        {#- Byggs manuellt i stället för med routes.pathFor, som alltid lägger på
+            ett avslutande snedstreck. Sökvägen måste sakna det för att matcha
+            Cloudflare-funktionen functions/ladda-ner.js (utan slash). #}
+        <a class="nav-cta" href="{{ routes.locales[lang].prefix }}/{{ routes.locales[lang].download }}" data-download-link data-ios-url="{{ site.storeUrls[lang].appStore }}" data-android-url="{{ site.storeUrls[lang].playStore }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
         {%- include "language-switcher.njk" %}
       </nav>
     </div>
