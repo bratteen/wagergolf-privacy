@@ -18,7 +18,15 @@
 // värre — då låg den publikt på /lib/.
 // Ändras något här måste motsvarande ändring göras i _data/routes.js och
 // lib/campaign.js. Testerna i tests/go.test.mjs och tests/campaign.test.js
-// kontrollerar samma värden från båda hållen.
+// kontrollerar samma värden från båda hållen, men INTE mot varandra —
+// synken är manuell.
+//
+// PUBLISHED SPEGLAR publishedLocales I _data/routes.js MEN UPPDATERAS INTE
+// AUTOMATISKT MED DEN. README:s checklista "Lägga till ett språk" har ett
+// eget steg för att uppdatera PUBLISHED — glöms det bort svarar /go?l=nb
+// (varje tryckt QR-kod och poddlänk för den marknaden) fortfarande med
+// svenska startsidan, tyst, eftersom pickLang faller tillbaka på
+// DEFAULT_LANG för alla språk som inte står i listan nedan.
 const PREFIX = { sv: '', nb: '/no', da: '/dk', en: '/en' };
 const PUBLISHED = ['sv'];
 const DEFAULT_LANG = 'sv';

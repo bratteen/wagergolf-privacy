@@ -139,10 +139,21 @@ genom att:
    commit som språkets sista sida. Innan dess kan språket byggas och
    granskas lokalt utan att synas i hreflang, språkväljaren, bannern eller
    sitemapen — allt filtrerar mot den listan.
+6. Spegla samma språk i `PUBLISHED` i `functions/go.js`. Den listan är EN
+   EGEN KOPIA av `publishedLocales`, inte utledd från `_data/routes.js` —
+   se DUPLIKAT-kommentaren i filen för varför (`functions/` deployas utan
+   `_data/`). Uppdateras bara steg 5, svarar `/go?l=nb` fortfarande med
+   svenska startsidan: `pickLang` faller tillbaka på `DEFAULT_LANG` för
+   varje språk som inte står i `PUBLISHED`, tyst och utan byggfel. Varje
+   tryckt QR-kod och poddlänk för marknaden pekar då fel tills detta steg
+   görs. Testerna i `tests/go.test.mjs` kontrollerar bara `PUBLISHED` mot
+   sig själv, inte mot `_data/routes.js`, så synken är manuell och måste
+   göras i samma commit som steg 5.
 
 Hreflang, språkväljaren, bannern och sitemap härleds automatiskt ur sidornas
-`key` och `publishedLocales`. Inget av det behöver röras för att lägga till
-ett språk.
+`key` och `publishedLocales` i `_data/routes.js` — inget av det behöver röras
+för att lägga till ett språk. `/go` är undantaget: dess `PUBLISHED`-lista
+(steg 6) är en egen kopia som måste uppdateras för hand.
 
 Nedladdningslänken (`functions/ladda-ner.js`) behöver inget arbete per
 språk heller: den är en enda endpoint för alla marknader, med marknaden i
