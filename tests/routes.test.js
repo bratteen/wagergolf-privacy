@@ -30,3 +30,25 @@ test('pathFor bygger lokaliserade sökvägar', () => {
   assert.strictEqual(routes.pathFor('en', 'formats'), '/en/game-formats/');
   assert.strictEqual(routes.pathFor('sv', 'about'), '/om/');
 });
+
+test('downloadPath är en färdig sökväg, inte ett segment', () => {
+  assert.strictEqual(routes.locales.sv.downloadPath, '/ladda-ner');
+  assert.strictEqual(routes.locales.nb.downloadPath, '/ladda-ner?l=nb');
+  assert.strictEqual(routes.locales.da.downloadPath, '/ladda-ner?l=da');
+  assert.strictEqual(routes.locales.en.downloadPath, '/ladda-ner?l=en');
+});
+
+test('svenskans downloadPath saknar avslutande snedstreck', () => {
+  // functions/ladda-ner.js matchar /ladda-ner utan slash. Ett avslutande
+  // snedstreck skulle ge 404 på sajtens primära CTA.
+  assert.ok(!routes.locales.sv.downloadPath.endsWith('/'));
+});
+
+test('segmentfältet download finns inte kvar', () => {
+  // Det förledde till pathFor(lang, 'download'), som lägger på ett avslutande
+  // snedstreck och därmed bryter knappen. En färdig downloadPath tar bort
+  // fotgillret i stället för att dokumentera det.
+  for (const [lang, cfg] of Object.entries(routes.locales)) {
+    assert.strictEqual(cfg.download, undefined, `${lang} har kvar download`);
+  }
+});

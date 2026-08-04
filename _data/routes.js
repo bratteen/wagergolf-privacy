@@ -9,22 +9,28 @@
 //
 // hreflang tas ALLTID från hreflang-fältet, aldrig från prefixet. hreflang="dk"
 // är ogiltig och ignoreras tyst av Google, utan varning i Search Console.
+//
+// downloadPath är en färdig sökväg, inte ett segment som de övriga. Två skäl:
+// Cloudflare-funktionen svarar på /ladda-ner utan avslutande snedstreck, medan
+// pathFor alltid lägger på ett — och en enda endpoint slipper en Pages Function
+// per språk. Marknaden går i query-strängen. Endpointen är en omdirigering som
+// aldrig indexeras, så en lokaliserad slug hade varit kosmetik utan SEO-värde.
 const LOCALES = {
   sv: {
     prefix: "", hreflang: "sv", htmlLang: "sv", intl: "sv-SE", label: "Svenska",
-    formats: "spelformer", glossary: "ordlista", about: "om", download: "ladda-ner",
+    formats: "spelformer", glossary: "ordlista", about: "om", downloadPath: "/ladda-ner",
   },
   nb: {
     prefix: "/no", hreflang: "nb", htmlLang: "nb", intl: "nb-NO", label: "Norsk",
-    formats: "spilleformer", glossary: "ordliste", about: "om-oss", download: "last-ned",
+    formats: "spilleformer", glossary: "ordliste", about: "om-oss", downloadPath: "/ladda-ner?l=nb",
   },
   da: {
     prefix: "/dk", hreflang: "da", htmlLang: "da", intl: "da-DK", label: "Dansk",
-    formats: "spilformer", glossary: "ordliste", about: "om-os", download: "hent",
+    formats: "spilformer", glossary: "ordliste", about: "om-os", downloadPath: "/ladda-ner?l=da",
   },
   en: {
     prefix: "/en", hreflang: "en", htmlLang: "en", intl: "en-GB", label: "English",
-    formats: "game-formats", glossary: "glossary", about: "about", download: "download",
+    formats: "game-formats", glossary: "glossary", about: "about", downloadPath: "/ladda-ner?l=en",
   },
 };
 
