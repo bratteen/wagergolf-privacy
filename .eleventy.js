@@ -16,6 +16,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.ignores.add("terms/**");
   eleventyConfig.ignores.add("docs/**");
   eleventyConfig.ignores.add("README.md");
+  // .superpowers/ är SDD-arbetsytans processartefakter (planer, briefar,
+  // rapporter) — inte sidor. Utan detta blir varje markdown-fil där en egen
+  // HTML-sida i _site, och deployen (wrangler pages deploy _site) skickar hela
+  // katalogen rakt ut på wagergolf.se.
+  eleventyConfig.ignores.add(".superpowers/**");
 
   // Datum-helper för sitemap.
   eleventyConfig.addFilter("isoDate", (d) => (d || new Date()).toISOString());
