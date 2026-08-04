@@ -3,12 +3,21 @@ permalink: /sitemap.xml
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 {%- for item in collections.all %}
+{%- if routes.publishedLocales.includes(item.data.lang or "sv") %}
   <url>
     <loc>{{ site.url }}{{ item.url }}</loc>
     <lastmod>{{ item.date | isoDate }}</lastmod>
+{%- set alts = collections.all | alternates(item.data.key, routes) %}
+{%- for a in alts.links %}
+    <xhtml:link rel="alternate" hreflang="{{ a.hreflang }}" href="{{ site.url }}{{ a.url }}"/>
+{%- endfor %}
+{%- if alts.xDefault %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ alts.xDefault }}"/>
+{%- endif %}
   </url>
+{%- endif %}
 {%- endfor %}
   <url>
     <loc>{{ site.url }}/privacy/</loc>
