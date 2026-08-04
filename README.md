@@ -135,6 +135,12 @@ genom att:
 4. Översätta sidorna. Varje sida ska behålla samma `key` som sin svenska
    motsvarighet — det är den nyckeln, inte sökvägen, som hreflang,
    språkväljaren och sitemapen kopplar ihop sidor mellan språk med.
+
+   Samma konvention gäller `related:`-listan i en guides frontmatter (se
+   `_includes/guide.njk`): den innehåller alltid den SVENSKA sluggen,
+   oöversatt, i alla språkversioner — precis som argumentet till
+   `guideUrl`-shortcoden. En översatt guide kopierar alltså sin svenska
+   motsvarighets `related:`-lista rakt av, den ska inte översättas.
 5. Lägga till språket i `publishedLocales` i `_data/routes.js`, i samma
    commit som språkets sista sida. Innan dess kan språket byggas och
    granskas lokalt utan att synas i hreflang, språkväljaren, bannern eller

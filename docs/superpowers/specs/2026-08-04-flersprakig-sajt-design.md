@@ -135,9 +135,13 @@ språkoberoende och identisk i alla fyra versionerna av en fil.
 Utan den blir 84 översatta länkar fyra separata uppsättningar hårdkodade
 sökvägar som tyst kan peka på fel språk eller på 404.
 
-`related`-listorna i frontmatter använder redan språkoberoende nycklar och
-fungerar oförändrat, förutsatt att uppslagningen i `guide.njk` filtreras på
-`lang`.
+`related`-listorna i frontmatter innehåller den svenska sluggen, som är
+språkoberoende, men uppslagningen i `guide.njk` måste matcha på `key`
+("guide:<svensk-slug>"), inte på `slug` filtrerat på `lang` — sluggen själv
+översätts (slaggolf -> slagspill/slagspil/stroke-play) och är alltså inte
+språkoberoende. En ren `lang`-filtrering hade fortfarande jämfört den svenska
+sluggen i `related` mot den översatta guidens egen, översatta `slug`, vilket
+aldrig matchar.
 
 ### Strukturerad data
 

@@ -46,7 +46,14 @@ layout: base.njk
   <section class="related">
     <h2>{{ t.guide.related }}</h2>
     <div class="related-links">
-      {%- for slug in related %}{%- for g in collections.guides %}{%- if g.data.slug == slug and g.data.lang == lang %}<a href="{{ g.url }}">{{ g.data.format }}</a>{%- endif %}{%- endfor %}{%- endfor %}
+      {#- related-listan i frontmatter innehåller alltid den SVENSKA sluggen,
+          aldrig den översatta — samma konvention som guideUrl-shortcoden
+          (lib/guide-url.js). Matchar därför på key ("guide:<svensk-slug>"),
+          inte på slug: sluggen översätts (slaggolf -> slagspill/slagspil/
+          stroke-play) och är alltså inte språkoberoende, till skillnad från
+          key. Ett felskrivet värde ger tyst ett tomt relaterat-block, precis
+          som innan — till skillnad från guideUrl fäller detta inte bygget. -#}
+      {%- for slug in related %}{%- for g in collections.guides %}{%- if g.data.key == "guide:" + slug and g.data.lang == lang %}<a href="{{ g.url }}">{{ g.data.format }}</a>{%- endif %}{%- endfor %}{%- endfor %}
     </div>
   </section>
   {% endif %}
