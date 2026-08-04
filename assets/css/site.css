@@ -444,3 +444,35 @@ footer { background: var(--green-900); color: rgba(245,239,227,0.7); padding: 54
 .lang-switch .lang-current {
   font-weight: 600;
 }
+
+/* Språkbanner. Höjden är reserverad via min-height så att visningen inte
+   förskjuter innehållet under och därmed inte påverkar CLS. */
+.lang-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 40px;
+  padding: 8px 16px;
+  background: var(--green-700, #0a2e21);
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+}
+.lang-banner[hidden] {
+  display: none;
+}
+.lang-banner a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.lang-banner button {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  padding: 0 4px;
+}

@@ -41,6 +41,7 @@
   {% if site.umami.recorderSrc %}<script defer src="/assets/js/replay-sample.js{% if assets.replay %}?v={{ assets.replay }}{% endif %}" data-recorder-src="{{ site.umami.recorderSrc }}" data-website-id="{{ site.umami.websiteId }}" data-sample-rate="{{ site.umami.replaySampleRate }}"></script>{% endif %}{% endif %}
 </head>
 <body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+  {%- include "language-banner.njk" %}
   <header>
     <div class="wrap nav">
       <a class="brandmark" href="{{ routes.homeFor(lang) }}" aria-label="Wager Golf">
