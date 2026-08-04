@@ -421,3 +421,26 @@ footer { background: var(--green-900); color: rgba(245,239,227,0.7); padding: 54
 .home-faq .faq-item:last-child { border-bottom: 1px solid rgba(245,239,227,0.14); }
 .home-faq .faq-q { font-family: var(--serif); font-weight: 700; font-size: 20px; color: #fff; margin: 0 0 8px; letter-spacing: -.3px; }
 .home-faq .faq-a { font-size: 16px; color: rgba(245,239,227,0.78); line-height: 1.6; }
+
+/* Språkväljare. Renderas inte alls när bara ett språk är publicerat, så
+   reglerna är verkningslösa tills första översättningen går live. */
+.lang-switch {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+}
+.lang-switch a {
+  color: inherit;
+  opacity: 0.7;
+  text-decoration: none;
+}
+.lang-switch a:hover,
+.lang-switch a:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.lang-switch .lang-current {
+  font-weight: 600;
+}

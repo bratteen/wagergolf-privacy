@@ -1,0 +1,18 @@
+{#- Språkväljare. Bygger på samma alternates-lista som hreflang, så den alltid
+    länkar till MOTSVARANDE sida i det andra språket och aldrig till startsidan.
+    Att kasta besökaren till startsidan när hen står på en guide är det
+    vanligaste felet i flerspråkiga sajter.
+
+    Skriver ingenting när det bara finns ett publicerat språk. -#}
+{%- set alts = collections.all | alternates(key, routes) -%}
+{%- if alts.links.length > 1 %}
+<nav class="lang-switch" aria-label="{{ t.switcher.label }}">
+  {%- for a in alts.links %}
+  {%- if a.lang == lang %}
+  <span class="lang-current" aria-current="true">{{ routes.locales[a.lang].label }}</span>
+  {%- else %}
+  <a href="{{ a.url }}" hreflang="{{ a.hreflang }}" data-lang-link="{{ a.lang }}">{{ routes.locales[a.lang].label }}</a>
+  {%- endif %}
+  {%- endfor %}
+</nav>
+{%- endif -%}
