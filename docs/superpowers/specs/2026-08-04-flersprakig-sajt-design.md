@@ -1,7 +1,8 @@
 # Flerspråkig wagergolf.se: bokmål, danska och engelska
 
 Datum: 2026-08-04
-Status: godkänd design, ej implementerad
+Status: våg 1 implementerad. Vågorna 2-5 (termordlista och översättningar)
+återstår och får en egen plan.
 
 ## Mål
 
