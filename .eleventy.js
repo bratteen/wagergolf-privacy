@@ -43,6 +43,13 @@ module.exports = function (eleventyConfig) {
     alternatesFor(all, key, routes),
   );
 
+  // Länk till en annan guide i sidans eget språk. Nyckeln är den svenska
+  // sluggen; se lib/guide-url.js.
+  const { guideUrl } = require("./lib/guide-url.js");
+  eleventyConfig.addShortcode("guideUrl", function (key) {
+    return guideUrl(this.ctx.collections.guides, key, this.ctx.lang || "sv");
+  });
+
   return {
     dir: {
       input: ".",
