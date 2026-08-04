@@ -88,17 +88,43 @@ genom att:
    `tests/i18n.test.js` låser schemat och stoppar bygget om en nyckel saknas
    eller är överflödig.
 2. Skapa språkets innehållskatalog (`no/`, `dk/` eller `en/`) med en
-   `.11tydata.js` som sätter `lang` som **vanlig data, inte i
-   `eleventyComputed`**. Det här är lätt att göra fel: ordningen mellan
-   global och katalognivås `eleventyComputed` är inte garanterad i Eleventy,
-   och guidernas katalogdata läser `data.lang` när den bygger sin permalink.
-   Ligger `lang` i `eleventyComputed` kan den vara odefinierad när permalinken
-   räknas ut, vilket ger en engelsk guide en svensk sökväg utan att bygget
-   larmar.
-3. Översätta sidorna. Varje sida ska behålla samma `key` som sin svenska
+   katalogdatafil som sätter `lang` som **vanlig data, inte i
+   `eleventyComputed`**.
+
+   Filen måste bära **katalogens eget namn** — det är Eleventys konvention
+   för katalogdata, inte en stilfråga: `no/no.11tydata.js`,
+   `dk/dk.11tydata.js`, `en/en.11tydata.js`. Ett annat namn, t.ex.
+   `no/.11tydata.js` eller `no/index.11tydata.js`, ignoreras **tyst** av
+   Eleventy — inget byggfel, filen plockas helt enkelt aldrig upp, och varje
+   sida i katalogen faller tillbaka på svenska. Resultatet är
+   `<html lang="sv">` på varenda norsk sida, utan att något larmar. Se
+   `spelformer/guides/guides.11tydata.js` för hur en katalogdatafil ser ut i
+   repot i dag (namngiven efter sin egen katalog, `guides/`), och
+   kommentaren överst i `_data/eleventyComputed.js`, som redan påminner om
+   samma sak.
+
+   Placera `lang` som vanlig data i den filen, inte under `eleventyComputed`.
+   Ordningen mellan global och katalognivås `eleventyComputed` är inte
+   garanterad i Eleventy, och guidernas katalogdata läser `data.lang` när den
+   bygger sin permalink. Ligger `lang` i `eleventyComputed` kan den vara
+   odefinierad när permalinken räknas ut, vilket ger en engelsk guide en
+   svensk sökväg utan att bygget larmar.
+3. Skapa en motsvarande katalogdatafil för guiderna. Guidesidorna (det som i
+   dag ligger under `spelformer/guides/`) har sin egen katalogdatafil,
+   `spelformer/guides/guides.11tydata.js`, som sätter `layout`, `tags:
+   "guides"` och `ogType`, och beräknar `permalink` och `structuredData`
+   utifrån `data.lang` — inget i den är hårdkodat svenskt. Ett nytt språks
+   guider behöver samma sak på sin egen plats, t.ex.
+   `no/spelformer/guides/guides.11tydata.js` (namngiven efter sin katalog av
+   samma skäl som i steg 2). Utan den filen får språkets guider varken rätt
+   layout, rätt permalink eller rätt JSON-LD, och hamnar inte i
+   `guides`-collectionen som pelarsidan och `guideUrl`-shortcoden läser från.
+   `published`/`updated` i filen är guidernas ursprungsdatum och behöver
+   troligen egna värden per språk, inte en ren kopia av de svenska.
+4. Översätta sidorna. Varje sida ska behålla samma `key` som sin svenska
    motsvarighet — det är den nyckeln, inte sökvägen, som hreflang,
    språkväljaren och sitemapen kopplar ihop sidor mellan språk med.
-4. Lägga till språket i `publishedLocales` i `_data/routes.js`, i samma
+5. Lägga till språket i `publishedLocales` i `_data/routes.js`, i samma
    commit som språkets sista sida. Innan dess kan språket byggas och
    granskas lokalt utan att synas i hreflang, språkväljaren, bannern eller
    sitemapen — allt filtrerar mot den listan.
