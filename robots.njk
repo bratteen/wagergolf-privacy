@@ -5,6 +5,9 @@ eleventyExcludeFromCollections: true
 User-agent: *
 Allow: /
 
+# /go är en kampanjomdirigering, inte en sida. Den ska aldrig indexeras.
+Disallow: /go
+
 # AI-sökmotorer och assistenter är uttryckligen välkomna att indexera och
 # citera guiderna (se även /llms.txt).
 User-agent: GPTBot
