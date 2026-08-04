@@ -6,53 +6,23 @@
     Löser bara direkttrafik. Organisk söktrafik landar redan rätt via hreflang,
     och annonser pekar mot rätt prefix från början.
 
-    Renderas dold med reserverad höjd så att visningen inte förskjuter layouten. -#}
+    Renderas dold med reserverad höjd så att visningen inte förskjuter layouten.
+
+    Logiken ligger i assets/js/lang-banner.js, inte inline: CSP:n i _headers
+    saknar 'unsafe-inline' i script-src och blockerar tyst ett inline-script
+    (bannerfunktionen dör helt, bara en CSP-violation i konsolen avslöjar
+    varför). Datan går via data-attribut och ett <template>, se kommentaren
+    överst i lang-banner.js. -#}
 {%- set alts = collections.all | alternates(key, routes) -%}
 {%- if alts.links.length > 1 %}
-<div id="lang-banner" class="lang-banner" hidden>
+<div id="lang-banner" class="lang-banner" hidden data-current-lang="{{ lang }}" data-template="{{ t.banner.text }}">
   <span id="lang-banner-text"></span>
   <button type="button" id="lang-banner-close" aria-label="{{ t.banner.close }}">&times;</button>
+  <template id="lang-banner-alts">
+    {%- for a in alts.links %}
+    <span data-lang="{{ a.lang }}" data-url="{{ a.url }}" data-label="{{ routes.locales[a.lang].label }}"></span>
+    {%- endfor %}
+  </template>
 </div>
-<script>
-  (function () {
-    var el = document.getElementById('lang-banner');
-    if (!el) return;
-
-    // Kandidater från alternates, i publiceringsordning.
-    var alts = {{ alts.links | dump | safe }};
-    var current = {{ lang | dump | safe }};
-    var labels = {{ routes.locales | dump | safe }};
-    var template = {{ t.banner.text | dump | safe }};
-
-    // Har besökaren stängt raden eller själv valt språk visas den aldrig igen.
-    try {
-      if (localStorage.getItem('wg-lang-dismissed')) return;
-    } catch (e) { return; }
-
-    // Första webbläsarspråket som vi faktiskt har en översättning för.
-    var prefs = navigator.languages || [navigator.language || ''];
-    var match = null;
-    for (var i = 0; i < prefs.length && !match; i++) {
-      var base = String(prefs[i]).toLowerCase().split('-')[0];
-      for (var j = 0; j < alts.length; j++) {
-        // nb och no är samma skriftspråk för vårt syfte.
-        var altBase = alts[j].lang === 'nb' ? 'no' : alts[j].lang;
-        if (base === altBase || base === alts[j].lang) { match = alts[j]; break; }
-      }
-    }
-
-    if (!match || match.lang === current) return;
-
-    var name = labels[match.lang].label;
-    document.getElementById('lang-banner-text').innerHTML =
-      '<a href="' + match.url + '" data-lang-link="' + match.lang + '">' +
-      template.replace('{language}', name) + ' &rarr;</a>';
-    el.hidden = false;
-
-    document.getElementById('lang-banner-close').addEventListener('click', function () {
-      el.hidden = true;
-      try { localStorage.setItem('wg-lang-dismissed', '1'); } catch (e) {}
-    });
-  })();
-</script>
+<script defer src="/assets/js/lang-banner.js{% if assets.langBanner %}?v={{ assets.langBanner }}{% endif %}"></script>
 {%- endif -%}

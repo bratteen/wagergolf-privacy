@@ -24,4 +24,5 @@ module.exports = {
   fonts: hash("assets/fonts/fonts.css"),
   replay: hash("assets/js/replay-sample.js"),
   download: hash("assets/js/download-link.js"),
+  langBanner: hash("assets/js/lang-banner.js"),
 };
