@@ -11,7 +11,7 @@
     "check:legal": "node scripts/check-legal.mjs",
     "check:sv": "node scripts/check-sv-unchanged.mjs",
     "baseline:sv": "node scripts/check-sv-unchanged.mjs --write",
-    "test": "node --test tests/*.test.js",
+    "test": "node --test 'tests/**/*.test.{js,mjs}'",
     "validate:html": "html-validate _site/privacy/index.html _site/terms/index.html",
     "check": "npm run build && npm run test && npm run check:legal && npm run check:sv && npm run validate:html",
     "dev": "eleventy --serve",
