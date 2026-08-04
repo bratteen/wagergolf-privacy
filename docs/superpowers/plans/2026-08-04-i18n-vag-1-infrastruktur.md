@@ -2238,7 +2238,282 @@ oförändrad för svenskan."
 
 ---
 
-### Task 15: `download-link.js` — kampanjen vidare till butiken
+### Task 15: Nedladdningslänken måste fungera på alla språk
+
+**Lucka mot specen, upptäckt under körning av Task 14.** Specens avsnitt
+"Butikslänkar per marknad" kräver att `functions/ladda-ner.js` blir
+marknadsmedveten. Ingen task gjorde det, och `base.njk` bygger redan nav-knappen
+som `prefix + "/" + download` — vilket ger `/dk/hent` och `/no/last-ned`.
+`functions/` innehåller bara `go.js`, `ladda-ner.js` och `i/`, så de sökvägarna
+svarar 404. Idag märks det inte eftersom bara svenska är publicerat, men våg 3
+hade shippat en trasig primär CTA.
+
+**Designbeslut som avviker från specen:** specen tänkte sig lokaliserade
+sökvägar (`/no/last-ned`). Det kräver en Pages Function per språk plus en delad
+modul, och Cloudflares routingregler för icke-routade filer inuti `functions/`
+är inte något denna plan kan verifiera utan en riktig deploy. En redirect-
+endpoint indexeras aldrig — den ligger bakom `Disallow` — så en lokaliserad
+slug är ren kosmetik utan SEO-värde.
+
+Därför: **en endpoint, marknaden i query-strängen.** `/ladda-ner` för svenska
+exakt som idag, `/ladda-ner?l=da` för danska. Verifierbart nu, inget 404, och
+fältet `download` försvinner helt — vilket samtidigt tar bort den fotgiller
+Task 14 fick nöja sig med att kommentera.
+
+**Files:**
+- Modify: `_data/routes.js`
+- Modify: `functions/ladda-ner.js`
+- Modify: `_includes/base.njk`
+- Modify: `robots.njk`
+- Modify: `tests/routes.test.js`
+- Create: `tests/ladda-ner.test.mjs`
+
+**Interfaces:**
+- Consumes: `MARKETS`-tänket från Task 14, `pickLang`-mönstret från Task 13.
+- Produces: `routes.locales[lang].downloadPath` — färdig sökväg inklusive
+  eventuell query. Fältet `download` tas bort.
+
+- [ ] **Step 1: Skriv de fallerande testerna**
+
+Lägg till i `tests/routes.test.js`:
+
+```js
+test('downloadPath är en färdig sökväg, inte ett segment', () => {
+  assert.strictEqual(routes.locales.sv.downloadPath, '/ladda-ner');
+  assert.strictEqual(routes.locales.nb.downloadPath, '/ladda-ner?l=nb');
+  assert.strictEqual(routes.locales.da.downloadPath, '/ladda-ner?l=da');
+  assert.strictEqual(routes.locales.en.downloadPath, '/ladda-ner?l=en');
+});
+
+test('svenskans downloadPath saknar avslutande snedstreck', () => {
+  // functions/ladda-ner.js matchar /ladda-ner utan slash. Ett avslutande
+  // snedstreck skulle ge 404 på sajtens primära CTA.
+  assert.ok(!routes.locales.sv.downloadPath.endsWith('/'));
+});
+
+test('segmentfältet download finns inte kvar', () => {
+  // Det förledde till pathFor(lang, 'download'), som lägger på ett avslutande
+  // snedstreck och därmed bryter knappen. En färdig downloadPath tar bort
+  // fotgillret i stället för att dokumentera det.
+  for (const [lang, cfg] of Object.entries(routes.locales)) {
+    assert.strictEqual(cfg.download, undefined, `${lang} har kvar download`);
+  }
+});
+```
+
+Skapa `tests/ladda-ner.test.mjs`:
+
+```js
+import test from 'node:test';
+import assert from 'node:assert';
+import { onRequestGet, marketFor } from '../functions/ladda-ner.js';
+
+const req = (url, ua = '', headers = {}) =>
+  new Request(url, { headers: { 'user-agent': ua, ...headers } });
+
+const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)';
+const ANDROID = 'Mozilla/5.0 (Linux; Android 14; Pixel 8)';
+const DESKTOP = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)';
+
+test('svenska iPhone får den svenska storefronten', async () => {
+  const res = await onRequestGet({ request: req('https://wagergolf.se/ladda-ner', IPHONE) });
+  assert.strictEqual(res.status, 302);
+  assert.match(res.headers.get('Location'), /apps\.apple\.com\/se\//);
+  assert.match(res.headers.get('Location'), /ct=webb(&|$)/);
+});
+
+test('l väljer marknad för både butik och kampanj', async () => {
+  const res = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?l=da', IPHONE),
+  });
+  assert.match(res.headers.get('Location'), /apps\.apple\.com\/dk\//);
+  assert.match(res.headers.get('Location'), /ct=webb-dk(&|$)/);
+});
+
+test('Android får Play med rätt marknad i referrer', async () => {
+  const res = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?l=nb', ANDROID),
+  });
+  const loc = res.headers.get('Location');
+  assert.match(loc, /play\.google\.com/);
+  assert.ok(decodeURIComponent(loc).includes('utm_campaign=webb-no'));
+});
+
+test('desktop faller tillbaka på språkets startsida, inte roten', async () => {
+  const res = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?l=da', DESKTOP),
+  });
+  assert.strictEqual(res.headers.get('Location'), '/dk/#top');
+});
+
+test('svensk desktop behåller dagens fallback exakt', async () => {
+  const res = await onRequestGet({ request: req('https://wagergolf.se/ladda-ner', DESKTOP) });
+  assert.strictEqual(res.headers.get('Location'), '/#top');
+});
+
+test('okänd marknad faller tillbaka på svenska', () => {
+  assert.strictEqual(marketFor('klingon').campaign, 'webb');
+  assert.strictEqual(marketFor(null).campaign, 'webb');
+});
+
+test('svaret får aldrig cachas delat', async () => {
+  const res = await onRequestGet({ request: req('https://wagergolf.se/ladda-ner', IPHONE) });
+  assert.strictEqual(res.headers.get('Cache-Control'), 'no-store');
+  assert.strictEqual(res.headers.get('Vary'), 'User-Agent');
+});
+```
+
+- [ ] **Step 2: Kör testerna, se dem falla**
+
+Run: `npm test`
+Förväntat: FAIL — `downloadPath` finns inte, och `marketFor` exporteras inte.
+
+- [ ] **Step 3: Byt `download` mot `downloadPath` i `_data/routes.js`**
+
+I varje locale-objekt, ta bort `download: "..."` och lägg i stället:
+
+```js
+  sv: { …, downloadPath: "/ladda-ner" },
+  nb: { …, downloadPath: "/ladda-ner?l=nb" },
+  da: { …, downloadPath: "/ladda-ner?l=da" },
+  en: { …, downloadPath: "/ladda-ner?l=en" },
+```
+
+Lägg en kommentar ovanför `LOCALES` som förklarar varför nedladdningen är en
+färdig sökväg och inte ett segment:
+
+```js
+// downloadPath är en färdig sökväg, inte ett segment som de övriga. Två skäl:
+// Cloudflare-funktionen svarar på /ladda-ner utan avslutande snedstreck, medan
+// pathFor alltid lägger på ett — och en enda endpoint slipper en Pages Function
+// per språk. Marknaden går i query-strängen. Endpointen är en omdirigering som
+// aldrig indexeras, så en lokaliserad slug hade varit kosmetik utan SEO-värde.
+```
+
+- [ ] **Step 4: Gör funktionen marknadsmedveten**
+
+I `functions/ladda-ner.js`, ersätt de hårdkodade konstanterna med en
+marknadstabell och exportera `marketFor`. Behåll den befintliga kommentaren om
+att värdena måste hållas i synk med `_data/site.js`, och utöka den med att
+tabellen nedan speglar `MARKETS` där.
+
+```js
+const APP_ID = 'id6767638917';
+const PLAY_ID = 'com.bratteen.wagergolf';
+const APPLE_PROVIDER_TOKEN = '128879444';
+
+// Speglar MARKETS i _data/site.js. Cloudflare-funktioner byggs separat och kan
+// inte importera den filen: .eleventy.js passthrough-kopierar functions/ in i
+// _site/, och deployen skickar bara _site. Ändras något där måste det ändras
+// här också.
+const MARKETS = {
+  sv: { store: 'se', play: 'sv', gl: 'SE', campaign: 'webb', home: '/' },
+  nb: { store: 'no', play: 'no', gl: 'NO', campaign: 'webb-no', home: '/no/' },
+  da: { store: 'dk', play: 'da', gl: 'DK', campaign: 'webb-dk', home: '/dk/' },
+  en: { store: 'us', play: 'en', gl: 'US', campaign: 'webb-en', home: '/en/' },
+};
+
+export function marketFor(lang) {
+  return MARKETS[lang] || MARKETS.sv;
+}
+
+function appStore(market) {
+  const base = `https://apps.apple.com/${market.store}/app/${APP_ID}`;
+  if (!APPLE_PROVIDER_TOKEN) return base;
+  return `${base}?pt=${APPLE_PROVIDER_TOKEN}&ct=${market.campaign}&mt=8`;
+}
+
+function playStore(market) {
+  const referrer = `utm_source=wagergolf.se&utm_medium=referral&utm_campaign=${market.campaign}`;
+  const params = new URLSearchParams({
+    id: PLAY_ID, hl: market.play, gl: market.gl, referrer,
+  });
+  return `https://play.google.com/store/apps/details?${params}`;
+}
+
+export function onRequestGet({ request }) {
+  const url = new URL(request.url);
+  const market = marketFor(url.searchParams.get('l'));
+  const ua = request.headers.get('user-agent') || '';
+
+  // Android testas först: Android-webbläsare kan innehålla "Linux" men aldrig
+  // "iPhone", medan vissa inbäddade iOS-vyer nämner både iPhone och Android.
+  //
+  // Ingen igenkänd mobil: skicka till språkets egen startsida, där båda
+  // knapparna syns. Att skicka en dansk besökare till den svenska roten vore
+  // en språkbyte mitt i ett klick.
+  let target = `${market.home}#top`;
+  if (/Android/i.test(ua)) target = playStore(market);
+  else if (/iPhone|iPad|iPod/i.test(ua)) target = appStore(market);
+
+  return new Response(null, {
+    status: 302,
+    headers: {
+      Location: target,
+      // Svaret varierar med enheten, så det får aldrig cachas delat. Utan detta
+      // riskerar en Android-användare att få iOS-omdirigeringen ur cachen.
+      'Cache-Control': 'no-store',
+      Vary: 'User-Agent',
+    },
+  });
+}
+```
+
+- [ ] **Step 5: Peka nav-knappen på `downloadPath`**
+
+I `_includes/base.njk`, byt nedladdningslänkens `href` mot
+`{{ routes.locales[lang].downloadPath }}` och **ta bort** Nunjucks-kommentaren
+som Task 14 lade in om `pathFor` och avslutande snedstreck. Fotgillret finns
+inte längre — fältet `download` är borta, så ingen kan råka anropa
+`pathFor(lang, 'download')`. En kommentar som varnar för något omöjligt är
+brus.
+
+- [ ] **Step 6: Håll endpointen utanför indexet**
+
+I `robots.njk`, intill den befintliga `Disallow: /go`:
+
+```
+# /ladda-ner är en enhetsstyrd omdirigering, inte en sida.
+Disallow: /ladda-ner
+```
+
+- [ ] **Step 7: Verifiera**
+
+```bash
+npm run check
+```
+Förväntat: allt grönt. Svenskans `downloadPath` är `/ladda-ner`, exakt vad som
+redan renderades, så `check:sv` ska vara grön **utan** att baseline skrivs om.
+Faller den — rapportera det, skriv inte om baseline. Denna task är inte en av de
+två som får det.
+
+```bash
+grep -o 'href="/ladda-ner[^"]*"' _site/index.html | head -1
+```
+Förväntat: `href="/ladda-ner"` — utan query och utan avslutande snedstreck.
+
+- [ ] **Step 8: Committa**
+
+```bash
+git add _data/routes.js functions/ladda-ner.js _includes/base.njk robots.njk tests/routes.test.js tests/ladda-ner.test.mjs
+git commit -m "fix(i18n): nedladdningslänken fungerar på alla språk
+
+base.njk byggde nav-knappen som prefix + download, vilket gav /dk/hent och
+/no/last-ned. Ingen Pages Function svarar på de sökvägarna, så våg 3 hade
+shippat en trasig primär CTA.
+
+En endpoint med marknaden i query-strängen i stället för en funktion per
+språk: endpointen är en omdirigering som aldrig indexeras, så en lokaliserad
+slug är kosmetik utan SEO-värde. Segmentfältet download är borttaget, vilket
+också tar bort fotgillret att pathFor lägger på ett avslutande snedstreck.
+
+Desktop-fallbacken går nu till språkets egen startsida i stället för till
+den svenska roten."
+```
+
+---
+
+### Task 16: `download-link.js` — kampanjen vidare till butiken
 
 **Files:**
 - Create: `lib/campaign.js`
@@ -2458,7 +2733,7 @@ Baseline omskriven: data-store-link är ny markup och den enda skillnaden."
 
 ---
 
-### Task 16: Sitemap med hreflang-alternativ
+### Task 17: Sitemap med hreflang-alternativ
 
 **Files:**
 - Modify: `sitemap.njk`
@@ -2533,7 +2808,7 @@ Filtret är det som håller ett halvöversatt språk utanför indexet."
 
 ---
 
-### Task 17: Slutverifiering och städning
+### Task 18: Slutverifiering och städning
 
 **Files:**
 - Modify: `README.md`
@@ -2680,4 +2955,4 @@ faller låset i någon annan task är det en bugg, inte en förväntad ändring.
 | Task | Vad som ändras i HTML | Varför |
 |---|---|---|
 | 14 | Play-länken får `hl` och `gl` | Marknadsanpassade butikslänkar |
-| 15 | `data-store-link` på butiksknapparna | Kroken kampanjskriptet behöver |
+| 16 | `data-store-link` på butiksknapparna | Kroken kampanjskriptet behöver |
