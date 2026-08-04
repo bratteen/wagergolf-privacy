@@ -211,6 +211,22 @@ generiska `ct=webb-dk` med kanalslugen. Det gör att App Store Connect kan visa
 faktiska nedladdningar per offline-kanal, inte bara klick — en siffra som annars
 inte går att få för en tryckt QR-kod.
 
+Uppslagningen sker i ordningen `c`, sedan `utm_campaign`, sedan fallback till
+marknadens generiska namn. **`utm_campaign` måste finnas med:** betald trafik
+från Meta, Google Ads och nyhetsbrev kommer aldrig via `/go` utan landar direkt
+på `/dk/?utm_campaign=…`. Utan det steget faller all annonstrafik tillbaka på
+`webb-dk` och kampanjen går inte att skilja ut i App Store Connect.
+
+Värdet saneras innan det används som `ct`: gemener, endast `a–z`, `0–9` och
+bindestreck, övrigt ersätts med bindestreck, upprepade bindestreck fälls ihop,
+och strängen kortas. Metas `{{campaign.name}}` expanderar till kampanjnamnet så
+som det skrevs i annonsverktyget, med mellanslag, versaler och ibland emoji —
+det kan inte gå orört in i butikens kampanjfält.
+
+Apples kampanjrapport i App Store Connect bygger på `pt`/`ct` och är Apples egen
+aggregerade förstahandsdata. Den påverkas inte av ATT, till skillnad från
+annonsplattformarnas egen attribution.
+
 **Ingen klientlagring.** Kampanjen lever i URL:en, inte i cookie eller
 `sessionStorage`. Det håller ihop med att Umami är cookielöst och med vad
 integritetspolicyn säger. Konsekvensen är att kampanjen tappas om besökaren
@@ -421,6 +437,9 @@ informeras om de nya sidorna.
   följer `Accept-Language`
 - `/go?c=test` ger utm-parametrar på landningssidan och `ct=test` i
   butikslänken; `/go` utan `c` ger en ren URL utan utm
+- `/dk/?utm_campaign=WG%20DK%20-%20Reels%20%F0%9F%8F%8C` ger
+  `ct=wg-dk-reels` i butikslänken — saneringen testas med ett verkligt
+  Meta-kampanjnamn, inte med en redan ren sträng
 - `/go` med okänd `c` omdirigerar ändå, felar inte
 - `/go` blockerad i `robots.txt`, och `/dk/?utm_source=x` har `canonical`
   mot `/dk/`
@@ -430,5 +449,13 @@ informeras om de nya sidorna.
 
 - Appens eget språk ligger utanför detta arbete. Apputrullning till fler
   marknader pågår parallellt hos användaren.
+- **Ingen Meta-pixel och ingen annan spårningspixel på sajten.** Den skulle
+  kräva samtyckesbanner, ändrad CSP och omskriven integritetspolicy, och den
+  kan ändå inte se en appinstallation — bara knappklicket innan. För att mäta
+  och optimera mot nedladdningar krävs Meta-SDK i appen plus RevenueCats
+  Meta Ads-integration, och sådana kampanjer länkar direkt till butiken utan
+  att passera sajten. Det arbetet hör hemma i appens repo.
+  Sajtens roll i annonsmixen är organisk sökning, `/go`-kanalerna och kalla
+  målgrupper som behöver övertygas först.
 - Ingen valutaomräkning eller prisvisning per marknad; sajten visar inga priser.
 - Ingen översättning av `docs/`.
