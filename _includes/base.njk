@@ -51,7 +51,7 @@
       <nav class="nav-links">
         <a href="{{ routes.homeFor(lang) }}#funktioner">{{ t.nav.features }}</a>
         <a class="nav-keep" href="{{ routes.pathFor(lang, 'formats') }}">{{ t.nav.formats }}</a>
-        <a class="nav-cta" href="{{ routes.locales[lang].downloadPath }}" data-download-link data-ios-url="{{ site.storeUrls[lang].appStore }}" data-android-url="{{ site.storeUrls[lang].playStore }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
+        <a class="nav-cta" href="{{ routes.locales[lang].downloadPath }}" data-download-link data-store-link data-ios-url="{{ site.storeUrls[lang].appStore }}" data-android-url="{{ site.storeUrls[lang].playStore }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
         {%- include "language-switcher.njk" %}
       </nav>
     </div>
