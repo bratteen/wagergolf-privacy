@@ -113,12 +113,23 @@ genom att:
    dag ligger under `spelformer/guides/`) har sin egen katalogdatafil,
    `spelformer/guides/guides.11tydata.js`, som sätter `layout`, `tags:
    "guides"` och `ogType`, och beräknar `permalink` och `structuredData`
-   utifrån `data.lang` — inget i den är hårdkodat svenskt. Ett nytt språks
-   guider behöver samma sak på sin egen plats, t.ex.
-   `no/spelformer/guides/guides.11tydata.js` (namngiven efter sin katalog av
-   samma skäl som i steg 2). Utan den filen får språkets guider varken rätt
-   layout, rätt permalink eller rätt JSON-LD, och hamnar inte i
-   `guides`-collectionen som pelarsidan och `guideUrl`-shortcoden läser från.
+   utifrån `data.lang`. Ett nytt språks guider behöver samma sak på sin egen
+   plats, t.ex. `no/spelformer/guides/guides.11tydata.js` (namngiven efter
+   sin katalog av samma skäl som i steg 2). Utan den filen får språkets
+   guider varken rätt layout, rätt permalink eller rätt JSON-LD, och hamnar
+   inte i `guides`-collectionen som pelarsidan och `guideUrl`-shortcoden
+   läser från.
+
+   Filen kan **kopieras rakt av**, oförändrad. Dess `require`-anrop använder
+   `#data/...` och `#lib/...` — Nodes subpath-imports, definierade i
+   `package.json` under `"imports"` (`#data/*` → `_data/*`, `#lib/*` →
+   `lib/*`). De är repo-rotsrelativa, inte relativa till filens egen plats,
+   så samma `require("#data/routes.js")` fungerar oavsett om filen ligger på
+   `spelformer/guides/` eller `no/spelformer/guides/` eller djupare. Skriv
+   inte om dem till `require("../../...")` vid kopieringen — det var precis
+   den sortens sökväg som gjorde att en tidigare version av denna instruktion
+   krävde manuell uträkning av antal `../` per kopia.
+
    `published`/`updated` i filen är guidernas ursprungsdatum och behöver
    troligen egna värden per språk, inte en ren kopia av de svenska.
 4. Översätta sidorna. Varje sida ska behålla samma `key` som sin svenska

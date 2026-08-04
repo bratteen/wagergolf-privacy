@@ -6,6 +6,10 @@
     "node": ">=24.8.0"
   },
   "description": "wagergolf.se, marknadssajt + integritetspolicy + villkor (11ty)",
+  "imports": {
+    "#data/*": "./_data/*",
+    "#lib/*": "./lib/*"
+  },
   "scripts": {
     "build": "rm -rf _site && eleventy",
     "check:legal": "node scripts/check-legal.mjs",

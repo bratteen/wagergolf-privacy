@@ -1,6 +1,15 @@
 // Katalog-data för alla guide-sidor i spelformer/guides/.
 // Sätter layout + collection-tag, defaultdatum + og:type, och beräknar
 // permalink + JSON-LD per guide. Per-fil-frontmatter vinner över dessa default.
+//
+// Kraven på require: den här filen kopieras oförändrad till en guide-katalog
+// per språk (t.ex. no/spelformer/guides/guides.11tydata.js), och hamnar då
+// på samma djup under repo-roten som originalet — men en framtida
+// katalogstruktur kan lägga den djupare. Relativa sökvägar (../../_data/...)
+// skulle behöva räknas om för varje kopia och tyst peka fel om det missas.
+// #data/ och #lib/ är Nodes subpath-imports (se "imports" i package.json),
+// repo-rotsrelativa oavsett filens eget djup, så samma require fungerar
+// överallt utan ändring.
 module.exports = {
   layout: "guide.njk",
   tags: "guides",
@@ -12,10 +21,10 @@ module.exports = {
   eleventyComputed: {
     // key är språkoberoende och kopplar ihop översättningarna av samma guide.
     key: (data) => `guide:${data.slug}`,
-    permalink: (data) => `${require("../../_data/routes.js").pathFor(data.lang || "sv", "formats", data.slug)}`,
+    permalink: (data) => `${require("#data/routes.js").pathFor(data.lang || "sv", "formats", data.slug)}`,
     structuredData: (data) => {
-      const routes = require("../../_data/routes.js");
-      const { guideGraph } = require("../../lib/structured-data.js");
+      const routes = require("#data/routes.js");
+      const { guideGraph } = require("#lib/structured-data.js");
       const lang = data.lang || "sv";
       const base = data.site.url;
       const image = data.image
@@ -35,8 +44,8 @@ module.exports = {
         faq: data.faq,
         // stringsFor och inte data.t: ordningen mellan global och katalognivås
         // eleventyComputed är inte garanterad, så data.t kan vara odefinierad här.
-        breadcrumbHome: require("../../lib/i18n.js").stringsFor(lang).breadcrumb.home,
-        breadcrumbFormats: require("../../lib/i18n.js").stringsFor(lang).nav.formats,
+        breadcrumbHome: require("#lib/i18n.js").stringsFor(lang).breadcrumb.home,
+        breadcrumbFormats: require("#lib/i18n.js").stringsFor(lang).nav.formats,
         formatsUrl: base + routes.pathFor(lang, "formats"),
       });
     },
