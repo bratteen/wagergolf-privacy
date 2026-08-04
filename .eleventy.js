@@ -1,3 +1,5 @@
+const { alternatesFor } = require("./lib/alternates.js");
+
 module.exports = function (eleventyConfig) {
   // Statiska resurser + de fristående juridiska sidorna kopieras rakt av.
   eleventyConfig.addPassthroughCopy("assets");
@@ -43,6 +45,11 @@ module.exports = function (eleventyConfig) {
     (guides || [])
       .filter((g) => g.data.category === cat)
       .sort((a, b) => (a.data.order || 99) - (b.data.order || 99)),
+  );
+
+  // Språkversioner av samma sida, för hreflang och språkväljaren.
+  eleventyConfig.addFilter("alternates", (all, key, routes) =>
+    alternatesFor(all, key, routes),
   );
 
   return {
