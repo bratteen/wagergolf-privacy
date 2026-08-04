@@ -38,10 +38,17 @@ export function sanitizeCampaign(raw) {
 
 /** Språk från ?l=, annars Accept-Language. Opublicerade språk faller tillbaka
  *  på svenska, så en kampanjlänk kan tryckas innan översättningen är klar utan
- *  att leda till en tom katalog. */
-export function pickLang(url, request) {
+ *  att leda till en tom katalog.
+ *
+ *  `published` tar default från PUBLISHED (våg 1: bara sv), men går att
+ *  skicka in explicit i tester. Utan den möjligheten skulle själva
+ *  språkvalslogiken — att ?l=da väljer danska, att Accept-Language: nb-NO
+ *  väljer bokmål, att "no" och "nb" räknas som samma skriftspråk — förbli
+ *  otestad tills den aktiveras i en senare våg, och ett fel i den skulle
+ *  då först upptäckas i produktion. */
+export function pickLang(url, request, published = PUBLISHED) {
   const forced = url.searchParams.get('l');
-  if (forced && PUBLISHED.includes(forced)) return forced;
+  if (forced && published.includes(forced)) return forced;
   if (forced) return DEFAULT_LANG;
 
   const header = (request.headers.get('accept-language') || '').toLowerCase();
@@ -49,7 +56,7 @@ export function pickLang(url, request) {
     const base = part.split(';')[0].trim().split('-')[0];
     // "no" och "nb" är samma skriftspråk för vårt syfte.
     const lang = base === 'no' ? 'nb' : base;
-    if (PUBLISHED.includes(lang)) return lang;
+    if (published.includes(lang)) return lang;
   }
   return DEFAULT_LANG;
 }

@@ -1,8 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import { onRequestGet, sanitizeCampaign } from '../functions/go.js';
+import { onRequestGet, sanitizeCampaign, pickLang } from '../functions/go.js';
 
 const req = (url, headers = {}) => new Request(url, { headers });
+
+// Full uppsättning för att testa själva språkvalslogiken oberoende av vilka
+// språk som råkar vara publicerade just nu (våg 1: bara sv). Utan detta skulle
+// t.ex. no/nb-hanteringen förbli otestad tills den aktiveras i en senare våg.
+const ALLA = ['sv', 'nb', 'da', 'en'];
 
 test('sanerar Metas kampanjnamn till något butiken accepterar', () => {
   assert.strictEqual(sanitizeCampaign('WG DK - Reels 🏌'), 'wg-dk-reels');
@@ -18,28 +23,38 @@ test('sanerad sträng kortas och slutar aldrig på bindestreck', () => {
   assert.ok(!out.endsWith('-'));
 });
 
-test('l med opublicerat språk faller tillbaka på svenska trots avvikande Accept-Language', async () => {
-  // publishedLocales är ["sv"] i våg 1. "da" finns i PREFIX-tabellen men är
-  // inte publicerat, så forced-parametern ska falla tillbaka på svenska i
-  // stället för att läcka igenom till Accept-Language-detekteringen.
-  const res = await onRequestGet({ request: req('https://wagergolf.se/go?l=da', {
-    'accept-language': 'en-US,en;q=0.9',
-  }) });
-  assert.strictEqual(res.status, 302);
-  assert.strictEqual(res.headers.get('Location'), '/');
+test('l tvingar språk oavsett Accept-Language', () => {
+  // pickLang testas här direkt med en injicerad publicerad-lista som
+  // innehåller alla fyra språk, så själva valet ("da" trumfar Accept-Language)
+  // går att verifiera redan nu, innan da faktiskt är publicerat i våg 1.
+  const url = new URL('https://wagergolf.se/go?l=da');
+  const request = req('https://wagergolf.se/go?l=da', { 'accept-language': 'en-US,en;q=0.9' });
+  assert.strictEqual(pickLang(url, request, ALLA), 'da');
 });
 
-test('utan l följs Accept-Language, men opublicerat språk ger ändå svenska', async () => {
-  // "nb" (norska) är inte publicerat än i denna våg, så en norsk besökares
-  // Accept-Language ska ändå landa på startsidan i stället för en tom /no/-katalog.
-  const res = await onRequestGet({ request: req('https://wagergolf.se/go', {
-    'accept-language': 'nb-NO,nb;q=0.9',
-  }) });
-  assert.strictEqual(res.headers.get('Location'), '/');
+test('utan l följs Accept-Language', () => {
+  const url = new URL('https://wagergolf.se/go');
+  const request = req('https://wagergolf.se/go', { 'accept-language': 'nb-NO,nb;q=0.9' });
+  assert.strictEqual(pickLang(url, request, ALLA), 'nb');
 });
 
-test('opublicerat språk faller tillbaka på svenska', async () => {
-  // publishedLocales är ["sv"] i våg 1, så även l=da ska ge svenska.
+test('no och nb är samma skriftspråk för vårt syfte', () => {
+  const url = new URL('https://wagergolf.se/go');
+  const request = req('https://wagergolf.se/go', { 'accept-language': 'no' });
+  assert.strictEqual(pickLang(url, request, ALLA), 'nb');
+});
+
+test('okänt språk i l faller tillbaka på svenska även när allt är publicerat', () => {
+  const url = new URL('https://wagergolf.se/go?l=klingon');
+  const request = req('https://wagergolf.se/go?l=klingon');
+  assert.strictEqual(pickLang(url, request, ALLA), 'sv');
+});
+
+test('opublicerat språk faller tillbaka på svenska (våg 1: bara sv är live)', async () => {
+  // publishedLocales är ["sv"] i våg 1, så även l=da ska ge svenska. Detta är
+  // regressionslåset för produktionens faktiska PUBLISHED-lista (default-
+  // parametern i pickLang), till skillnad från testerna ovan som injicerar
+  // en egen lista för att pröva valmekaniken oberoende av vilken våg vi är i.
   const res = await onRequestGet({ request: req('https://wagergolf.se/go?l=da') });
   assert.strictEqual(res.headers.get('Location'), '/');
 });
