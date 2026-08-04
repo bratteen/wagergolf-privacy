@@ -5,11 +5,16 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 {%- for item in collections.all %}
+{#- Filtrera på publicerade språk för att hålla ett halvöversatt språk utanför indexet.
+    Tunna, ofullständiga sidor i sitemapen drar ner hela domänen, inte bara sig själva.
+    Sidor utan lang-attribut behandlas som svenska. -#}
 {%- if routes.publishedLocales.includes(item.data.lang or "sv") %}
   <url>
     <loc>{{ site.url }}{{ item.url }}</loc>
     <lastmod>{{ item.date | isoDate }}</lastmod>
 {%- set alts = collections.all | alternates(item.data.key, routes) %}
+{#- alternates-filtret returnerar tomt när färre än två språkversioner finns.
+    Det är avsiktligt — en ensam självpekande xhtml:link beskriver ingen alternativ. -#}
 {%- for a in alts.links %}
     <xhtml:link rel="alternate" hreflang="{{ a.hreflang }}" href="{{ site.url }}{{ a.url }}"/>
 {%- endfor %}
