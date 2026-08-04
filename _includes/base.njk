@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="{{ routes.locales[lang].htmlLang }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,13 @@
   <meta name="description" content="{{ description }}">
   <meta name="theme-color" content="#0a2e21">
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+{%- set alts = collections.all | alternates(key, routes) %}
+{%- for a in alts.links %}
+  <link rel="alternate" hreflang="{{ a.hreflang }}" href="{{ site.url }}{{ a.url }}">
+{%- endfor %}
+{%- if alts.xDefault %}
+  <link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ alts.xDefault }}">
+{%- endif %}
 
   <meta property="og:title" content="{{ ogTitle or title }}">
   <meta property="og:description" content="{{ ogDescription or description }}">
@@ -36,14 +43,14 @@
 <body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
   <header>
     <div class="wrap nav">
-      <a class="brandmark" href="/" aria-label="Wager Golf">
+      <a class="brandmark" href="{{ routes.homeFor(lang) }}" aria-label="Wager Golf">
         <img src="/assets/logo.png" alt="" width="42" height="42">
         <span>WAGER GOLF</span>
       </a>
       <nav class="nav-links">
-        <a href="/#funktioner">Funktioner</a>
-        <a class="nav-keep" href="/spelformer/">Spelformer</a>
-        <a class="nav-cta" href="/ladda-ner" data-download-link data-ios-url="{{ site.appStoreUrl }}" data-android-url="{{ site.playStoreUrl }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">Ladda ner</a>
+        <a href="{{ routes.homeFor(lang) }}#funktioner">{{ t.nav.features }}</a>
+        <a class="nav-keep" href="{{ routes.pathFor(lang, 'formats') }}">{{ t.nav.formats }}</a>
+        <a class="nav-cta" href="{{ routes.locales[lang].prefix }}/{{ routes.locales[lang].download }}" data-download-link data-ios-url="{{ site.appStoreUrl }}" data-android-url="{{ site.playStoreUrl }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
       </nav>
     </div>
   </header>
@@ -58,17 +65,17 @@
           <span>Wager Golf</span>
         </div>
         <nav class="foot-links">
-          <a href="/spelformer/">Spelformer</a>
-          <a href="/ordlista/">Ordlista</a>
-          <a href="/om/">Om</a>
-          <a href="/privacy/">Integritetspolicy</a>
-          <a href="/terms/">Användarvillkor</a>
-          <a href="mailto:{{ site.email }}">Kontakt</a>
+          <a href="{{ routes.pathFor(lang, 'formats') }}">{{ t.footer.formats }}</a>
+          <a href="{{ routes.pathFor(lang, 'glossary') }}">{{ t.footer.glossary }}</a>
+          <a href="{{ routes.pathFor(lang, 'about') }}">{{ t.footer.about }}</a>
+          <a href="/privacy/">{{ t.footer.privacy }}</a>
+          <a href="/terms/">{{ t.footer.terms }}</a>
+          <a href="mailto:{{ site.email }}">{{ t.footer.contact }}</a>
         </nav>
       </div>
       <div class="foot-bottom">
         <span>© Gustaf Bratt</span>
-        <span>Byggd i Sverige, för golfgänget</span>
+        <span>{{ t.footer.tagline }}</span>
       </div>
     </div>
   </footer>
