@@ -31,12 +31,11 @@ module.exports = function (eleventyConfig) {
   const { localDate } = require("./lib/local-date.js");
   eleventyConfig.addFilter("localDate", localDate);
 
-  // Guider i en given kategori, sorterade på order (för pelarsidan).
-  eleventyConfig.addFilter("byCategory", (guides, cat) =>
-    (guides || [])
-      .filter((g) => g.data.category === cat)
-      .sort((a, b) => (a.data.order || 99) - (b.data.order || 99)),
-  );
+  // Guider i en given kategori och språk, sorterade på order (för
+  // pelarsidan och llms.txt). Se lib/by-category.js för varför lang måste
+  // vara med.
+  const { byCategory } = require("./lib/by-category.js");
+  eleventyConfig.addFilter("byCategory", byCategory);
 
   // Språkversioner av samma sida, för hreflang och språkväljaren.
   eleventyConfig.addFilter("alternates", (all, key, routes) =>

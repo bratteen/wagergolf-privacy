@@ -11,7 +11,7 @@ Wager Golf är byggd av Gustaf Bratt. Guiderna nedan förklarar varje spelforms 
 ## Spelformer, guider
 {% set cats = ["Klassiker", "Hålspel", "Lag", "Sidobet"] %}{% for cat in cats %}
 ### {{ cat }}
-{% set inCat = collections.guides | byCategory(cat) %}{% for g in inCat %}- [{{ g.data.format }}{% if g.data.altName %} ({{ g.data.altName }}){% endif %}]({{ site.url }}{{ g.url }}): {{ g.data.cardText or g.data.lede }}
+{% set inCat = collections.guides | byCategory(cat, lang) %}{% for g in inCat %}- [{{ g.data.format }}{% if g.data.altName %} ({{ g.data.altName }}){% endif %}]({{ site.url }}{{ g.url }}): {{ g.data.cardText or g.data.lede }}
 {% endfor %}{% endfor %}
 ## Sidor
 

@@ -64,7 +64,7 @@ structuredData: |
   <div class="wrap hub-section">
     {%- set cats = ["Klassiker", "Hålspel", "Lag", "Sidobet"] %}
     {%- for cat in cats %}
-    {%- set inCat = collections.guides | byCategory(cat) %}
+    {%- set inCat = collections.guides | byCategory(cat, lang) %}
     {%- if inCat.length %}
     <div class="hub-cat">{{ cat }}</div>
     <div class="hub-grid">
