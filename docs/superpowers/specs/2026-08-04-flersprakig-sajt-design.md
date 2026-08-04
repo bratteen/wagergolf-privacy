@@ -14,7 +14,7 @@ egen sökbarhet per marknad. Svenskan ska komma ur arbetet oförändrad.
 | Fråga | Beslut |
 |---|---|
 | Omfattning | Hela sajten, 27 innehållssidor per språk |
-| URL-struktur | Underkataloger på wagergolf.se: `/no/`, `/da/`, `/en/` |
+| URL-struktur | Underkataloger på wagergolf.se: `/no/`, `/dk/`, `/en/` |
 | Svenska | Ligger kvar i roten, inga redirects, blir `x-default` |
 | Slugs | Översätts per språk |
 | Norsk skriftform | Bokmål, hreflang `nb` |
@@ -50,7 +50,7 @@ språkberoende härleds från de två.
 | `lib/structured-data.js` | JSON-LD-byggare, delad av alla språk |
 | `lib/alternates.js` | Grupperar sidor på `key` → hreflang-alternativ |
 | `scripts/check-sv-unchanged.mjs` | Regressionsskydd för svenskans output |
-| `no/no.11tydata.js`, `da/…`, `en/…` | Sätter `lang` per katalog |
+| `no/no.11tydata.js`, `dk/…`, `en/…` | Sätter `lang` per katalog |
 
 ### `_data/routes.js`
 
@@ -59,12 +59,20 @@ stället för att hårdkoda svenska sökvägar.
 
 ```js
 {
-  sv: { prefix: "",    formats: "spelformer",  glossary: "ordlista", about: "om",     download: "ladda-ner" },
+  sv: { prefix: "",    formats: "spelformer",   glossary: "ordlista", about: "om",     download: "ladda-ner" },
   nb: { prefix: "/no", formats: "spilleformer", glossary: "ordliste", about: "om-oss", download: "last-ned" },
-  da: { prefix: "/da", formats: "spilformer",   glossary: "ordliste", about: "om-os",  download: "hent" },
+  da: { prefix: "/dk", formats: "spilformer",   glossary: "ordliste", about: "om-os",  download: "hent" },
   en: { prefix: "/en", formats: "game-formats", glossary: "glossary", about: "about",  download: "download" },
 }
 ```
+
+Nyckeln är **språket** (`da`), sökvägen är **marknaden** (`/dk`). De två
+sammanfaller för `nb`/`/no` bara av en slump: `no` är både språkkod och
+landskod, medan `da` enbart är språkkod och `dk` enbart landskod.
+
+Marknadsbaserade sökvägar valdes för att `/no/` och `/dk/` är vad besökarna
+känner igen från `.no` och `.dk`, och för att appen säljs per App
+Store-storefront, som är landsindelad.
 
 Guidernas katalogdatafiler beräknar `permalink` som
 `${prefix}/${formats}/${slug}/` i stället för dagens hårdkodade
@@ -93,6 +101,13 @@ vid första designändringen.
 given sida, samtliga språkversioner med samma nyckel. `base.njk` skriver
 `<link rel="alternate" hreflang="…">` för varje, inklusive self-reference, plus
 `hreflang="x-default"` mot den svenska versionen.
+
+**Värdena är `sv`, `nb`, `da`, `en` — aldrig `dk` eller `se`.** hreflang tar en
+ISO 639-1-språkkod, eventuellt följd av en ISO 3166-1-landskod (`da-DK`). Ett
+ensamt `dk` är ogiltigt: Google ignorerar taggen tyst, utan varning i Search
+Console. Att sökvägen heter `/dk/` gör felet frestande att "rätta" till senare,
+därför står det här. `alternates.js` härleder hreflang ur `lang`-nyckeln, aldrig
+ur sökvägsprefixet, så felet kan inte uppstå av misstag.
 
 Härledningen är poängen: 27 sidor × 4 språk är 108 sidor som var och en ska peka
 på fyra URL:er. Handunderhållet ruttnar. Med nyckelgruppering blir en saknad
@@ -143,7 +158,9 @@ fyra kopior av samma 60 rader.
 
 - App Store: landsprefix `/se/`, `/no/`, `/dk/`, `/us/` på samma app-id
 - Google Play: `&hl=` och `&gl=` per marknad
-- Kampanjnamn per marknad: `webb`, `webb-no`, `webb-da`, `webb-en`
+- Kampanjnamn per marknad: `webb`, `webb-no`, `webb-dk`, `webb-en`
+  (marknadsbaserade, som sökvägarna, eftersom butiksrapporterna är indelade
+  per storefront)
 
 Kampanjnamn per marknad gör att App Store Connect och Play Console delar
 förvärvsrapporten per land i stället för att klumpa ihop all webbtrafik.
@@ -160,9 +177,36 @@ Väljare i header och footer, byggd på samma `alternates`-lista som hreflang, s
 den alltid länkar till *motsvarande* sida i det andra språket och inte till
 startsidan.
 
+### Språkbanner
+
+En diskret rad högst upp på sidan när besökarens språk inte matchar sidans:
+*"Denne side findes også på dansk →"*. Klick går till motsvarande sida via
+`alternates`. Raden går att stänga.
+
+Regler:
+
+- **Klientsida.** Ren JS som läser `navigator.languages`. Ingen Pages Function
+  på `/`, ingen `Vary: Accept-Language`, ingen cachefragmentering på
+  Cloudflares kant.
+- **Visas bara om målspråket är publicerat** och sidan har en översättning med
+  samma `key`.
+- **Valet sparas i `localStorage`.** Stänger besökaren raden, eller byter språk
+  via väljaren, visas den inte igen.
+- **Ingen omdirigering.** Sidan som begärdes är sidan som visas.
+- **Ingen layoutförskjutning.** Raden renderas dold i HTML och får `hidden`
+  borttaget av skriptet, med reserverad höjd, så CLS inte påverkas.
+- Skriptet är litet och inline i `base.njk`. En extern fil för tjugo rader är
+  inte värt en request innan first paint.
+
 **Ingen automatisk omdirigering** på `Accept-Language`. Googlebot kryper från
 USA och skulle då bara se den engelska versionen, vilket lämnar tre språk
-oindexerade. Det irriterar dessutom besökare som medvetet valt ett språk.
+oindexerade. Google avråder dessutom explicit från det i sin dokumentation för
+flerregionala sajter, och det irriterar besökare som medvetet valt ett språk.
+Bannern ger nyttan utan den risken.
+
+Direkttrafik är det enda fall bannern löser: organisk söktrafik landar redan
+rätt via hreflang, och annonser, App Store-länkar och QR-koder pekar mot rätt
+prefix från början.
 
 ### Sitemap och robots
 
@@ -291,7 +335,7 @@ komplett.
 
 **Våg 4 — bokmål.** Samma omfattning, `/no/`.
 
-**Våg 5 — danska.** Samma omfattning, `/da/`.
+**Våg 5 — danska.** Samma omfattning, `/dk/`.
 
 Ett språk exponeras i sitemap och hreflang först när dess våg är komplett.
 Halvöversatta språk i sitemap ger tunna sidor i indexet och drar ner hela
@@ -307,6 +351,9 @@ informeras om de nya sidorna.
 - `claude-seo:seo-hreflang` — hreflang-taggarna validerade efter varje våg
 - Manuell kontroll att språkväljaren länkar till *motsvarande* sida, inte till
   startsidan, från en djup guide i varje språk
+- Bannern testad med `navigator.languages` satt till danska på en svensk sida:
+  ska visas en gång, sedan aldrig efter att den stängts
+- Bannern får inte visas för ett opublicerat språk
 - Butikslänkarna testade per marknad när apputrullningen är klar
 
 ## Avgränsningar
