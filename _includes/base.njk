@@ -52,6 +52,11 @@
         <a href="{{ routes.homeFor(lang) }}#funktioner">{{ t.nav.features }}</a>
         <a class="nav-keep" href="{{ routes.pathFor(lang, 'formats') }}">{{ t.nav.formats }}</a>
         <a class="nav-cta" href="{{ routes.locales[lang].downloadPath }}" data-download-link data-store-link data-ios-url="{{ site.storeUrls[lang].appStore }}" data-android-url="{{ site.storeUrls[lang].playStore }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
+        {#- <div>, inte <nav>: den här inkluderingen ligger inuti
+            <nav class="nav-links"> ovan, och ett nästlat nav-landmark är
+            förvirrande för skärmläsare. Se kommentaren i
+            language-switcher.njk. -#}
+        {%- set langSwitchTag = "div" %}
         {%- include "language-switcher.njk" %}
       </nav>
     </div>
@@ -74,6 +79,11 @@
           <a href="/terms/">{{ t.footer.terms }}</a>
           <a href="mailto:{{ site.email }}">{{ t.footer.contact }}</a>
         </nav>
+        {#- <nav> här: till skillnad från headern ligger den här
+            inkluderingen inte inuti någon annan nav, så landmarket är inte
+            nästlat. Återställer langSwitchTag uttryckligen — {% set %} lever
+            kvar i mallens scope efter headerns include ovan. -#}
+        {%- set langSwitchTag = "nav" %}
         {%- include "language-switcher.njk" %}
       </div>
       <div class="foot-bottom">

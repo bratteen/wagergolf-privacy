@@ -3,10 +3,19 @@
     Att kasta besökaren till startsidan när hen står på en guide är det
     vanligaste felet i flerspråkiga sajter.
 
-    Skriver ingenting när det bara finns ett publicerat språk. -#}
+    Skriver ingenting när det bara finns ett publicerat språk.
+
+    Elementtaggen styrs av `langSwitchTag`, satt av anropande mall precis
+    innan include (se base.njk): headern inkluderar den inuti
+    <nav class="nav-links">, och ett nästlat <nav>-landmark där är förvirrande
+    för skärmläsare. Footern ligger inte inuti någon annan nav och behåller
+    <nav>. En <div> saknar landmark-roll, så role="group" läggs på i det
+    fallet för att aria-label fortfarande ska ge väljaren ett namn. -#}
 {%- set alts = collections.all | alternates(key, routes) -%}
 {%- if alts.links.length > 1 %}
-<nav class="lang-switch" aria-label="{{ t.switcher.label }}">
+{%- set tag = langSwitchTag or "nav" -%}
+{%- set roleAttr = ' role="group"' if tag == "div" else "" -%}
+<{{ tag }} class="lang-switch"{{ roleAttr | safe }} aria-label="{{ t.switcher.label }}">
   {%- for a in alts.links %}
   {%- if a.lang == lang %}
   <span class="lang-current" aria-current="true">{{ routes.locales[a.lang].label }}</span>
@@ -14,5 +23,5 @@
   <a href="{{ a.url }}" hreflang="{{ a.hreflang }}" data-lang-link="{{ a.lang }}">{{ routes.locales[a.lang].label }}</a>
   {%- endif %}
   {%- endfor %}
-</nav>
+</{{ tag }}>
 {%- endif -%}
