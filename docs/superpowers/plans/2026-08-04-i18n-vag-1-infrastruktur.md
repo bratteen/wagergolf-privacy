@@ -618,9 +618,20 @@ test('x-default pekar på svenskan', () => {
   assert.strictEqual(out.xDefault, '/spelformer/stableford/');
 });
 
-test('saknad översättning blir ett tomrum, inte en trasig länk', () => {
+test('sida som saknar översättningar ger tomt, inte en ensam självlänk', () => {
   const out = alternatesFor(ALL, 'page:about', many);
-  assert.deepStrictEqual(out.links.map((l) => l.hreflang), ['sv']);
+  assert.deepStrictEqual(out.links, []);
+  assert.strictEqual(out.xDefault, null);
+});
+
+test('två översättningar räcker för att listan ska skrivas ut', () => {
+  const tva = [
+    page('sv', 'page:invite', '/i/'),
+    page('en', 'page:invite', '/en/invite/'),
+  ];
+  const out = alternatesFor(tva, 'page:invite', many);
+  assert.deepStrictEqual(out.links.map((l) => l.hreflang), ['sv', 'en']);
+  assert.strictEqual(out.xDefault, '/i/');
 });
 
 test('opublicerat språk utelämnas även om sidan finns', () => {
@@ -684,7 +695,11 @@ function alternatesFor(all, key, routes) {
       url: p.url,
     }));
 
-  // Färre än två faktiska översättningar: samma resonemang som ovan.
+  // Färre än två faktiska översättningar: samma resonemang som ovan. En ensam
+  // självrefererande hreflang beskriver inga alternativ och säger ingenting.
+  // Kontraktet konsumeras av fyra ställen — hreflang-blocket, språkväljaren,
+  // bannern och sitemapen — och är enklare att lita på när det aldrig ger en
+  // lista med exakt ett element.
   if (links.length < 2) return empty;
 
   const fallback = links.find((l) => l.lang === routes.defaultLocale);
@@ -714,7 +729,7 @@ Och bland filtren, efter `byCategory`:
 - [ ] **Step 5: Kör testerna, se dem passera**
 
 Run: `node --test tests/alternates.test.js`
-Förväntat: PASS, 7 tester.
+Förväntat: PASS, 8 tester.
 
 - [ ] **Step 6: Verifiera att svenskan är orörd**
 
@@ -2352,7 +2367,7 @@ module.exports = { sanitizeCampaign, campaignFromSearch, withCampaign };
 - [ ] **Step 4: Kör testerna, se dem passera**
 
 Run: `node --test tests/campaign.test.js`
-Förväntat: PASS, 7 tester.
+Förväntat: PASS, 8 tester.
 
 - [ ] **Step 5: Använd logiken i webbläsaren**
 
