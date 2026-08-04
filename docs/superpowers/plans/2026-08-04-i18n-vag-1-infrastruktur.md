@@ -151,10 +151,14 @@ I `package.json`, i `"scripts"`, efter `"check:legal"`:
 Och ändra `"check"` till:
 
 ```json
-    "check": "npm run build && npm test && npm run check:legal && npm run check:sv && npm run validate:html",
+    "check": "npm run build && npm run check:legal && npm run check:sv && npm run validate:html",
 ```
 
-- [ ] **Step 3: Skapa en tom tests-katalog så `npm test` inte felar**
+`npm test` kopplas medvetet **inte** in i `check` här. `node --test` på en
+katalog utan testfiler avslutar med fel, och det första testet skapas först i
+Task 2. Task 2 kopplar in det.
+
+- [ ] **Step 3: Skapa tests-katalogen**
 
 ```bash
 mkdir -p tests && printf '' > tests/.gitkeep
@@ -333,18 +337,33 @@ module.exports = {
 Run: `node --test tests/routes.test.js`
 Förväntat: PASS, 5 tester.
 
-- [ ] **Step 5: Verifiera att svenskan är orörd**
+- [ ] **Step 5: Koppla in testerna i `check`**
 
-```bash
-npm run build && npm run check:sv
+Nu finns det första testet, så `npm test` kan bli en del av kedjan. I
+`package.json`, ändra `"check"` till:
+
+```json
+    "check": "npm run build && npm test && npm run check:legal && npm run check:sv && npm run validate:html",
 ```
-Förväntat: `Svensk output oförändrad`. Ny datafil som ingen mall läser ännu ska
-inte kunna påverka något.
 
-- [ ] **Step 6: Committa**
+Och ta bort `tests/.gitkeep` — katalogen har riktigt innehåll nu:
 
 ```bash
-git add _data/routes.js tests/routes.test.js
+git rm tests/.gitkeep
+```
+
+- [ ] **Step 6: Verifiera att svenskan är orörd**
+
+```bash
+npm run check
+```
+Förväntat: allt grönt, inklusive `Svensk output oförändrad`. Ny datafil som
+ingen mall läser ännu ska inte kunna påverka något.
+
+- [ ] **Step 7: Committa**
+
+```bash
+git add _data/routes.js tests/routes.test.js package.json
 git commit -m "feat(i18n): lokaliserade sökvägssegment per språk
 
 Nyckeln är språket (da), sökvägen marknaden (/dk). hreflang tas alltid ur
@@ -1878,8 +1897,15 @@ Skapa `functions/go.js`:
 // indexeringsriskerna med en språkredirect på roten uppstår. Alla fyra
 // språkversionerna förblir fullt synliga för sökmotorerna.
 //
-// Cloudflare-funktioner byggs separat från Eleventy och kan inte importera
-// _data/routes.js. Håll listan nedan i synk med den.
+// DUPLIKAT MED AVSIKT. Listan nedan och sanitizeCampaign finns också i
+// _data/routes.js respektive lib/campaign.js. Anledningen är deploykedjan:
+// .eleventy.js passthrough-kopierar functions/ in i _site/, och deployen
+// skickar bara _site. lib/ följer inte med, så en import härifrån skulle
+// resolva till ingenting i produktion. Att passthrough-kopiera lib/ vore
+// värre — då låg den publikt på /lib/.
+// Ändras något här måste motsvarande ändring göras i _data/routes.js och
+// lib/campaign.js. Testerna i tests/go.test.mjs och tests/campaign.test.js
+// kontrollerar samma värden från båda hållen.
 const PREFIX = { sv: '', nb: '/no', da: '/dk', en: '/en' };
 const PUBLISHED = ['sv'];
 const DEFAULT_LANG = 'sv';
@@ -2545,7 +2571,11 @@ Ett språk går live genom att:
 1. Skapa `_data/i18n/<lang>.json` med samma nycklar som `sv.json`.
    `tests/i18n.test.js` låser schemat.
 2. Skapa språkets katalog (`no/`, `dk/`, `en/`) med en `.11tydata.js` som
-   sätter `lang`.
+   sätter `lang` som **vanlig data, inte i `eleventyComputed`**. Ordningen
+   mellan global och katalognivås `eleventyComputed` är inte garanterad i
+   Eleventy, och guidernas katalogdata läser `data.lang` när den bygger
+   permalink. Ett beräknat `lang` kan därför vara odefinierat där och ge
+   svenska sökvägar åt en engelsk guide.
 3. Översätta sidorna. Varje sida behåller samma `key` som sin svenska
    motsvarighet — det är så hreflang kopplas ihop.
 4. Lägga till språket i `publishedLocales` i `_data/routes.js`, i samma commit
