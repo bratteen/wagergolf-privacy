@@ -40,9 +40,10 @@ test('x-default pekar på svenskan', () => {
   assert.strictEqual(out.xDefault, '/spelformer/stableford/');
 });
 
-test('saknad översättning blir ett tomrum, inte en trasig länk', () => {
+test('sida som saknar översättningar ger tomt, inte en ensam självlänk', () => {
   const out = alternatesFor(ALL, 'page:about', many);
-  assert.deepStrictEqual(out.links.map((l) => l.hreflang), ['sv']);
+  assert.deepStrictEqual(out.links, []);
+  assert.strictEqual(out.xDefault, null);
 });
 
 test('opublicerat språk utelämnas även om sidan finns', () => {
@@ -61,4 +62,14 @@ test('hreflang tas ur språkkonfigurationen, aldrig ur sökvägen', () => {
   const out = alternatesFor(ALL, 'guide:stableford', many);
   const da = out.links.find((l) => l.url.startsWith('/dk/'));
   assert.strictEqual(da.hreflang, 'da');
+});
+
+test('två översättningar räcker för att listan ska skrivas ut', () => {
+  const tva = [
+    page('sv', 'page:invite', '/i/'),
+    page('en', 'page:invite', '/en/invite/'),
+  ];
+  const out = alternatesFor(tva, 'page:invite', many);
+  assert.deepStrictEqual(out.links.map((l) => l.hreflang), ['sv', 'en']);
+  assert.strictEqual(out.xDefault, '/i/');
 });
