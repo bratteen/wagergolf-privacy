@@ -5,11 +5,11 @@ layout: base.njk
   <section class="subhero">
     <div class="subhero-inner">
       <div class="breadcrumb">
-        <a href="/">Hem</a><span class="sep">/</span><a href="/spelformer/">Spelformer</a><span class="sep">/</span><span>{{ format }}</span>
+        <a href="{{ routes.homeFor(lang) }}">{{ t.breadcrumb.home }}</a><span class="sep">/</span><a href="{{ routes.pathFor(lang, 'formats') }}">{{ t.nav.formats }}</a><span class="sep">/</span><span>{{ format }}</span>
       </div>
       <h1>{{ h1 or title }}</h1>
       {% if lede %}<p>{{ lede }}</p>{% endif %}
-      <p class="guide-byline">Av <a href="/om/">Gustaf Bratt</a>{% if updated %} · Uppdaterad {{ updated | localDate(lang) }}{% endif %}</p>
+      <p class="guide-byline">{{ t.byline.by }} <a href="{{ routes.pathFor(lang, 'about') }}">Gustaf Bratt</a>{% if updated %} · {{ t.byline.updated }} {{ updated | localDate(lang) }}{% endif %}</p>
       <div class="guide-meta-row">
         {% if players %}<span class="guide-chip">{{ players }}</span>{% endif %}
         {% if category %}<span class="guide-chip outline">{{ category }}</span>{% endif %}
@@ -25,7 +25,7 @@ layout: base.njk
 
   {% if faq %}
   <section class="faq">
-    <h2>Vanliga frågor</h2>
+    <h2>{{ t.faq.heading }}</h2>
     {% for f in faq %}
     <div class="faq-item">
       <p class="faq-q">{{ f.q }}</p>
@@ -36,17 +36,17 @@ layout: base.njk
   {% endif %}
 
   <section class="guide-cta">
-    <h2>Slipp räkna {{ format }} för hand</h2>
-    <p>Wager Golf scorar rundan automatiskt med rätt WHS-handicap och gör upp med Swish när ni går in.</p>
+    <h2>{{ t.guide.ctaHeading | replace("{format}", format) }}</h2>
+    <p>{{ t.guide.ctaText }}</p>
     {% set storePlats = "guide" %}
     {% include "store-badges.njk" %}
   </section>
 
   {% if related %}
   <section class="related">
-    <h2>Fler spelformer</h2>
+    <h2>{{ t.guide.related }}</h2>
     <div class="related-links">
-      {%- for slug in related %}{%- for g in collections.guides %}{%- if g.data.slug == slug %}<a href="{{ g.url }}">{{ g.data.format }}</a>{%- endif %}{%- endfor %}{%- endfor %}
+      {%- for slug in related %}{%- for g in collections.guides %}{%- if g.data.slug == slug and g.data.lang == lang %}<a href="{{ g.url }}">{{ g.data.format }}</a>{%- endif %}{%- endfor %}{%- endfor %}
     </div>
   </section>
   {% endif %}

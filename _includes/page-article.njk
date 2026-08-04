@@ -6,13 +6,13 @@ layout: base.njk
     <div class="subhero-inner">
       {% if breadcrumb %}
       <div class="breadcrumb">
-        <a href="/">Hem</a>
+        <a href="{{ routes.homeFor(lang) }}">{{ t.breadcrumb.home }}</a>
         {%- for c in breadcrumb %}<span class="sep">/</span>{% if c.url %}<a href="{{ c.url }}">{{ c.name }}</a>{% else %}<span>{{ c.name }}</span>{% endif %}{%- endfor %}
       </div>
       {% endif %}
       <h1>{{ h1 or title }}</h1>
       {% if lede %}<p>{{ lede }}</p>{% endif %}
-      {% if byline %}<p class="guide-byline">Av <a href="/om/">Gustaf Bratt</a>{% if updated %} · Uppdaterad {{ updated | localDate(lang) }}{% endif %}</p>{% endif %}
+      {% if byline %}<p class="guide-byline">{{ t.byline.by }} <a href="{{ routes.pathFor(lang, 'about') }}">Gustaf Bratt</a>{% if updated %} · {{ t.byline.updated }} {{ updated | localDate(lang) }}{% endif %}</p>{% endif %}
     </div>
   </section>
 
@@ -24,7 +24,7 @@ layout: base.njk
 
   {% if faq %}
   <section class="faq">
-    <h2>Vanliga frågor</h2>
+    <h2>{{ t.faq.heading }}</h2>
     {% for f in faq %}
     <div class="faq-item">
       <p class="faq-q">{{ f.q }}</p>
@@ -37,7 +37,7 @@ layout: base.njk
   {% if ctaHeading %}
   <section class="guide-cta">
     <h2>{{ ctaHeading }}</h2>
-    <p>{{ ctaText or "Wager Golf scorar rundan automatiskt med rätt WHS-handicap och gör upp med Swish när ni går in." }}</p>
+    <p>{{ ctaText or t.article.ctaText }}</p>
     {% set storePlats = "artikel" %}
     {% include "store-badges.njk" %}
   </section>
@@ -45,7 +45,7 @@ layout: base.njk
 
   {% if relatedLinks %}
   <section class="related">
-    <h2>Läs vidare</h2>
+    <h2>{{ t.article.related }}</h2>
     <div class="related-links">
       {%- for r in relatedLinks %}<a href="{{ r.url }}">{{ r.name }}</a>{%- endfor %}
     </div>
