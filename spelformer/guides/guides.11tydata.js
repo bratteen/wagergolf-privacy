@@ -20,7 +20,18 @@ module.exports = {
   updated: "2026-06-20",
   eleventyComputed: {
     // key är språkoberoende och kopplar ihop översättningarna av samma guide.
-    key: (data) => `guide:${data.slug}`,
+    // data.key vinner om den finns: specen översätter sluggen
+    // (slaggolf -> slagspill/slagspil/stroke-play), så en svensk `slug` duger
+    // inte som default för en översatt guide. Den sätter därför `key`
+    // explicit i sin frontmatter till den SVENSKA sluggen
+    // (t.ex. `key: guide:slaggolf` i en norsk `slagspill.md`), så att
+    // hreflang, språkväljaren, bannern och sitemap-alternativen fortfarande
+    // grupperar ihop översättningarna. Utan detta skriver eleventyComputed
+    // ovillkorligt över frontmatter-värdet, och varje översatt guide får en
+    // egen, unik key som aldrig matchar originalet.
+    // Defaulten (`guide:${data.slug}`) gäller bara svenska guider, som inte
+    // sätter key själva.
+    key: (data) => data.key || `guide:${data.slug}`,
     permalink: (data) => `${require("#data/routes.js").pathFor(data.lang || "sv", "formats", data.slug)}`,
     structuredData: (data) => {
       const routes = require("#data/routes.js");
