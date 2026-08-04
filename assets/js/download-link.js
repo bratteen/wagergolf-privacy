@@ -28,4 +28,44 @@
     // ta omvägen via omdirigeringen och ladda om sidan.
     el.setAttribute('href', target || '#top');
   }
+
+  // Kampanjen från /go eller från en annonslänks utm_campaign skrivs in i
+  // butikens ct-parameter. Utan detta rapporterar App Store Connect all
+  // annonstrafik som generiskt "webb-<marknad>".
+  //
+  // Ingen cookie och ingen sessionStorage: kampanjen lever i URL:en. Det håller
+  // ihop med att Umami är cookielöst och med vad integritetspolicyn säger.
+  // Priset är att kampanjen tappas om besökaren navigerar vidare innan
+  // nedladdning, och det är en bättre avvägning än att lagra i webbläsaren.
+  //
+  // Saneringen här är en tredje kopia av samma logik som finns i
+  // functions/go.js och lib/campaign.js. Filen körs utan bundler, så den kan
+  // inte importera lib/campaign.js. Ändras saneringen på ett ställe måste den
+  // ändras på alla tre.
+  var params = new URLSearchParams(location.search);
+  var raw = params.get('c') || params.get('utm_campaign');
+  var campaign = raw
+    ? String(raw).toLowerCase().replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+/, '').slice(0, 40).replace(/-+$/, '')
+    : '';
+
+  if (campaign) {
+    var stores = document.querySelectorAll('a[data-store-link]');
+    for (i = 0; i < stores.length; i++) {
+      var href = stores[i].getAttribute('href');
+      try {
+        var u = new URL(href);
+        if (u.searchParams.has('ct')) u.searchParams.set('ct', campaign);
+        var ref = u.searchParams.get('referrer');
+        if (ref) {
+          var inner = new URLSearchParams(ref);
+          inner.set('utm_campaign', campaign);
+          u.searchParams.set('referrer', inner.toString());
+        }
+        stores[i].setAttribute('href', u.toString());
+      } catch (e) {
+        // Trasig URL ska inte fälla knappen. Lämna den som den är.
+      }
+    }
+  }
 })();
