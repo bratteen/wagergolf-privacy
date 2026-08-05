@@ -37,7 +37,7 @@ const LOCALES = {
 // Vilka språk som är live. Både hreflang-härledningen och sitemap filtrerar mot
 // den här listan, så ett halvöversatt språk kan byggas och granskas lokalt utan
 // att exponeras. Ett språk läggs till i samma commit som dess sista sida.
-const PUBLISHED = ["sv"];
+const PUBLISHED = ["sv", "en"];
 
 /** Bygger en lokaliserad sökväg: pathFor("da", "formats", "stableford")
  *  ger "/dk/spilformer/stableford/". Utan slug ges sektionens indexsida. */

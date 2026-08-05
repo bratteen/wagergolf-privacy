@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "features": "Features",
+    "formats": "Game formats",
+    "download": "Download"
+  },
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "byline": {
+    "by": "By",
+    "updated": "Updated"
+  },
+  "faq": {
+    "heading": "Common questions"
+  },
+  "guide": {
+    "ctaHeading": "Stop working out {format} by hand",
+    "ctaText": "Wager Golf scores the round automatically with the right WHS handicap and settles the pot by the time you walk off the 18th.",
+    "related": "More game formats"
+  },
+  "article": {
+    "related": "Read next",
+    "ctaText": "Wager Golf scores the round automatically with the right WHS handicap and settles the pot by the time you walk off the 18th."
+  },
+  "footer": {
+    "formats": "Game formats",
+    "glossary": "Glossary",
+    "about": "About",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "contact": "Contact",
+    "tagline": "Built in Sweden, for the regular fourball"
+  },
+  "store": {
+    "sub": "DOWNLOAD ON"
+  },
+  "switcher": {
+    "label": "Language"
+  },
+  "banner": {
+    "text": "This page is also available in {language}",
+    "close": "Close"
+  }
+}
