@@ -1,0 +1,101 @@
+---
+layout: page-article.njk
+key: page:about
+updated: "2026-06-20"
+permalink: /en/about/
+title: "About Wager Golf, the app that does the counting | Wager Golf"
+description: "About Wager Golf and Gustaf Bratt, the golfer behind the app that scores all 21 game formats off the correct WHS handicap and settles the pot for you."
+ogType: article
+h1: "About Wager Golf"
+lede: "Wager Golf was built by a golfer who got tired of paper, calculators and arguments at the 19th. Here is the short version of why the app exists and who is behind it."
+breadcrumb:
+  - name: "About"
+faq:
+  - q: "Who built Wager Golf?"
+    a: "The app was built by Gustaf Bratt, a Swedish golfer who plays for money with his own group and got tired of working the pot out by hand. The guides on this site are written by the same person, so the rules in the text match how the app counts."
+  - q: "Is Wager Golf a gambling company?"
+    a: "No. Wager Golf does not take stakes and there is no house that wins. The app simply keeps track of the game you have already agreed between yourselves, works out the settlement off the correct handicap and makes squaring up straightforward."
+  - q: "Does the app really use the correct handicap?"
+    a: "Yes. Course handicap is worked out under WHS per course and tee, and the strokes are allocated to the right holes via the course's stroke index. Net scores are compared hole by hole, so players off different handicaps can meet fairly in the same round."
+ctaHeading: "Download Wager Golf"
+relatedLinks:
+  - name: "Game formats"
+    url: "/en/game-formats/"
+  - name: "Golf glossary"
+    url: "/en/glossary/"
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "en",
+        "publisher": {
+          "@id": "https://wagergolf.se/#org"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://wagergolf.se/#person",
+        "name": "Gustaf Bratt",
+        "url": "https://wagergolf.se/en/about/",
+        "description": "Swedish golfer and founder of Wager Golf.",
+        "knowsAbout": [
+          "golf",
+          "golf game formats",
+          "golf handicap",
+          "WHS"
+        ]
+      },
+      {
+        "@type": "AboutPage",
+        "name": "About Wager Golf",
+        "url": "https://wagergolf.se/en/about/",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@id": "https://wagergolf.se/#website"
+        },
+        "about": {
+          "@id": "https://wagergolf.se/#org"
+        },
+        "mainEntity": {
+          "@id": "https://wagergolf.se/#person"
+        }
+      }
+    ]
+  }
+---
+<h2>Why the app exists</h2>
+<p>Play for money on the course and there is counting to do. Skins carrying between holes, a Nassau with a press on the back nine, a birdie pot on the side, and all of it to be divided off the right course handicap. With paper and a calculator it usually ends in an argument at the 19th, where someone remembers the pot wrong and someone else never got their strokes.</p>
+<p>Wager Golf does the counting for you. You pick the course and the format, score hole by hole, and the app keeps the pot live. When the round ends it shows who owes whom. No scraps of paper, no mental arithmetic.</p>
+<ul>
+<li><strong>21 game formats</strong> with automatic settlement, from <a href="{% guideUrl "skins" %}">skins</a> and <a href="{% guideUrl "matchspel" %}">match play</a> to <a href="{% guideUrl "nassau" %}">Nassau</a>, team games and side bets.</li>
+<li><strong>Proper WHS handicap.</strong> Course handicap is worked out per course and tee, and the strokes are allocated to the right holes via stroke index. Net scores are compared hole by hole so a mixed group can meet fairly.</li>
+<li><strong>705 Swedish courses</strong> with par and stroke index already loaded, so you do not have to type the scorecard in by hand. Courses outside Sweden are not in the app yet.</li>
+<li><strong>Settlement worked out for you.</strong> The app minimises the number of payments and shows exactly who pays whom.</li>
+</ul>
+<h2>Who is behind it</h2>
+<p>Wager Golf was built by Gustaf Bratt, a Swedish golfer who plays with the same group and has the same arguments about the pot as most people. The app came about to solve a concrete problem in his own fourball, not as a product on a drawing board. It shows in the details: the formats that actually get played are the ones included, handicap is worked out under WHS properly, and the tone is golf club rather than betting company.</p>
+<p>Wager Golf is not a gambling company. There is no bank taking stakes and no house that wins. The app simply keeps track of what you have already agreed between yourselves, and makes squaring up straightforward.</p>
+<h2>Why the guides exist</h2>
+<p>Much of what exists online about golf's game formats is shallow, and the rules often differ between sources. How does a skin actually carry? How is a <a href="{% guideUrl "quota" %}">Quota</a> worked out for a mixed group? What does a press do in a Nassau?</p>
+<p><a href="/en/game-formats/">The guides on this site</a> answer that properly. Each guide explains what the format is, how you play it, how the pot is worked out and how handicap fits in, with concrete numbers and examples. They are written by the same person who built the app, so the rules in the text are the rules the app counts by.</p>
+<p>If you want to see how a format plays out in practice, start with the classics: <a href="{% guideUrl "skins" %}">skins</a>, <a href="{% guideUrl "matchspel" %}">match play</a> and <a href="{% guideUrl "stableford" %}">Stableford</a>.</p>
