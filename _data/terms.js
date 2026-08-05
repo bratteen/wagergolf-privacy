@@ -41,8 +41,10 @@ const FORMATS = {
   },
   stableford: {
     sv: { name: "Stableford", slug: "stableford", altName: "Poängbogey" },
-    nb: { name: "Stableford", slug: "stableford", altName: "Poengbogey" },
-    da: { name: "Stableford", slug: "stableford", altName: "Pointbogey" },
+    // Inget alternativnamn på norska eller danska: sökningar ger inga belägg
+    // för "poengbogey" eller "pointbogey". Bara svenskan har ett andra namn.
+    nb: { name: "Stableford", slug: "stableford", altName: null },
+    da: { name: "Stableford", slug: "stableford", altName: null },
     en: { name: "Stableford", slug: "stableford", altName: null },
     source: "NGF",
   },
@@ -69,17 +71,20 @@ const FORMATS = {
   // --- Beskrivande namn. Översätts, och behöver granskas. ---
   bastboll: {
     sv: { name: "Bästboll", slug: "bastboll" },
-    nb: { name: "Bestball", slug: "bestball" },
-    da: { name: "Bedste bold", slug: "bedste-bold" },
+    // Både NGF och DGU listar formatet som "Best-ball" med bindestreck och
+    // behåller den engelska termen. Mina första gissningar "Bestball" och
+    // "Bedste bold" var alltså båda fel — ingen av dem används.
+    nb: { name: "Best-ball", slug: "best-ball" },
+    da: { name: "Best-ball", slug: "best-ball" },
     en: { name: "Best ball", slug: "best-ball" },
-    source: "",
+    source: "NGF + DGU",
   },
   "langst-drive": {
     sv: { name: "Längst drive", slug: "langst-drive" },
     nb: { name: "Lengste drive", slug: "lengste-drive" },
     da: { name: "Længste drive", slug: "laengste-drive" },
     en: { name: "Longest drive", slug: "longest-drive" },
-    source: "",
+    source: "NGF + DGU",
   },
   "narmast-flaggan": {
     sv: { name: "Närmast flaggan", slug: "narmast-flaggan" },
@@ -87,7 +92,7 @@ const FORMATS = {
     da: { name: "Tættest på flaget", slug: "taettest-paa-flaget" },
     // Engelskan har ett etablerat uttryck som folk faktiskt söker på.
     en: { name: "Closest to the pin", slug: "closest-to-the-pin" },
-    source: "",
+    source: "NGF + DGU",
   },
   birdiepott: {
     sv: { name: "Birdiepott", slug: "birdiepott" },
@@ -117,7 +122,7 @@ const FORMATS = {
     // danskt alternativnamn. Lämnas utan tills en dansk golfare sagt sitt.
     da: { name: "Split Sixes", slug: "split-sixes", altName: null },
     en: { name: "Split Sixes", slug: "split-sixes", altName: null },
-    source: "",
+    source: "namn",
   },
 };
 
