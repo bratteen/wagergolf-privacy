@@ -1,0 +1,90 @@
+---
+layout: base.njk
+key: page:formats
+updated: "2026-06-20"
+title: "Golf game formats: rules and scoring explained | Wager Golf"
+description: "Guides to golf's game formats. Skins, match play, Nassau, Stableford and more, with the rules, how the scoring works and how to play them off handicap."
+ogTitle: "Golf game formats"
+ogDescription: "Rules and scoring for golf's game formats: skins, match play, Nassau, Stableford and more."
+permalink: /en/game-formats/
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wagergolf.se/en/" },
+          { "@type": "ListItem", "position": 2, "name": "Game formats", "item": "https://wagergolf.se/en/game-formats/" }
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "name": "Golf game formats",
+        "url": "https://wagergolf.se/en/game-formats/",
+        "inLanguage": "en",
+        "about": "Rules, scoring and handicap for golf's game formats",
+        "isPartOf": { "@id": "https://wagergolf.se/#website" },
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      }
+    ]
+  }
+---
+<main>
+  <section class="subhero">
+    <div class="subhero-inner">
+      <div class="breadcrumb">
+        <a href="/en/">Home</a><span class="sep">/</span><span>Game formats</span>
+      </div>
+      <h1>Golf game formats, <span class="accent">explained.</span></h1>
+      <p>How do skins, match play and Nassau actually work, and how is the scoring done? Here are guides to golf's game formats, with the rules, the scoring and how to play them off the right handicap.</p>
+    </div>
+  </section>
+
+  <div class="wrap hub-section">
+    {#- Kategorierna är samma strängar som guidernas frontmatter, alltså
+        engelska här och svenska på den svenska pelarsidan. byCategory matchar
+        på värdet, så listan måste följa språket. -#}
+    {%- set cats = ["Classics", "Hole by hole", "Team", "Side bets"] %}
+    {%- for cat in cats %}
+    {%- set inCat = collections.guides | byCategory(cat, lang) %}
+    {%- if inCat.length %}
+    <div class="hub-cat">{{ cat }}</div>
+    <div class="hub-grid">
+      {%- for g in inCat %}
+      <a class="hub-card" href="{{ g.url }}">
+        <h3>{{ g.data.format }}{% if g.data.altName %} ({{ g.data.altName }}){% endif %}</h3>
+        <p>{{ g.data.cardText or g.data.lede }}</p>
+        <span class="meta">{{ g.data.players }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+
+  <div class="wrap hub-extra">
+    <p>Not sure what to play? Read <a href="/en/game-formats/choosing-a-format/">which format suits your group</a>, compare <a href="/en/game-formats/stableford-vs-stroke-play/">Stableford and stroke play</a>, or look the terms up in the <a href="/en/glossary/">golf glossary</a>.</p>
+  </div>
+</main>
