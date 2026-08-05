@@ -1,0 +1,107 @@
+const test = require('node:test');
+const assert = require('node:assert');
+const { readdirSync, readFileSync } = require('node:fs');
+const { FORMATS, TERMS } = require('../_data/terms.js');
+const routes = require('../_data/routes.js');
+
+const LANGS = Object.keys(routes.locales);
+
+/** Guidernas faktiska slug och format ur repot, nycklade på slug. */
+function guidesInRepo() {
+  const dir = 'spelformer/guides';
+  const out = {};
+  for (const f of readdirSync(dir).filter((x) => x.endsWith('.md'))) {
+    const src = readFileSync(`${dir}/${f}`, 'utf8');
+    const slug = src.match(/^slug:\s*(\S+)/m)[1];
+    const format = src.match(/^format:\s*(.+)$/m)[1].trim();
+    const alt = src.match(/^altName:\s*(.+)$/m);
+    out[slug] = { format, altName: alt ? alt[1].trim() : null };
+  }
+  return out;
+}
+
+const REPO = guidesInRepo();
+
+// Den viktigaste kontrollen: ordlistan ska beskriva sajten som den ÄR. Glider
+// de isär översätter vi mot en sajt som inte finns.
+test('varje guide i repot finns i ordlistan', () => {
+  for (const slug of Object.keys(REPO)) {
+    assert.ok(FORMATS[slug], `ordlistan saknar guiden "${slug}"`);
+  }
+});
+
+test('ordlistan hittar inte på guider som inte finns', () => {
+  for (const key of Object.keys(FORMATS)) {
+    assert.ok(REPO[key], `ordlistan har "${key}" men ingen sådan guide finns`);
+  }
+});
+
+test('svenskan i ordlistan matchar guidernas frontmatter exakt', () => {
+  for (const [slug, guide] of Object.entries(REPO)) {
+    const sv = FORMATS[slug].sv;
+    assert.strictEqual(sv.slug, slug, `${slug}: slug skiljer sig`);
+    assert.strictEqual(sv.name, guide.format, `${slug}: format skiljer sig`);
+    assert.strictEqual(
+      sv.altName || null,
+      guide.altName,
+      `${slug}: altName skiljer sig`,
+    );
+  }
+});
+
+test('varje format har alla fyra språken med namn och slug', () => {
+  for (const [key, entry] of Object.entries(FORMATS)) {
+    for (const lang of LANGS) {
+      assert.ok(entry[lang], `${key} saknar ${lang}`);
+      assert.ok(entry[lang].name, `${key}.${lang} saknar name`);
+      assert.ok(entry[lang].slug, `${key}.${lang} saknar slug`);
+    }
+  }
+});
+
+test('slugs är URL-säkra: gemener, a-z0-9 och bindestreck', () => {
+  for (const [key, entry] of Object.entries(FORMATS)) {
+    for (const lang of LANGS) {
+      const slug = entry[lang].slug;
+      assert.match(
+        slug,
+        /^[a-z0-9]+(-[a-z0-9]+)*$/,
+        `${key}.${lang}: "${slug}" är inte URL-säker — diakriter ska skalas bort`,
+      );
+    }
+  }
+});
+
+test('inga två format delar slug inom samma språk', () => {
+  for (const lang of LANGS) {
+    const seen = new Map();
+    for (const [key, entry] of Object.entries(FORMATS)) {
+      const slug = entry[lang].slug;
+      assert.ok(
+        !seen.has(slug),
+        `${lang}: "${slug}" används av både ${seen.get(slug)} och ${key}`,
+      );
+      seen.set(slug, key);
+    }
+  }
+});
+
+test('varje term har alla fyra språken', () => {
+  for (const [key, entry] of Object.entries(TERMS)) {
+    for (const lang of LANGS) {
+      assert.ok(entry[lang], `termen "${key}" saknar ${lang}`);
+    }
+  }
+});
+
+test('source-fältet finns på varje format, även när det är tomt', () => {
+  // Tomt värde betyder "obekräftad, granska innan slugs fryses". Saknat fält
+  // betyder att någon glömt fundera på saken — det är skillnaden.
+  for (const [key, entry] of Object.entries(FORMATS)) {
+    assert.strictEqual(
+      typeof entry.source,
+      'string',
+      `${key} saknar source-fält`,
+    );
+  }
+});
