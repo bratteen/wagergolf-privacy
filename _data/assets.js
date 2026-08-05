@@ -25,4 +25,5 @@ module.exports = {
   replay: hash("assets/js/replay-sample.js"),
   download: hash("assets/js/download-link.js"),
   langBanner: hash("assets/js/lang-banner.js"),
+  invite: hash("assets/js/invite.js"),
 };
