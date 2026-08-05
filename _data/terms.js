@@ -16,6 +16,7 @@
 //   "NGF"   Norges Golfforbund
 //   "DGU"   Dansk Golf Union
 //   "namn"  egennamn, oförändrat på alla språk
+//   "beslut" ingen etablerad term finns, namnet är valt medvetet
 //   ""      obekräftad, behöver granskas
 //
 // SLUGGKONVENTION: diakriter skalas bort, som i de befintliga svenska sluggarna
@@ -94,26 +95,36 @@ const FORMATS = {
     en: { name: "Closest to the pin", slug: "closest-to-the-pin" },
     source: "NGF + DGU",
   },
+  // De tre nedan är informella vadslagningsspel utan belägg på norska eller
+  // danska — de finns helt enkelt inte i skrift. Namnen är därför beslutade,
+  // inte funna. Låg risk: ingen söker på dem, så sluggen har inget
+  // sökordsvärde att förlora.
   birdiepott: {
     sv: { name: "Birdiepott", slug: "birdiepott" },
+    // Bara ordet "pott" översätts, resten står. Danskan säger pulje, se TERMS.
     nb: { name: "Birdiepott", slug: "birdiepott" },
     da: { name: "Birdiepulje", slug: "birdiepulje" },
     en: { name: "Birdie pot", slug: "birdie-pot" },
-    source: "",
+    source: "beslut",
   },
   klubbroulette: {
+    // Behålls oöversatt på de nordiska språken. Kølleroulett/Kølleroulette var
+    // mina påhitt och används inte av någon; en uppfunnen lokal term är sämre
+    // än en igenkännbar. Engelskan översätts, eftersom "Klubbroulette" inte
+    // säger en engelsktalande någonting.
     sv: { name: "Klubbroulette", slug: "klubbroulette" },
-    nb: { name: "Kølleroulett", slug: "kolleroulett" },
-    da: { name: "Kølleroulette", slug: "kolleroulette" },
+    nb: { name: "Klubbroulette", slug: "klubbroulette" },
+    da: { name: "Klubbroulette", slug: "klubbroulette" },
     en: { name: "Club roulette", slug: "club-roulette" },
-    source: "",
+    source: "beslut",
   },
   golfpoker: {
+    // Identiskt på alla tre nordiska språken, inget att välja på.
     sv: { name: "Golfpoker", slug: "golfpoker" },
     nb: { name: "Golfpoker", slug: "golfpoker" },
     da: { name: "Golfpoker", slug: "golfpoker" },
     en: { name: "Golf poker", slug: "golf-poker" },
-    source: "",
+    source: "beslut",
   },
   "split-sixes": {
     sv: { name: "Split Sixes", slug: "split-sixes", altName: "Köpenhamnare" },
