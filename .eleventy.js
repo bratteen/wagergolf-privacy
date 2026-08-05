@@ -27,6 +27,10 @@ module.exports = function (eleventyConfig) {
   // Datum-helper för sitemap.
   eleventyConfig.addFilter("isoDate", (d) => (d || new Date()).toISOString());
 
+  // lastmod för sitemapen: explicit datum ur frontmatter före filens mtime.
+  const { sitemapDate } = require("./lib/sitemap-date.js");
+  eleventyConfig.addFilter("sitemapDate", sitemapDate);
+
   // Läsbart datum per språk för by-line ("2026-06-20" -> "20 juni 2026").
   const { localDate } = require("./lib/local-date.js");
   eleventyConfig.addFilter("localDate", localDate);

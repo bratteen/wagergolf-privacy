@@ -4,14 +4,21 @@ eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-{%- for item in collections.all %}
+{#- Sorterad på URL, inte på datum. collections.all ligger i datumordning, och
+    Eleventys item.date är filens mtime — i en färsk clone blir ordningen därför
+    en annan varje gång. Sorteringen spelar ingen roll för Google, men en fil
+    som byter ordning vid varje bygge är omöjlig att diffa. -#}
+{%- for item in collections.all | sort(false, false, "url") %}
 {#- Filtrera på publicerade språk för att hålla ett halvöversatt språk utanför indexet.
     Tunna, ofullständiga sidor i sitemapen drar ner hela domänen, inte bara sig själva.
     Sidor utan lang-attribut behandlas som svenska. -#}
 {%- if routes.publishedLocales.includes(item.data.lang or "sv") %}
   <url>
     <loc>{{ site.url }}{{ item.url }}</loc>
-    <lastmod>{{ item.date | isoDate }}</lastmod>
+{#- Explicit datum ur frontmatter före filens mtime: en färsk clone ger alla
+    filer checkout-tidpunkten, och sitemapen skulle då påstå att hela sajten
+    ändrats idag. Se lib/sitemap-date.js. -#}
+    <lastmod>{{ item.data.updated | sitemapDate(item.data.published, item.date) }}</lastmod>
 {%- set alts = collections.all | alternates(item.data.key, routes) %}
 {#- alternates-filtret returnerar tomt när färre än två språkversioner finns.
     Det är avsiktligt — en ensam självpekande xhtml:link beskriver ingen alternativ. -#}
