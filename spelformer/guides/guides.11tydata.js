@@ -10,6 +10,10 @@
 // #data/ och #lib/ är Nodes subpath-imports (se "imports" i package.json),
 // repo-rotsrelativa oavsett filens eget djup, så samma require fungerar
 // överallt utan ändring.
+const routes = require("#data/routes.js");
+const { guideGraph } = require("#lib/structured-data.js");
+const { stringsFor } = require("#lib/i18n.js");
+
 module.exports = {
   layout: "guide.njk",
   tags: "guides",
@@ -32,10 +36,8 @@ module.exports = {
     // Defaulten (`guide:${data.slug}`) gäller bara svenska guider, som inte
     // sätter key själva.
     key: (data) => data.key || `guide:${data.slug}`,
-    permalink: (data) => `${require("#data/routes.js").pathFor(data.lang || "sv", "formats", data.slug)}`,
+    permalink: (data) => routes.pathFor(data.lang || "sv", "formats", data.slug),
     structuredData: (data) => {
-      const routes = require("#data/routes.js");
-      const { guideGraph } = require("#lib/structured-data.js");
       const lang = data.lang || "sv";
       const base = data.site.url;
       const image = data.image
@@ -55,8 +57,8 @@ module.exports = {
         faq: data.faq,
         // stringsFor och inte data.t: ordningen mellan global och katalognivås
         // eleventyComputed är inte garanterad, så data.t kan vara odefinierad här.
-        breadcrumbHome: require("#lib/i18n.js").stringsFor(lang).breadcrumb.home,
-        breadcrumbFormats: require("#lib/i18n.js").stringsFor(lang).nav.formats,
+        breadcrumbHome: stringsFor(lang).breadcrumb.home,
+        breadcrumbFormats: stringsFor(lang).nav.formats,
         formatsUrl: base + routes.pathFor(lang, "formats"),
       });
     },

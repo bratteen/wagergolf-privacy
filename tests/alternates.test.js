@@ -73,3 +73,18 @@ test('två översättningar räcker för att listan ska skrivas ut', () => {
   assert.deepStrictEqual(out.links.map((l) => l.hreflang), ['sv', 'en']);
   assert.strictEqual(out.xDefault, '/i/');
 });
+
+test('två sidor på samma språk med samma key fäller bygget', () => {
+  // Uppstår när en översatt sida kopieras och key glöms bort i frontmatter.
+  // Tyst publicering skulle ge två hreflang-rader för samma språkkod, och
+  // Google ignorerar hela uppsättningen när den är motsägelsefull.
+  const dubblett = [
+    page('sv', 'page:home', '/'),
+    page('sv', 'page:home', '/kopia/'),
+    page('en', 'page:home', '/en/'),
+  ];
+  assert.throws(
+    () => alternatesFor(dubblett, 'page:home', many),
+    /finns två gånger på språket "sv"/,
+  );
+});

@@ -44,8 +44,12 @@ const PUBLISHED = ["sv"];
 function pathFor(lang, segment, slug) {
   const loc = LOCALES[lang];
   if (!loc) throw new Error(`Okänt språk: ${lang}`);
+  // Nyckelkontroll, inte falsy-test: ett segment som någon gång får ett tomt
+  // värde ska inte rapporteras som "okänt".
+  if (!Object.prototype.hasOwnProperty.call(loc, segment)) {
+    throw new Error(`Okänt segment "${segment}" för ${lang}`);
+  }
   const seg = loc[segment];
-  if (!seg) throw new Error(`Okänt segment "${segment}" för ${lang}`);
   return slug ? `${loc.prefix}/${seg}/${slug}/` : `${loc.prefix}/${seg}/`;
 }
 
