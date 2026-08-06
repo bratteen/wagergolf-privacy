@@ -28,7 +28,7 @@
 // svenska startsidan, tyst, eftersom pickLang faller tillbaka på
 // DEFAULT_LANG för alla språk som inte står i listan nedan.
 const PREFIX = { sv: '', nb: '/no', da: '/dk', en: '/en' };
-const PUBLISHED = ['sv'];
+const PUBLISHED = ['sv', 'en'];
 const DEFAULT_LANG = 'sv';
 
 /** Butikernas kampanjfält är fritext men trivs inte med mellanslag, versaler

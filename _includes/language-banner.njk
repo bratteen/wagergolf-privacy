@@ -8,6 +8,11 @@
 
     Renderas dold med reserverad höjd så att visningen inte förskjuter layouten.
 
+    Erbjudandet står på MÅLSPRÅKET, inte på sidans eget: den som ser bannern
+    är per definition på fel språk, så "Den här sidan finns också på English"
+    hjälper inte den som inte läser svenska. Därför bär varje kandidat sin
+    egen banner.text i data-text.
+
     Logiken ligger i assets/js/lang-banner.js, inte inline: CSP:n i _headers
     saknar 'unsafe-inline' i script-src och blockerar tyst ett inline-script
     (bannerfunktionen dör helt, bara en CSP-violation i konsolen avslöjar
@@ -15,12 +20,12 @@
     överst i lang-banner.js. -#}
 {%- set alts = collections.all | alternates(key, routes) -%}
 {%- if alts.links.length > 1 %}
-<div id="lang-banner" class="lang-banner" hidden data-current-lang="{{ lang }}" data-template="{{ t.banner.text }}">
+<div id="lang-banner" class="lang-banner" hidden data-current-lang="{{ lang }}">
   <span id="lang-banner-text"></span>
   <button type="button" id="lang-banner-close" aria-label="{{ t.banner.close }}">&times;</button>
   <template id="lang-banner-alts">
     {%- for a in alts.links %}
-    <span data-lang="{{ a.lang }}" data-url="{{ a.url }}" data-label="{{ routes.locales[a.lang].label }}"></span>
+    <span data-lang="{{ a.lang }}" data-url="{{ a.url }}" data-label="{{ routes.locales[a.lang].label }}" data-text="{{ i18n[a.lang].banner.text }}"></span>
     {%- endfor %}
   </template>
 </div>

@@ -1,0 +1,341 @@
+---
+layout: base.njk
+key: page:home
+updated: "2026-07-27"
+permalink: /en/
+title: "Wager Golf, golf bets without paper and a calculator"
+description: "Wager Golf keeps the count when the group plays for money. 21 game formats, automatic settlement and the correct WHS handicap on every hole."
+ogTitle: "Wager Golf"
+ogDescription: "Golf bets without paper and a calculator. 21 game formats, automatic settlement."
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://wagergolf.se/#person",
+        "name": "Gustaf Bratt",
+        "url": "https://wagergolf.se/en/about/"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Wager Golf",
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "SportsApplication",
+        "url": "https://wagergolf.se/en/",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://wagergolf.se/#org" },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "SEK"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does everyone in the group need the app?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. One person can run the whole round and score for everyone, with the others added as guests. If you want to follow each other's rounds live and get notifications then more of you should download it, but one is enough."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Wager Golf free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, the app is free to download and play. All 21 game formats and the settlement are included. There is an optional Pro tier, but you do not need to pay anything to settle a round with your group."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "You play for money — is that allowed?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Wager Golf is not a gambling company and never touches the money. The app simply keeps the count on what you have already agreed between yourselves and makes squaring up straightforward, exactly as you already do after a round."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will my course work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "705 Swedish courses are loaded with par and stroke index. Courses outside Sweden are not in the app yet, so you would need to enter par and stroke index yourself."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the app use the correct handicap?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Course handicap is worked out under WHS per course and tee, and the strokes are allocated to the right holes via stroke index. A mixed group off different handicaps can meet fairly in the same round."
+            }
+          }
+        ]
+      }
+    ]
+  }
+---
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow on-dark">Now on the App Store and Google Play</span>
+          <h1>Play for <span class="accent">more than pride.</span></h1>
+          <p class="lede">Wager Golf keeps the count when the group settles it on the course. 21 game formats worked out automatically, and the pot squared up by the time the round ends. No paper, no calculator, no arguing at the 19th.</p>
+          <div class="cta-row">
+            {% set storePlats = "startsida-hero" %}
+            {% include "store-badges.njk" %}
+            <span class="cta-note">Free, for iPhone and Android</span>
+          </div>
+          <p class="hero-proof">
+            <span class="hero-proof-stars" role="img" aria-label="5 out of 5 stars">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</span>
+            <span class="hero-proof-text">5.0 out of 5 on the App Store</span>
+          </p>
+        </div>
+        <div class="hero-phone">
+          <img src="/assets/shots/live.webp" alt="Wager Golf live scorecard on iPhone" loading="eager" fetchpriority="high" width="640" height="1306">
+          <span class="hero-stamp">Hole by hole, in real time</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="holestrip" aria-hidden="true">
+      <div class="wrap holestrip-inner">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+        <span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+        <span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="wrap">
+        <div class="stats-grid reveal">
+          <div class="stat">
+            <div class="num brass">21</div>
+            <div class="label">Game formats with automatic settlement</div>
+          </div>
+          <div class="stat">
+            <div class="num">705</div>
+            <div class="label">Swedish courses with par and stroke index</div>
+          </div>
+          {#- Svenskans tredje ruta säger "Swish", som bara finns i Sverige.
+              Ersatt med priset, som är sant på alla marknader och redan
+              påstås i FAQ:n. -#}
+          <div class="stat">
+            <div class="num" style="font-size:46px">Free</div>
+            <div class="label">Every format and the settlement included</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="steps">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow">How it works</span>
+          <h2>Three steps, no paper</h2>
+        </div>
+        <div class="steps-grid reveal">
+          <div class="step">
+            <div class="step-num">01</div>
+            <h3>Add the group</h3>
+            <p>Pick the course and 2 to 4 players. Choose a format, or let the app suggest one. You set the stake once.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <h3>Score the round</h3>
+            <p>Tap in the strokes hole by hole. The app works out points, strokes and the leader in real time, with the right handicap for each player.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <h3>Square up</h3>
+            <p>When you walk off, the app works out who owes whom and reduces it to as few payments as possible. No disputes at the 19th.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <!-- Alla tre = verifierade 5-stjärniga App Store-recensioner. Citaten är
+    ÖVERSATTA från den publicerade svenska texten, vilket noteras i UI:t —
+    en översatt recension är inte längre ordagrant vad personen skrev.
+    Eric J Karlsson · Nacka Golf, Taashiie/Natasha · Troxhammar GK, Buffshady/Philip · Golfstar.
+    Kontrollera mot itunes.apple.com/se/rss/customerreviews/id=6767638917/sortBy=mostRecent/json -->
+    <section class="voices">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow">From the group</span>
+          <h2>Golfers who have stopped counting by hand</h2>
+        </div>
+        {% macro stars() %}<div class="voice-stars" role="img" aria-label="5 out of 5 stars">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</div>{% endmacro %}
+        <div class="voices-grid reveal">
+          <figure class="voice">
+            <blockquote>Works well with lots of formats, and the settlement at the end of the round is seamless.</blockquote>
+            <figcaption>{{ stars() }}<span class="v-name">Eric K.</span><span class="v-meta">Nacka Golf · App Store</span></figcaption>
+          </figure>
+          <figure class="voice">
+            <blockquote>Good, fun app! Loads of different game formats.</blockquote>
+            <figcaption>{{ stars() }}<span class="v-name">Natasha</span><span class="v-meta">Troxhammar GK · App Store</span></figcaption>
+          </figure>
+          <figure class="voice">
+            <blockquote>Really good fun! Very innovative.</blockquote>
+            <figcaption>{{ stars() }}<span class="v-name">Philip</span><span class="v-meta">Golfstar · App Store</span></figcaption>
+          </figure>
+        </div>
+        <p class="voices-note" style="text-align:center;color:#888;font-size:13px;margin-top:18px">Verified App Store reviews, translated from Swedish.</p>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <div id="funktioner"></div>
+    <section class="feature">
+      <div class="wrap feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow">The scorecard</span>
+          <h2>Score the round, hole by hole</h2>
+          <p>The whole group on one scorecard. Par as a faint guide, birdie and bogey markings in the classic style, and a leaderboard that updates while you play. No more losing count at the 14th.</p>
+        </div>
+        <div class="feature-shot">
+          <img src="/assets/shots/live.webp" alt="Live scorecard" loading="lazy" width="640" height="1306">
+        </div>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div class="wrap feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow">The settlement</span>
+          <h2>Who owes whom, worked out</h2>
+          <p>When the round ends the app works out the net for each player and reduces it all to as few payments as possible. No disputes at the 19th.</p>
+        </div>
+        <div class="feature-shot">
+          <img src="/assets/shots/settlement.webp" alt="Automatic settlement" loading="lazy" width="640" height="1306">
+        </div>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div class="wrap feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow">The season</span>
+          <h2>The rivalry lives on between rounds</h2>
+          <p>A season balance, a leaderboard and a feed where you follow your friends' rounds in real time. Cheer from the sofa, and see who is up when the year is totted up.</p>
+        </div>
+        <div class="feature-shot">
+          <img src="/assets/shots/home.webp" alt="Season balance and leaderboard" loading="lazy" width="640" height="1306">
+        </div>
+      </div>
+    </section>
+
+    <!-- GAME FORMATS -->
+    <section class="formats" id="game-formats">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow on-dark">21 ways to make the round interesting</span>
+          <h2>Play it your way</h2>
+          <p>The classics, the hole-by-hole games, the team formats and the side bets, freely combined in the same round. All with proper WHS handicap and automatic settlement.</p>
+        </div>
+        <div class="card-grid reveal">
+          <div class="fcard">
+            <div class="ftitle">Classics</div>
+            <ul>
+              <li><a href="{% guideUrl "skins" %}">Skins</a></li><li><a href="{% guideUrl "matchspel" %}">Match play</a></li><li><a href="{% guideUrl "nassau" %}">Nassau</a></li>
+              <li><a href="{% guideUrl "stableford" %}">Stableford</a></li><li><a href="{% guideUrl "quota" %}">Quota</a></li><li><a href="{% guideUrl "slaggolf" %}">Stroke play</a></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <div class="ftitle">Hole by hole</div>
+            <ul>
+              <li><a href="{% guideUrl "wolf" %}">Wolf</a></li><li><a href="{% guideUrl "bingo-bango-bongo" %}">Bingo Bango Bongo</a></li>
+              <li><a href="{% guideUrl "split-sixes" %}">Split Sixes</a></li><li><a href="{% guideUrl "klubbroulette" %}">Club roulette</a></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <div class="ftitle">Team</div>
+            <ul>
+              <li><a href="{% guideUrl "scramble" %}">Scramble</a></li><li><a href="{% guideUrl "foursome" %}">Foursome</a></li><li><a href="{% guideUrl "greensome" %}">Greensome</a></li>
+              <li><a href="{% guideUrl "bastboll" %}">Best ball</a></li><li><a href="{% guideUrl "vegas" %}">Vegas</a></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <div class="ftitle">Side bets</div>
+            <ul>
+              <li><a href="{% guideUrl "birdiepott" %}">Birdie pot</a></li><li><a href="{% guideUrl "snake" %}">Snake</a></li><li><a href="{% guideUrl "sandie" %}">Sandie</a></li>
+              <li><a href="{% guideUrl "narmast-flaggan" %}">Closest to the pin</a></li><li><a href="{% guideUrl "langst-drive" %}">Longest drive</a></li><li><a href="{% guideUrl "golfpoker" %}">Golf poker</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="home-faq">
+      <div class="faq-wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Before you download</span>
+          <h2>Common questions</h2>
+        </div>
+        <div class="faqlist reveal">
+          <div class="faq-item">
+            <p class="faq-q">Does everyone in the group need the app?</p>
+            <p class="faq-a">No. One person can run the whole round and score for everyone, with the others added as guests. If you want to follow each other's rounds live and get notifications then more of you should download it, but one is enough.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Is it free?</p>
+            <p class="faq-a">Yes, the app is free to download and play. All 21 game formats and the settlement are included. There is an optional Pro tier, but you do not need to pay anything to settle a round with your group.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">You play for money — is that allowed?</p>
+            <p class="faq-a">Wager Golf is not a gambling company and never touches the money. The app simply keeps the count on what you have already agreed between yourselves and makes squaring up straightforward, exactly as you already do after a round.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Will my course work?</p>
+            <p class="faq-a">705 Swedish courses are loaded with par and stroke index, so you just pick the course and start scoring. Courses outside Sweden are not in the app yet, so you would need to enter par and stroke index yourself.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Does the app use the correct handicap?</p>
+            <p class="faq-a">Yes. Course handicap is worked out under WHS per course and tee, and the strokes are allocated to the right holes via stroke index. A mixed group off different handicaps can meet fairly in the same round.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="closing">
+      <div class="wrap reveal">
+        <span class="eyebrow">Ready for the next round</span>
+        <h2 style="margin-top:14px">Settle up in <span class="accent">a second.</span></h2>
+        <p>Download it free, add the group and start playing.</p>
+        {% set storePlats = "startsida-avslut" %}
+        {% include "store-badges.njk" %}
+      </div>
+    </section>
+  </main>

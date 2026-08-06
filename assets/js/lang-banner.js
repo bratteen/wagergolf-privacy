@@ -25,7 +25,6 @@
   } catch (e) { return; }
 
   var current = el.getAttribute('data-current-lang');
-  var template = el.getAttribute('data-template') || '';
 
   var nodes = tpl.content.querySelectorAll('[data-lang]');
   var alts = [];
@@ -35,6 +34,7 @@
       lang: nodes[i].getAttribute('data-lang'),
       url: nodes[i].getAttribute('data-url'),
       label: nodes[i].getAttribute('data-label'),
+      text: nodes[i].getAttribute('data-text') || '',
     });
   }
 
@@ -59,7 +59,8 @@
   var link = document.createElement('a');
   link.setAttribute('href', match.url);
   link.setAttribute('data-lang-link', match.lang);
-  link.textContent = template.replace('{language}', match.label) + ' →';
+  // match.text är målspråkets sträng, se kommentaren i komponenten.
+  link.textContent = match.text.replace('{language}', match.label) + ' →';
 
   var textEl = document.getElementById('lang-banner-text');
   textEl.textContent = '';

@@ -20,8 +20,13 @@ test('ingen hreflang är en landskod', () => {
   }
 });
 
-test('bara svenska är publicerat i våg 1', () => {
-  assert.deepStrictEqual(routes.publishedLocales, ['sv']);
+test('publishedLocales innehåller bara kända språk, och alltid svenskan', () => {
+  // Svenskan är x-default och måste alltid vara med. Ett okänt språk här
+  // skulle krascha alternates.js, som slår upp routes.locales[lang].hreflang.
+  assert.ok(routes.publishedLocales.includes(routes.defaultLocale));
+  for (const lang of routes.publishedLocales) {
+    assert.ok(routes.locales[lang], `okänt språk i publishedLocales: ${lang}`);
+  }
 });
 
 test('pathFor bygger lokaliserade sökvägar', () => {
