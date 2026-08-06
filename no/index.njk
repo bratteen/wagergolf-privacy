@@ -1,0 +1,327 @@
+---
+layout: base.njk
+key: page:home
+updated: "2026-07-27"
+permalink: /no/
+title: "Wager Golf, golfveddemål uten papir og kalkulator"
+description: "Wager Golf holder styr på regningen når gjengen spiller om penger på banen. 21 spilleformer, automatisk avregning og riktig WHS-handicap på hvert hull."
+ogTitle: "Wager Golf"
+ogDescription: "Golfveddemål uten papir og kalkulator. 21 spilleformer, automatisk avregning."
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "nb-NO",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://wagergolf.se/#person",
+        "name": "Gustaf Bratt",
+        "url": "https://wagergolf.se/no/om-oss/"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Wager Golf",
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "SportsApplication",
+        "url": "https://wagergolf.se/no/",
+        "inLanguage": "nb-NO",
+        "publisher": { "@id": "https://wagergolf.se/#org" },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "SEK"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://wagergolf.se/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Må alle i gjengen ha appen?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Nei. Én person kan holde styr på hele runden og score for alle, de andre legges til som gjester. Vil dere følge hverandres runder live og få varsler, bør flere laste ned appen, men det holder at én har den." }
+          },
+          {
+            "@type": "Question",
+            "name": "Er Wager Golf gratis?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja, appen er gratis å laste ned og spille. Alle 21 spilleformer og oppgjøret er inkludert. Det finnes et valgfritt Pro-nivå, men du trenger ikke betale noe for å gjøre opp en runde med gjengen." }
+          },
+          {
+            "@type": "Question",
+            "name": "Dere spiller om penger, er det lov?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Wager Golf er ikke et spillselskap og rører aldri pengene. Appen holder bare styr på det dere allerede har blitt enige om dere imellom, og gjør oppgjøret enkelt, akkurat som når dere allerede gjør opp etter runden." }
+          },
+          {
+            "@type": "Question",
+            "name": "Funker banen min?",
+            "acceptedAnswer": { "@type": "Answer", "text": "705 svenske baner er lagt inn med par og stroke-index. Baner utenfor Sverige er ikke i appen ennå, så du må legge inn par og stroke-index selv." }
+          },
+          {
+            "@type": "Question",
+            "name": "Regner appen med riktig handicap?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Spillehandicap regnes etter WHS per bane og tee, og slagene fordeles på riktig hull via stroke-index. En blandet gjeng med ulikt handicap kan møtes rettferdig i samme runde." }
+          }
+        ]
+      }
+    ]
+  }
+---
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow on-dark">Nå på App Store og Google Play</span>
+          <h1>Spill om <span class="accent">mer enn æren.</span></h1>
+          <p class="lede">Wager Golf holder styr på regningen når gjengen gjør opp på banen. 21 spilleformer regnes automatisk, og potten er gjort opp når runden er over. Ingen papir, ingen kalkulator, ingen krangel ved det 19. hullet.</p>
+          <div class="cta-row">
+            {% set storePlats = "startsida-hero" %}
+            {% include "store-badges.njk" %}
+            <span class="cta-note">Gratis, for iPhone og Android</span>
+          </div>
+          <p class="hero-proof">
+            <span class="hero-proof-stars" role="img" aria-label="5 av 5 stjerner">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</span>
+            <span class="hero-proof-text">5,0 av 5 i App Store</span>
+          </p>
+        </div>
+        <div class="hero-phone">
+          <img src="/assets/shots/live.webp" alt="Wager Golf live-scorekort på iPhone" loading="eager" fetchpriority="high" width="640" height="1306">
+          <span class="hero-stamp">Hull for hull, i sanntid</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="holestrip" aria-hidden="true">
+      <div class="wrap holestrip-inner">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+        <span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+        <span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="wrap">
+        <div class="stats-grid reveal">
+          <div class="stat">
+            <div class="num brass">21</div>
+            <div class="label">Spilleformer med automatisk avregning</div>
+          </div>
+          <div class="stat">
+            <div class="num">705</div>
+            <div class="label">Svenske baner med par og stroke-index</div>
+          </div>
+          {#- Svenskans tredje ruta sier "Swish", som bare finnes i Sverige.
+              Erstattet med prisen, som stemmer i alle markeder og allerede
+              påstås i FAQ-en. Samme løsning som en/index.njk. -#}
+          <div class="stat">
+            <div class="num" style="font-size:46px">Gratis</div>
+            <div class="label">Alle formater og oppgjøret er inkludert</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SÅ FUNKER DET -->
+    <section class="steps">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Slik fungerer det</span>
+          <h2>Tre steg, uten papir</h2>
+        </div>
+        <div class="steps-grid reveal">
+          <div class="step">
+            <div class="step-num">01</div>
+            <h3>Legg til gjengen</h3>
+            <p>Velg bane og 2 til 4 spillere. Velg spilleform, eller la appen foreslå en. Innsatsen setter dere én gang.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <h3>Score runden</h3>
+            <p>Tast inn slagene hull for hull. Appen regner poeng, slag og vinner i sanntid, med riktig handicap for hver enkelt.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <h3>Gjør opp</h3>
+            <p>Når dere går inn, regner appen ut hvem som skylder hvem, og reduserer det til så få betalinger som mulig. Ingen krangel ved det 19. hullet.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OMDØMMER / ROSTER -->
+    <!-- Alla tre = verifierade 5-stjärniga App Store-recensioner. Citaten är
+    ÖVERSATTA från den publicerade svenska texten, vilket noteras i UI:t —
+    en översatt recension är inte längre ordagrant vad personen skrev.
+    Eric J Karlsson · Nacka Golf, Taashiie/Natasha · Troxhammar GK, Buffshady/Philip · Golfstar.
+    Kontrollera mot itunes.apple.com/se/rss/customerreviews/id=6767638917/sortBy=mostRecent/json -->
+    <section class="voices">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Fra gjengen</span>
+          <h2>Golfere som har sluttet å regne for hånd</h2>
+        </div>
+        {% macro stars() %}<div class="voice-stars" role="img" aria-label="5 av 5 stjerner">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</div>{% endmacro %}
+        <div class="voices-grid reveal">
+          <figure class="voice">
+            <blockquote>Funker bra med mange formater og enkel utregning på slutten av runden.</blockquote>
+            <figcaption>{{ stars() }}<span class="v-name">Eric K.</span><span class="v-meta">Nacka Golf · App Store</span></figcaption>
+          </figure>
+          <figure class="voice">
+            <blockquote>Bra og morsom app! Massevis av ulike spilleformer.</blockquote>
+            <figcaption>{{ stars() }}<span class="v-name">Natasha</span><span class="v-meta">Troxhammar GK · App Store</span></figcaption>
+          </figure>
+          <figure class="voice">
+            <blockquote>Veldig gøy! Veldig innovativt.</blockquote>
+            <figcaption>{{ stars() }}<span class="v-name">Philip</span><span class="v-meta">Golfstar · App Store</span></figcaption>
+          </figure>
+        </div>
+        <p class="voices-note" style="text-align:center;color:#888;font-size:13px;margin-top:18px">Verifiserte App Store-anmeldelser, oversatt fra svensk.</p>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <div id="funktioner"></div>
+    <section class="feature">
+      <div class="wrap feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow">Scorekortet</span>
+          <h2>Score runden, hull for hull</h2>
+          <p>Hele gjengen på ett scorekort. Par som svak mal, birdie- og bogey-markeringer i klassisk stil, og en ledertavle som oppdateres mens dere spiller. Slipp å miste tellingen ved det 14. hullet.</p>
+        </div>
+        <div class="feature-shot">
+          <img src="/assets/shots/live.webp" alt="Live-scorekort" loading="lazy" width="640" height="1306">
+        </div>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div class="wrap feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow">Oppgjøret</span>
+          <h2>Hvem skylder hvem, utregnet</h2>
+          <p>Når runden er over, regner appen ut nettoresultatet for hver spiller og slår sammen alt til så få betalinger som mulig. Ingen krangel ved det 19. hullet.</p>
+        </div>
+        <div class="feature-shot">
+          <img src="/assets/shots/settlement.webp" alt="Automatisk oppgjør" loading="lazy" width="640" height="1306">
+        </div>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div class="wrap feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow">Sesongen</span>
+          <h2>Rivaliseringen lever mellom rundene</h2>
+          <p>Sesongsaldo, topplisten og en strøm der du følger kompisenes runder i sanntid. Hei dem frem fra sofaen, og se hvem som ligger i pluss når året oppsummeres.</p>
+        </div>
+        <div class="feature-shot">
+          <img src="/assets/shots/home.webp" alt="Sesongsaldo og topplisten" loading="lazy" width="640" height="1306">
+        </div>
+      </div>
+    </section>
+
+    <!-- SPILLEFORMER -->
+    <section class="formats" id="spilleformer">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow on-dark">21 måter å gjøre runden mer spennende på</span>
+          <h2>Spill på deres måte</h2>
+          <p>Klassikerne, hullspillene, lagformatene og sidebettene, fritt kombinerbare i samme runde. Alt med ekte WHS-handicap og automatisk avregning.</p>
+        </div>
+        <div class="card-grid reveal">
+          <div class="fcard">
+            <div class="ftitle">Klassikere</div>
+            <ul>
+              <li><a href="{% guideUrl "skins" %}">Skins</a></li><li><a href="{% guideUrl "matchspel" %}">Matchspill</a></li><li><a href="{% guideUrl "nassau" %}">Nassau</a></li>
+              <li><a href="{% guideUrl "stableford" %}">Stableford</a></li><li><a href="{% guideUrl "quota" %}">Quota</a></li><li><a href="{% guideUrl "slaggolf" %}">Slagspill</a></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <div class="ftitle">Hullspill</div>
+            <ul>
+              <li><a href="{% guideUrl "wolf" %}">Wolf</a></li><li><a href="{% guideUrl "bingo-bango-bongo" %}">Bingo Bango Bongo</a></li>
+              <li><a href="{% guideUrl "split-sixes" %}">Split Sixes</a></li><li><a href="{% guideUrl "klubbroulette" %}">Klubbroulette</a></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <div class="ftitle">Lag</div>
+            <ul>
+              <li><a href="{% guideUrl "scramble" %}">Scramble</a></li><li><a href="{% guideUrl "foursome" %}">Foursome</a></li><li><a href="{% guideUrl "greensome" %}">Greensome</a></li>
+              <li><a href="{% guideUrl "bastboll" %}">Best-ball</a></li><li><a href="{% guideUrl "vegas" %}">Vegas</a></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <div class="ftitle">Sidebet</div>
+            <ul>
+              <li><a href="{% guideUrl "birdiepott" %}">Birdiepott</a></li><li><a href="{% guideUrl "snake" %}">Snake</a></li><li><a href="{% guideUrl "sandie" %}">Sandie</a></li>
+              <li><a href="{% guideUrl "narmast-flaggan" %}">Nærmest flagget</a></li><li><a href="{% guideUrl "langst-drive" %}">Lengste drive</a></li><li><a href="{% guideUrl "golfpoker" %}">Golfpoker</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="home-faq">
+      <div class="faq-wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Før du laster ned</span>
+          <h2>Vanlige spørsmål</h2>
+        </div>
+        <div class="faqlist reveal">
+          <div class="faq-item">
+            <p class="faq-q">Må alle i gjengen ha appen?</p>
+            <p class="faq-a">Nei. Én person kan holde styr på hele runden og score for alle, de andre legges til som gjester. Vil dere følge hverandres runder live og få varsler, bør flere laste ned appen, men det holder at én har den.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Er det gratis?</p>
+            <p class="faq-a">Ja, appen er gratis å laste ned og spille. Alle 21 spilleformer og oppgjøret er inkludert. Det finnes et valgfritt Pro-nivå, men du trenger ikke betale noe for å gjøre opp en runde med gjengen.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Dere spiller om penger, er det lov?</p>
+            <p class="faq-a">Wager Golf er ikke et spillselskap og rører aldri pengene. Appen holder bare styr på det dere allerede har blitt enige om dere imellom, og gjør oppgjøret enkelt, akkurat som når dere allerede gjør opp etter runden.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Funker banen min?</p>
+            <p class="faq-a">705 svenske baner er lagt inn med par og stroke-index, så du velger bare bane og begynner å score. Baner utenfor Sverige er ikke i appen ennå, så du må legge inn par og stroke-index selv.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Regner appen med riktig handicap?</p>
+            <p class="faq-a">Ja. Spillehandicap regnes etter WHS per bane og tee, og slagene fordeles på riktig hull via stroke-index. En blandet gjeng med ulikt handicap kan møtes rettferdig i samme runde.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="closing">
+      <div class="wrap reveal">
+        <span class="eyebrow">Klare for neste runde</span>
+        <h2 style="margin-top:14px">Gjør opp på <span class="accent">et sekund.</span></h2>
+        <p>Last ned gratis, legg til gjengen og begynn å spille.</p>
+        {% set storePlats = "startsida-avslut" %}
+        {% include "store-badges.njk" %}
+      </div>
+    </section>
+  </main>
