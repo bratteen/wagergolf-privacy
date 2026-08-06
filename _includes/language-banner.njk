@@ -18,7 +18,7 @@
     (bannerfunktionen dör helt, bara en CSP-violation i konsolen avslöjar
     varför). Datan går via data-attribut och ett <template>, se kommentaren
     överst i lang-banner.js. -#}
-{%- set alts = collections.all | alternates(key, routes) -%}
+{%- set alts = collections.all | alternates(key, routes, lang) -%}
 {%- if alts.links.length > 1 %}
 <div id="lang-banner" class="lang-banner" hidden data-current-lang="{{ lang }}">
   <span id="lang-banner-text"></span>

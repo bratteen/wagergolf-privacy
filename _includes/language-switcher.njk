@@ -11,7 +11,7 @@
     för skärmläsare. Footern ligger inte inuti någon annan nav och behåller
     <nav>. En <div> saknar landmark-roll, så role="group" läggs på i det
     fallet för att aria-label fortfarande ska ge väljaren ett namn. -#}
-{%- set alts = collections.all | alternates(key, routes) -%}
+{%- set alts = collections.all | alternates(key, routes, lang) -%}
 {%- if alts.links.length > 1 %}
 {%- set tag = langSwitchTag or "nav" -%}
 {%- set roleAttr = ' role="group"' if tag == "div" else "" -%}

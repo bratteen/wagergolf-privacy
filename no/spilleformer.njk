@@ -1,0 +1,90 @@
+---
+layout: base.njk
+key: page:formats
+updated: "2026-06-20"
+title: "Golfspill og spilleformer: regler og utregning | Wager Golf"
+description: "Guider til golfens spilleformer. Skins, matchspill, Nassau, Stableford og flere, med reglene, hvordan poengene regnes og hvordan du spiller dem med riktig handicap."
+ogTitle: "Spilleformer i golf"
+ogDescription: "Regler og utregning for golfens spilleformer: skins, matchspill, Nassau, Stableford med flere."
+permalink: /no/spilleformer/
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "nb-NO",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://wagergolf.se/no/" },
+          { "@type": "ListItem", "position": 2, "name": "Spilleformer", "item": "https://wagergolf.se/no/spilleformer/" }
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "name": "Spilleformer i golf",
+        "url": "https://wagergolf.se/no/spilleformer/",
+        "inLanguage": "nb-NO",
+        "about": "Regler, utregning og handicap for golfens spilleformer",
+        "isPartOf": { "@id": "https://wagergolf.se/#website" },
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      }
+    ]
+  }
+---
+<main>
+  <section class="subhero">
+    <div class="subhero-inner">
+      <div class="breadcrumb">
+        <a href="/no/">Hjem</a><span class="sep">/</span><span>Spilleformer</span>
+      </div>
+      <h1>Spilleformer i golf, <span class="accent">forklart.</span></h1>
+      <p>Hvordan fungerer egentlig skins, matchspill og Nassau, og hvordan regnes poengene? Her er guider til golfens spilleformer, med reglene, utregningen og hvordan du spiller dem med riktig handicap.</p>
+    </div>
+  </section>
+
+  <div class="wrap hub-section">
+    {#- Kategoriene er de samme strengene som guidenes frontmatter, altså
+        norsk her og svensk på den svenske pillarsiden. byCategory matcher på
+        verdien, så listen må følge språket. -#}
+    {%- set cats = ["Klassikere", "Hullspill", "Lag", "Sidebet"] %}
+    {%- for cat in cats %}
+    {%- set inCat = collections.guides | byCategory(cat, lang) %}
+    {%- if inCat.length %}
+    <div class="hub-cat">{{ cat }}</div>
+    <div class="hub-grid">
+      {%- for g in inCat %}
+      <a class="hub-card" href="{{ g.url }}">
+        <h3>{{ g.data.format }}{% if g.data.altName %} ({{ g.data.altName }}){% endif %}</h3>
+        <p>{{ g.data.cardText or g.data.lede }}</p>
+        <span class="meta">{{ g.data.players }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+
+  <div class="wrap hub-extra">
+    <p>Usikker på hva dere skal spille? Les <a href="/no/spilleformer/velge-spilleform/">hvilken spilleform som passer gjengen</a>, sammenlign <a href="/no/spilleformer/stableford-vs-slagspill/">Stableford og slagspill</a>, eller slå opp begrepene i <a href="/no/ordliste/">golfordlisten</a>.</p>
+  </div>
+</main>

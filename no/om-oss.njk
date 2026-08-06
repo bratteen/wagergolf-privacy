@@ -1,0 +1,101 @@
+---
+layout: page-article.njk
+key: page:about
+updated: "2026-06-20"
+permalink: /no/om-oss/
+title: "Om Wager Golf, appen som teller opp for deg | Wager Golf"
+description: "Om Wager Golf og Gustaf Bratt, golferen bak appen som scorer alle 21 spilleformer med riktig WHS-handicap og gjør opp potten for deg."
+ogType: article
+h1: "Om Wager Golf"
+lede: "Wager Golf er bygget av en golfer som ble lei av papir, kalkulator og krangel ved det 19. hullet. Her er den korte versjonen av hvorfor appen finnes, og hvem som står bak."
+breadcrumb:
+  - name: "Om oss"
+faq:
+  - q: "Hvem har bygget Wager Golf?"
+    a: "Appen er bygget av Gustaf Bratt, en svensk golfer som spiller om penger med sin egen gjeng og ble lei av å regne ut potten for hånd. Guidene på siden er skrevet av samme person, så reglene i teksten stemmer med hvordan appen regner."
+  - q: "Er Wager Golf et spillselskap?"
+    a: "Nei. Wager Golf tar ikke imot innsatser, og det finnes ikke noe hus som vinner. Appen holder bare styr på spillet dere allerede har blitt enige om dere imellom, regner ut avregningen på riktig handicap og gjør oppgjøret enkelt."
+  - q: "Regner appen virkelig med riktig handicap?"
+    a: "Ja. Spillehandicap regnes etter WHS per bane og tee, og slagene fordeles på riktig hull via banens stroke-index. Netto sammenlignes hull for hull, så spillere med ulikt handicap kan møtes rettferdig i samme runde."
+ctaHeading: "Last ned Wager Golf"
+relatedLinks:
+  - name: "Spilleformer"
+    url: "/no/spilleformer/"
+  - name: "Golfordliste"
+    url: "/no/ordliste/"
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "nb-NO",
+        "publisher": {
+          "@id": "https://wagergolf.se/#org"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://wagergolf.se/#person",
+        "name": "Gustaf Bratt",
+        "url": "https://wagergolf.se/no/om-oss/",
+        "description": "Svensk golfer og grunnlegger av Wager Golf.",
+        "knowsAbout": [
+          "golf",
+          "golfspilleformer",
+          "golfhandicap",
+          "WHS"
+        ]
+      },
+      {
+        "@type": "AboutPage",
+        "name": "Om Wager Golf",
+        "url": "https://wagergolf.se/no/om-oss/",
+        "inLanguage": "nb-NO",
+        "isPartOf": {
+          "@id": "https://wagergolf.se/#website"
+        },
+        "about": {
+          "@id": "https://wagergolf.se/#org"
+        },
+        "mainEntity": {
+          "@id": "https://wagergolf.se/#person"
+        }
+      }
+    ]
+  }
+---
+<h2>Hvorfor appen finnes</h2>
+<p>Spiller man om penger på banen, blir det mye regning. Skins som carryer mellom hullene, en Nassau med press på de siste ni, en birdiepott ved siden av, og så skal alt fordeles på riktig spillehandicap. Med papir og kalkulator ender det ofte i krangel ved det 19. hullet, der noen husker potten feil og en annen aldri fikk slagene sine.</p>
+<p>Wager Golf tar regnestykket for deg. Du velger bane og spilleform, scorer hull for hull, og appen holder styr på potten live. Når runden er slutt, vises det hvem som skylder hvem. Ingen lapper, ingen hoderegning.</p>
+<ul>
+<li><strong>21 spilleformer</strong> med automatisk avregning, fra <a href="{% guideUrl "skins" %}">skins</a> og <a href="{% guideUrl "matchspel" %}">matchspill</a> til <a href="{% guideUrl "nassau" %}">Nassau</a>, lagspill og sidebet.</li>
+<li><strong>Riktig WHS-handicap.</strong> Spillehandicap regnes per bane og tee, og slagene fordeles på riktig hull via stroke-index. Netto sammenlignes hull for hull, så en blandet gjeng kan møtes rettferdig.</li>
+<li><strong>705 svenske baner</strong> med par og stroke-index lagt inn på forhånd, så du slipper å taste inn scorekortet for hånd. Baner utenfor Sverige er ikke i appen ennå.</li>
+<li><strong>Oppgjør regnet ut for deg.</strong> Appen minimerer antall betalinger og viser nøyaktig hvem som betaler hvem.</li>
+</ul>
+<h2>Hvem står bak</h2>
+<p>Wager Golf er bygget av Gustaf Bratt, en svensk golfer som spiller med samme gjeng og har de samme diskusjonene om potten som de fleste. Appen ble til for å løse et konkret problem i hans egen firer-ball, ikke som et produkt på tegnebrettet. Det merkes i detaljene: formatene som faktisk spilles, er de som er med, handicap regnes etter WHS som det skal, og tonen er golfklubb snarere enn spillselskap.</p>
+<p>Wager Golf er ikke et spillselskap. Det finnes ingen bank som tar imot innsatser, og ikke noe hus som vinner. Appen holder bare styr på det dere allerede har blitt enige om dere imellom, og gjør oppgjøret enkelt.</p>
+<h2>Hvorfor guidene finnes</h2>
+<p>Mye av det som finnes om golfens spilleformer på nettet, er overfladisk, og reglene skiller seg ofte fra kilde til kilde. Hvordan carryer en skin egentlig? Hvordan regnes en <a href="{% guideUrl "quota" %}">Quota</a> ut for en blandet gjeng? Hva gjør et press i en Nassau?</p>
+<p><a href="/no/spilleformer/">Guidene her på siden</a> svarer ordentlig på det. Hver guide forklarer hva formatet er, hvordan du spiller det, hvordan potten regnes og hvordan handicap fungerer, med konkrete tall og eksempler. De er skrevet av samme person som har bygget appen, så reglene i teksten er de reglene appen regner etter.</p>
+<p>Vil du se hvordan et format spilles i praksis, kan du begynne med klassikerne: <a href="{% guideUrl "skins" %}">skins</a>, <a href="{% guideUrl "matchspel" %}">matchspill</a> og <a href="{% guideUrl "stableford" %}">Stableford</a>.</p>

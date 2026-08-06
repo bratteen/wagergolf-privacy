@@ -88,3 +88,34 @@ test('två sidor på samma språk med samma key fäller bygget', () => {
     /finns två gånger på språket "sv"/,
   );
 });
+
+test('en sida på ett opublicerat språk deltar inte i hreflang-grafen', () => {
+  // Språkkatalogerna byggs även innan språket publiceras, så att en färdig
+  // översättning går att granska skarpt. Men en sådan sida får inte hävda att
+  // de publicerade språken är dess alternativ — de nämner den inte tillbaka,
+  // och Google kräver att annoteringarna är ömsesidiga.
+  const medNb = [
+    page('sv', 'page:home', '/'),
+    page('en', 'page:home', '/en/'),
+    page('nb', 'page:home', '/no/'),
+  ];
+  const bara_sv_en = { ...routes, publishedLocales: ['sv', 'en'] };
+
+  const fromNb = alternatesFor(medNb, 'page:home', bara_sv_en, 'nb');
+  assert.deepStrictEqual(fromNb.links, [], 'opublicerad sida ska inte få alternativ');
+  assert.strictEqual(fromNb.xDefault, null);
+
+  // De publicerade sidorna påverkas inte, och nämner inte heller norskan.
+  const fromSv = alternatesFor(medNb, 'page:home', bara_sv_en, 'sv');
+  assert.deepStrictEqual(fromSv.links.map((l) => l.lang), ['sv', 'en']);
+});
+
+test('utelämnat lang-argument beter sig som förut', () => {
+  // Bakåtkompatibelt: anropas filtret utan språk antas sidan vara publicerad.
+  const alla = { ...routes, publishedLocales: ['sv', 'en'] };
+  const utan = alternatesFor(
+    [page('sv', 'page:home', '/'), page('en', 'page:home', '/en/')],
+    'page:home', alla,
+  );
+  assert.deepStrictEqual(utan.links.map((l) => l.lang), ['sv', 'en']);
+});

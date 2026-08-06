@@ -7,7 +7,7 @@
   <meta name="description" content="{{ description }}">
   <meta name="theme-color" content="#0a2e21">
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
-{%- set alts = collections.all | alternates(key, routes) %}
+{%- set alts = collections.all | alternates(key, routes, lang) %}
 {%- for a in alts.links %}
   <link rel="alternate" hreflang="{{ a.hreflang }}" href="{{ site.url }}{{ a.url }}">
 {%- endfor %}
@@ -35,6 +35,14 @@
   <link rel="stylesheet" href="/assets/css/site.css{% if assets.css %}?v={{ assets.css }}{% endif %}">
 
   {% if structuredData %}<script type="application/ld+json">{{ structuredData | safe }}</script>{% endif %}
+  {%- if not routes.publishedLocales.includes(lang) %}
+  {#- Språkkatalogerna byggs och deployas även innan språket är publicerat, så
+      att en färdig översättning går att granska i skarp miljö. Men sidorna är
+      då publikt nåbara utan att ligga i sitemap eller hreflang-grafen, och en
+      halvfärdig översättning i indexet drar ner hela domänen. noindex tas bort
+      automatiskt i samma stund språket läggs till i publishedLocales. -#}
+  <meta name="robots" content="noindex">
+  {%- endif %}
   {% if extraHead %}{{ extraHead | safe }}{% endif %}
   {% if site.cfBeaconToken %}<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cfBeaconToken }}"}'></script>{% endif %}
   {% if site.umami.websiteId %}<script defer src="{{ site.umami.src }}" data-website-id="{{ site.umami.websiteId }}"></script>

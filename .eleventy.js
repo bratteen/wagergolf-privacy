@@ -42,8 +42,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("byCategory", byCategory);
 
   // Språkversioner av samma sida, för hreflang och språkväljaren.
-  eleventyConfig.addFilter("alternates", (all, key, routes) =>
-    alternatesFor(all, key, routes),
+  eleventyConfig.addFilter("alternates", (all, key, routes, lang) =>
+    alternatesFor(all, key, routes, lang),
   );
 
   // Länk till en annan guide i sidans eget språk. Nyckeln är den svenska

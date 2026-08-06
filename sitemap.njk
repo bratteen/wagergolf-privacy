@@ -19,7 +19,7 @@ eleventyExcludeFromCollections: true
     filer checkout-tidpunkten, och sitemapen skulle då påstå att hela sajten
     ändrats idag. Se lib/sitemap-date.js. -#}
     <lastmod>{{ item.data.updated | sitemapDate(item.data.published, item.date) }}</lastmod>
-{%- set alts = collections.all | alternates(item.data.key, routes) %}
+{%- set alts = collections.all | alternates(item.data.key, routes, item.data.lang or "sv") %}
 {#- alternates-filtret returnerar tomt när färre än två språkversioner finns.
     Det är avsiktligt — en ensam självpekande xhtml:link beskriver ingen alternativ. -#}
 {%- for a in alts.links %}
