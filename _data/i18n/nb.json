@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "features": "Funksjoner",
+    "formats": "Spilleformer",
+    "download": "Last ned"
+  },
+  "breadcrumb": {
+    "home": "Hjem"
+  },
+  "byline": {
+    "by": "Av",
+    "updated": "Oppdatert"
+  },
+  "faq": {
+    "heading": "Vanlige spørsmål"
+  },
+  "guide": {
+    "ctaHeading": "Slipp å regne {format} for hånd",
+    "ctaText": "Wager Golf scorer runden automatisk med riktig WHS-handicap og gjør opp potten når dere går inn.",
+    "related": "Flere spilleformer"
+  },
+  "article": {
+    "related": "Les videre",
+    "ctaText": "Wager Golf scorer runden automatisk med riktig WHS-handicap og gjør opp potten når dere går inn."
+  },
+  "footer": {
+    "formats": "Spilleformer",
+    "glossary": "Ordliste",
+    "about": "Om",
+    "privacy": "Personvern",
+    "terms": "Brukervilkår",
+    "contact": "Kontakt",
+    "tagline": "Bygget i Sverige, for golfgjengen"
+  },
+  "store": {
+    "sub": "LAST NED PÅ"
+  },
+  "switcher": {
+    "label": "Språk"
+  },
+  "banner": {
+    "text": "Denne siden finnes også på {language}",
+    "close": "Lukk"
+  }
+}
