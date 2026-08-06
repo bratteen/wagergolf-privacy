@@ -175,3 +175,27 @@ hreflang tyst, utan varning i Search Console, så felet upptäcks inte av sig
 självt. Att sökvägen för danska heter `/dk/` gör misstaget extra frestande —
 kontrollera alltid mot `hreflang`-fältet i `_data/routes.js`, aldrig mot
 sökvägsprefixet.
+
+### Slå på norska eller danska
+
+Båda språken är färdigöversatta men **inte publicerade**. De byggs och
+deployas, men är helt inerta: ingen hreflang, ingen språkväljare, inget i
+sitemap, och `noindex` på varje sida. Så länge appen inte finns i norska
+respektive danska App Store är det avsiktligt — en besökare som klickar
+"Last ned" och möts av "appen er ikke tilgjengelig i din region" kommer inte
+tillbaka.
+
+Att slå på ett av dem kräver en enda ändring, på tre ställen som måste följas
+åt (`tests/published-in-sync.test.js` fäller bygget annars):
+
+1. `_data/routes.js` — lägg till språket i `PUBLISHED`.
+2. `functions/go.js` — samma tillägg.
+3. `functions/i/[[path]].js` — samma tillägg.
+
+Allt annat följer med automatiskt: hreflang, språkväljaren, bannern, sitemap
+och borttagningen av `noindex`. `tests/published-complete.test.js` kontrollerar
+samtidigt att varje svensk sida har en motsvarighet, så ett halvfärdigt språk
+kan inte gå live av misstag.
+
+Verifierat genom torrkörning: med alla fyra i `PUBLISHED` blir det 110 URL:er
+i sitemap, 540 hreflang-alternativ och noll `noindex`.
