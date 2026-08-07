@@ -57,6 +57,6 @@ Wager Golf beregner allowance, holder styr på, hvis tur det er, og afgør match
 Greensome er ofte den bedste holdform til blandede flokke og turneringer. Den fjerner frygten for et enkelt dårligt udslag, fordi begge slår, men bevarer spændingen i den delte bold. Vil I have noget endnu mildere, spiller I scramble. Vil I have den hårdeste og mest krævende variant, er Foursome svaret.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/home.webp" alt="Wager Golf sæsonsaldo og topliste" width="640" height="1306" loading="lazy">
+  <img src="{% shot "home" %}" alt="Wager Golf sæsonsaldo og topliste" width="640" height="1306" loading="lazy">
   <figcaption>Holdmatcherne gemmes, så I kan følge, hvem der fører flokken over hele sæsonen.</figcaption>
 </figure>

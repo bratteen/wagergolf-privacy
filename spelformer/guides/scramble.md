@@ -62,6 +62,6 @@ Wager Golf räknar lag-allowance, lagens score per hål och uppgörelsen åt er,
 - **Att slarva med ordningen på green.** Låt en spelare putta först som lodning, sedan läser nästa av samma linje. Det är gratis information som vinner hål.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/settlement.webp" alt="Wager Golf uppgörelse efter en scramble" width="640" height="1306" loading="lazy">
+  <img src="{% shot "settlement" %}" alt="Wager Golf uppgörelse efter en scramble" width="640" height="1306" loading="lazy">
   <figcaption>Appen räknar lag-allowance och gör upp uppgörelsen, ni fokuserar på bästa bollen.</figcaption>
 </figure>

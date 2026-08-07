@@ -63,6 +63,6 @@ Wager Golf beregner holdets allowance, holdets score per hul og gør opgørelsen
 - **At være sjusket med rækkefølgen på green.** Lad en spiller putte først som lodning, så læser den næste samme linje. Det er gratis information, der vinder huller.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/settlement.webp" alt="Wager Golf-opgørelse efter en scramble" width="640" height="1306" loading="lazy">
+  <img src="{% shot "settlement" %}" alt="Wager Golf-opgørelse efter en scramble" width="640" height="1306" loading="lazy">
   <figcaption>Appen beregner holdets allowance og gør opgørelsen op, I fokuserer på den bedste bold.</figcaption>
 </figure>

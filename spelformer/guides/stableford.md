@@ -71,6 +71,6 @@ Stableford lyser när gänget spelar på olika nivå, eller när ni vill hålla 
 - **Noll poäng är inte ett misslyckande.** Det är hela poängen med formatet. Lägg upp bollen och spara energin till nästa hål.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/live.webp" alt="Wager Golf scorekort som räknar Stableford-poäng" width="640" height="1306" loading="lazy">
+  <img src="{% shot "live" %}" alt="Wager Golf scorekort som räknar Stableford-poäng" width="640" height="1306" loading="lazy">
   <figcaption>I Wager Golf knappar du in slagen, appen räknar Stableford-poängen och håller ställningen live.</figcaption>
 </figure>

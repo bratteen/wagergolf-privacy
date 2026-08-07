@@ -57,6 +57,6 @@ Wager Golf keeps track of whose turn it is to tee off, works out the team allowa
 - **Apologising for every miss.** In a Foursome you always play your partner's position. Dwell on the mistakes and you will both lose focus. Play on, the next shot is yours.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/live.webp" alt="Wager Golf scorecard during a foursome match" width="640" height="1306" loading="lazy">
+  <img src="{% shot "live" %}" alt="Wager Golf scorecard during a foursome match" width="640" height="1306" loading="lazy">
   <figcaption>The app keeps track of whose turn it is to tee off and shows the match score live.</figcaption>
 </figure>

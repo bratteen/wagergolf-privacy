@@ -63,6 +63,6 @@ Wager Golf regner lag-allowance, lagenes score per hull og oppgjøret for dere, 
 - **Å slurve med rekkefølgen på green.** La en spiller putte først som lodd, deretter leser neste av samme linje. Det er gratis informasjon som vinner hull.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/settlement.webp" alt="Wager Golf-oppgjør etter en scramble" width="640" height="1306" loading="lazy">
+  <img src="{% shot "settlement" %}" alt="Wager Golf-oppgjør etter en scramble" width="640" height="1306" loading="lazy">
   <figcaption>Appen regner lag-allowance og gjør opp oppgjøret, dere fokuserer på beste ball.</figcaption>
 </figure>

@@ -47,6 +47,6 @@ Slagspil passer, når I vil have det reneste, mest konkurrenceprægede spil, ell
 - **At glemme handicappen.** Uden handicap vinder næsten altid den laveste spiller. Spil på netto, hvis selskabet spreder sig i niveau, så bliver det en rigtig kamp.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/settlement.webp" alt="Wager Golf opgørelse efter en slagspilrunde" width="640" height="1306" loading="lazy">
+  <img src="{% shot "settlement" %}" alt="Wager Golf opgørelse efter en slagspilrunde" width="640" height="1306" loading="lazy">
   <figcaption>Når runden er slut, regner appen nettoen ud for hver spiller, og hvem der skylder hvem.</figcaption>
 </figure>

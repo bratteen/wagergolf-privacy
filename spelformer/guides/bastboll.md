@@ -46,6 +46,6 @@ Bästboll är det perfekta valet när fyra spelare på olika nivå vill spela ti
 - **Turas om att ta riskerna.** Vet en av er att partnern har par i hus kan den andra attackera utan rädsla. Det är där bästboll vinns, inte i att båda spelar försiktigt.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/live.webp" alt="Wager Golf scorekort med fyra spelare" width="640" height="1306" loading="lazy">
+  <img src="{% shot "live" %}" alt="Wager Golf scorekort med fyra spelare" width="640" height="1306" loading="lazy">
   <figcaption>Alla fyra spelarna på ett scorekort, appen plockar lagets bästa boll per hål.</figcaption>
 </figure>

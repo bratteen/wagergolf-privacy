@@ -69,6 +69,6 @@ Stableford skinner, når holdet spiller på forskelligt niveau, eller når I vil
 - **Nul point er ikke en fiasko.** Det er hele pointen med formatet. Saml bolden op og spar energien til næste hul.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/live.webp" alt="Wager Golf scorekort der tæller Stableford-point" width="640" height="1306" loading="lazy">
+  <img src="{% shot "live" %}" alt="Wager Golf scorekort der tæller Stableford-point" width="640" height="1306" loading="lazy">
   <figcaption>I Wager Golf taster du slagene ind, appen beregner Stableford-pointene og holder stillingen live.</figcaption>
 </figure>

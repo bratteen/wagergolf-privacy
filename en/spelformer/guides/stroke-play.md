@@ -47,6 +47,6 @@ Stroke play suits a group that wants the purest, most competitive game, or one w
 - **Forgetting the handicap.** Without it the lowest player wins nearly every time. Play net if the group varies in standard and you will have a contest.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/settlement.webp" alt="Wager Golf settlement after a stroke play round" width="640" height="1306" loading="lazy">
+  <img src="{% shot "settlement" %}" alt="Wager Golf settlement after a stroke play round" width="640" height="1306" loading="lazy">
   <figcaption>When the round ends the app works out each player's net score and who owes whom.</figcaption>
 </figure>

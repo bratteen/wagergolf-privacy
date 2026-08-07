@@ -57,6 +57,6 @@ Wager Golf holder styr på hvem som har tur til å slå ut, regner lag-allowance
 - **Å be om unnskyldning for hver bom.** I Foursome spiller du alltid partnerens ligge. Grubler dere på feilene, mister begge fokus. Spill videre, neste slag er ditt.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/live.webp" alt="Wager Golf scorekort under en foursome-match" width="640" height="1306" loading="lazy">
+  <img src="{% shot "live" %}" alt="Wager Golf scorekort under en foursome-match" width="640" height="1306" loading="lazy">
   <figcaption>Appen holder styr på hvem som har tur til å slå ut og viser matchstillingen live.</figcaption>
 </figure>

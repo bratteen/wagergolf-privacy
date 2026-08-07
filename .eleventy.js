@@ -46,6 +46,13 @@ module.exports = function (eleventyConfig) {
     alternatesFor(all, key, routes, lang),
   );
 
+  // Appskärmbild i sidans eget språk, med fallback. Se lib/shot.js för
+  // varför uppslagningen är additiv i stället för blockerande.
+  const { shotPath } = require("./lib/shot.js");
+  eleventyConfig.addShortcode("shot", function (name) {
+    return shotPath(name, this.ctx.lang || "sv", this.ctx.shots.available);
+  });
+
   // Länk till en annan guide i sidans eget språk. Nyckeln är den svenska
   // sluggen; se lib/guide-url.js.
   const { guideUrl } = require("./lib/guide-url.js");

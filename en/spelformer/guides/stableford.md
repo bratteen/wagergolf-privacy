@@ -71,6 +71,6 @@ Stableford shines when the group plays off different standards, or when you want
 - **Zero points is not a failure.** It is the entire idea of the format. Pick the ball up and save your energy for the next hole.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/live.webp" alt="Wager Golf scorecard counting Stableford points" width="640" height="1306" loading="lazy">
+  <img src="{% shot "live" %}" alt="Wager Golf scorecard counting Stableford points" width="640" height="1306" loading="lazy">
   <figcaption>In Wager Golf you tap in the strokes, the app counts the Stableford points and keeps the standing live.</figcaption>
 </figure>

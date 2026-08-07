@@ -56,6 +56,6 @@ Wager Golf räknar allowance, håller koll på vems tur det är och avgör match
 Greensome är ofta den bästa lagformen för blandade gäng och tävlingar. Den tar bort skräcken för ett ensamt dåligt utslag, eftersom båda slår, men behåller spänningen i den delade bollen. Vill ni ha något ännu snällare kör ni scramble. Vill ni ha den hårdaste och mest krävande varianten är Foursome svaret.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/home.webp" alt="Wager Golf säsongssaldo och topplista" width="640" height="1306" loading="lazy">
+  <img src="{% shot "home" %}" alt="Wager Golf säsongssaldo och topplista" width="640" height="1306" loading="lazy">
   <figcaption>Lagmatcherna sparas, så ni kan följa vem som leder gänget över hela säsongen.</figcaption>
 </figure>
