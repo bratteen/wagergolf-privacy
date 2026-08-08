@@ -83,8 +83,13 @@
           <a href="{{ routes.pathFor(lang, 'formats') }}">{{ t.footer.formats }}</a>
           <a href="{{ routes.pathFor(lang, 'glossary') }}">{{ t.footer.glossary }}</a>
           <a href="{{ routes.pathFor(lang, 'about') }}">{{ t.footer.about }}</a>
+          {% if lang == "sv" %}
           <a href="/privacy/">{{ t.footer.privacy }}</a>
           <a href="/terms/">{{ t.footer.terms }}</a>
+          {% else %}
+          <a href="/privacy/#english">{{ t.footer.privacy }}</a>
+          <a href="/terms/#english">{{ t.footer.terms }}</a>
+          {% endif %}
           <a href="mailto:{{ site.email }}">{{ t.footer.contact }}</a>
         </nav>
         {#- <nav> här: till skillnad från headern ligger den här

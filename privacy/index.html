@@ -79,7 +79,7 @@
   </div>
 
   <h1>Integritetspolicy för Wager Golf</h1>
-  <p class="meta">Senast uppdaterad: 25 juli 2026 · Version 4.0</p>
+  <p class="meta">Senast uppdaterad: 8 augusti 2026 · Version 4.1</p>
 
   <h2>Sammanfattning</h2>
   <p>
@@ -97,7 +97,7 @@
 
   <h2>Ikraftträdande för det nya raderingsflödet</h2>
   <p>
-    Policyn gäller från 25 juli 2026. Det detaljerade, checkpointade
+    Policyn gäller från 8 augusti 2026. Det detaljerade, checkpointade
     raderingsflödet i avsnittet "Så fungerar kontoradering" för appversion 1.5
     aktiverades och verifierades i produktion den 17 juli 2026. Flödet används
     av appversioner som stöder det. Om din app kräver en uppdatering som du
@@ -140,8 +140,19 @@
       för andra inloggade användare.
     </li>
     <li>
+      <strong>Hemmarknad (Sverige, Danmark eller Norge)</strong>: vid en ny
+      installation kan appen föreslå en marknad utifrån enhetens region, men
+      du väljer den själv och kan ändra den i appen. Valet sparas lokalt och i
+      din profil hos Supabase, visas som land eller flagga för andra inloggade
+      användare och används för förvald valuta, bankatalog och vilka lokala
+      betalningsalternativ appen visar. Enhetens regionkod sparas inte separat
+      på servern och inställningen innehåller inte din exakta position.
+    </li>
+    <li>
       <strong>Mobilnummer</strong> (valfritt): används bara för Swish-länkar
-      i uppgörelse-vyn. Det kan visas för accepterade vänner och för
+      för svenska rundor i uppgörelse-vyn. Danmark och Norge kräver inget
+      telefonnummer för den nuvarande manuella uppgörelsen. Numret kan visas
+      för accepterade vänner och för
       runddeltagare som du uttryckligen ger betalningsåtkomst. Gästers nummer
       lagras bara lokalt på den enhet där gästen skapades.
     </li>
@@ -205,7 +216,8 @@
       <strong>Potter och uppgörelser</strong>: deltagare, insatser, fryst netto
       per runda, status, tidsstämplar, vem som skapade eller gjorde upp potten,
       beräknade betalningar och uttryckliga åtkomstgivningar till
-      betalningskontakt. Wager Golf håller inte pengarna.
+      betalningskontakt. Wager Golf behandlar inte själva betalningen, håller
+      eller förmedlar inga pengar och tar ingen avgift eller andel.
     </li>
   </ul>
 
@@ -311,7 +323,7 @@
       finnas kvar efter ominstallation tills appen uttryckligen rensar den.
     </li>
     <li>
-      <strong>Supabase (EU-baserad server)</strong>: din profil, aktiva och
+      <strong>Supabase (EU-baserad server)</strong>: din profil och hemmarknad, aktiva och
       avslutade rundor, scorer, events, rundkonfiguration, potter,
       betalningskontakter, vänskapsrelationer, cheers, kommentarer,
       blockeringar, rapporter och profilbild. Detta synkas mellan dina enheter;
@@ -344,7 +356,7 @@
     push-token, notistext och, beroende på notistyp, tekniska ID:n för exempelvis
     aktivitet, aktör, runda eller rapport.
     Notistexten kan innehålla namn, bana, hål, en förhandsvisning av en
-    användarskriven kommentar samt vinnare och netto i kronor efter avslutad
+    användarskriven kommentar samt vinnare och netto i rundans valda valuta efter avslutad
     runda. Vi lägger inte till telefon, e-post, bank-, kort- eller
     Swish-referens som separata tekniska fält, men en kommentar kan innehålla
     det avsändaren själv skriver. Hur mycket som syns på låsskärmen styrs av
@@ -353,7 +365,8 @@
 
   <h3>GolfAPI.io</h3>
   <p>
-    Bandata (par, stroke-index, GPS-koordinater för svenska golfbanor)
+    Bandata (par, stroke-index och GPS-koordinater för över 1 000 golfbanor i
+    Sverige, Danmark och Norge)
     hämtas via vår egen Cloudflare Worker-proxy som anropar
     <a href="https://www.golfapi.io">GolfAPI.io</a>. Till GolfAPI.io går bara
     valt bana-ID via proxyn, inte personuppgifter, GPS-position eller
@@ -364,13 +377,17 @@
     60 sekunder.
   </p>
 
-  <h3>Swish</h3>
+  <h3>Privat uppgörelse och Swish</h3>
   <p>
-    Wager Golf håller eller förmedlar inga insatser och tar ingen andel av en
-    uppgörelse. När du trycker "Betala via Swish" eller "Visa QR-kod" skapar
-    appen en <code>swish://</code>-länk eller QR-kod på din enhet med
-    förifyllt belopp, mottagarnummer och meddelande. Betalningen sker i din
-    betalapp; betalningsuppgifter skickas inte via Wager Golfs servrar.
+    Wager Golf visar vem som är skyldig vem och vilket belopp som gäller. För
+    svenska rundor kan appen skapa en <code>swish://</code>-länk eller QR-kod
+    med förifyllt belopp, mottagarnummer och meddelande. Swish-funktionen är
+    endast tillgänglig för rundor med Sverige som vald marknad. I Danmark och Norge gör spelarna för
+    närvarande betalningen manuellt utanför Wager Golf med den betalningsmetod
+    de själva väljer. Wager Golf behandlar inte betalningen, håller eller
+    förmedlar inga insatser, är inte part i transaktionen och tar ingen avgift
+    eller andel. Själva betalningen och betalappens transaktionsuppgifter går
+    inte via Wager Golfs servrar.
   </p>
 
   <h3>RevenueCat</h3>
@@ -511,8 +528,11 @@
       du anser att något är fel eller vill invända mot behandlingen.
     </li>
     <li>
-      <strong>Klaga till tillsynsmyndighet</strong>: i Sverige är detta
+      <strong>Klaga till tillsynsmyndighet</strong>: du kan klaga hos
+      dataskyddsmyndigheten där du bor eller arbetar, eller där du anser att
+      en överträdelse har skett. I Sverige är detta
       <a href="https://www.imy.se">Integritetsskyddsmyndigheten (IMY)</a>.
+      <a href="https://www.edpb.europa.eu/about-edpb/faq-frequently-asked-questions/i-wish-lodge-complaint-data-protection-authority-dpa_en">Europeiska dataskyddsstyrelsen förklarar hur du hittar rätt myndighet</a>.
     </li>
   </ul>
 
@@ -619,7 +639,7 @@
 
   <section lang="en">
   <h2 id="english">Privacy Policy · Wager Golf</h2>
-  <p class="meta">Last updated: July 25, 2026 · Version 4.0</p>
+  <p class="meta">Last updated: August 8, 2026 · Version 4.1</p>
 
   <h2>Summary</h2>
   <p>
@@ -632,12 +652,12 @@
     the contact route at the end of this page.
   </p>
   <p>
-    Terms of Service are available <a href="../terms/">here</a>.
+    Terms of Service are available <a href="../terms/#english">here</a>.
   </p>
 
   <h2>Effective date for the new deletion flow</h2>
   <p>
-    This policy applies from July 25, 2026. The detailed checkpointed flow in
+    This policy applies from August 8, 2026. The detailed checkpointed flow in
     "How account deletion works" was activated and verified in production on
     July 17, 2026. The flow is used by app versions that support it. If your
     app requires an update you cannot install, you can use the contact route
@@ -679,8 +699,20 @@
       other signed-in users.
     </li>
     <li>
-      <strong>Phone number</strong> (optional): used for Swish links in the
-      settlement view. It may be shown to accepted friends and round
+      <strong>Home market (Sweden, Denmark or Norway)</strong>: on a new
+      installation, the app may suggest a market from the device region, but
+      you choose it and can change it in the app. The choice is stored locally
+      and in your Supabase profile, shown as a country or flag to other
+      signed-in users, and used for the default currency, course catalogue and
+      which local payment options the app displays. The device region code is
+      not stored separately on the server, and the setting does not contain
+      your precise location.
+    </li>
+    <li>
+      <strong>Phone number</strong> (optional): used for Swish links for rounds
+      in Sweden in the settlement view. Denmark and Norway do not require a
+      phone number for the current manual settlement. It may be shown to
+      accepted friends and round
       participants you explicitly grant payment access to. Guest phone
       numbers are stored only on the device where the guest was created.
     </li>
@@ -743,8 +775,9 @@
     <li>
       <strong>Pots and settlements</strong>: participants, stakes, frozen net
       per round, status, timestamps, who created or settled the pot, calculated
-      payments and explicit grants to payment-contact data. Wager Golf does not
-      hold the funds.
+      payments and explicit grants to payment-contact data. Wager Golf does
+      not process the actual payment, hold or transfer money, or take any fee
+      or share.
     </li>
   </ul>
 
@@ -849,7 +882,7 @@
       may survive reinstallation until the app explicitly clears it.
     </li>
     <li>
-      <strong>Supabase (EU-based server)</strong>: your profile, active and
+      <strong>Supabase (EU-based server)</strong>: your profile and home market, active and
       completed rounds, scores, events, round configuration, pots, payment
       contacts, friendships, cheers, comments, blocks, reports and profile
       picture. This syncs between your devices; other users see only the parts
@@ -883,7 +916,8 @@
     notification text and, depending on notification type, technical IDs for
     items such as the activity, actor, round or report.
     The text may include a name, course, hole, a preview of a user-written
-    comment, and the winner and net amount in SEK after a completed round. We
+    comment, and the winner and net amount in the round's selected currency
+    after a completed round. We
     do not add phone, email, bank, card or Swish references as separate
     technical fields, but a comment can contain whatever its author writes.
     Your phone's notification settings control what appears on the lock screen.
@@ -891,8 +925,9 @@
 
   <h3>GolfAPI.io</h3>
   <p>
-    Course data (par, stroke index, GPS coordinates for Swedish golf
-    courses) is fetched via our own Cloudflare Worker proxy which calls
+    Course data (par, stroke index and GPS coordinates for more than 1,000 golf
+    courses in Sweden, Denmark and Norway) is fetched via our own Cloudflare
+    Worker proxy which calls
     <a href="https://www.golfapi.io">GolfAPI.io</a>. Only the selected course
     ID is sent to GolfAPI.io through the proxy, not personal information, GPS
     position or game history. The proxy processes the installation ID and a Pro
@@ -902,13 +937,17 @@
     cache the name/profile picture for approximately 60 seconds.
   </p>
 
-  <h3>Swish</h3>
+  <h3>Private settlement and Swish</h3>
   <p>
-    Wager Golf does not hold or transfer stakes and takes no share of a
-    settlement. When you tap "Pay via Swish" or "Show QR code", the app
-    creates a <code>swish://</code> link or QR code on your device with a
-    pre-filled amount, recipient number and message. Payment happens in your
-    payment app; payment data is not sent through Wager Golf's servers.
+    Wager Golf shows who owes whom and the amount due. For rounds in Sweden,
+    the app can create a <code>swish://</code> link or QR code with a
+    pre-filled amount, recipient number and message. Swish is available only
+    for rounds set to Sweden. In Denmark and Norway, players currently complete payment
+    manually outside Wager Golf using a payment method they choose themselves.
+    Wager Golf does not process the payment, hold or transfer stakes, act as a
+    party to the transaction, or take any fee or share. The actual payment and
+    the payment app's transaction data do not pass through Wager Golf's
+    servers.
   </p>
 
   <h3>RevenueCat</h3>
@@ -1049,8 +1088,11 @@
       believe something is wrong or want to object to processing.
     </li>
     <li>
-      <strong>Complain to a supervisory authority</strong>: in Sweden this
-      is <a href="https://www.imy.se">Integritetsskyddsmyndigheten (IMY)</a>.
+      <strong>Complain to a supervisory authority</strong>: you may complain
+      to the data protection authority where you live or work, or where you
+      believe an infringement occurred. In Sweden this is
+      <a href="https://www.imy.se">Integritetsskyddsmyndigheten (IMY)</a>.
+      <a href="https://www.edpb.europa.eu/about-edpb/faq-frequently-asked-questions/i-wish-lodge-complaint-data-protection-authority-dpa_en">The European Data Protection Board explains how to find the appropriate authority</a>.
     </li>
   </ul>
 
