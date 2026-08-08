@@ -47,6 +47,6 @@ Slagspill passer når dere vil ha det reneste, mest konkurransepregede spillet, 
 - **Å glemme handicapet.** Uten det vinner nesten alltid spilleren med lavest handicap. Spill på netto hvis gjengen spriker i nivå, da blir det en match.
 
 <figure class="guide-figure">
-  <img src="{% shot "settlement" %}" alt="Wager Golf oppgjør etter en slagspillrunde" width="640" height="1306" loading="lazy">
-  <figcaption>Når runden er slutt, regner appen ut nettoet per spiller og hvem som skylder hvem.</figcaption>
+  <img src="{% shot "settlement" %}" alt="Wager Golf-oppgjør etter en slagspillrunde" width="640" height="1306" loading="lazy">
+  <figcaption>Når runden er slutt, regner appen ut nettoresultatet per spiller og viser hvem som skylder hvem.</figcaption>
 </figure>

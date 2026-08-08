@@ -47,6 +47,6 @@ Best-ball er det perfekte valg, når fire spillere på forskelligt niveau vil sp
 - **Skiftes til at tage chancerne.** Ved den ene af jer, at makkeren har par i hus, kan den anden angribe uden frygt. Det er der, best-ball vindes, ikke ved at begge spiller forsigtigt.
 
 <figure class="guide-figure">
-  <img src="{% shot "live" %}" alt="Wager Golf scorekort med fire spillere" width="640" height="1306" loading="lazy">
+  <img src="{% shot "live" %}" alt="Wager Golf-scorekort med fire spillere" width="640" height="1306" loading="lazy">
   <figcaption>Alle fire spillere på ét scorekort, appen udvælger holdets bedste bold per hul.</figcaption>
 </figure>

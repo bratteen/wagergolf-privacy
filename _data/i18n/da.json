@@ -16,12 +16,12 @@
   },
   "guide": {
     "ctaHeading": "Slip for at regne {format} i hånden",
-    "ctaText": "Wager Golf scorer runden automatisk med det rigtige WHS-handicap og gør puljen op, når I går ind.",
+    "ctaText": "Wager Golf scorer runden automatisk med det rigtige WHS-handicap og gør puljen op, når runden er slut.",
     "related": "Flere spilleformer"
   },
   "article": {
     "related": "Læs videre",
-    "ctaText": "Wager Golf scorer runden automatisk med det rigtige WHS-handicap og gør puljen op, når I går ind."
+    "ctaText": "Wager Golf scorer runden automatisk med det rigtige WHS-handicap og gør puljen op, når runden er slut."
   },
   "footer": {
     "formats": "Spilleformer",
@@ -30,7 +30,7 @@
     "privacy": "Privatlivspolitik",
     "terms": "Brugerbetingelser",
     "contact": "Kontakt",
-    "tagline": "Bygget i Sverige, til golfholdet"
+    "tagline": "Bygget i Sverige, til golfvennerne"
   },
   "store": {
     "sub": "HENT PÅ"

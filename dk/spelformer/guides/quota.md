@@ -14,7 +14,7 @@ faq:
   - q: "Hvordan udregnes mit quota-mål?"
     a: "Målet er 36 minus dit spillehandicap. En scratch-spiller får 36, en 10-handicapper 26 og en 20-handicapper 16. Derefter samler du almindelige Stableford-point og forsøger at komme over dit mål."
   - q: "Hvad er forskellen fra almindelig Stableford?"
-    a: "I Stableford fordeles slag per hul, og alle sammenlignes på samme point. I Quota bages handicappen i stedet ind i målet, og du spiller på bruttopoint. Den, der slår sit eget mål mest, ikke den med flest point, vinder."
+    a: "I Stableford fordeles slag per hul, og alle sammenlignes på samme point. I Quota bages handicappet i stedet ind i målet, og du spiller på bruttopoint. Den, der slår sit eget mål mest, ikke den med flest point, vinder."
   - q: "Hvem passer Quota til?"
     a: "Quota skinner i selskaber med stor niveauforskel. Fordi hver enkelt jagter sit eget mål, er det ligegyldigt, om én har handicap 5 og en anden 30. Begge har samme chance for at vinde puljen."
 related: [stableford, slaggolf, skins]
@@ -33,6 +33,6 @@ Quota, nogle gange kaldet 36-point eller Chicago, vender op og ned på Stablefor
 
 ## Sådan regnes det ud
 
-Fordi handicappen allerede ligger i målet, får du ingen slag på enkelte huller, du spiller på bruttopoint lige ud. Sig, at du har spillehandicap 14. Dit mål er 22. Laver du 25 point, er din diff plus 3. Har en ven mål 30 og laver 28, er hans diff minus 2. Du vinder, på trods af færre point, fordi du slog dit eget mål bedre.
+Fordi handicappet allerede ligger i målet, får du ingen slag på enkelte huller, du spiller på bruttopoint lige ud. Sig, at du har spillehandicap 14. Dit mål er 22. Laver du 25 point, er din diff plus 3. Har en ven mål 30 og laver 28, er hans diff minus 2. Du vinder, på trods af færre point, fordi du slog dit eget mål bedre.
 
-Bliver det lige diff, deles puljen. Wager Golf udregner hver spillers mål ud fra handicappen, holder bruttopointene hul for hul og viser diffen live, så I altid kan se, hvem der fører mod sit mål.
+Bliver det lige diff, deles puljen. Wager Golf udregner hver spillers mål ud fra handicappet, holder bruttopointene hul for hul og viser diffen live, så I altid kan se, hvem der fører mod sit mål.

@@ -1,6 +1,21 @@
 const test = require('node:test');
 const assert = require('node:assert');
+const fs = require('node:fs');
+const path = require('node:path');
 const { shotPath } = require('../lib/shot.js');
+
+const ROOT = path.join(__dirname, '..');
+
+function sourceFiles(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    if (entry.name.startsWith('.') || entry.name === '_site' || entry.name === 'node_modules') {
+      return [];
+    }
+    const file = path.join(dir, entry.name);
+    if (entry.isDirectory()) return sourceFiles(file);
+    return /\.(?:md|njk)$/.test(entry.name) ? [file] : [];
+  });
+}
 
 test('sidans eget språk vinner när bilden finns', () => {
   assert.strictEqual(
@@ -40,4 +55,20 @@ test('svenska faller till den delade, inte till engelska', () => {
 test('saknad eller tom lista kraschar inte bygget', () => {
   assert.strictEqual(shotPath('live', 'nb', undefined), '/assets/shots/live.webp');
   assert.strictEqual(shotPath('live', undefined, ['en/live']), '/assets/shots/en/live.webp');
+});
+
+test('varje shortcode har en fysisk delad reservbild', () => {
+  const names = new Set();
+  const pattern = /{%\s*shot\s+"([^"]+)"\s*%}/g;
+
+  for (const file of sourceFiles(ROOT)) {
+    const source = fs.readFileSync(file, 'utf8');
+    for (const match of source.matchAll(pattern)) names.add(match[1]);
+  }
+
+  assert.ok(names.size > 0, 'hittade inga shot-shortcodes i innehållet');
+  for (const name of names) {
+    const fallback = path.join(ROOT, 'assets', 'shots', `${name}.webp`);
+    assert.ok(fs.existsSync(fallback), `saknad reservbild: ${fallback}`);
+  }
 });

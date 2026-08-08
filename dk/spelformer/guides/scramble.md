@@ -40,7 +40,7 @@ Scramble er den mest sociale og overbærende holdform, perfekt til blandede flok
 
 To hold stilles op mod hinanden. Lavest samlet score vinder, enten hul for hul som en match eller på totalen for runden. Fordi holdet kun har én score per hul, bliver det let at følge med.
 
-For at udjævne mellem forskelligt stærke hold bruges et holdhandicap efter WHS: 35 procent af den laveste handicap på holdet plus 15 procent af den højeste.
+For at udjævne mellem forskelligt stærke hold bruges et holdhandicap efter WHS: 35 procent af det laveste handicap på holdet plus 15 procent af det højeste.
 
 ## Texas Scramble
 

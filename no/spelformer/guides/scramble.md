@@ -6,15 +6,15 @@ category: Lag
 players: "4 spillere, 2 lag"
 order: 1
 title: "Scramble i golf: regler, varianter og handicap | Wager Golf"
-description: "Scramble forklart. Laget slår, velger beste ligge og spiller videre derfra. Regler, varianter som Texas Scramble, lag-handicap etter WHS og taktikk."
+description: "Scramble forklart. Laget slår, velger beste ballplassering og spiller videre derfra. Regler, varianter som Texas Scramble, laghandicap etter WHS og taktikk."
 h1: "Scramble i golf"
-lede: "Alle i laget slår, dere tar det beste ligget og spiller videre derfra. En overbærende og sosial form der laget bare har én ball å bry seg om."
-cardText: "Laget slår, velger beste ligge og spiller videre. Én ball, lavest vinner."
+lede: "Alle i laget slår, dere velger den beste ballplasseringen og spiller videre derfra. En overbærende og sosial form der laget bare har én ball å bry seg om."
+cardText: "Laget slår, velger beste ballplassering og spiller videre. Én ball, lavest vinner."
 faq:
-  - q: "Hvordan fungerer lag-handicap i scramble?"
+  - q: "Hvordan fungerer laghandicap i scramble?"
     a: "For topersonslag brukes WHS-anbefalingen: 35 prosent av den lavere spillerens handicap pluss 15 prosent av den høyere. Det gir laget en rettferdig allowance uten å favorisere det sterkeste laget for mye."
   - q: "Spiller alle hvert slag?"
-    a: "Ja. Begge i laget slår fra hvert ligge, så velger dere det beste av de to, og begge spiller neste slag derfra. Slik fortsetter det helt til ballen er i hull."
+    a: "Ja. Begge i laget slår fra samme posisjon, så velger dere det beste av de to slagene, og begge spiller neste slag derfra. Slik fortsetter det helt til ballen er i hull."
   - q: "Hva er Texas Scramble?"
     a: "En variant der et minste antall av hver spillers utslag må brukes i løpet av runden, for eksempel fire drivere per spiller på 18 hull. Det hindrer laget i å bare lene seg på den lengste spillerens utslag."
   - q: "Hva er forskjellen fra Foursome?"
@@ -32,7 +32,7 @@ Scramble er den mest sosiale og overbærende lagformen, perfekt for blandede gje
 
 - Alle i laget slår ut.
 - Laget velger det beste av utslagene.
-- Begge spiller sitt neste slag fra det ligget.
+- Begge spiller sitt neste slag fra den valgte posisjonen.
 - Slik fortsetter dere, velger beste ball hver gang, til hullet er i havn.
 - Lagets score på hullet er den felles ballens score.
 
@@ -40,7 +40,7 @@ Scramble er den mest sosiale og overbærende lagformen, perfekt for blandede gje
 
 To lag stilles mot hverandre. Lavest samlet score vinner, enten hull for hull som en match eller på totalen over runden. Siden laget bare har én score per hull, blir det enkelt å følge med.
 
-For å jevne ut mellom ulikt sterke lag brukes en lag-handicap etter WHS: 35 prosent av den laveste handicapen i laget pluss 15 prosent av den høyeste.
+For å jevne ut mellom ulikt sterke lag brukes et laghandicap etter WHS: 35 prosent av det laveste handicapet i laget pluss 15 prosent av det høyeste.
 
 ## Texas Scramble
 
@@ -49,7 +49,7 @@ Texas Scramble er den vanligste varianten, og den mange søker på spesifikt. Re
 ## Andre scramble-varianter
 
 - **Florida Scramble (Step Aside):** spilleren hvis ball ble valgt, står over neste slag. Med bare én ball i spill om gangen blir det mer krevende enn vanlig scramble.
-- **Ambrose:** scramble med lag-handicap, vanlig i Australia, ofte brukt når nivåforskjellene i laget er store.
+- **Ambrose:** scramble med laghandicap, vanlig i Australia, ofte brukt når nivåforskjellene i laget er store.
 
 ## Taktikk
 
@@ -59,7 +59,7 @@ Wager Golf regner lag-allowance, lagenes score per hull og oppgjøret for dere, 
 
 ## Vanlige feil
 
-- **Å alltid velge det lengste utslaget.** Et kortere slag med bedre vinkel mot flagget, eller fritt ligge på fairway, er ofte verdt mer. Velg ligge, ikke bare lengde.
+- **Å alltid velge det lengste utslaget.** Et kortere slag med bedre vinkel mot flagget, eller en gunstig posisjon på fairway, er ofte verdt mer. Velg posisjon, ikke bare lengde.
 - **Å slurve med rekkefølgen på green.** La en spiller putte først som lodd, deretter leser neste av samme linje. Det er gratis informasjon som vinner hull.
 
 <figure class="guide-figure">

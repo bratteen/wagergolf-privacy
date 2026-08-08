@@ -56,7 +56,7 @@ Det er denne fordelingen som gjør at en 28-handicapper og en 9-handicapper kan 
 
 36 poeng er referansen. Det betyr at du i snitt har gjort netto par på hvert hull, altså spilt nøyaktig til handicapet ditt. Kommer du over 36 har du hatt en virkelig god dag. De fleste klubbrunder lander et sted mellom 30 og 34.
 
-I et veddemål legger alle en innsats, og den med flest poeng når runden er slutt tar potten. Er det likt, deles potten. Wager Golf regner poengene hull for hull med riktige WHS-slag, viser stillingen live og gjør opp potten automatisk når dere går inn.
+I et veddemål legger alle en innsats, og den med flest poeng når runden er slutt tar potten. Er det likt, deles potten. Wager Golf regner poengene hull for hull med riktige WHS-slag, viser stillingen live og gjør automatisk opp potten når runden er over.
 
 ## Når passer Stableford?
 
@@ -69,6 +69,6 @@ Stableford skinner når gjengen spiller på ulikt nivå, eller når dere vil hol
 - **Null poeng er ikke en fiasko.** Det er hele poenget med formatet. Plukk opp ballen og spar energien til neste hull.
 
 <figure class="guide-figure">
-  <img src="{% shot "live" %}" alt="Wager Golf scorekort som teller Stableford-poeng" width="640" height="1306" loading="lazy">
+  <img src="{% shot "live" %}" alt="Wager Golf-scorekort som teller Stableford-poeng" width="640" height="1306" loading="lazy">
   <figcaption>I Wager Golf taster du inn slagene, appen regner Stableford-poengene og holder stillingen live.</figcaption>
 </figure>

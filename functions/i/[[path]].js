@@ -16,8 +16,10 @@ const PUBLISHED = ['sv', 'en'];
 
 /** Sökvägen till den asset som ska serveras för ett språk. Svenskan ligger i
  *  roten, övriga bakom sitt prefix. */
-const ASSET_FOR = {
+export const ASSET_FOR = {
   sv: '/i/',
+  nb: '/no/i/',
+  da: '/dk/i/',
   en: '/en/i/',
 };
 

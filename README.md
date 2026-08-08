@@ -190,7 +190,8 @@ Att slå på ett av dem kräver en enda ändring, på tre ställen som måste f�
 
 1. `_data/routes.js` — lägg till språket i `PUBLISHED`.
 2. `functions/go.js` — samma tillägg.
-3. `functions/i/[[path]].js` — samma tillägg.
+3. `functions/i/[[path]].js` — samma tillägg. Kontrollera också att språket
+   finns i `ASSET_FOR`; norska och danska sökvägar är redan förberedda där.
 
 Allt annat följer med automatiskt: hreflang, språkväljaren, bannern, sitemap
 och borttagningen av `noindex`. `tests/published-complete.test.js` kontrollerar
