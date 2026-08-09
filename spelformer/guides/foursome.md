@@ -56,6 +56,6 @@ Wager Golf håller reda på vems tur det är att slå ut, räknar lag-allowance 
 - **Att be om ursäkt för varje miss.** I Foursome spelar du alltid partnerns läge. Ältar ni misstagen tappar båda fokus. Spela vidare, nästa slag är ditt.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/live.webp" alt="Wager Golf scorekort under en foursome-match" width="640" height="1306" loading="lazy">
+  <img src="{% shot "live" %}" alt="Wager Golf scorekort under en foursome-match" width="640" height="1306" loading="lazy">
   <figcaption>Appen håller reda på vems tur det är att slå ut och visar matchställningen live.</figcaption>
 </figure>

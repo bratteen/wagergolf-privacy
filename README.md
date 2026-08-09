@@ -190,7 +190,8 @@ Att slå på ett av dem kräver en enda ändring, på tre ställen som måste f�
 
 1. `_data/routes.js` — lägg till språket i `PUBLISHED`.
 2. `functions/go.js` — samma tillägg.
-3. `functions/i/[[path]].js` — samma tillägg.
+3. `functions/i/[[path]].js` — samma tillägg. Kontrollera också att språket
+   finns i `ASSET_FOR`; norska och danska sökvägar är redan förberedda där.
 
 Allt annat följer med automatiskt: hreflang, språkväljaren, bannern, sitemap
 och borttagningen av `noindex`. `tests/published-complete.test.js` kontrollerar
@@ -199,3 +200,22 @@ kan inte gå live av misstag.
 
 Verifierat genom torrkörning: med alla fyra i `PUBLISHED` blir det 110 URL:er
 i sitemap, 540 hreflang-alternativ och noll `noindex`.
+
+### Lokaliserade appskärmbilder
+
+Bilderna i `assets/shots/` visar appens gränssnitt, och det är på svenska. En
+besökare som ser "Hål 3" mitt i det som ska övertyga hen att ladda ner får
+svaret gratis: appen är inte på mitt språk.
+
+Sidorna refererar bilderna med shortcoden `{% shot "live" %}`, inte med en
+hårdkodad sökväg. Uppslagsordningen är sidans språk, sedan engelska, sedan
+den delade bilden — och svenskan går direkt till den delade, eftersom de
+delade bilderna *är* de svenska.
+
+Det gör hanteringen additiv: ett nytt språk kostar ingenting, sidorna byggs
+och fungerar direkt med reservbilden. Vill du lokalisera lägger du filerna i
+`assets/shots/<lang>/` med samma namn (`live.webp`, `settlement.webp`,
+`home.webp`), och de plockas upp automatiskt överallt — utan att en enda sida
+behöver ändras. Varje bild slås upp för sig, så du kan ta en i taget.
+
+Bara `alt`-texten står kvar per sida, och den är redan översatt.

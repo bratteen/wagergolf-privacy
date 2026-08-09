@@ -6,7 +6,7 @@ category: Sidebet
 players: "2 til 4 spillere"
 order: 2
 title: "Snake i golf: regler for tre-putt-spillet | Wager Golf"
-description: "Snake, ormen, forklart. Hver tre-putt legger til i potten og gir deg ormen. Den som holder ormen på siste green, betaler alt. Regler og uttregning."
+description: "Snake, ormen, forklart. Hver tre-putt legger til i potten og gir deg ormen. Den som holder ormen på siste green, betaler alt. Regler og utregning."
 h1: "Snake i golf"
 lede: "Tre-putt og du får ormen, og fyller på potten. Gi den videre ved å la noen andre tre-putte. Den som sitter med ormen på 18., betaler hele potten."
 cardText: "Tre-putt gir deg ormen. Holder du den på siste green, betaler du potten."

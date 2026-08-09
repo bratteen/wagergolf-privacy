@@ -5,7 +5,7 @@ format: Birdiepott
 category: Sidebet
 players: "2 til 4 spillere"
 order: 1
-title: "Birdiepott i golf: regler og uttregning | Wager Golf"
+title: "Birdiepott i golf: regler og utregning | Wager Golf"
 description: "Birdiepott forklart. Alle legger inn en innsats, flest birdier i løpet av runden tar potten. Regler, hvordan eagler telles og varianten der hver birdie betales direkte."
 h1: "Birdiepott"
 lede: "Alle legger en innsats i potten. Flest birdier når runden er slutt, tar alt. Den enkleste måten å sette litt ekstra på spill uten å krangle."

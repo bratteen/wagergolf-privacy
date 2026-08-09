@@ -63,6 +63,6 @@ Wager Golf works out the team allowance, the teams' scores per hole and the sett
 - **Being careless with the order on the green.** Let one player putt first as a read, then the next takes the line off it. That is free information, and it wins holes.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/settlement.webp" alt="Wager Golf settlement after a scramble" width="640" height="1306" loading="lazy">
+  <img src="{% shot "settlement" %}" alt="Wager Golf settlement after a scramble" width="640" height="1306" loading="lazy">
   <figcaption>The app works out the team allowance and settles up, so you can focus on the best ball.</figcaption>
 </figure>

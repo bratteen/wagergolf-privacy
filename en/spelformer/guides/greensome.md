@@ -57,6 +57,6 @@ Wager Golf works out the allowance, keeps track of whose turn it is and settles 
 A Greensome is often the best team format for mixed groups and competitions. It removes the dread of a single bad drive, because both of you play one, but keeps the tension of the shared ball. If you want something gentler still, play a scramble. If you want the hardest and most demanding version, a Foursome is the answer.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/home.webp" alt="Wager Golf season balance and leaderboard" width="640" height="1306" loading="lazy">
+  <img src="{% shot "home" %}" alt="Wager Golf season balance and leaderboard" width="640" height="1306" loading="lazy">
   <figcaption>Team matches are saved, so you can follow who is leading the group across the whole season.</figcaption>
 </figure>

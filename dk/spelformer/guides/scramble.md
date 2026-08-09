@@ -40,7 +40,7 @@ Scramble er den mest sociale og overbærende holdform, perfekt til blandede flok
 
 To hold stilles op mod hinanden. Lavest samlet score vinder, enten hul for hul som en match eller på totalen for runden. Fordi holdet kun har én score per hul, bliver det let at følge med.
 
-For at udjævne mellem forskelligt stærke hold bruges et holdhandicap efter WHS: 35 procent af den laveste handicap på holdet plus 15 procent af den højeste.
+For at udjævne mellem forskelligt stærke hold bruges et holdhandicap efter WHS: 35 procent af det laveste handicap på holdet plus 15 procent af det højeste.
 
 ## Texas Scramble
 
@@ -63,6 +63,6 @@ Wager Golf beregner holdets allowance, holdets score per hul og gør opgørelsen
 - **At være sjusket med rækkefølgen på green.** Lad en spiller putte først som lodning, så læser den næste samme linje. Det er gratis information, der vinder huller.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/settlement.webp" alt="Wager Golf-opgørelse efter en scramble" width="640" height="1306" loading="lazy">
+  <img src="{% shot "settlement" %}" alt="Wager Golf-opgørelse efter en scramble" width="640" height="1306" loading="lazy">
   <figcaption>Appen beregner holdets allowance og gør opgørelsen op, I fokuserer på den bedste bold.</figcaption>
 </figure>

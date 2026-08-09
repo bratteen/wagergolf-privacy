@@ -18,7 +18,7 @@ faq:
   - q: "Hvad er Irish Greensome?"
     a: "En variant, hvor begge spiller deres egne udslag et par slag ind på hullet, før I vælger, hvilken bold I fortsætter med. Det giver holdet endnu flere chancer tidligt på hullet."
   - q: "Hvordan beregnes holdhandicap i Greensome?"
-    a: "Standarden er 60 procent af den laveste handicap plus 40 procent af den højeste. Det giver holdet en allowance, der afspejler, at I altid får lov at vælge det bedste udslag."
+    a: "Standarden er 60 procent af det laveste handicap plus 40 procent af det højeste. Det giver holdet en allowance, der afspejler, at I altid får lov at vælge det bedste udslag."
   - q: "Hvem passer Greensome til?"
     a: "Greensome passer de fleste flokke. Den fjerner frygten for et enkelt dårligt udslag, men bevarer spændingen i den delte bold. Ofte en bedre fest- og turneringsform end Foursome for blandede niveauer."
 related: [foursome, scramble, bastboll]
@@ -44,7 +44,7 @@ Greensome er en mellemform mellem scramble og Foursome, og måske den mest balan
 
 To hold stilles op mod hinanden på holdets fælles score, som match eller total. Valget af det bedste drive gør Greensome mildere end Foursome, men den skiftevise bold bevarer spændingen.
 
-Holdhandicappet i Greensome er 60 procent af den laveste handicap plus 40 procent af den højeste.
+Holdhandicappet i Greensome er 60 procent af det laveste handicap plus 40 procent af det højeste.
 
 ## Taktik: mere end bare det længste drive
 
@@ -57,6 +57,6 @@ Wager Golf beregner allowance, holder styr på, hvis tur det er, og afgør match
 Greensome er ofte den bedste holdform til blandede flokke og turneringer. Den fjerner frygten for et enkelt dårligt udslag, fordi begge slår, men bevarer spændingen i den delte bold. Vil I have noget endnu mildere, spiller I scramble. Vil I have den hårdeste og mest krævende variant, er Foursome svaret.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/home.webp" alt="Wager Golf sæsonsaldo og topliste" width="640" height="1306" loading="lazy">
+  <img src="{% shot "home" %}" alt="Sæsonsaldo og topliste i Wager Golf" width="640" height="1306" loading="lazy">
   <figcaption>Holdmatcherne gemmes, så I kan følge, hvem der fører flokken over hele sæsonen.</figcaption>
 </figure>

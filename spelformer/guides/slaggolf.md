@@ -46,6 +46,6 @@ Slaggolf passar när ni vill ha det renaste, mest tävlingslika spelet, eller n�
 - **Att glömma handicapen.** Utan handicap vinner nästan alltid den lägsta spelaren. Spela på netto om gänget spretar i nivå, då blir det en match.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/settlement.webp" alt="Wager Golf uppgörelse efter en slaggolfrunda" width="640" height="1306" loading="lazy">
+  <img src="{% shot "settlement" %}" alt="Wager Golf uppgörelse efter en slaggolfrunda" width="640" height="1306" loading="lazy">
   <figcaption>När ronden är slut räknar appen ut nettot per spelare och vem som är skyldig vem.</figcaption>
 </figure>

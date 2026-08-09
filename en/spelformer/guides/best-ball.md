@@ -47,6 +47,6 @@ Best ball is the perfect choice when four players of differing standards want to
 - **Take turns taking the risks.** If one of you knows your partner has a par in the bag, the other can attack without fear. That is where best ball is won, not in both of you playing carefully.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/live.webp" alt="Wager Golf scorecard with four players" width="640" height="1306" loading="lazy">
+  <img src="{% shot "live" %}" alt="Wager Golf scorecard with four players" width="640" height="1306" loading="lazy">
   <figcaption>All four players on one scorecard, with the app picking the team's best ball per hole.</figcaption>
 </figure>

@@ -57,6 +57,6 @@ Wager Golf holder styr på, hvis tur det er til at slå ud, beregner holdets all
 - **At undskylde for hver miss.** I Foursome spiller du altid makkerens position. Hænger I fast i fejlene, mister I begge fokus. Spil videre, næste slag er dit.
 
 <figure class="guide-figure">
-  <img src="/assets/shots/live.webp" alt="Wager Golf scorekort under en foursome-match" width="640" height="1306" loading="lazy">
+  <img src="{% shot "live" %}" alt="Wager Golf-scorekort under en foursome-match" width="640" height="1306" loading="lazy">
   <figcaption>Appen holder styr på, hvis tur det er til at slå ud, og viser matchstillingen live.</figcaption>
 </figure>
