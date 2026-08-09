@@ -38,4 +38,4 @@ En viktig detalj: spillerekkefølgen avgjør alt. Den som ligger lengst fra hull
 
 Etter runden summeres alles poeng. Poengforskjellen mellom spillerne gjøres om til penger: hvert par sammenlignes, og poengforskjellen ganger innsatsen bytter hender. Den som har samlet flest poeng, plukker altså inn fra dem med færre, og summen går jevnt opp i gjengen.
 
-Siden ingen slag eller handicap telles, slipper dere styr med stroke-index. Wager Golf holder rede på bingo, bango og bongo per hull og regner ut oppgjøret automatisk når runden er slutt.
+Siden ingen slag eller handicap telles, slipper dere styr med handicap-indeks. Wager Golf holder rede på bingo, bango og bongo per hull og regner ut oppgjøret automatisk når runden er slutt.

@@ -16,7 +16,7 @@ faq:
   - q: "Hvad sker der, hvis et hul bliver uafgjort?"
     a: "Så deles hullet, på engelsk halved. Stillingen står stille, ingen går op eller ned. Et delt hul gør det sværere for den, der ligger under, at hente ledelsen ind."
   - q: "Kan man spille hulspil med handicap?"
-    a: "Ja. Så sammenlignes nettoscore per hul, så spilleren med højere handicap får sine slag på de sværeste huller efter stroke-index. Hulspil er en af de mest retfærdige måder at møde nogen på et andet niveau."
+    a: "Ja. Så sammenlignes nettoscore per hul, så spilleren med højere handicap får sine slag på de sværeste huller efter handicapnøgle. Hulspil er en af de mest retfærdige måder at møde nogen på et andet niveau."
   - q: "Hvad betyder AS i hulspil?"
     a: "All square, altså lige. Ingen fører. Ender hele runden lige, er kampen AS, og indsatsen går som regel tilbage eller spilles af på et ekstrahul."
 related: [skins, nassau, stableford]
@@ -41,6 +41,6 @@ Et eksempel: du er 3 op efter hul 15. Der er 3 huller tilbage. Modstanderen kan 
 
 ## Hulspil med handicap
 
-I et blandet selskab spilles hulspil med handicap. Spilleren med højere handicap får slag på de sværeste huller efter banens stroke-index, præcis som i almindelig handicapgolf. Så afgøres hvert hul på nettoscore, og en jævn kamp bliver mulig selv mellem spillere langt fra hinanden i niveau.
+I et blandet selskab spilles hulspil med handicap. Spilleren med højere handicap får slag på de sværeste huller efter banens handicapnøgle, præcis som i almindelig handicapgolf. Så afgøres hvert hul på nettoscore, og en jævn kamp bliver mulig selv mellem spillere langt fra hinanden i niveau.
 
 Wager Golf holder stillingen hul for hul, regner nettoscore med de rigtige WHS-slag og viser med det samme, når kampen er afgjort, for eksempel 2&1.

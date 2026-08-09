@@ -41,6 +41,6 @@ Den carry, der ligger tilbage efter sidste hul, deles ligeligt mellem alle spill
 
 ## Med eller uden handicap
 
-Skins fungerer lige godt i et jævnt selskab som i et blandet. Med handicap sammenlignes nettoscore, altså brutto minus de slag, du får på hullet efter slope, banevurdering og stroke-index. En 18-handicapper og en scratch-spiller kan da mødes på samme hul, uden at den ene er dømt på forhånd.
+Skins fungerer lige godt i et jævnt selskab som i et blandet. Med handicap sammenlignes nettoscore, altså brutto minus de slag, du får på hullet efter slope, banevurdering og handicapnøgle. En 18-handicapper og en scratch-spiller kan da mødes på samme hul, uden at den ene er dømt på forhånd.
 
 Wager Golf regner nettoscore per hul automatisk med den rigtige WHS-handicap, holder styr på carry mellem hullerne og viser puljen live, mens I spiller.

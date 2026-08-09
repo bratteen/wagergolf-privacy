@@ -14,7 +14,7 @@ faq:
   - q: "Hvor mange poeng gir et par i Stableford?"
     a: "Et par gir 2 poeng. Birdie gir 3, eagle 4 og en bogey 1 poeng. Dobbeltbogey eller dårligere gir 0 poeng, og da plukker du opp ballen og går videre."
   - q: "Hvordan regnes Stableford med handicap?"
-    a: "Poengene regnes på nettoscore. Du får handicapslagene dine fordelt på de vanskeligste hullene etter stroke-index, trekker dem fra bruttoscoren og sammenligner netto mot par. Derfor kan spillere på ulikt nivå konkurrere rettferdig."
+    a: "Poengene regnes på nettoscore. Du får handicapslagene dine fordelt på de vanskeligste hullene etter handicap-indeks, trekker dem fra bruttoscoren og sammenligner netto mot par. Derfor kan spillere på ulikt nivå konkurrere rettferdig."
   - q: "Hva er en god Stableford-poengsum?"
     a: "36 poeng betyr at du har spilt nøyaktig til handicapet ditt, altså i snitt netto par på hvert hull. Alt over 36 er en sterk runde. Rundt 30 til 34 er en helt normal klubbrunde."
   - q: "Hvorfor gir dårlige hull bare null?"
@@ -48,7 +48,7 @@ Skalaen fortsetter oppover for de virkelig uvanlige hullene. Albatross gir 5 poe
 
 ## Slik regnes det med handicap
 
-Stableford spilles nesten alltid på nettoscore. Du får et antall slag basert på spillehandicapet ditt, fordelt på de vanskeligste hullene etter banens stroke-index. På de hullene får du altså en ekstra margin før poengene begynner å synke. En bogey brutto på et hull der du har et slag blir netto par, og gir 2 poeng.
+Stableford spilles nesten alltid på nettoscore. Du får et antall slag basert på spillehandicapet ditt, fordelt på de vanskeligste hullene etter banens handicap-indeks. På de hullene får du altså en ekstra margin før poengene begynner å synke. En bogey brutto på et hull der du har et slag blir netto par, og gir 2 poeng.
 
 Det er denne fordelingen som gjør at en 28-handicapper og en 9-handicapper kan spille samme runde og likevel møtes på like vilkår.
 

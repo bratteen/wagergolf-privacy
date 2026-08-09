@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert');
-const { readdirSync, readFileSync } = require('node:fs');
+const { existsSync, readdirSync, readFileSync } = require('node:fs');
 const { FORMATS, TERMS } = require('../_data/terms.js');
 const routes = require('../_data/routes.js');
 
@@ -104,4 +104,68 @@ test('source-fältet finns på varje format, även när det är tomt', () => {
       `${key} saknar source-fält`,
     );
   }
+});
+
+test('nordiska förbundstermer och sluggar är låsta', () => {
+  assert.deepStrictEqual(
+    FORMATS.bastboll.nb,
+    { name: 'Four-Ball', slug: 'four-ball' },
+  );
+  assert.deepStrictEqual(
+    FORMATS.bastboll.da,
+    { name: 'Four-Ball', slug: 'four-ball' },
+  );
+  assert.deepStrictEqual(
+    FORMATS.bastboll.en,
+    { name: 'Four-Ball', slug: 'best-ball' },
+  );
+  assert.deepStrictEqual(
+    FORMATS['narmast-flaggan'].da,
+    { name: 'Nærmest hullet', slug: 'naermest-hullet' },
+  );
+  assert.strictEqual(FORMATS['split-sixes'].nb.altName, 'Københavner');
+  assert.strictEqual(FORMATS['split-sixes'].da.altName, 'Københavner');
+  assert.strictEqual(TERMS['stroke-index'].nb, 'Handicap-indeks');
+  assert.strictEqual(TERMS['stroke-index'].da, 'Handicapnøgle');
+});
+
+test('nordiska guidefiler använder samma säkra sluggar och namn', () => {
+  const expected = [
+    ['no/spelformer/guides/four-ball.md', 'four-ball', 'Four-Ball'],
+    ['dk/spelformer/guides/four-ball.md', 'four-ball', 'Four-Ball'],
+    ['dk/spelformer/guides/naermest-hullet.md', 'naermest-hullet', 'Nærmest hullet'],
+  ];
+
+  for (const [file, slug, format] of expected) {
+    const source = readFileSync(file, 'utf8');
+    assert.match(source, new RegExp(`^slug: ${slug}$`, 'm'));
+    assert.match(source, new RegExp(`^format: ${format}$`, 'm'));
+  }
+
+  assert.ok(!existsSync('no/spelformer/guides/best-ball.md'));
+  assert.ok(!existsSync('dk/spelformer/guides/best-ball.md'));
+  assert.ok(!existsSync('dk/spelformer/guides/taettest-paa-flaget.md'));
+});
+
+test('den publicerade engelska Four-Ball-guiden behåller sin gamla URL', () => {
+  const source = readFileSync('en/spelformer/guides/best-ball.md', 'utf8');
+  assert.match(source, /^slug: best-ball$/m);
+  assert.match(source, /^format: Four-Ball$/m);
+  assert.doesNotMatch(source, /^format: Best ball$/m);
+});
+
+test('gamla nordiska guideadresser omdirigeras permanent', () => {
+  const redirects = readFileSync('_redirects', 'utf8');
+  assert.match(
+    redirects,
+    /^\/no\/spilleformer\/best-ball\/ \/no\/spilleformer\/four-ball\/ 301$/m,
+  );
+  assert.match(
+    redirects,
+    /^\/dk\/spilformer\/best-ball\/ \/dk\/spilformer\/four-ball\/ 301$/m,
+  );
+  assert.match(
+    redirects,
+    /^\/dk\/spilformer\/taettest-paa-flaget\/ \/dk\/spilformer\/naermest-hullet\/ 301$/m,
+  );
 });

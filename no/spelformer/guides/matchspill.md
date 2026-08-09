@@ -16,7 +16,7 @@ faq:
   - q: "Hva skjer hvis et hull blir uavgjort?"
     a: "Da deles hullet, på engelsk halved. Stillingen står stille, ingen går opp eller ned. Et delt hull gjør det vanskeligere for den som ligger under, å hente inn ledelsen."
   - q: "Kan man spille matchspill med handicap?"
-    a: "Ja. Da sammenlignes nettoscore per hull, slik at spilleren med høyere handicap får slagene sine på de vanskeligste hullene etter stroke-index. Matchspill er en av de mest rettferdige måtene å møte noen på et annet nivå."
+    a: "Ja. Da sammenlignes nettoscore per hull, slik at spilleren med høyere handicap får slagene sine på de vanskeligste hullene etter handicap-indeks. Matchspill er en av de mest rettferdige måtene å møte noen på et annet nivå."
   - q: "Hva betyr AS i matchspill?"
     a: "All square, altså likt. Ingen leder. Ender hele runden likt, er kampen AS, og innsatsen går som regel tilbake eller spilles av på et ekstrahull."
 related: [skins, nassau, stableford]
@@ -41,6 +41,6 @@ Et eksempel: du er 3 opp etter hull 15. Det er 3 hull igjen. Motstanderen kan i 
 
 ## Matchspill med handicap
 
-I en blandet gjeng spilles matchspill med handicap. Spilleren med høyere handicap får slag på de vanskeligste hullene etter banens stroke-index, akkurat som i vanlig handicapgolf. Da avgjøres hvert hull på nettoscore, og en jevn kamp blir mulig selv mellom spillere langt fra hverandre i nivå.
+I en blandet gjeng spilles matchspill med handicap. Spilleren med høyere handicap får slag på de vanskeligste hullene etter banens handicap-indeks, akkurat som i vanlig handicapgolf. Da avgjøres hvert hull på nettoscore, og en jevn kamp blir mulig selv mellom spillere langt fra hverandre i nivå.
 
 Wager Golf holder stillingen hull for hull, regner nettoscore med riktige WHS-slag og viser umiddelbart når kampen er avgjort, for eksempel 2&1.

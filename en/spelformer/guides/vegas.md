@@ -35,4 +35,4 @@ Vegas is the team format for anyone who likes drama. Two teams of two go head to
 
 This is where Vegas gets sharp. If your team makes a birdie and the opposition does not, their number is flipped, so 46 becomes 64. If anyone makes an eagle or better the hole's difference doubles, and if both players in a team birdie it doubles as well. The bonuses stack, so a hot spell can cost the opposition dearly.
 
-Vegas is played off gross, because the whole number mechanic is built on actual scores. If you want handicap levelling, best ball or a Foursome suits better. Wager Golf builds the numbers, handles the flips and bonuses and keeps the running difference for you.
+Vegas is played off gross, because the whole number mechanic is built on actual scores. If you want handicap levelling, Four-Ball or a Foursome suits better. Wager Golf builds the numbers, handles the flips and bonuses and keeps the running difference for you.

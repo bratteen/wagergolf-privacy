@@ -2,6 +2,7 @@
 slug: split-sixes
 key: guide:split-sixes
 format: Split Sixes
+altName: Københavner
 category: Hulspil
 players: "3 spillere"
 order: 3

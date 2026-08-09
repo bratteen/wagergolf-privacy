@@ -43,6 +43,8 @@ test('danska texter innehåller inte kända direktöversättningar', () => {
     ['Wager Golf live-scorekort', /Wager Golf live-scorekort/i],
     ['Wager Golf opgørelse', /Wager Golf opgørelse/i],
     ['Wager Golf sæsonsaldo', /Wager Golf sæsonsaldo/i],
+    ['stroke-index', /stroke-index/i],
+    ['Best-ball', /best-ball/i],
   ]);
 });
 
@@ -60,5 +62,7 @@ test('norska texter innehåller inte kända direktöversättningar', () => {
     ['Wager Golf oppgjør', /Wager Golf oppgjør/i],
     ['Wager Golf sesongsaldo', /Wager Golf sesongsaldo/i],
     ['Sesongsaldo med topplisten', /Sesongsaldo(?:,| og) topplisten/i],
+    ['stroke-index', /stroke-index/i],
+    ['Best-ball', /best-ball/i],
   ]);
 });

@@ -38,4 +38,4 @@ En vigtig detalje: spillerækkefølgen afgør alt. Den, der ligger længst fra h
 
 Efter runden lægges alles point sammen. Forskellen i point mellem spillerne omregnes til penge: hvert par sammenlignes, og pointforskellen gange indsatsen skifter hænder. Den, der har samlet flest point, tager altså fra dem med færre, og summen går lige op i selskabet.
 
-Fordi der ikke tælles slag eller handicap, slipper I for besvær med stroke-index. Wager Golf holder styr på bingo, bango og bongo per hul og regner opgørelsen automatisk ud, når runden er slut.
+Fordi der ikke tælles slag eller handicap, slipper I for besvær med handicapnøgle. Wager Golf holder styr på bingo, bango og bongo per hul og regner opgørelsen automatisk ud, når runden er slut.

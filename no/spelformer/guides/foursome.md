@@ -18,7 +18,7 @@ faq:
   - q: "Hvordan regnes laghandicap?"
     a: "I Foursome slagspill brukes 50 prosent av summen av partnernes spillehandicap. Det gir laget en samlet allowance som trekkes fra lagets bruttoscore."
   - q: "Hvorfor heter det foursome?"
-    a: "Navnet viser til de fire spillerne i en match: to lag med to hver. Det skal ikke forveksles med four-ball, altså best-ball, der alle fire spiller sine egne baller."
+    a: "Navnet viser til de fire spillerne i en match: to lag med to hver. Det skal ikke forveksles med Four-Ball, der alle fire spiller sine egne baller."
   - q: "Er foursome vanskelig?"
     a: "Det er den mest krevende lagformen, siden du alltid spiller videre fra stedet der partneren har etterlatt ballen. Et bomskudd straffer partneren direkte. Nettopp derfor er det også et av de mest samlende spillene, og grunnen til at det brukes i Ryder Cup."
 related: [greensome, scramble, bastboll]
@@ -45,9 +45,9 @@ Laghandicapet i Foursome slagspill er 50 prosent av summen av partnernes spilleh
 
 Valget av hvem som slår ut på oddetalls- og partallshull er Foursomes viktigste beslutning. Se på banen på forhånd: vil du ha den lengste spilleren på par 5-utslagene og den rakeste på de trange par 4-hullene? Tenk også på par 3-hullene, der den som slår ut også slår mot green. Legg dem til spilleren som er sikrest med jernene. En gjennomtenkt fordeling kan være verdt flere slag over en runde.
 
-## Foursome, Greensome eller best-ball?
+## Foursome, Greensome eller Four-Ball?
 
-Tre formater blandes ofte sammen. I Foursome slår bare én av dere ut og dere deler ball. I Greensome slår begge ut, dere velger beste driv og deler deretter ball. I best-ball (four-ball) spiller alle sin egen ball hele veien. Foursome er altså det reneste delte spillet, og det mest krevende.
+Tre formater blandes ofte sammen. I Foursome slår bare én av dere ut og dere deler ball. I Greensome slår begge ut, dere velger beste driv og deler deretter ball. I Four-Ball spiller alle sin egen ball hele veien. Foursome er altså det reneste delte spillet, og det mest krevende.
 
 Wager Golf holder styr på hvem som har tur til å slå ut, regner lag-allowance og avgjør matchen for dere.
 

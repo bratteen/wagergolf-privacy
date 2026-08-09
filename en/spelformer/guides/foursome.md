@@ -18,7 +18,7 @@ faq:
   - q: "How is team handicap worked out?"
     a: "In Foursome stroke play, 50 per cent of the sum of the partners' course handicaps is used. That gives the team a combined allowance, deducted from the team's gross score."
   - q: "Why is it called a foursome?"
-    a: "The name refers to the four players in a match: two teams of two. It should not be confused with four-ball, in other words best ball, where all four play their own ball."
+    a: "The name refers to the four players in a match: two teams of two. It should not be confused with Four-Ball, where all four play their own ball."
   - q: "Is a foursome difficult?"
     a: "It is the most demanding team format, because you always play the position your partner left you. A missed tee shot punishes your partner immediately. That is exactly why it is also one of the most bonding games to play, and why it features in the Ryder Cup."
 related: [greensome, scramble, bastboll]
@@ -45,9 +45,9 @@ The team handicap in Foursome stroke play is 50 per cent of the sum of the partn
 
 Choosing who tees off on the odd and even holes is the most important decision in a Foursome. Look at the course in advance: do you want your longest player on the par 5 tees and the straightest on the tight par 4s? Think about the par 3s too, where whoever tees off is also hitting the green. Give those to whoever is steadiest with the irons. A well-considered split can be worth several shots over a round.
 
-## Foursome, Greensome or best ball?
+## Foursome, Greensome or Four-Ball?
 
-Three formats often get confused. In a Foursome only one of you tees off and you share a ball. In a Greensome both tee off, you pick the better drive and then share a ball. In best ball (four-ball) everyone plays their own ball the whole way. Foursome is therefore the purest shared game, and the most demanding.
+Three formats often get confused. In a Foursome only one of you tees off and you share a ball. In a Greensome both tee off, you pick the better drive and then share a ball. In Four-Ball everyone plays their own ball the whole way. Foursome is therefore the purest shared game, and the most demanding.
 
 Wager Golf keeps track of whose turn it is to tee off, works out the team allowance and decides the match for you.
 

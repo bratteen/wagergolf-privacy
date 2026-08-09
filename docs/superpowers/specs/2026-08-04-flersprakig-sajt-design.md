@@ -361,11 +361,11 @@ Den täcker golftermer där de nordiska språken skiljer sig och där en rak
 | slaggolf | slagspill | slagspil | stroke play |
 | matchspel | matchspill | hulspil | match play |
 | spelform | spilleform | spilleform | game format |
-| bästboll | bestball | bedste bold | best ball |
+| bästboll | Four-Ball | Four-Ball | Four-Ball |
 | poängbogey | poengbogey | pointbogey | Stableford |
 | brutto / net | brutto / netto | brutto / netto | gross / net |
 | spelhandicap | spillehandicap | spillehandicap | course handicap |
-| stroke-index | stroke-index | stroke-index | stroke index |
+| stroke-index | handicap-indeks | handicapnøgle | stroke index |
 | slope | slope | slope | slope |
 | hål | hull | hul | hole |
 | runda | runde | runde | round |
@@ -378,7 +378,7 @@ Ordlistan används också som underlag för slug-valen. Slugs ska väljas efter 
 folk faktiskt söker på i respektive marknad, inte efter en ordboksöversättning.
 Exempel att verifiera: `slaggolf` → `slagspill` (nb) / `slagspil` (da) /
 `stroke-play` (en); `matchspel` → `matchspill` / `hulspil` / `match-play`;
-`narmast-flaggan` → `naermest-flagget` / `taettest-pa-flaget` /
+`narmast-flaggan` → `naermest-flagget` / `naermest-hullet` /
 `closest-to-the-pin`. Egennamn som Nassau, Vegas, Wolf, Skins, Scramble och
 Stableford behålls oförändrade i alla språk.
 
