@@ -18,7 +18,7 @@ faq:
   - q: "Hvordan beregnes holdhandicap?"
     a: "I Foursome slagspil bruges 50 procent af summen af makkernes spillehandicap. Det giver holdet en samlet allowance, der trækkes fra holdets bruttoscore."
   - q: "Hvorfor hedder det foursome?"
-    a: "Navnet henviser til de fire spillere i en match: to hold af to. Det skal ikke forveksles med four-ball, altså best-ball, hvor alle fire spiller deres egen bold."
+    a: "Navnet henviser til de fire spillere i en match: to hold af to. Det skal ikke forveksles med Four-Ball, hvor alle fire spiller deres egen bold."
   - q: "Er foursome svært?"
     a: "Det er den mest krævende holdform, fordi du altid spiller den position, makkeren har efterladt. Et misset udslag straffer makkeren direkte. Netop derfor er det også et af de mest sammensvejsende spil, hvilket er grunden til, at det bruges i Ryder Cup."
 related: [greensome, scramble, bastboll]
@@ -45,9 +45,9 @@ Holdhandicappet i Foursome slagspil er 50 procent af summen af makkernes spilleh
 
 Valget af, hvem der slår ud på henholdsvis ulige og lige huller, er Foursomes vigtigste beslutning. Kig på banen i forvejen: vil du have din længste spiller på par 5-udslagene og den mest lige på de snævre par 4'ere? Tænk også på par 3-hullerne, hvor den, der slår ud, også slår mod green. Læg dem hos den spiller, der er sikrest med jernene. En gennemtænkt fordeling kan være flere slag værd over en runde.
 
-## Foursome, Greensome eller best-ball?
+## Foursome, Greensome eller Four-Ball?
 
-Tre formater forveksles ofte. I Foursome slår kun én af jer ud, og I deler bold. I Greensome slår begge ud, I vælger det bedste drive og deler derefter bold. I best-ball (four-ball) spiller alle deres egen bold hele vejen. Foursome er altså det reneste delte spil, og det mest krævende.
+Tre formater forveksles ofte. I Foursome slår kun én af jer ud, og I deler bold. I Greensome slår begge ud, I vælger det bedste drive og deler derefter bold. I Four-Ball spiller alle deres egen bold hele vejen. Foursome er altså det reneste delte spil, og det mest krævende.
 
 Wager Golf holder styr på, hvis tur det er til at slå ud, beregner holdets allowance og afgør matchen for jer.
 

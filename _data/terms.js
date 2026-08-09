@@ -72,12 +72,14 @@ const FORMATS = {
   // --- Beskrivande namn. Översätts, och behöver granskas. ---
   bastboll: {
     sv: { name: "Bästboll", slug: "bastboll" },
-    // Både NGF och DGU listar formatet som "Best-ball" med bindestreck och
-    // behåller den engelska termen. Mina första gissningar "Bestball" och
-    // "Bedste bold" var alltså båda fel — ingen av dem används.
-    nb: { name: "Best-ball", slug: "best-ball" },
-    da: { name: "Best-ball", slug: "best-ball" },
-    en: { name: "Best ball", slug: "best-ball" },
+    // NGF och DGU använder Four-Ball för just den 2 mot 2-form som appen
+    // implementerar: alla spelar egen boll och lagets lägsta score räknas.
+    // "Best-ball" kan också syfta på en annan spelform och används därför
+    // inte som synligt namn. Den redan publicerade engelska sluggen behålls
+    // så befintliga länkar och sökhistorik fortsätter fungera.
+    nb: { name: "Four-Ball", slug: "four-ball" },
+    da: { name: "Four-Ball", slug: "four-ball" },
+    en: { name: "Four-Ball", slug: "best-ball" },
     source: "NGF + DGU",
   },
   "langst-drive": {
@@ -90,7 +92,8 @@ const FORMATS = {
   "narmast-flaggan": {
     sv: { name: "Närmast flaggan", slug: "narmast-flaggan" },
     nb: { name: "Nærmest flagget", slug: "naermest-flagget" },
-    da: { name: "Tættest på flaget", slug: "taettest-paa-flaget" },
+    // DGU:s formella namn är "Nærmest hullet".
+    da: { name: "Nærmest hullet", slug: "naermest-hullet" },
     // Engelskan har ett etablerat uttryck som folk faktiskt söker på.
     en: { name: "Closest to the pin", slug: "closest-to-the-pin" },
     source: "NGF + DGU",
@@ -128,10 +131,9 @@ const FORMATS = {
   },
   "split-sixes": {
     sv: { name: "Split Sixes", slug: "split-sixes", altName: "Köpenhamnare" },
-    nb: { name: "Split Sixes", slug: "split-sixes", altName: null },
-    // Svenskans "Köpenhamnare" är namngiven efter staden och fungerar inte som
-    // danskt alternativnamn. Lämnas utan tills en dansk golfare sagt sitt.
-    da: { name: "Split Sixes", slug: "split-sixes", altName: null },
+    nb: { name: "Split Sixes", slug: "split-sixes", altName: "Københavner" },
+    // Det nordiska alternativnamnet används även på danska och norska.
+    da: { name: "Split Sixes", slug: "split-sixes", altName: "Københavner" },
     en: { name: "Split Sixes", slug: "split-sixes", altName: null },
     source: "namn",
   },
@@ -150,7 +152,7 @@ const TERMS = {
   "hole-in-one": { sv: "Hole in one", nb: "Hole in one", da: "Hole in one", en: "Hole-in-one" },
   albatross: { sv: "Albatross", nb: "Albatross", da: "Albatros", en: "Albatross" },
   spelhandicap: { sv: "Spelhandicap", nb: "Spillehandicap", da: "Spillehandicap", en: "Course handicap" },
-  "stroke-index": { sv: "Stroke-index", nb: "Stroke-index", da: "Stroke-index", en: "Stroke index" },
+  "stroke-index": { sv: "Stroke-index", nb: "Handicap-indeks", da: "Handicapnøgle", en: "Stroke index" },
   "course-rating": { sv: "Course rating (banvärde)", nb: "Course rating (banevurdering)", da: "Course rating (banevurdering)", en: "Course rating" },
   brutto: { sv: "Brutto", nb: "Brutto", da: "Brutto", en: "Gross" },
   net: { sv: "Net", nb: "Netto", da: "Netto", en: "Net" },

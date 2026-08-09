@@ -7,6 +7,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("terms");
   // Cloudflare Pages-headers (säkerhet + cache) måste ligga i output-roten.
   eleventyConfig.addPassthroughCopy("_headers");
+  // Permanenta redirects för gamla publika eller delade guideadresser.
+  eleventyConfig.addPassthroughCopy("_redirects");
   // Pages Functions (functions/i/[[path]].js servar /i/<handle>-landningssidan).
   eleventyConfig.addPassthroughCopy("functions");
   // .well-known: universal links (AASA) + Android App Links (assetlinks.json)

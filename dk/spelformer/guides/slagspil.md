@@ -33,7 +33,7 @@ Slagspil er golf i sin reneste form. Du tæller hvert slag, du slår i løbet af
 
 ## Slagspil med handicap
 
-I et blandet selskab spilles slagspil på netto. Du får dine handicapslag fordelt på de sværeste huller efter banens stroke-index, og de trækkes fra din bruttototal. Det er sådan, en 20-handicapper og en 8-handicapper kan gøre op på samme vilkår. Uden handicap er det de rene bruttoslag, der gælder, altså lavest reelle total.
+I et blandet selskab spilles slagspil på netto. Du får dine handicapslag fordelt på de sværeste huller efter banens handicapnøgle, og de trækkes fra din bruttototal. Det er sådan, en 20-handicapper og en 8-handicapper kan gøre op på samme vilkår. Uden handicap er det de rene bruttoslag, der gælder, altså lavest reelle total.
 
 Wager Golf lægger slagene sammen hul for hul, regner netto med de rigtige WHS-slag og gør puljen op automatisk, selv hvis I vælger at afslutte tidligt.
 

@@ -35,4 +35,4 @@ Vegas er lagformen for den som liker dramatikk. To lag med to spillere hver stil
 
 Det er her Vegas blir skarpt. Gjør laget ditt en birdie, men ikke motstanderne, snus tallet deres, så 46 blir 64. Gjør noen eagle eller bedre, dobles hullets diff, og birder begge i et lag, dobles den også. Bonusene stables, så en het periode kan koste motstanderne dyrt.
 
-Vegas spilles på brutto, siden hele tall-mekanikken bygger på virkelige score. Vil dere ha handicaputjevning, passer best-ball eller Foursome bedre. Wager Golf bygger tallene, håndterer flipper og bonuser og holder totaldiffen for dere.
+Vegas spilles på brutto, siden hele tall-mekanikken bygger på virkelige score. Vil dere ha handicaputjevning, passer Four-Ball eller Foursome bedre. Wager Golf bygger tallene, håndterer flipper og bonuser og holder totaldiffen for dere.

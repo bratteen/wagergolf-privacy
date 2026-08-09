@@ -15,7 +15,7 @@ breadcrumb:
   - name: "Stableford vs slagspil"
 faq:
   - q: "Hvad er forskellen mellem Stableford og slagspil?"
-    a: "I slagspil tæller hvert slag, og lavest total vinder, så et enkelt dårligt hul kan koste hele rundens væddemål. Stableford giver point pr. hul, eagle 4, birdie 3, par 2, bogey 1 og dobbeltbogey eller værre 0, så et katastrofehul kun koster det huls point. Begge spilles oftest på netto med WHS-slag fordelt via stroke-index."
+    a: "I slagspil tæller hvert slag, og lavest total vinder, så et enkelt dårligt hul kan koste hele rundens væddemål. Stableford giver point pr. hul, eagle 4, birdie 3, par 2, bogey 1 og dobbeltbogey eller værre 0, så et katastrofehul kun koster det huls point. Begge spilles oftest på netto med WHS-slag fordelt via handicapnøgle."
   - q: "Hvilket format er mest almindeligt i klubturneringer?"
     a: "Næsten alle klubturneringer og venskabsrunder spilles som Stableford. Det holder tempoet oppe og gør det retfærdigt for blandede hold, fordi et dårligt hul bare giver nul point. Slagspil er mere almindeligt ved mesterskaber, scratchturneringer og professionel golf, hvor hvert slag skal tælle."
   - q: "Kan man spille begge formater på samme scorekort?"
@@ -100,7 +100,7 @@ structuredData: |
             "name": "Hvad er forskellen mellem Stableford og slagspil?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "I slagspil tæller hvert slag, og lavest total vinder, så et enkelt dårligt hul kan koste hele rundens væddemål. Stableford giver point pr. hul, eagle 4, birdie 3, par 2, bogey 1 og dobbeltbogey eller værre 0, så et katastrofehul kun koster det huls point. Begge spilles oftest på netto med WHS-slag fordelt via stroke-index."
+              "text": "I slagspil tæller hvert slag, og lavest total vinder, så et enkelt dårligt hul kan koste hele rundens væddemål. Stableford giver point pr. hul, eagle 4, birdie 3, par 2, bogey 1 og dobbeltbogey eller værre 0, så et katastrofehul kun koster det huls point. Begge spilles oftest på netto med WHS-slag fordelt via handicapnøgle."
             }
           },
           {
@@ -126,7 +126,7 @@ structuredData: |
 ---
 <h2>Kort fortalt</h2>
 <p>I <a href="{% guideUrl "slaggolf" %}">slagspil</a> tæller du hvert slag, og lavest total vinder. Et katastrofehul følger med hele vejen til sidste green. I <a href="{% guideUrl "stableford" %}">Stableford</a> samler du point pr. hul: et godt hul giver point, et rigtig dårligt giver bare nul og påvirker ikke resten af runden. Du kan tage bolden op og gå videre.</p>
-<p>Begge spilles oftest på netto, med dine WHS-slag fordelt på de sværeste huller efter banens stroke-index. Det er den samme handicapmodel i bunden. Forskellen ligger i, hvordan et enkelt hul påvirker din stilling.</p>
+<p>Begge spilles oftest på netto, med dine WHS-slag fordelt på de sværeste huller efter banens handicapnøgle. Det er den samme handicapmodel i bunden. Forskellen ligger i, hvordan et enkelt hul påvirker din stilling.</p>
 
 <h2>Sammenligning side om side</h2>
 <table>
@@ -140,7 +140,7 @@ structuredData: |
     <tr><td>Et dårligt hul</td><td>Koster kun det huls point, højst 2 sammenlignet med netto par</td><td>Hvert ekstra slag følger med i totalen hele runden</td></tr>
     <tr><td>Tage bolden op</td><td>Ja, når hullet ikke kan give point, tager du bolden op og går videre</td><td>Nej, hvert slag skal spilles i hul</td></tr>
     <tr><td>Tempo</td><td>Højt, ingen jagter tabte huller</td><td>Lavere, alle spiller hvert hul færdigt</td></tr>
-    <tr><td>Handicap</td><td>Netto via stroke-index, samme WHS-model</td><td>Netto via stroke-index, eller brutto uden handicap</td></tr>
+    <tr><td>Handicap</td><td>Netto via handicapnøgle, samme WHS-model</td><td>Netto via handicapnøgle, eller brutto uden handicap</td></tr>
     <tr><td>Passer bedst til</td><td>Blandede hold, venskabsrunder, hurtigt spil</td><td>Jævne hold, ægte slagoptælling, handicaprunder</td></tr>
     <tr><td>Mest almindeligt i turnering</td><td>Næsten alle klubturneringer spilles som Stableford</td><td>Mesterskaber, scratchturneringer og professionel golf</td></tr>
   </tbody>

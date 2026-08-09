@@ -35,4 +35,4 @@ Vegas er holdformen for den, der kan lide dramatik. To hold af hver to spillere 
 
 Det er her, Vegas bliver skarpt. Laver dit hold en birdie, men ikke modstanderne, vendes deres tal, så 46 bliver til 64. Laver nogen eagle eller bedre, fordobles hullets forskel, og birder begge på et hold, fordobles den også. Bonusserne lægges oveni hinanden, så en varm stime kan koste modstanderne dyrt.
 
-Vegas spilles på brutto, fordi hele talmekanikken bygger på virkelige scorer. Vil I have handicap-udligning, passer best-ball eller Foursome bedre. Wager Golf bygger tallene, håndterer flips og bonusser og holder den samlede forskel for jer.
+Vegas spilles på brutto, fordi hele talmekanikken bygger på virkelige scorer. Vil I have handicap-udligning, passer Four-Ball eller Foursome bedre. Wager Golf bygger tallene, håndterer flips og bonusser og holder den samlede forskel for jer.
