@@ -78,8 +78,8 @@ uppdatera preload-länkarna i `_includes/base.njk` vid behov.
 
 ## Lägga till ett språk
 
-Fyra språk är förberedda i `_data/routes.js` (sv, nb, da, en) men bara
-svenska är publicerat i dag. Sökvägarna är marknadsbaserade (`/no/`, `/dk/`,
+Fyra språk är publicerade via `_data/routes.js` (sv, nb, da, en).
+Sökvägarna är marknadsbaserade (`/no/`, `/dk/`,
 `/en/`) medan hreflang är språkbaserad (`nb`, `da`, `en`) — de skiljer sig
 medvetet, se kommentaren överst i `_data/routes.js`. Ett språk går live
 genom att:
@@ -176,17 +176,14 @@ självt. Att sökvägen för danska heter `/dk/` gör misstaget extra frestande 
 kontrollera alltid mot `hreflang`-fältet i `_data/routes.js`, aldrig mot
 sökvägsprefixet.
 
-### Slå på norska eller danska
+### Publicera eller pausa ett språk
 
-Båda språken är färdigöversatta men **inte publicerade**. De byggs och
-deployas, men är helt inerta: ingen hreflang, ingen språkväljare, inget i
-sitemap, och `noindex` på varje sida. Så länge appen inte finns i norska
-respektive danska App Store är det avsiktligt — en besökare som klickar
-"Last ned" och möts av "appen er ikke tilgjengelig i din region" kommer inte
-tillbaka.
+Norska och danska är publicerade. De syns i hreflang, språkväxlare och
+sitemap, och sidorna är indexerbara. Om ett språk tillfälligt måste pausas
+tas det bort från de tre listorna nedan och sajten deployas på nytt.
 
-Att slå på ett av dem kräver en enda ändring, på tre ställen som måste följas
-åt (`tests/published-in-sync.test.js` fäller bygget annars):
+Att ändra publiceringsstatus kräver samma ändring på tre ställen som måste
+följas åt (`tests/published-in-sync.test.js` fäller bygget annars):
 
 1. `_data/routes.js` — lägg till språket i `PUBLISHED`.
 2. `functions/go.js` — samma tillägg.

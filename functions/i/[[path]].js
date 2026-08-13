@@ -12,7 +12,7 @@
 // byggs separat från Eleventy: .eleventy.js passthrough-kopierar functions/ in
 // i _site/, och _data/ följer inte med. Läggs ett språk till där måste det
 // läggas till här också, annars får språkets besökare svenska.
-const PUBLISHED = ['sv', 'en'];
+const PUBLISHED = ['sv', 'nb', 'da', 'en'];
 
 /** Sökvägen till den asset som ska serveras för ett språk. Svenskan ligger i
  *  roten, övriga bakom sitt prefix. */
