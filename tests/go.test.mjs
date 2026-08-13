@@ -5,8 +5,7 @@ import { onRequestGet, sanitizeCampaign, pickLang } from '../functions/go.js';
 const req = (url, headers = {}) => new Request(url, { headers });
 
 // Full uppsättning för att testa själva språkvalslogiken oberoende av vilka
-// språk som råkar vara publicerade just nu (våg 1: bara sv). Utan detta skulle
-// t.ex. no/nb-hanteringen förbli otestad tills den aktiveras i en senare våg.
+// språk som råkar vara publicerade just nu.
 const ALLA = ['sv', 'nb', 'da', 'en'];
 
 test('sanerar Metas kampanjnamn till något butiken accepterar', () => {
@@ -26,7 +25,7 @@ test('sanerad sträng kortas och slutar aldrig på bindestreck', () => {
 test('l tvingar språk oavsett Accept-Language', () => {
   // pickLang testas här direkt med en injicerad publicerad-lista som
   // innehåller alla fyra språk, så själva valet ("da" trumfar Accept-Language)
-  // går att verifiera redan nu, innan da faktiskt är publicerat i våg 1.
+  // går att verifiera direkt mot en uttrycklig lista.
   const url = new URL('https://wagergolf.se/go?l=da');
   const request = req('https://wagergolf.se/go?l=da', { 'accept-language': 'en-US,en;q=0.9' });
   assert.strictEqual(pickLang(url, request, ALLA), 'da');
@@ -50,13 +49,14 @@ test('okänt språk i l faller tillbaka på svenska även när allt är publicer
   assert.strictEqual(pickLang(url, request, ALLA), 'sv');
 });
 
-test('opublicerat språk faller tillbaka på svenska (våg 1: bara sv är live)', async () => {
-  // publishedLocales är ["sv"] i våg 1, så även l=da ska ge svenska. Detta är
-  // regressionslåset för produktionens faktiska PUBLISHED-lista (default-
-  // parametern i pickLang), till skillnad från testerna ovan som injicerar
-  // en egen lista för att pröva valmekaniken oberoende av vilken våg vi är i.
+test('publicerat danskt språk leder till den danska startsidan', async () => {
   const res = await onRequestGet({ request: req('https://wagergolf.se/go?l=da') });
-  assert.strictEqual(res.headers.get('Location'), '/');
+  assert.strictEqual(res.headers.get('Location'), '/dk/');
+});
+
+test('publicerat norskt språk leder till den norska startsidan', async () => {
+  const res = await onRequestGet({ request: req('https://wagergolf.se/go?l=nb') });
+  assert.strictEqual(res.headers.get('Location'), '/no/');
 });
 
 test('c ger utm-parametrar på landningssidan', async () => {

@@ -28,7 +28,7 @@
 // svenska startsidan, tyst, eftersom pickLang faller tillbaka på
 // DEFAULT_LANG för alla språk som inte står i listan nedan.
 const PREFIX = { sv: '', nb: '/no', da: '/dk', en: '/en' };
-const PUBLISHED = ['sv', 'en'];
+const PUBLISHED = ['sv', 'nb', 'da', 'en'];
 const DEFAULT_LANG = 'sv';
 
 /** Butikernas kampanjfält är fritext men trivs inte med mellanslag, versaler
@@ -48,7 +48,7 @@ export function sanitizeCampaign(raw) {
  *  på svenska, så en kampanjlänk kan tryckas innan översättningen är klar utan
  *  att leda till en tom katalog.
  *
- *  `published` tar default från PUBLISHED (våg 1: bara sv), men går att
+ *  `published` tar default från PUBLISHED, men går att
  *  skicka in explicit i tester. Utan den möjligheten skulle själva
  *  språkvalslogiken — att ?l=da väljer danska, att Accept-Language: nb-NO
  *  väljer bokmål, att "no" och "nb" räknas som samma skriftspråk — förbli
