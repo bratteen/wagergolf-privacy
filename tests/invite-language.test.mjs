@@ -19,4 +19,5 @@ test('inbjudningssidan kan välja alla språk när de publiceras', () => {
   assert.strictEqual(pickLang('da-DK,da;q=0.9', allLocales), 'da');
   assert.strictEqual(pickLang('nb-NO,nb;q=0.9', allLocales), 'nb');
   assert.strictEqual(pickLang('no-NO,no;q=0.9', allLocales), 'nb');
+  assert.strictEqual(pickLang('fi-FI,fi;q=0.9', allLocales), 'fi');
 });

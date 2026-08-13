@@ -1,0 +1,19 @@
+<h2>Mikä on {{ guide.format }}?</h2>
+<p>{{ guide.lede }}</p>
+
+<h2>Näin pelataan</h2>
+<ul>
+  {% for rule in guide.rules %}<li>{{ rule }}</li>{% endfor %}
+</ul>
+
+<h2>Näin tulos lasketaan</h2>
+<p>{{ guide.calculation }}</p>
+
+<h2>Tasoitus</h2>
+<p>{{ guide.handicap }}</p>
+
+<h2>Esimerkki</h2>
+<p>{{ guide.example }}</p>
+
+<h2>Wager Golf hoitaa laskemisen</h2>
+<p>Valitse {{ guide.format }} kierrosta luodessa ja syötä lyönnit reikä kerrallaan. Wager Golf käyttää valittua tasoitustapaa, näyttää tilanteen suorana ja tekee maksujen loppuselvityksen kierroksen päättyessä. Sovellus ei vastaanota tai siirrä rahaa.</p>

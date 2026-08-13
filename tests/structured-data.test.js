@@ -27,6 +27,10 @@ test('inLanguage följer språket', () => {
   const da = JSON.parse(guideGraph({ ...ARGS, lang: 'da' }));
   const daArticle = da['@graph'].find((n) => n['@type'] === 'Article');
   assert.strictEqual(daArticle.inLanguage, 'da-DK');
+
+  const fi = JSON.parse(guideGraph({ ...ARGS, lang: 'fi' }));
+  const fiArticle = fi['@graph'].find((n) => n['@type'] === 'Article');
+  assert.strictEqual(fiArticle.inLanguage, 'fi-FI');
 });
 
 test('breadcrumb använder de skickade namnen', () => {
@@ -36,6 +40,12 @@ test('breadcrumb använder de skickade namnen', () => {
   const crumbs = graph['@graph'].find((n) => n['@type'] === 'BreadcrumbList');
   assert.deepStrictEqual(crumbs.itemListElement.map((i) => i.name),
     ['Home', 'Game formats', 'Stableford']);
+});
+
+test('breadcrumbens startsida följer sidans språk', () => {
+  const graph = JSON.parse(guideGraph({ ...ARGS, lang: 'fi' }));
+  const crumbs = graph['@graph'].find((n) => n['@type'] === 'BreadcrumbList');
+  assert.strictEqual(crumbs.itemListElement[0].item, 'https://wagergolf.se/fi/');
 });
 
 test('FAQPage läggs bara till när det finns frågor', () => {

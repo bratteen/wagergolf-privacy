@@ -21,6 +21,10 @@ const MARKETS = {
   nb: { store: "no", play: "no", gl: "NO", campaign: "webb-no" },
   da: { store: "dk", play: "da", gl: "DK", campaign: "webb-dk" },
   en: { store: "us", play: "en", gl: "US", campaign: "webb-en" },
+  // Irland delar engelskt innehåll men måste ha en egen storefront och
+  // kampanj. `ie` är därför en marknadsnyckel, inte ett nytt språk.
+  ie: { store: "ie", play: "en", gl: "IE", campaign: "webb-ie" },
+  fi: { store: "fi", play: "fi", gl: "FI", campaign: "webb-fi" },
 };
 
 /** App Store-länk med kampanjmärkning. Faller tillbaka på den rena länken så

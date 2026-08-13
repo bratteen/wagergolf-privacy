@@ -48,7 +48,7 @@
   {% if site.umami.websiteId %}<script defer src="{{ site.umami.src }}" data-website-id="{{ site.umami.websiteId }}"></script>
   {% if site.umami.recorderSrc %}<script defer src="/assets/js/replay-sample.js{% if assets.replay %}?v={{ assets.replay }}{% endif %}" data-recorder-src="{{ site.umami.recorderSrc }}" data-website-id="{{ site.umami.websiteId }}" data-sample-rate="{{ site.umami.replaySampleRate }}"></script>{% endif %}{% endif %}
 </head>
-<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %} data-market="{{ market or lang }}">
   {%- include "language-banner.njk" %}
   <header>
     <div class="wrap nav">
@@ -59,7 +59,7 @@
       <nav class="nav-links">
         <a href="{{ routes.homeFor(lang) }}#funktioner">{{ t.nav.features }}</a>
         <a class="nav-keep" href="{{ routes.pathFor(lang, 'formats') }}">{{ t.nav.formats }}</a>
-        <a class="nav-cta" href="{{ routes.locales[lang].downloadPath }}" data-download-link data-store-link data-ios-url="{{ site.storeUrls[lang].appStore }}" data-android-url="{{ site.storeUrls[lang].playStore }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
+        <a class="nav-cta" href="{% if market == 'ie' %}/ladda-ner?m=ie{% else %}{{ routes.locales[lang].downloadPath }}{% endif %}" data-download-link data-store-link data-ios-url="{{ site.storeUrls[market or lang].appStore }}" data-android-url="{{ site.storeUrls[market or lang].playStore }}" data-ios-market-ie="{{ site.storeUrls.ie.appStore }}" data-android-market-ie="{{ site.storeUrls.ie.playStore }}" data-download-market-ie="/ladda-ner?m=ie" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
         {#- <div>, inte <nav>: den här inkluderingen ligger inuti
             <nav class="nav-links"> ovan, och ett nästlat nav-landmark är
             förvirrande för skärmläsare. Se kommentaren i

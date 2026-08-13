@@ -2,6 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert');
 const { readdirSync, readFileSync, existsSync } = require('node:fs');
 const routes = require('../_data/routes.js');
+const fiGuides = require('../_data/fiGuides.js');
 
 // Ett språk får inte stå i publishedLocales förrän varje svensk sida har en
 // motsvarighet. Halvöversatta språk i sitemap och hreflang ger tunna sidor i
@@ -26,6 +27,11 @@ function keysUnder(dir) {
     }
   }
   return keys;
+}
+
+function generatedKeys(lang) {
+  if (lang === 'fi') return new Set(fiGuides.map((g) => `guide:${g.key}`));
+  return new Set();
 }
 
 /** Svenskans nycklar: rotens sidor plus guiderna. Guidernas key sätts av
@@ -55,6 +61,7 @@ for (const lang of routes.publishedLocales) {
   test(`${lang} är publicerat och måste därför vara komplett`, () => {
     const dir = routes.locales[lang].prefix.replace(/^\//, '');
     const has = keysUnder(dir);
+    for (const key of generatedKeys(lang)) has.add(key);
     const missing = [...SV].filter((k) => !has.has(k)).sort();
     assert.deepStrictEqual(
       missing,

@@ -7,6 +7,8 @@ test('varje språk har en egen storefront', () => {
   assert.ok(site.storeUrls.nb.appStore.includes('/no/'));
   assert.ok(site.storeUrls.da.appStore.includes('/dk/'));
   assert.ok(site.storeUrls.en.appStore.includes('/us/'));
+  assert.ok(site.storeUrls.ie.appStore.includes('/ie/'));
+  assert.ok(site.storeUrls.fi.appStore.includes('/fi/'));
 });
 
 test('kampanjnamnen är marknadsbaserade', () => {
@@ -14,6 +16,20 @@ test('kampanjnamnen är marknadsbaserade', () => {
   assert.strictEqual(site.storeUrls.nb.campaign, 'webb-no');
   assert.strictEqual(site.storeUrls.da.campaign, 'webb-dk');
   assert.strictEqual(site.storeUrls.en.campaign, 'webb-en');
+  assert.strictEqual(site.storeUrls.ie.campaign, 'webb-ie');
+  assert.strictEqual(site.storeUrls.fi.campaign, 'webb-fi');
+});
+
+test('Irland återanvänder engelska men har irländsk Play-storefront', () => {
+  const url = new URL(site.storeUrls.ie.playStore);
+  assert.strictEqual(url.searchParams.get('hl'), 'en');
+  assert.strictEqual(url.searchParams.get('gl'), 'IE');
+});
+
+test('Finland har finsk Play-storefront', () => {
+  const url = new URL(site.storeUrls.fi.playStore);
+  assert.strictEqual(url.searchParams.get('hl'), 'fi');
+  assert.strictEqual(url.searchParams.get('gl'), 'FI');
 });
 
 test('kampanjen ligger i ct på App Store-länken', () => {

@@ -31,6 +31,11 @@ const PREFIX = { sv: '', nb: '/no', da: '/dk', en: '/en' };
 const PUBLISHED = ['sv', 'nb', 'da', 'en'];
 const DEFAULT_LANG = 'sv';
 
+// Irland återanvänder den redan publicerade engelskan men behöver en egen
+// marknadslandning för korrekt storefront. Finland läggs medvetet INTE här
+// förrän den finska sajten och båda butikerna har publicerats.
+const PUBLISHED_MARKETS = { ie: '/en/?market=ie' };
+
 /** Butikernas kampanjfält är fritext men trivs inte med mellanslag, versaler
  *  eller emoji. Metas {{campaign.name}} expanderar till kampanjnamnet precis
  *  som det skrevs i annonsverktyget, så värdet måste saneras. */
@@ -71,17 +76,25 @@ export function pickLang(url, request, published = PUBLISHED) {
 
 export function onRequestGet({ request }) {
   const url = new URL(request.url);
+  const forcedMarket = url.searchParams.get('m');
   const lang = pickLang(url, request);
   const campaign = sanitizeCampaign(url.searchParams.get('c'));
 
-  let target = `${PREFIX[lang]}/`;
+  let target = PUBLISHED_MARKETS[forcedMarket] || `${PREFIX[lang]}/`;
+
+  // en-IE utan explicit parameter är en stark marknadssignal. Övriga
+  // engelska varianter går till den generella engelska sidan.
+  if (!forcedMarket && !url.searchParams.has('l')) {
+    const first = (request.headers.get('accept-language') || '').split(',')[0].trim().toLowerCase();
+    if (first === 'en-ie') target = PUBLISHED_MARKETS.ie;
+  }
   if (campaign) {
     const params = new URLSearchParams({
       utm_source: campaign,
       utm_medium: 'offline',
       utm_campaign: campaign,
     });
-    target += `?${params}`;
+    target += `${target.includes('?') ? '&' : '?'}${params}`;
   }
 
   return new Response(null, {

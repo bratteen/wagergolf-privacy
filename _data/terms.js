@@ -174,4 +174,67 @@ const TERMS = {
   poang: { sv: "Poäng", nb: "Poeng", da: "Point", en: "Points" },
 };
 
+// Suomen vakiintuneet nimet. Sovelluksen fi-katalogi on tuotteen ensisijainen
+// sanastolähde; tässä peilataan samat nimet verkkosisältöä ja slugien
+// julkaisuporttia varten. Kuvaavat slugit kirjoitetaan ASCII-muodossa, jotta
+// URL:t pysyvät vakaina.
+const FI_FORMATS = {
+  slaggolf: { name: "Lyöntipeli", slug: "lyontipeli" },
+  matchspel: { name: "Reikäpeli", slug: "reikapeli" },
+  stableford: { name: "Pistebogey (Stableford)", slug: "pistebogey", altName: "Stableford" },
+  nassau: { name: "Nassau", slug: "nassau" },
+  vegas: { name: "Vegas", slug: "vegas" },
+  wolf: { name: "Wolf", slug: "wolf" },
+  skins: { name: "Skins", slug: "skins" },
+  scramble: { name: "Scramble", slug: "scramble" },
+  foursome: { name: "Foursome", slug: "foursome" },
+  greensome: { name: "Greensome", slug: "greensome" },
+  sandie: { name: "Sandie", slug: "sandie" },
+  snake: { name: "Snake", slug: "snake" },
+  quota: { name: "Quota", slug: "quota" },
+  "bingo-bango-bongo": { name: "Bingo Bango Bongo", slug: "bingo-bango-bongo" },
+  bastboll: { name: "Four-Ball", slug: "four-ball" },
+  "langst-drive": { name: "Pisin draivi", slug: "pisin-draivi" },
+  "narmast-flaggan": { name: "Lähimmäs lippua", slug: "lahimmas-lippua" },
+  birdiepott: { name: "Birdiepotti", slug: "birdiepotti" },
+  klubbroulette: { name: "Mailaruletti", slug: "mailaruletti" },
+  golfpoker: { name: "Golfpokeri", slug: "golfpokeri" },
+  "split-sixes": { name: "Split Sixes", slug: "split-sixes" },
+};
+
+for (const [key, value] of Object.entries(FI_FORMATS)) {
+  FORMATS[key].fi = value;
+}
+
+const FI_TERMS = {
+  dubbelbogey: "Tuplabogey",
+  "hole-in-one": "Hole-in-one",
+  albatross: "Albatrossi",
+  spelhandicap: "Pelitasoitus",
+  "stroke-index": "Tasoitusindeksi",
+  "course-rating": "Course Rating",
+  brutto: "Brutto",
+  net: "Netto",
+  utslag: "Avaus",
+  pegga: "Tiiaaminen",
+  honnor: "Avausvuoro",
+  greenfee: "Green fee",
+  gimme: "Gimme",
+  mulligan: "Mulligan",
+  sidobet: "Sivupeli",
+  pott: "Potti",
+  insats: "Panos",
+  hal: "Reikä",
+  runda: "Kierros",
+  bana: "Kenttä",
+  spelform: "Pelimuoto",
+  scorekort: "Tuloskortti",
+  slag: "Lyönti",
+  poang: "Pisteet",
+};
+
+for (const [key, value] of Object.entries(FI_TERMS)) {
+  TERMS[key].fi = value;
+}
+
 module.exports = { FORMATS, TERMS };

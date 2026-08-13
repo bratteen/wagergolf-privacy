@@ -78,7 +78,9 @@ uppdatera preload-länkarna i `_includes/base.njk` vid behov.
 
 ## Lägga till ett språk
 
-Fyra språk är publicerade via `_data/routes.js` (sv, nb, da, en).
+Fyra språk är publicerade via `_data/routes.js` (sv, nb, da, en). Finska är
+tekniskt förberett men avsiktligt opublicerat och `noindex`; se
+`docs/2026-08-13-finland-native-review.md`.
 Sökvägarna är marknadsbaserade (`/no/`, `/dk/`,
 `/en/`) medan hreflang är språkbaserad (`nb`, `da`, `en`) — de skiljer sig
 medvetet, se kommentaren överst i `_data/routes.js`. Ett språk går live
