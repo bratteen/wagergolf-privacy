@@ -49,7 +49,7 @@ test('svenskan i ordlistan matchar guidernas frontmatter exakt', () => {
   }
 });
 
-test('varje format har alla fyra språken med namn och slug', () => {
+test('varje format har alla kända språk med namn och slug', () => {
   for (const [key, entry] of Object.entries(FORMATS)) {
     for (const lang of LANGS) {
       assert.ok(entry[lang], `${key} saknar ${lang}`);
@@ -86,7 +86,7 @@ test('inga två format delar slug inom samma språk', () => {
   }
 });
 
-test('varje term har alla fyra språken', () => {
+test('varje term har alla kända språk', () => {
   for (const [key, entry] of Object.entries(TERMS)) {
     for (const lang of LANGS) {
       assert.ok(entry[lang], `termen "${key}" saknar ${lang}`);

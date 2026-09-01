@@ -40,6 +40,42 @@ test('desktop faller tillbaka på språkets startsida, inte roten', async () => 
   assert.strictEqual(res.headers.get('Location'), '/dk/#top');
 });
 
+test('m=ie väljer irländska butiker trots att innehållet är engelskt', async () => {
+  const ios = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?l=en&m=ie', IPHONE),
+  });
+  assert.match(ios.headers.get('Location'), /apps\.apple\.com\/ie\//);
+  assert.match(ios.headers.get('Location'), /ct=webb-ie(&|$)/);
+
+  const android = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?m=ie', ANDROID),
+  });
+  const play = new URL(android.headers.get('Location'));
+  assert.strictEqual(play.searchParams.get('hl'), 'en');
+  assert.strictEqual(play.searchParams.get('gl'), 'IE');
+});
+
+test('irländsk desktop går till engelskan med bevarad marknad', async () => {
+  const res = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?m=ie', DESKTOP),
+  });
+  assert.strictEqual(res.headers.get('Location'), '/en/?market=ie#top');
+});
+
+test('finska sidan använder finska storefronts', async () => {
+  const ios = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?l=fi', IPHONE),
+  });
+  assert.match(ios.headers.get('Location'), /apps\.apple\.com\/fi\//);
+
+  const android = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?l=fi', ANDROID),
+  });
+  const play = new URL(android.headers.get('Location'));
+  assert.strictEqual(play.searchParams.get('hl'), 'fi');
+  assert.strictEqual(play.searchParams.get('gl'), 'FI');
+});
+
 test('svensk desktop behåller dagens fallback exakt', async () => {
   const res = await onRequestGet({ request: req('https://wagergolf.se/ladda-ner', DESKTOP) });
   assert.strictEqual(res.headers.get('Location'), '/#top');
@@ -48,6 +84,11 @@ test('svensk desktop behåller dagens fallback exakt', async () => {
 test('okänd marknad faller tillbaka på svenska', () => {
   assert.strictEqual(marketFor('klingon').campaign, 'webb');
   assert.strictEqual(marketFor(null).campaign, 'webb');
+});
+
+test('m trumfar l eftersom språk och marknad inte är samma sak', () => {
+  assert.strictEqual(marketFor('en', 'ie').campaign, 'webb-ie');
+  assert.strictEqual(marketFor('fi', null).campaign, 'webb-fi');
 });
 
 test('svaret får aldrig cachas delat', async () => {

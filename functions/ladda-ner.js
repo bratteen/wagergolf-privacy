@@ -31,12 +31,17 @@ const MARKETS = {
   nb: { store: 'no', play: 'no', gl: 'NO', campaign: 'webb-no', home: '/no/' },
   da: { store: 'dk', play: 'da', gl: 'DK', campaign: 'webb-dk', home: '/dk/' },
   en: { store: 'us', play: 'en', gl: 'US', campaign: 'webb-en', home: '/en/' },
+  ie: { store: 'ie', play: 'en', gl: 'IE', campaign: 'webb-ie', home: '/en/?market=ie' },
+  fi: { store: 'fi', play: 'fi', gl: 'FI', campaign: 'webb-fi', home: '/fi/' },
 };
 
-/** Marknad från ?l=. Okänt eller saknat språk faller tillbaka på svenska, så
+/** Marknad från ?m=, med språkets standardmarknad från ?l= som reserv.
+ *  Irland och engelska delar språk men inte storefront, därför kan marknad
+ *  inte längre härledas entydigt enbart från `l=en`.
+ *  Okänt eller saknat värde faller tillbaka på svenska, så
  *  en trasig eller föråldrad länk aldrig ger en tom eller trasig omdirigering. */
-export function marketFor(lang) {
-  return MARKETS[lang] || MARKETS.sv;
+export function marketFor(lang, market) {
+  return MARKETS[market] || MARKETS[lang] || MARKETS.sv;
 }
 
 // Bygg alltid på den landsprefixade adressen. App Store Connects egen
@@ -58,7 +63,7 @@ function playStore(market) {
 
 export function onRequestGet({ request }) {
   const url = new URL(request.url);
-  const market = marketFor(url.searchParams.get('l'));
+  const market = marketFor(url.searchParams.get('l'), url.searchParams.get('m'));
   const ua = request.headers.get('user-agent') || '';
 
   // Android testas först: Android-webbläsare kan innehålla "Linux" men aldrig

@@ -59,6 +59,37 @@ test('publicerat norskt språk leder till den norska startsidan', async () => {
   assert.strictEqual(res.headers.get('Location'), '/no/');
 });
 
+test('m=ie leder till den engelska sidan med irländsk marknad', async () => {
+  const res = await onRequestGet({ request: req('https://wagergolf.se/go?m=ie') });
+  assert.strictEqual(res.headers.get('Location'), '/en/?market=ie');
+});
+
+test('en-IE väljer Irland utan att andra engelska varianter påverkas', async () => {
+  const ie = await onRequestGet({
+    request: req('https://wagergolf.se/go', { 'accept-language': 'en-IE,en;q=0.9' }),
+  });
+  assert.strictEqual(ie.headers.get('Location'), '/en/?market=ie');
+
+  const gb = await onRequestGet({
+    request: req('https://wagergolf.se/go', { 'accept-language': 'en-GB,en;q=0.9' }),
+  });
+  assert.strictEqual(gb.headers.get('Location'), '/en/');
+});
+
+test('Irland behåller både marknad och kampanj', async () => {
+  const res = await onRequestGet({
+    request: req('https://wagergolf.se/go?m=ie&c=irish-golf'),
+  });
+  const location = res.headers.get('Location');
+  assert.ok(location.startsWith('/en/?market=ie&'));
+  assert.ok(location.includes('utm_campaign=irish-golf'));
+});
+
+test('Finland är fortfarande stängt i publiceringsgrinden', async () => {
+  const res = await onRequestGet({ request: req('https://wagergolf.se/go?l=fi') });
+  assert.strictEqual(res.headers.get('Location'), '/');
+});
+
 test('c ger utm-parametrar på landningssidan', async () => {
   const res = await onRequestGet({
     request: req('https://wagergolf.se/go?c=podd-golfsnack'),

@@ -11,6 +11,9 @@ test('marknadsbaserade prefix, språkbaserad hreflang', () => {
   assert.strictEqual(routes.locales.da.hreflang, 'da');
   assert.strictEqual(routes.locales.nb.prefix, '/no');
   assert.strictEqual(routes.locales.nb.hreflang, 'nb');
+  assert.strictEqual(routes.locales.fi.prefix, '/fi');
+  assert.strictEqual(routes.locales.fi.hreflang, 'fi');
+  assert.strictEqual(routes.locales.fi.htmlLang, 'fi');
 });
 
 test('ingen hreflang är en landskod', () => {
@@ -41,6 +44,12 @@ test('downloadPath är en färdig sökväg, inte ett segment', () => {
   assert.strictEqual(routes.locales.nb.downloadPath, '/ladda-ner?l=nb');
   assert.strictEqual(routes.locales.da.downloadPath, '/ladda-ner?l=da');
   assert.strictEqual(routes.locales.en.downloadPath, '/ladda-ner?l=en');
+  assert.strictEqual(routes.locales.fi.downloadPath, '/ladda-ner?l=fi');
+});
+
+test('finska on valmisteltu mutta ei julkaistu', () => {
+  assert.ok(routes.locales.fi);
+  assert.ok(!routes.publishedLocales.includes('fi'));
 });
 
 test('svenskans downloadPath saknar avslutande snedstreck', () => {

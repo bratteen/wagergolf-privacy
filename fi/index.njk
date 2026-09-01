@@ -1,0 +1,143 @@
+---
+layout: base.njk
+key: page:home
+updated: "2026-08-13"
+permalink: /fi/
+title: "Wager Golf, 21 pelimuotoa ja automaattinen loppuselvitys"
+description: "Live-tuloskortti, 21 golfpelimuotoa, oikea WHS-tasoitus ja automaattinen loppuselvitys golfporukalle."
+ogTitle: "Wager Golf"
+ogDescription: "21 pelimuotoa, live-tuloskortti ja maksujen loppuselvitys ilman päässälaskua."
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": { "@type": "ImageObject", "url": "https://wagergolf.se/assets/logo.png", "width": 192, "height": 192 }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Wager Golf",
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "SportsApplication",
+        "url": "https://wagergolf.se/fi/",
+        "inLanguage": "fi",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Tarvitseeko jokainen pelaaja sovelluksen?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ei. Yksi pelaaja voi ylläpitää koko ryhmän tuloskorttia ja lisätä muut vieraspelaajina." }
+          },
+          {
+            "@type": "Question",
+            "name": "Käsitteleekö Wager Golf pelaajien rahoja?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ei. Sovellus laskee tulokset ja näyttää maksujen loppuselvityksen, mutta ei vastaanota, säilytä eikä siirrä rahaa." }
+          },
+          {
+            "@type": "Question",
+            "name": "Toimiiko oma kenttäni?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Sovelluksessa on yli 1 400 kenttää Suomessa, Irlannissa, Ruotsissa, Tanskassa ja Norjassa." }
+          }
+        ]
+      }
+    ]
+  }
+---
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow on-dark">iPhonelle ja Androidille</span>
+        <h1>Pelaa <span class="accent">muustakin kuin kunniasta.</span></h1>
+        <p class="lede">Wager Golf pitää golfporukan pelit järjestyksessä. 21 pelimuotoa lasketaan automaattisesti, ja kierroksen jälkeen näette heti, kuka maksaa kenelle. Ei paperia, laskinta eikä väittelyä klubilla.</p>
+        <div class="cta-row">
+          {% set storePlats = "startsida-hero" %}
+          {% include "store-badges.njk" %}
+          <span class="cta-note">Ilmainen aloittaa, iPhonelle ja Androidille</span>
+        </div>
+      </div>
+      <div class="hero-phone">
+        <img src="{% shot "live" %}" alt="Wager Golfin live-tuloskortti" loading="eager" fetchpriority="high" width="640" height="1306">
+        <span class="hero-stamp">Reikä kerrallaan, suorana</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="holestrip" aria-hidden="true">
+    <div class="wrap holestrip-inner">
+      {% for i in range(1, 18) %}<span>{{ i }}</span>{% endfor %}
+    </div>
+  </div>
+
+  <section class="stats">
+    <div class="wrap"><div class="stats-grid reveal">
+      <div class="stat"><div class="num brass">21</div><div class="label">pelimuotoa automaattisella laskennalla</div></div>
+      <div class="stat"><div class="num">1 400+</div><div class="label">kenttää viidessä maassa</div></div>
+      <div class="stat"><div class="num" style="font-size:46px">Ilmainen</div><div class="label">aloittaa ilman mainoksia</div></div>
+    </div></div>
+  </section>
+
+  <section class="steps">
+    <div class="wrap">
+      <div class="head reveal"><span class="eyebrow">Näin se toimii</span><h2>Kolme vaihetta, ei paperia</h2></div>
+      <div class="steps-grid reveal">
+        <div class="step"><div class="step-num">01</div><h3>Lisää peliporukka</h3><p>Valitse kenttä, 1–4 pelaajaa ja pelimuodot. Pelatkaa rahapanoksella tai ilman.</p></div>
+        <div class="step"><div class="step-num">02</div><h3>Syötä tulokset</h3><p>Yksi pelaaja voi pitää koko korttia, tai jokainen voi syöttää tuloksensa omalla puhelimellaan. Tilanne päivittyy heti.</p></div>
+        <div class="step"><div class="step-num">03</div><h3>Tee loppuselvitys</h3><p>Sovellus laskee nettotulokset ja näyttää mahdollisimman vähillä maksuilla, kuka maksaa kenelle. Pelaajat maksavat toisilleen omalla tavallaan.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="funktioner"></div>
+  <section class="feature">
+    <div class="wrap feature-inner reveal">
+      <div class="feature-text"><span class="eyebrow">Live-tuloskortti</span><h2>Koko ryhmä yhdellä kortilla</h2><p>Syötä lyönnit reikä kerrallaan. Näe brutto- ja nettotulos, pistebogeypisteet sekä kaikkien valittujen pelimuotojen tilanne reaaliajassa.</p></div>
+      <div class="feature-shot"><img src="{% shot "live" %}" alt="Live-tuloskortti" loading="lazy" width="640" height="1306"></div>
+    </div>
+  </section>
+  <section class="feature">
+    <div class="wrap feature-inner reveal">
+      <div class="feature-text"><span class="eyebrow">Loppuselvitys</span><h2>Kuka maksaa kenelle, valmiiksi laskettuna</h2><p>Wager Golf yhdistää pelimuotojen tulokset ja vähentää maksujen määrän mahdollisimman pieneksi. Sovellus ei käsittele rahaa, vaan näyttää selkeän laskelman pelaajille.</p></div>
+      <div class="feature-shot"><img src="{% shot "settlement" %}" alt="Maksujen loppuselvitys" loading="lazy" width="640" height="1306"></div>
+    </div>
+  </section>
+  <section class="feature">
+    <div class="wrap feature-inner reveal">
+      <div class="feature-text"><span class="eyebrow">Kausi</span><h2>Kaveriporukan kilpailu jatkuu kierrosten välillä</h2><p>Kierroshistoria, kauden tulostaulukko ja keskinäiset tilastot. Seuraa kavereiden aktiivisia kierroksia ja kannusta heitä etänä.</p></div>
+      <div class="feature-shot"><img src="{% shot "home" %}" alt="Kauden tulokset ja tulostaulukko" loading="lazy" width="640" height="1306"></div>
+    </div>
+  </section>
+
+  <section class="formats" id="game-formats">
+    <div class="wrap">
+      <div class="head reveal"><span class="eyebrow">21 pelimuotoa</span><h2>Klassikoista villimpiin sivupeleihin</h2><p>Valitse yksi pääpeli ja lisää halutessasi sivupelejä. Sovellus pitää kaikki laskut erillään ja yhdistää ne lopuksi.</p></div>
+      <div class="format-grid reveal">
+        <a class="format-card" href="{% guideUrl "skins" %}"><h3>Skins</h3><p>Reikäkohtainen potti, joka siirtyy tasapelillä.</p></a>
+        <a class="format-card" href="{% guideUrl "nassau" %}"><h3>Nassau</h3><p>Etuysi, takaysi ja koko kierros erillisinä peleinä.</p></a>
+        <a class="format-card" href="{% guideUrl "stableford" %}"><h3>Pistebogey</h3><p>Pisteet suhteessa pariin oikealla tasoituksella.</p></a>
+        <a class="format-card" href="{% guideUrl "wolf" %}"><h3>Wolf</h3><p>Vaihtuva Wolf valitsee parin tai pelaa yksin.</p></a>
+        <a class="format-card" href="{% guideUrl "bastboll" %}"><h3>Four-Ball</h3><p>Kaksi vastaan kaksi, joukkueen parempi pallo lasketaan.</p></a>
+        <a class="format-card" href="{% guideUrl "golfpoker" %}"><h3>Golfpokeri</h3><p>Hyvistä tuloksista kortteja, paras pokerikäsi voittaa.</p></a>
+      </div>
+      <p style="text-align:center;margin-top:32px"><a href="/fi/pelimuodot/" class="text-link">Katso kaikki 21 pelimuotoa</a></p>
+    </div>
+  </section>
+
+  <section class="faq">
+    <h2>Usein kysyttyä</h2>
+    <div class="faq-item"><p class="faq-q">Tarvitseeko jokainen pelaaja sovelluksen?</p><p class="faq-a">Ei. Yksi pelaaja voi pitää koko ryhmän tuloskorttia. Muut voidaan lisätä vieraina, tai he voivat liittyä omilla tileillään ja seurata kierrosta suorana.</p></div>
+    <div class="faq-item"><p class="faq-q">Voiko pelata ilman rahaa?</p><p class="faq-a">Kyllä. Valitse kierrosta luodessa peli ilman panosta. Saat silti live-tuloskortin, pelimuotojen tilanteen ja voittajan.</p></div>
+    <div class="faq-item"><p class="faq-q">Käsitteleekö Wager Golf maksuja?</p><p class="faq-a">Ei. Sovellus laskee vain pelaajien sopiman pelin ja näyttää loppuselvityksen. Se ei vastaanota, säilytä eikä siirrä rahaa.</p></div>
+    <div class="faq-item"><p class="faq-q">Löytyykö oma kenttäni?</p><p class="faq-a">Sovelluksessa on yli 1 400 kenttää Suomessa, Irlannissa, Ruotsissa, Tanskassa ja Norjassa. Kenttädata sisältää parin, tasoitusindeksin ja tiipaikkojen WHS-arvot saatavuuden mukaan.</p></div>
+  </section>
+
+  <section class="closing"><div class="wrap"><span class="eyebrow">Valmis ensimmäiselle tiille?</span><h2>Anna sovelluksen <span class="accent">hoitaa laskeminen.</span></h2><p>Ilmainen aloittaa. Ei mainoksia, vain golfia.</p>{% set storePlats = "startsida-slut" %}{% include "store-badges.njk" %}</div></section>
+</main>

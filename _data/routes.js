@@ -32,6 +32,10 @@ const LOCALES = {
     prefix: "/en", hreflang: "en", htmlLang: "en", intl: "en-GB", label: "English",
     formats: "game-formats", glossary: "glossary", about: "about", downloadPath: "/ladda-ner?l=en",
   },
+  fi: {
+    prefix: "/fi", hreflang: "fi", htmlLang: "fi", intl: "fi-FI", label: "Suomi",
+    formats: "pelimuodot", glossary: "sanasto", about: "tietoa-meista", downloadPath: "/ladda-ner?l=fi",
+  },
 };
 
 // Vilka språk som är live. Både hreflang-härledningen och sitemap filtrerar mot

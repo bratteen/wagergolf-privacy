@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "features": "Ominaisuudet",
+    "formats": "Pelimuodot",
+    "download": "Lataa"
+  },
+  "breadcrumb": {
+    "home": "Etusivu"
+  },
+  "byline": {
+    "by": "Kirjoittaja",
+    "updated": "Päivitetty"
+  },
+  "faq": {
+    "heading": "Usein kysyttyä"
+  },
+  "guide": {
+    "ctaHeading": "Jätä pelimuodon {format} laskeminen sovellukselle",
+    "ctaText": "Wager Golf laskee kierroksen automaattisesti oikealla WHS-tasoituksella ja näyttää maksujen loppuselvityksen heti 18. reiän jälkeen.",
+    "related": "Lisää pelimuotoja"
+  },
+  "article": {
+    "related": "Lue seuraavaksi",
+    "ctaText": "Wager Golf laskee kierroksen automaattisesti oikealla WHS-tasoituksella ja näyttää maksujen loppuselvityksen heti 18. reiän jälkeen."
+  },
+  "footer": {
+    "formats": "Pelimuodot",
+    "glossary": "Golf-sanasto",
+    "about": "Tietoa meistä",
+    "privacy": "Tietosuojakäytäntö (englanniksi)",
+    "terms": "Käyttöehdot (englanniksi)",
+    "contact": "Yhteystiedot",
+    "tagline": "Golfarin rakentama, golfporukalle"
+  },
+  "store": {
+    "sub": "LATAA"
+  },
+  "switcher": {
+    "label": "Kieli"
+  },
+  "banner": {
+    "text": "Tämä sivu on saatavilla myös kielellä {language}",
+    "close": "Sulje"
+  }
+}

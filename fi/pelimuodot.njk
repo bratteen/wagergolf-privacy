@@ -1,0 +1,39 @@
+---
+layout: base.njk
+key: page:formats
+permalink: /fi/pelimuodot/
+title: "21 golfpelimuotoa: säännöt ja laskenta | Wager Golf"
+description: "Skins, Nassau, pistebogey, Wolf, reikäpeli, lyöntipeli, Scramble, Four-Ball ja 13 muuta pelimuotoa sääntöineen."
+ogTitle: "21 golfpelimuotoa"
+ogDescription: "Säännöt, tasoitukset ja laskenta yhdestä paikasta."
+---
+<main>
+  <section class="subhero"><div class="subhero-inner"><div class="breadcrumb"><a href="/fi/">Etusivu</a><span class="sep">/</span><span>Pelimuodot</span></div><h1>21 golfpelimuotoa</h1><p>Klassikot, joukkuepelit ja sivupelit. Jokaisessa oppaassa ovat säännöt, tasoitus ja käytännön laskenta.</p></div></section>
+
+  <section class="article-wrap"><div class="article">
+    <h2>Mikä sopii teidän ryhmällenne?</h2>
+    <p>Kahdelle pelaajalle reikäpeli on selkeä kaksintaistelu. Kolmelle Wolf ja Split Sixes on rakennettu alusta asti. Neljän pelaajan ryhmä voi valita joukkuepelin tai pinota useita henkilökohtaisia pelejä. Jos tasoituserot ovat suuria, pistebogey ja Quota tasoittavat peliä hyvin.</p>
+    <p><a href="/fi/pelimuodot/valitse-pelimuoto/">Avaa valintaopas</a>, jos ette vielä tiedä, mitä pelata.</p>
+  </div></section>
+
+  {% set groups = [
+    { name: "Klassikot", text: "Tunnetut tulos- ja reikäpelit koko kierrokselle." },
+    { name: "Reikäpelit", text: "Tapahtumat ja pisteet ratkaistaan reikä kerrallaan." },
+    { name: "Joukkuepelit", text: "Neljä pelaajaa kahdessa kahden hengen joukkueessa." },
+    { name: "Sivupelit", text: "Pienet kilpailut pääpelin rinnalle." }
+  ] %}
+  {% for group in groups %}
+  <section class="formats">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">{{ group.name }}</span><h2>{{ group.name }}</h2><p>{{ group.text }}</p></div>
+      <div class="format-grid">
+        {% for g in collections.guides | byCategory(group.name, lang) %}
+        <a class="format-card" href="{{ g.url }}"><h3>{{ g.data.format }}</h3><p>{{ g.data.lede }}</p><span>{{ g.data.players }}</span></a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endfor %}
+
+  <section class="closing"><div class="wrap"><h2>Valitse peli, sovellus hoitaa laskemisen</h2><p>Syötä tulokset reikä kerrallaan ja näe kaikkien pelien tilanne suorana.</p>{% set storePlats = "pelimuodot" %}{% include "store-badges.njk" %}</div></section>
+</main>

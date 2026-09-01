@@ -19,9 +19,46 @@
 // data-download-link, och ska märkas även på en sida utan nav (skulle någon
 // sådan tillkomma).
 (function () {
+  var params = new URLSearchParams(location.search);
+  var requestedMarket = params.get('market') ||
+    (document.body && document.body.getAttribute('data-market')) || '';
+  var i;
+
+  // Engelskan används i flera marknader. Irland får därför samma engelska
+  // innehåll men egna butikslänkar. Marknaden ligger i URL:en och följer med
+  // på interna engelska länkar; ingen cookie eller local/sessionStorage
+  // behövs, vilket håller webbens integritetslöfte intakt.
+  if (requestedMarket === 'ie') {
+    var marketStores = document.querySelectorAll('a[data-store-link]');
+    for (i = 0; i < marketStores.length; i++) {
+      var marketLink = marketStores[i];
+      var marketIos = marketLink.getAttribute('data-ios-market-ie');
+      var marketAndroid = marketLink.getAttribute('data-android-market-ie');
+      if (marketIos && marketAndroid) {
+        marketLink.setAttribute('data-ios-url', marketIos);
+        marketLink.setAttribute('data-android-url', marketAndroid);
+        marketLink.setAttribute('href', marketLink.getAttribute('data-download-market-ie') || '/ladda-ner?m=ie');
+      } else if (marketIos) {
+        marketLink.setAttribute('href', marketIos);
+      } else if (marketAndroid) {
+        marketLink.setAttribute('href', marketAndroid);
+      }
+    }
+
+    var internal = document.querySelectorAll('a[href^="/en/"]');
+    for (i = 0; i < internal.length; i++) {
+      try {
+        var internalUrl = new URL(internal[i].getAttribute('href'), location.origin);
+        internalUrl.searchParams.set('market', 'ie');
+        internal[i].setAttribute('href', internalUrl.pathname + internalUrl.search + internalUrl.hash);
+      } catch (e) {
+        // Lämna en trasig internlänk orörd; resten av sidan ska fungera.
+      }
+    }
+  }
+
   var links = document.querySelectorAll('a[data-download-link]');
   var ua = navigator.userAgent || '';
-  var i;
 
   if (links.length) {
     for (i = 0; i < links.length; i++) {
@@ -53,7 +90,6 @@
   // functions/go.js och lib/campaign.js. Filen körs utan bundler, så den kan
   // inte importera lib/campaign.js. Ändras saneringen på ett ställe måste den
   // ändras på alla tre.
-  var params = new URLSearchParams(location.search);
   var raw = params.get('c') || params.get('utm_campaign');
   var campaign = raw
     ? String(raw).toLowerCase().replace(/[^a-z0-9]+/g, '-')

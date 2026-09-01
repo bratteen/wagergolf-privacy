@@ -21,6 +21,8 @@ export const ASSET_FOR = {
   nb: '/no/i/',
   da: '/dk/i/',
   en: '/en/i/',
+  // Förberedd men inte aktiv förrän `fi` läggs till i PUBLISHED.
+  fi: '/fi/i/',
 };
 
 /** Första webbläsarspråket vi faktiskt har en inbjudningssida för. */
