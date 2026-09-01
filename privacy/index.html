@@ -79,7 +79,7 @@
   </div>
 
   <h1>Integritetspolicy för Wager Golf</h1>
-  <p class="meta">Senast uppdaterad: 8 augusti 2026 · Version 4.1</p>
+  <p class="meta">Senast uppdaterad: 1 september 2026 · Version 4.2</p>
 
   <h2>Sammanfattning</h2>
   <p>
@@ -88,16 +88,23 @@
     push-notiser, och dela med vänner sparar vi viss data på en server
     hos <strong>Supabase</strong> (EU-baserad). Du loggar in med Apple
     Sign-In (iOS) eller Google Sign-In (Android). Vi visar inga annonser och säljer aldrig data till tredje
-    part. Kontoradering kan begäras i en appversion som stöder det säkra
-    flödet eller via kontaktvägen längst ned på sidan.
+    part. På iPhone mäts appinstallationer endast genom Apples aggregerade
+    SKAdNetwork/AdAttributionKit-system, utan IDFA eller spårningsfråga. På
+    Android kan du frivilligt tillåta en enda installationssignal till
+    AppsFlyer för annonsmätning; appen fungerar likadant om du väljer nej.
+    Kontoradering kan begäras i en appversion som stöder det säkra flödet
+    eller via kontaktvägen längst ned på sidan.
   </p>
   <p>
     Användarvillkoren hittar du <a href="../terms/">här</a>.
   </p>
 
-  <h2>Ikraftträdande för det nya raderingsflödet</h2>
+  <h2>Ikraftträdande och appversioner</h2>
   <p>
-    Policyn gäller från 8 augusti 2026. Det detaljerade, checkpointade
+    Version 4.2 av policyn gäller från 1 september 2026. Avsnittet om
+    annonsmätning gäller endast appversioner där funktionen ingår; äldre
+    appversioner börjar inte samla in dessa uppgifter retroaktivt. Det
+    detaljerade, checkpointade
     raderingsflödet i avsnittet "Så fungerar kontoradering" för appversion 1.5
     aktiverades och verifierades i produktion den 17 juli 2026. Flödet används
     av appversioner som stöder det. Om din app kräver en uppdatering som du
@@ -108,6 +115,14 @@
   <p>
     Gustaf Bratt, Sverige, är personuppgiftsansvarig för Wager Golf. Du når
     oss på <!--email_off--><a href="mailto:bratt.gustaf@gmail.com">bratt.gustaf@gmail.com</a><!--/email_off-->.
+  </p>
+
+  <h2>Geografiskt tillämpningsområde</h2>
+  <p>
+    Policyn gäller i Sverige och, när Wager Golf görs tillgänglig där, i
+    Danmark, Norge, Irland, Finland, Nederländerna, Österrike, Portugal,
+    Belgien, Tyskland, Frankrike, Spanien och Italien. Samma
+    plattformsbaserade val för annonsmätning gäller i samtliga dessa länder.
   </p>
 
   <h2>Vilken data vi samlar in</h2>
@@ -140,8 +155,10 @@
       för andra inloggade användare.
     </li>
     <li>
-      <strong>Hemmarknad (Sverige, Danmark eller Norge)</strong>: vid en ny
-      installation kan appen föreslå en marknad utifrån enhetens region, men
+      <strong>Hemmarknad</strong>: Wager Golf stöder Sverige, Danmark, Norge,
+      Irland, Finland, Nederländerna, Österrike, Portugal, Belgien, Tyskland,
+      Frankrike, Spanien och Italien. Vid en ny installation kan appen föreslå
+      en marknad utifrån enhetens region, men
       du väljer den själv och kan ändra den i appen. Valet sparas lokalt och i
       din profil hos Supabase, visas som land eller flagga för andra inloggade
       användare och används för förvald valuta, bankatalog och vilka lokala
@@ -150,7 +167,7 @@
     </li>
     <li>
       <strong>Mobilnummer</strong> (valfritt): används bara för Swish-länkar
-      för svenska rundor i uppgörelse-vyn. Danmark och Norge kräver inget
+      för svenska rundor i uppgörelse-vyn. Övriga marknader kräver inget
       telefonnummer för den nuvarande manuella uppgörelsen. Numret kan visas
       för accepterade vänner och för
       runddeltagare som du uttryckligen ger betalningsåtkomst. Gästers nummer
@@ -194,6 +211,19 @@
       auditposter, raderingsstatus, recovery-kvitton och markörer för borttagna
       rundor används för säkerhet, felsökning och för att hindra raderad data
       från att återkomma efter offline-synk eller backupåterläsning.
+    </li>
+    <li>
+      <strong>Annonsmätningsidentifierare (endast Android och endast efter
+      samtycke)</strong>: om du aktivt tillåter installationsmätning kan
+      AppsFlyer behandla Googles återställningsbara Advertising ID (GAID), ett
+      AppsFlyer-installations-ID, Google Play Install Referrer och Meta Install
+      Referrer, IP-adress och IP-baserad ungefärlig plats, app- och OS-version,
+      enhetstyp/-modell, språk, tidsstämplar samt installations- och
+      kampanjuppgifter. Kryssrutan är avmarkerad som standard och inga
+      annonsmätningsdata skickas till AppsFlyer innan du samtycker. Vi skickar
+      inte Wager Golf-konto-ID, namn, handle, e-post, telefonnummer, exakt
+      GPS-position, golfdata, insatser, köp, prenumerationer eller egna
+      apphändelser.
     </li>
   </ul>
 
@@ -282,7 +312,7 @@
     förbjudet innehåll.
   </p>
 
-  <h2>Behörigheter (permissions)</h2>
+  <h2>Behörigheter och frivilliga val</h2>
   <ul>
     <li>
       <strong>Plats (GPS)</strong>: används om du godkänner platsbehörighet
@@ -302,6 +332,14 @@
       <strong>Push-notiser</strong>: krävs för att skicka aviseringar om
       vänners birdies, kommentarer, vänförfrågningar, etc. Du kan toggla av
       enskilda kategorier i appens notis-inställningar.
+    </li>
+    <li>
+      <strong>Installationsmätning på Android</strong>: detta är ett frivilligt
+      val i Wager Golf, inte en Android-popup. AppsFlyer startas först när ett
+      sparat samtycke finns. Du kan använda appen fullt ut utan att samtycka
+      och kan när som helst ändra valet under Profil → Installationsmätning.
+      Ett återkallat samtycke stoppar framtida sändning men raderar inte
+      automatiskt data som redan har skickats.
     </li>
   </ul>
 
@@ -365,8 +403,8 @@
 
   <h3>GolfAPI.io</h3>
   <p>
-    Bandata (par, stroke-index och GPS-koordinater för över 1 000 golfbanor i
-    Sverige, Danmark och Norge)
+    Bandata för över 3 000 golfbanor i de 13 marknader som anges ovan, med par,
+    stroke-index och GPS-koordinater där de finns tillgängliga,
     hämtas via vår egen Cloudflare Worker-proxy som anropar
     <a href="https://www.golfapi.io">GolfAPI.io</a>. Till GolfAPI.io går bara
     valt bana-ID via proxyn, inte personuppgifter, GPS-position eller
@@ -382,8 +420,8 @@
     Wager Golf visar vem som är skyldig vem och vilket belopp som gäller. För
     svenska rundor kan appen skapa en <code>swish://</code>-länk eller QR-kod
     med förifyllt belopp, mottagarnummer och meddelande. Swish-funktionen är
-    endast tillgänglig för rundor med Sverige som vald marknad. I Danmark och Norge gör spelarna för
-    närvarande betalningen manuellt utanför Wager Golf med den betalningsmetod
+    endast tillgänglig för rundor med Sverige som vald marknad. I övriga
+    marknader gör spelarna betalningen manuellt utanför Wager Golf med den betalningsmetod
     de själva väljer. Wager Golf behandlar inte betalningen, håller eller
     förmedlar inga insatser, är inte part i transaktionen och tar ingen avgift
     eller andel. Själva betalningen och betalappens transaktionsuppgifter går
@@ -443,15 +481,65 @@
     <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHubs integritetspolicy</a>.
   </p>
 
+  <h3>Apple SKAdNetwork / AdAttributionKit (iOS)</h3>
+  <p>
+    På iPhone registrerar Wager Golf endast Apples aggregerade
+    installationsvärde. Apple skapar en fördröjd, databegränsad postback som
+    kan rapportera kampanjresultat till Meta och en kopia till AppsFlyer.
+    iOS-appen kör ingen AppsFlyer- eller Meta-SDK, använder inte IDFA och visar
+    ingen App Tracking Transparency-fråga.
+  </p>
+
+  <h3>AppsFlyer och Meta (valfri Android-mätning)</h3>
+  <p>
+    På Android används <a href="https://www.appsflyer.com/legal/services-privacy-policy/">AppsFlyer</a>
+    först efter ditt frivilliga samtycke för att skicka en enda installations-
+    eller första öppningssignal. AppsFlyer kan dela kampanjattribution med
+    <a href="https://www.facebook.com/privacy/policy/">Meta Platforms</a>.
+    Wager Golf får inte tillgång till din Meta-profil och visar inga annonser i
+    appen. Datafält och begränsningar beskrivs i avsnitten ovan och nedan.
+  </p>
+
   <h3>Behandling utanför EU/EES</h3>
   <p>
     Supabase och PostHog är konfigurerade för EU-lagring. Vissa andra
-    leverantörer, exempelvis Apple, Google, RevenueCat, Expo, Sentry, Cloudflare
-    och GitHub, kan
+    leverantörer, exempelvis Apple, Google, RevenueCat, Expo, Sentry,
+    Cloudflare, GitHub, AppsFlyer och Meta, kan
     behandla uppgifter utanför EU/EES. Leverantörernas publicerade villkor och
     integritetstexter beskriver de skydd som gäller för deras överföringar,
     exempelvis adekvansbeslut eller EU:s standardavtalsklausuler. Kontakta oss
     om du vill veta vilken mekanism som gäller för en viss behandling.
+  </p>
+
+  <h2>Annonsmätning för Wager Golfs egna annonser</h2>
+  <p>
+    Wager Golf visar inga annonser i appen. Mätningen nedan används bara för
+    att avgöra om annonser för Wager Golf utanför appen leder till
+    installationer och för att rapportera kampanjresultat till Meta.
+  </p>
+  <p>
+    På iOS använder vi endast Apples integritetsbevarande
+    SKAdNetwork/AdAttributionKit. Apple skapar fördröjda och databegränsade
+    postbacks som kan rapportera en installation på kampanjnivå till Meta utan
+    att spåra enskilda användare eller enheter mellan appar. iOS-appen kör
+    ingen AppsFlyer-SDK, läser inte IDFA, visar ingen App Tracking
+    Transparency-fråga och skickar inga egna apphändelser för annonsmätning.
+  </p>
+  <p>
+    På Android används AppsFlyer endast om du först lämnar det frivilliga
+    samtycke som beskrivs ovan. AppsFlyer skickar då en installations-/första
+    öppningssignal för attribution till AppsFlyer och den konfigurerade
+    Meta-integrationen. Efter den bekräftade engångssignalen stoppas AppsFlyer
+    i appen; vi skickar inga senare egna apphändelser. AppsFlyer behandlar
+    uppgifterna som personuppgiftsbiträde för Wager Golf. Meta kan behandla
+    mottagna attributionsuppgifter enligt sin egen integritetspolicy. Wager
+    Golf får inte tillgång till din Meta-profil.
+  </p>
+  <p>
+    Läs mer hos <a href="https://developer.apple.com/app-store/ad-attribution/">Apple</a>,
+    i <a href="https://www.appsflyer.com/legal/services-privacy-policy/">AppsFlyers
+    policy för tjänstedata</a> och i
+    <a href="https://www.facebook.com/privacy/policy/">Metas integritetspolicy</a>.
   </p>
 
   <h2>Användningsstatistik</h2>
@@ -489,7 +577,16 @@
     intresse att förstå hur appen används, hitta produktproblem och förbättra
     tjänsten. Behandlingen är begränsad till appens tillåtelselistade produkt-
     och användningshändelser samt pseudonym teknisk data, utan anonym analys
-    före inloggning, GeoIP, GPS, fritext, kontaktuppgifter eller belopp.
+    före inloggning, GeoIP, GPS, fritext, kontaktuppgifter eller belopp. Vår
+    behandling av Apples aggregerade iOS-kampanjrapporter bygger på vårt
+    berättigade intresse enligt artikel 6.1 f GDPR att mäta effekten av våra
+    egna annonser med Apples integritetsbevarande attribution. På Android
+    startas AppsFlyer och GAID behandlas endast med ditt frivilliga samtycke
+    enligt artikel 6.1 a GDPR och, där tillämpligt, reglerna om lagring eller
+    läsning av information på terminalutrustning. Kryssrutan är avmarkerad som
+    standard, samtycket är inte ett villkor för tjänsten och du kan återkalla
+    det när som helst utan att det påverkar lagligheten av behandling som
+    redan har skett.
     Säkerhetsloggar, rate limiting,
     innehållsmoderering och nödvändig felrapportering bygger på vårt
     berättigade intresse att skydda och förbättra tjänsten. Delad rundhistorik
@@ -528,6 +625,17 @@
       du anser att något är fel eller vill invända mot behandlingen.
     </li>
     <li>
+      <strong>Annonsmätning på Android</strong>: du kan återkalla samtycket
+      under Profil → Installationsmätning. För tillgång till eller radering av
+      redan skickade attributionsdata kontaktar du oss. För att vi ska kunna
+      hantera begäran med AppsFlyer genom dess OpenDSR-process behöver du lämna
+      det Android-reklam-ID eller AppsFlyer-ID som användes. Eftersom inget
+      Wager Golf-konto-ID skickas kan vi inte söka på konto eller e-post. Om
+      identifieraren har återställts kan äldre data sakna en sökbar koppling;
+      då eskalerar vi ärendet till AppsFlyer och informerar dig om utfallet. Vi
+      hanterar även en begäran med Meta när det är tillämpligt.
+    </li>
+    <li>
       <strong>Klaga till tillsynsmyndighet</strong>: du kan klaga hos
       dataskyddsmyndigheten där du bor eller arbetar, eller där du anser att
       en överträdelse har skett. I Sverige är detta
@@ -542,7 +650,7 @@
     profil, profilbild, vänskapsrelationer, privata rundor, kommentarer,
     cheers, aktivitet, betalningskontaktuppgifter och annan privat kontodata.
     På den enhet där raderingen slutförs eller verifieras rensas kontospecifik
-    lokal data, analysklienten stoppas och dess oskickade minneskö rensas, och
+    lokal data, PostHog-klienten stoppas och dess oskickade minneskö rensas, och
     installationens pseudonyma ID roteras.
     Andra offline-enheter kan inte fjärrensas; deras lokala data rensas vid
     kontobyte, avinstallation eller när de återupptar raderingen med sitt
@@ -563,6 +671,13 @@
     tillhörande events och eventuella inspelningar och försöker igen vid
     tillfälliga fel. Ett dagligt workflow återupptar inaktuella,
     ofullständiga steg och söker om externa system i cirka 30 dagar.
+  </p>
+  <p>
+    Annonsmätningsdata innehåller inget Wager Golf-konto-ID och kan därför inte
+    automatiskt hittas av det vanliga kontoraderingsflödet. Om du har samtyckt
+    till Android-mätningen och vill radera redan skickade uppgifter ska du
+    kontakta oss enligt avsnittet ovan. Återkallelse i appen stoppar framtida
+    överföring men ersätter inte en raderingsbegäran.
   </p>
   <p>
     Delade rundor bevaras för de andra deltagarnas historik. Ditt namn,
@@ -611,6 +726,17 @@
     ansvarig, syfte och sista raderingsdag, åtkomstbegränsas och raderas direkt
     efter arbetet, senast när källbackupen löper ut.
   </p>
+  <p>
+    På Android sparas ditt val om installationsmätning lokalt per
+    appinstallation tills du ändrar valet, raderar appdata eller avinstallerar
+    appen. Wager Golf lagrar inte rå GAID eller rå AppsFlyer-attribution i
+    Supabase. AppsFlyer sparar End User Data enligt sin publicerade
+    lagringspolicy och gällande partnerkrav; Wager Golf begär inte en längre
+    period än vad som behövs för installationsattribution och bedrägeriskydd.
+    Meta sparar sin kopia enligt Metas integritetspolicy och tillämpliga
+    annonskontoinställningar. Aggregerade iOS-kampanjrapporter kan sparas som
+    statistik när de inte längre kan knytas till en person eller enhet.
+  </p>
 
   <h2>Ålder</h2>
   <p>
@@ -639,7 +765,7 @@
 
   <section lang="en">
   <h2 id="english">Privacy Policy · Wager Golf</h2>
-  <p class="meta">Last updated: August 8, 2026 · Version 4.1</p>
+  <p class="meta">Last updated: September 1, 2026 · Version 4.2</p>
 
   <h2>Summary</h2>
   <p>
@@ -647,7 +773,11 @@
     friends. To enable multi-device sync, push notifications, and sharing
     rounds with friends, we store some data on a server hosted by
     <strong>Supabase</strong> (EU-based). You sign in with Apple Sign-In (iOS) or Google Sign-In (Android).
-    We show no ads and never sell data to third parties. Account deletion can
+    We show no ads and never sell data to third parties. On iPhone, app
+    installs are measured only through Apple's aggregate
+    SKAdNetwork/AdAttributionKit system, without IDFA or a tracking prompt. On
+    Android, you may voluntarily allow one install signal to AppsFlyer for ad
+    measurement; the app works the same if you decline. Account deletion can
     be requested in an app version that supports the secure flow or through
     the contact route at the end of this page.
   </p>
@@ -655,9 +785,12 @@
     Terms of Service are available <a href="../terms/#english">here</a>.
   </p>
 
-  <h2>Effective date for the new deletion flow</h2>
+  <h2>Effective date and app versions</h2>
   <p>
-    This policy applies from August 8, 2026. The detailed checkpointed flow in
+    Version 4.2 of this policy applies from September 1, 2026. The advertising-
+    measurement section applies only to app versions that include that feature;
+    older app versions do not begin collecting this data retroactively. The
+    detailed checkpointed flow in
     "How account deletion works" was activated and verified in production on
     July 17, 2026. The flow is used by app versions that support it. If your
     app requires an update you cannot install, you can use the contact route
@@ -668,6 +801,14 @@
   <p>
     Gustaf Bratt, Sweden, is the data controller for Wager Golf. Contact us at
     <!--email_off--><a href="mailto:bratt.gustaf@gmail.com">bratt.gustaf@gmail.com</a><!--/email_off-->.
+  </p>
+
+  <h2>Geographic scope</h2>
+  <p>
+    This policy applies in Sweden and, when Wager Golf is made available
+    there, in Denmark, Norway, Ireland, Finland, the Netherlands, Austria,
+    Portugal, Belgium, Germany, France, Spain and Italy. The same platform-
+    specific advertising-measurement choices apply in all of these countries.
   </p>
 
   <h2>What data we collect</h2>
@@ -699,8 +840,10 @@
       other signed-in users.
     </li>
     <li>
-      <strong>Home market (Sweden, Denmark or Norway)</strong>: on a new
-      installation, the app may suggest a market from the device region, but
+      <strong>Home market</strong>: Wager Golf supports Sweden, Denmark,
+      Norway, Ireland, Finland, the Netherlands, Austria, Portugal, Belgium,
+      Germany, France, Spain and Italy. On a new installation, the app may
+      suggest a market from the device region, but
       you choose it and can change it in the app. The choice is stored locally
       and in your Supabase profile, shown as a country or flag to other
       signed-in users, and used for the default currency, course catalogue and
@@ -710,8 +853,8 @@
     </li>
     <li>
       <strong>Phone number</strong> (optional): used for Swish links for rounds
-      in Sweden in the settlement view. Denmark and Norway do not require a
-      phone number for the current manual settlement. It may be shown to
+      in Sweden in the settlement view. Other markets do not require a phone
+      number for the current manual settlement. It may be shown to
       accepted friends and round
       participants you explicitly grant payment access to. Guest phone
       numbers are stored only on the device where the guest was created.
@@ -754,6 +897,19 @@
       records, deletion status, recovery receipts and deleted-round markers
       are used for security, troubleshooting and to prevent deleted data from
       returning after offline sync or a backup restore.
+    </li>
+    <li>
+      <strong>Advertising-measurement identifiers (Android only and only
+      after consent)</strong>: if you actively allow install measurement,
+      AppsFlyer may process Google's resettable Advertising ID (GAID), an
+      AppsFlyer installation ID, Google Play Install Referrer and Meta Install
+      Referrer, IP address and IP-based approximate location, app and OS
+      version, device type/model, language, timestamps, and installation and
+      campaign data. The checkbox is unchecked by default and no advertising-
+      measurement data is sent to AppsFlyer before you consent. We do not send
+      a Wager Golf account ID, name, handle, email address, phone number,
+      precise GPS location, golf data, stakes, purchases, subscriptions or
+      custom in-app events.
     </li>
   </ul>
 
@@ -841,7 +997,7 @@
     content.
   </p>
 
-  <h2>Permissions</h2>
+  <h2>Permissions and optional choices</h2>
   <ul>
     <li>
       <strong>Location (GPS)</strong>: used if you grant location permission
@@ -861,6 +1017,14 @@
       <strong>Push notifications</strong>: required to send alerts about
       friends' birdies, comments, friend requests, etc. You can toggle
       individual categories in the app's notification settings.
+    </li>
+    <li>
+      <strong>Install measurement on Android</strong>: this is an optional
+      choice in Wager Golf, not an Android system pop-up. AppsFlyer starts only
+      when stored consent exists. You can use the app fully without consenting
+      and can change your choice at any time under Profile → Install
+      measurement. Withdrawing consent stops future transmission but does not
+      automatically erase data already sent.
     </li>
   </ul>
 
@@ -925,8 +1089,9 @@
 
   <h3>GolfAPI.io</h3>
   <p>
-    Course data (par, stroke index and GPS coordinates for more than 1,000 golf
-    courses in Sweden, Denmark and Norway) is fetched via our own Cloudflare
+    Course data for more than 3,000 golf courses in the 13 markets listed
+    above, with par, stroke index and GPS coordinates where available, is
+    fetched via our own Cloudflare
     Worker proxy which calls
     <a href="https://www.golfapi.io">GolfAPI.io</a>. Only the selected course
     ID is sent to GolfAPI.io through the proxy, not personal information, GPS
@@ -942,7 +1107,7 @@
     Wager Golf shows who owes whom and the amount due. For rounds in Sweden,
     the app can create a <code>swish://</code> link or QR code with a
     pre-filled amount, recipient number and message. Swish is available only
-    for rounds set to Sweden. In Denmark and Norway, players currently complete payment
+    for rounds set to Sweden. In other markets, players complete payment
     manually outside Wager Golf using a payment method they choose themselves.
     Wager Golf does not process the payment, hold or transfer stakes, act as a
     party to the transaction, or take any fee or share. The actual payment and
@@ -1002,15 +1167,66 @@
     See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>.
   </p>
 
+  <h3>Apple SKAdNetwork / AdAttributionKit (iOS)</h3>
+  <p>
+    On iPhone, Wager Golf registers only Apple's aggregate install value.
+    Apple creates a delayed, data-limited postback that may report campaign
+    results to Meta and a copy to AppsFlyer. The iOS app does not run the
+    AppsFlyer or Meta SDK, does not use IDFA, and does not show an App Tracking
+    Transparency prompt.
+  </p>
+
+  <h3>AppsFlyer and Meta (optional Android measurement)</h3>
+  <p>
+    On Android, <a href="https://www.appsflyer.com/legal/services-privacy-policy/">AppsFlyer</a>
+    is used only after your voluntary consent to send a single install or
+    first-open signal. AppsFlyer may share campaign attribution with
+    <a href="https://www.facebook.com/privacy/policy/">Meta Platforms</a>.
+    Wager Golf does not receive access to your Meta profile and does not show
+    ads in the app. The data fields and limitations are described above and
+    below.
+  </p>
+
   <h3>Processing outside the EU/EEA</h3>
   <p>
     Supabase and PostHog are configured for EU data storage. Some other
-    providers, including Apple, Google, RevenueCat, Expo, Sentry, Cloudflare and
-    GitHub, may
+    providers, including Apple, Google, RevenueCat, Expo, Sentry, Cloudflare,
+    GitHub, AppsFlyer and Meta, may
     process data outside the EU/EEA. The providers' published terms and
     privacy notices describe the safeguards that apply to their transfers,
     such as an adequacy decision or the EU Standard Contractual Clauses.
     Contact us for the mechanism that applies to a particular processing.
+  </p>
+
+  <h2>Advertising measurement for Wager Golf's own ads</h2>
+  <p>
+    Wager Golf does not show ads in the app. The measurement below is used
+    only to determine whether ads for Wager Golf outside the app lead to
+    installs and to report campaign results to Meta.
+  </p>
+  <p>
+    On iOS, we use only Apple's privacy-preserving
+    SKAdNetwork/AdAttributionKit. Apple creates delayed, data-limited postbacks
+    that can report an installation at campaign level to Meta without tracking
+    individual users or devices across apps. The iOS app does not run the
+    AppsFlyer SDK, does not access IDFA, does not show an App Tracking
+    Transparency prompt, and sends no custom in-app events for advertising
+    measurement.
+  </p>
+  <p>
+    On Android, AppsFlyer is used only if you first give the optional consent
+    described above. AppsFlyer then sends a single install/first-open signal
+    for attribution to AppsFlyer and the configured Meta integration. After
+    the confirmed one-time signal, AppsFlyer is stopped in the app; we send no
+    later custom in-app events. AppsFlyer processes the data as a processor for
+    Wager Golf. Meta may process received attribution data under its own
+    privacy policy. Wager Golf does not receive access to your Meta profile.
+  </p>
+  <p>
+    Learn more from <a href="https://developer.apple.com/app-store/ad-attribution/">Apple</a>,
+    the <a href="https://www.appsflyer.com/legal/services-privacy-policy/">AppsFlyer
+    Services Privacy Policy</a>, and the
+    <a href="https://www.facebook.com/privacy/policy/">Meta Privacy Policy</a>.
   </p>
 
   <h2>Usage analytics</h2>
@@ -1049,7 +1265,16 @@
     problems and improving the service. Processing is limited to the app's
     allowlisted product and usage events and pseudonymous technical data,
     without anonymous analytics before sign-in, GeoIP, GPS, free text,
-    contact details or amounts. Security logs,
+    contact details or amounts. Our processing of Apple's aggregated iOS
+    campaign reports is based on our legitimate interest under Article
+    6(1)(f) GDPR in measuring the effectiveness of our own advertising through
+    Apple's privacy-preserving attribution. On Android, AppsFlyer starts and
+    GAID is processed only with your freely given consent under Article
+    6(1)(a) GDPR and, where applicable, rules on storing or accessing
+    information on terminal equipment. The checkbox is unchecked by default,
+    consent is not a condition of the service, and you may withdraw it at any
+    time without affecting the lawfulness of processing that has already
+    taken place. Security logs,
     rate limiting, content moderation and necessary error reporting rely on
     our legitimate interest in protecting and improving the service. Shared
     round history is retained in pseudonymised form based on our and the other
@@ -1088,6 +1313,17 @@
       believe something is wrong or want to object to processing.
     </li>
     <li>
+      <strong>Advertising measurement on Android</strong>: you can withdraw
+      consent under Profile → Install measurement. To access or erase
+      attribution data already sent, contact us. To handle the request with
+      AppsFlyer through its OpenDSR process, we need the Android advertising ID
+      or AppsFlyer ID that was used. Because no Wager Golf account ID is sent,
+      we cannot search by account or email. If the identifier has been reset,
+      older data may no longer have a searchable link; in that case we
+      escalate the matter to AppsFlyer and tell you the outcome. We also handle
+      a request with Meta where applicable.
+    </li>
+    <li>
       <strong>Complain to a supervisory authority</strong>: you may complain
       to the data protection authority where you live or work, or where you
       believe an infringement occurred. In Sweden this is
@@ -1102,7 +1338,7 @@
     identity, profile, profile picture, friend relationships, private rounds,
     comments, cheers, activity, payment-contact data and other private account
     data. On the device where deletion is completed or verified,
-    account-specific local data is cleared, the analytics client is stopped
+    account-specific local data is cleared, the PostHog client is stopped
     and its unsent in-memory queue is cleared, and the installation's
     pseudonymous ID rotates. Other offline installations cannot
     be wiped remotely; their local data is cleared on account switch, uninstall,
@@ -1123,6 +1359,13 @@
     deletion of the person, associated events and any
     recordings and retry temporary failures. A daily workflow resumes stale,
     incomplete steps and resweeps external systems for approximately 30 days.
+  </p>
+  <p>
+    Advertising-measurement data contains no Wager Golf account ID and
+    therefore cannot be located automatically by the ordinary account-deletion
+    flow. If you consented to Android measurement and want data already sent
+    to be erased, contact us as described above. Withdrawal in the app stops
+    future transfer but does not replace an erasure request.
   </p>
   <p>
     Shared rounds are retained for the other participants' history. Your
@@ -1169,6 +1412,17 @@
     copy. Temporary manual copies are logged with checksum, owner, purpose and
     expiry, access restricted and removed immediately after the work, no later
     than the source backup's expiry.
+  </p>
+  <p>
+    On Android, your install-measurement choice is stored locally per app
+    installation until you change it, clear app data or uninstall the app.
+    Wager Golf does not store raw GAID or raw AppsFlyer attribution in
+    Supabase. AppsFlyer retains End User Data under its published retention
+    policy and applicable partner requirements; Wager Golf does not request a
+    longer period than needed for install attribution and fraud prevention.
+    Meta retains its copy under the Meta Privacy Policy and applicable ad-
+    account settings. Aggregated iOS campaign reports may be retained as
+    statistics once they can no longer be linked to a person or device.
   </p>
 
   <h2>Age</h2>
