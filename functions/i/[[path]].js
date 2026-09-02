@@ -12,11 +12,10 @@
 // byggs separat från Eleventy: .eleventy.js passthrough-kopierar functions/ in
 // i _site/, och _data/ följer inte med. Läggs ett språk till där måste det
 // läggas till här också, annars får språkets besökare svenska.
-const PUBLISHED = ['sv', 'nb', 'da', 'en'];
-const ENGLISH_FALLBACK_LANGS = new Set(['fi', 'nl', 'de', 'fr', 'es', 'it', 'pt']);
+const PUBLISHED = ['sv', 'nb', 'da', 'en', 'fi', 'nl', 'de', 'fr', 'es', 'it', 'pt'];
 const MARKET_LANG = {
-  SE: 'sv', DK: 'da', NO: 'nb', IE: 'en', FI: 'en', NL: 'en', AT: 'en',
-  PT: 'en', BE: 'en', DE: 'en', FR: 'en', ES: 'en', IT: 'en',
+  SE: 'sv', DK: 'da', NO: 'nb', IE: 'en', FI: 'fi', NL: 'nl', AT: 'de',
+  PT: 'pt', BE: 'en', DE: 'de', FR: 'fr', ES: 'es', IT: 'it',
 };
 
 /** Sökvägen till den asset som ska serveras för ett språk. Svenskan ligger i
@@ -26,6 +25,13 @@ export const ASSET_FOR = {
   nb: '/no/i/',
   da: '/dk/i/',
   en: '/en/i/',
+  fi: '/fi/i/',
+  nl: '/nl/i/',
+  de: '/de/i/',
+  fr: '/fr/i/',
+  es: '/es/i/',
+  it: '/it/i/',
+  pt: '/pt/i/',
 };
 
 function acceptedLanguageRanges(header) {
@@ -54,13 +60,15 @@ function acceptedLanguageRanges(header) {
 }
 
 /** Högst prioriterade webbläsarspråket vi faktiskt har en sida för. */
-export function pickLang(header, published = PUBLISHED, country = '') {
+export function pickLang(header, published = PUBLISHED, country = '', explicit = '') {
+  const explicitBase = String(explicit || '').toLowerCase().split('-')[0];
+  const explicitLang = explicitBase === 'no' ? 'nb' : explicitBase;
+  if (published.includes(explicitLang) && ASSET_FOR[explicitLang]) return explicitLang;
+
   for (const { range } of acceptedLanguageRanges(header)) {
     const base = range.toLowerCase().split('-')[0];
     // "no" och "nb" är samma skriftspråk för vårt syfte.
-    const lang = base === 'no'
-      ? 'nb'
-      : ENGLISH_FALLBACK_LANGS.has(base) ? 'en' : base;
+    const lang = base === 'no' ? 'nb' : base;
     if (published.includes(lang) && ASSET_FOR[lang]) return lang;
   }
   const geoLang = MARKET_LANG[String(country || '').toUpperCase()];
@@ -74,6 +82,7 @@ export async function onRequest({ request, env }) {
     request.headers.get('accept-language'),
     PUBLISHED,
     request.cf?.country || request.headers.get('CF-IPCountry'),
+    url.searchParams.get('l'),
   );
   url.pathname = ASSET_FOR[lang];
 

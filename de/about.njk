@@ -1,0 +1,90 @@
+---
+layout: page-article.njk
+key: page:about
+updated: "2026-09-02"
+permalink: /de/ueber-uns/
+title: "Über Wager Golf, die App, die für euch rechnet | Wager Golf"
+description: "Über Wager Golf und Gustaf Bratt, den Golfer hinter der App, die 21 Spielformen mit korrektem WHS-Handicap berechnet und zeigt, wer wem was schuldet."
+ogType: article
+h1: "Über Wager Golf"
+lede: "Wager Golf wurde von einem Golfer entwickelt, der genug von Zetteln, Taschenrechnern und Diskussionen am 19. Loch hatte. Hier erfährst du kurz, warum es die App gibt und wer dahintersteht."
+breadcrumb:
+  - name: "Über uns"
+faq:
+  - q: "Wer hat Wager Golf entwickelt?"
+    a: "Die App wurde von Gustaf Bratt entwickelt, einem schwedischen Golfer, der in seiner eigenen Gruppe um Einsätze spielt und es leid war, den Pot von Hand auszurechnen. Die Guides auf dieser Website stammen von derselben Person, deshalb entsprechen die beschriebenen Regeln genau der Berechnung in der App."
+  - q: "Ist Wager Golf ein Glücksspielunternehmen?"
+    a: "Nein. Wager Golf nimmt keine Einsätze entgegen, und es gibt keinen Anbieter, der gewinnt. Die App führt nur das von euch vereinbarte Spiel mit, berechnet anhand des richtigen Handicaps die Schlussbilanz und zeigt, wer wem was schuldet."
+  - q: "Verwendet die App wirklich das richtige Handicap?"
+    a: "Ja. Das Course Handicap wird nach WHS für Platz und Abschlag berechnet, die Vorgabenschläge werden gemäß Handicapverteilung auf die richtigen Löcher verteilt. Nettoergebnisse werden Loch für Loch verglichen, damit Spieler unterschiedlicher Stärke fair gegeneinander antreten."
+ctaHeading: "Wager Golf in 13 Märkten"
+ctaText: "Version 1.7.1 ist für 13 Märkte vorbereitet. Store-Links erscheinen nur in Ländern, in denen die App installiert werden kann."
+relatedLinks:
+  - name: "Spielformen"
+    url: "/de/spielformen/"
+  - name: "Golfbegriffe"
+    url: "/de/glossar/"
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "de",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://wagergolf.se/#person",
+        "name": "Gustaf Bratt",
+        "url": "https://wagergolf.se/de/ueber-uns/",
+        "description": "Schwedischer Golfer und Gründer von Wager Golf.",
+        "knowsAbout": ["Golf", "Golf-Spielformen", "Golf-Handicap", "WHS"]
+      },
+      {
+        "@type": "AboutPage",
+        "name": "Über Wager Golf",
+        "url": "https://wagergolf.se/de/ueber-uns/",
+        "inLanguage": "de",
+        "isPartOf": { "@id": "https://wagergolf.se/#website" },
+        "about": { "@id": "https://wagergolf.se/#org" },
+        "mainEntity": { "@id": "https://wagergolf.se/#person" }
+      }
+    ]
+  }
+---
+<h2>Warum es die App gibt</h2>
+<p>Wer auf dem Golfplatz um Einsätze spielt, muss rechnen. Skins werden zwischen Löchern übertragen, beim Nassau läuft ein Press auf den Back Nine, nebenbei gibt es einen Birdie-Pot, und alles muss mit dem richtigen Course Handicap verteilt werden. Mit Papier und Taschenrechner endet das oft in einer Diskussion am 19. Loch: Einer erinnert sich anders an den Pot, ein anderer hat seine Vorgabenschläge nicht bekommen.</p>
+<p>Wager Golf übernimmt die Berechnung. Dazu wählt ihr Platz und Spielform, tragt die Schläge Loch für Loch ein und die App hält den Pot live. Am Ende zeigt sie, wer wem was schuldet. Keine Zettel, kein Kopfrechnen.</p>
+<ul>
+<li><strong>21 Spielformen</strong> mit automatischer Berechnung der Abrechnung, von <a href="{% guideUrl "skins" %}">Skins</a> und <a href="{% guideUrl "matchspel" %}">Lochspiel</a> über <a href="{% guideUrl "nassau" %}">Nassau</a> bis zu Team- und Nebenspielen. Fünf Hauptspielformen und ein optionales Nebenspiel pro Runde sind kostenlos. Pro schaltet die gesamte Auswahl und weitere Kombinationen frei.</li>
+<li><strong>Korrektes WHS-Handicap.</strong> Das Course Handicap wird pro Platz und Abschlag berechnet. Die Vorgabenschläge werden gemäß Handicapverteilung auf die richtigen Löcher verteilt. Nettoergebnisse werden Loch für Loch verglichen, damit eine gemischte Gruppe fair spielen kann.</li>
+<li><strong>3.028 Plätze in 13 europäischen Ländern</strong> sind in Version 1.7.1 mit Par und Handicapverteilung enthalten. Der Katalog ist in den Ländern verfügbar, in denen die Version gestartet ist.</li>
+<li><strong>Automatisch berechnete Schlussbilanz.</strong> Die App reduziert die Zahl der nötigen Zahlungen und zeigt genau, wer wem welchen Betrag schuldet. Die Spieler begleichen ihn direkt miteinander über eine selbst gewählte Zahlungsmethode. Wager Golf verarbeitet, verwahrt oder überträgt niemals Einsatzgelder.</li>
+</ul>
+<h2>Wer dahintersteht</h2>
+<p>Wager Golf wurde von Gustaf Bratt entwickelt, einem schwedischen Golfer, der mit derselben Gruppe spielt und dieselben Diskussionen über den Pot kennt wie viele andere. Die App entstand, um ein konkretes Problem im eigenen Viererflight zu lösen, nicht als Produkt am Reißbrett. Das merkt man an den Details: Enthalten sind die Spielformen, die tatsächlich gespielt werden, das Handicap wird korrekt nach WHS berechnet und der Ton passt eher zum Golfclub als zu einem Wettanbieter.</p>
+<p>Wager Golf ist kein Glücksspielunternehmen. Es gibt keine Bank, die Einsätze annimmt, und keinen Anbieter, der gewinnt. Die App führt lediglich mit, was ihr bereits untereinander vereinbart habt, berechnet die Bilanz und zeigt, wer wem was schuldet.</p>
+<h2>Warum es die Guides gibt</h2>
+<p>Viele Erklärungen zu Golf-Spielformen im Internet bleiben oberflächlich, und die Regeln unterscheiden sich oft je nach Quelle. Wie wird ein Skin wirklich übertragen? Wie berechnet man <a href="{% guideUrl "quota" %}">Quota</a> in einer gemischten Gruppe? Was bewirkt ein Press beim Nassau?</p>
+<p><a href="/de/spielformen/">Die Guides auf dieser Website</a> beantworten diese Fragen gründlich. Jeder Guide erklärt die Spielform, den Ablauf, die Abrechnung des Pots und die Rolle des Handicaps mit konkreten Zahlen und Beispielen. Die Texte stammen von derselben Person, die die App entwickelt hat. Die beschriebenen Regeln entsprechen deshalb den Regeln, nach denen die App rechnet.</p>
+<p>Wenn du sehen willst, wie eine Spielform in der Praxis funktioniert, beginne mit den Klassikern: <a href="{% guideUrl "skins" %}">Skins</a>, <a href="{% guideUrl "matchspel" %}">Lochspiel</a> und <a href="{% guideUrl "stableford" %}">Stableford</a>.</p>

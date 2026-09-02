@@ -1,0 +1,354 @@
+---
+layout: base.njk
+key: page:home
+updated: "2026-09-02"
+permalink: /fr/
+title: "Wager Golf, jouez avec des mises sans papier ni calculatrice"
+description: "Wager Golf fait les calculs lorsque le groupe joue avec des mises. La version 1.7.1 propose 21 formules et 3 028 parcours dans 13 pays."
+ogTitle: "Wager Golf"
+ogDescription: "Jouez avec des mises sans papier ni calculatrice. 21 formules de jeu et calcul automatique du solde final."
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "fr",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://wagergolf.se/#person",
+        "name": "Gustaf Bratt",
+        "url": "https://wagergolf.se/fr/a-propos/"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Wager Golf",
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "SportsApplication",
+        "url": "https://wagergolf.se/fr/",
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ],
+        "inLanguage": "fr",
+        "publisher": { "@id": "https://wagergolf.se/#org" },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Tout le groupe doit-il avoir l’app ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Non. Une seule personne peut gérer toute la partie et saisir les scores de chacun, les autres étant ajoutés comme invités. Pour suivre les parties des autres en direct et recevoir des notifications, plusieurs joueurs peuvent télécharger l’app, mais une seule installation suffit pour jouer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Wager Golf est-il gratuit ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui. La version gratuite comprend cinq formules principales et permet de jouer une formule principale plus un jeu annexe facultatif par partie, avec calcul automatique du solde final. Pro donne accès aux 21 formules, à davantage de combinaisons et à tout l’historique. Les nouveaux utilisateurs éligibles bénéficient de 14 jours d’essai gratuit ; dans les marchés en euros, Pro coûte 4,99 € par mois ou 29,99 € par an."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Vous jouez avec de l’argent : est-ce autorisé ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Wager Golf n’est pas une société de jeux d’argent et ne touche jamais aux fonds. L’app suit simplement les mises déjà convenues entre les joueurs et facilite le règlement direct après la partie."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "À qui l’app est-elle destinée ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Wager Golf s’adresse aux personnes de 17 ans ou plus et aux parties privées entre personnes qui se connaissent. L’app ne reçoit, ne conserve et ne transfère jamais les mises."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Mon parcours est-il disponible ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La version 1.7.1 comprend 3 028 parcours en Suède, au Danemark, en Norvège, en Irlande, en Finlande, aux Pays-Bas, en Autriche, au Portugal, en Belgique, en Allemagne, en France, en Espagne et en Italie. Le catalogue est disponible dans les pays où cette version a été lancée."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "L’app applique-t-elle le bon handicap ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui. Le handicap de jeu est calculé selon le WHS pour le parcours et le repère choisis, puis les coups reçus sont répartis sur les bons trous grâce au Stroke Index. Des joueurs d’index différents peuvent ainsi s’affronter équitablement."
+            }
+          }
+        ]
+      }
+    ]
+  }
+---
+  <main id="main-content" data-download-anchor tabindex="-1">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow on-dark">Version 1.7.1 pour 13 marchés</span>
+          <h1>Marre de ne jouer que <span class="accent">pour l’honneur&nbsp;?</span></h1>
+          <p class="lede">Wager Golf fait les calculs quand votre groupe joue avec des mises. L’app calcule automatiquement 21 formules et indique précisément qui doit combien à qui à la fin de la partie. Sans papier, sans calculatrice et sans discussion au 19e trou.</p>
+          <div class="cta-row">
+            {% set storePlats = "startsida-hero" %}
+            {% include "store-badges.njk" %}
+            <span class="cta-note" data-release-open hidden>Téléchargement gratuit dans votre pays.</span>
+            <span class="cta-note" data-release-closed>Pas encore disponible pour votre appareil dans ce pays.</span>
+          </div>
+          <p class="hero-proof">
+            <span class="hero-proof-stars" role="img" aria-label="5 étoiles sur 5">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</span>
+            <span class="hero-proof-text">5,0 sur 5 sur l’App Store suédois</span>
+          </p>
+        </div>
+        <div class="hero-phone">
+          <img src="{% shot "live" %}" alt="Carte de score en direct Wager Golf sur iPhone" loading="eager" fetchpriority="high" width="640" height="1306">
+          <span class="hero-stamp">Trou par trou, en temps réel</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="holestrip" aria-hidden="true">
+      <div class="wrap holestrip-inner">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+        <span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+        <span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="wrap">
+        <div class="stats-grid reveal">
+          <div class="stat">
+            <div class="num brass">21</div>
+            <div class="label">Formules de jeu avec calcul automatique du solde final</div>
+          </div>
+          <div class="stat">
+            <div class="num">3&nbsp;028</div>
+            <div class="label">Parcours dans 13 pays avec la version 1.7.1</div>
+          </div>
+          <div class="stat">
+            <div class="num">5</div>
+            <div class="label">Formules principales gratuites, avec calcul automatique du solde final</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMENT ÇA MARCHE -->
+    <section class="steps">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Comment ça marche</span>
+          <h2>Trois étapes, sans papier</h2>
+        </div>
+        <div class="steps-grid reveal">
+          <div class="step">
+            <div class="step-num">01</div>
+            <h3>Ajoutez le groupe</h3>
+            <p>Choisissez le parcours et 2 à 4 joueurs. Sélectionnez une formule ou laissez l’app en suggérer une. Vous fixez la mise une seule fois.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <h3>Notez les scores</h3>
+            <p>Saisissez les coups trou par trou. L’app calcule en temps réel les points, les coups reçus et le classement, avec le bon handicap pour chacun.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <h3>Réglez les comptes</h3>
+            <p>À la fin, l’app calcule qui doit combien à qui et réduit le tout au plus petit nombre de paiements possible. Plus de discussion au 19e trou.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AVIS -->
+    <!-- Trois avis App Store vérifiés à 5 étoiles, traduits du suédois. -->
+    <section class="voices">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Paroles de joueurs</span>
+          <h2>Des golfeurs qui ont arrêté de compter à la main</h2>
+        </div>
+        {% macro stars() %}<div class="voice-stars" role="img" aria-label="5 étoiles sur 5">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</div>{% endmacro %}
+        <div class="voices-grid reveal">
+          <figure class="voice">
+            <blockquote>Fonctionne très bien avec de nombreuses formules, et le calcul à la fin de la partie est fluide.</blockquote>
+            <figcaption>{{ stars() }}<span class="v-name">Eric K.</span><span class="v-meta">Nacka Golf · App Store</span></figcaption>
+          </figure>
+          <figure class="voice">
+            <blockquote>Une bonne app, vraiment amusante&nbsp;! Beaucoup de formules différentes.</blockquote>
+            <figcaption>{{ stars() }}<span class="v-name">Natasha</span><span class="v-meta">Troxhammar GK · App Store</span></figcaption>
+          </figure>
+          <figure class="voice">
+            <blockquote>Vraiment très amusant&nbsp;! Très innovant.</blockquote>
+            <figcaption>{{ stars() }}<span class="v-name">Philip</span><span class="v-meta">Golfstar · App Store</span></figcaption>
+          </figure>
+        </div>
+        <p class="voices-note" style="text-align:center;color:var(--ink-faint);font-size:13px;margin-top:18px">Avis App Store vérifiés, traduits du suédois.</p>
+      </div>
+    </section>
+
+    <!-- FONCTIONNALITÉS -->
+    <div id="funktioner"></div>
+    <section class="feature">
+      <div class="wrap feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow">La carte de score</span>
+          <h2>Notez la partie, trou par trou</h2>
+          <p>Tout le groupe sur une seule carte de score. Le par apparaît comme repère discret, birdies et bogeys utilisent leur notation classique, et le classement évolue pendant que vous jouez. Plus question de perdre le compte au 14.</p>
+        </div>
+        <div class="feature-shot">
+          <img src="{% shot "live" %}" alt="Carte de score en direct" loading="lazy" width="640" height="1306">
+        </div>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div class="wrap feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow">Le règlement</span>
+          <h2>Qui doit quoi à qui, déjà calculé</h2>
+          <p>À la fin de la partie, l’app calcule le net de chaque joueur et réduit le résultat au plus petit nombre de paiements possible. Plus de discussion au 19e trou.</p>
+        </div>
+        <div class="feature-shot">
+          <img src="{% shot "settlement" %}" alt="Solde final calculé" loading="lazy" width="640" height="1306">
+        </div>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div class="wrap feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow">La saison</span>
+          <h2>La rivalité continue entre les parties</h2>
+          <p>Un solde de saison, un classement et un fil où vous suivez les parties de vos amis en temps réel. Encouragez-les depuis votre canapé et découvrez qui mène lorsque l’année se termine.</p>
+        </div>
+        <div class="feature-shot">
+          <img src="{% shot "home" %}" alt="Solde de saison et classement" loading="lazy" width="640" height="1306">
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMULES DE JEU -->
+    <section class="formats" id="game-formats">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow on-dark">21 façons de rendre la partie plus intéressante</span>
+          <h2>Jouez à votre façon</h2>
+          <p>Cinq formules principales sont gratuites, avec une formule principale et un jeu annexe facultatif par partie. Pro donne accès aux 21 formules, à davantage de combinaisons et à tout l’historique. Le tout avec un vrai handicap WHS et le calcul automatique du solde final.</p>
+        </div>
+        <div class="card-grid reveal">
+          <div class="fcard">
+            <div class="ftitle">Classiques</div>
+            <ul>
+              <li><a href="{% guideUrl "skins" %}">Skins</a></li><li><a href="{% guideUrl "matchspel" %}">Match play</a></li><li><a href="{% guideUrl "nassau" %}">Nassau</a></li>
+              <li><a href="{% guideUrl "stableford" %}">Stableford</a></li><li><a href="{% guideUrl "quota" %}">Quota</a></li><li><a href="{% guideUrl "slaggolf" %}">Stroke play</a></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <div class="ftitle">Jeux par trou</div>
+            <ul>
+              <li><a href="{% guideUrl "wolf" %}">Wolf</a></li><li><a href="{% guideUrl "bingo-bango-bongo" %}">Bingo Bango Bongo</a></li>
+              <li><a href="{% guideUrl "split-sixes" %}">Split Sixes</a></li><li><a href="{% guideUrl "klubbroulette" %}">Roulette des clubs</a></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <div class="ftitle">Équipe</div>
+            <ul>
+              <li><a href="{% guideUrl "scramble" %}">Scramble</a></li><li><a href="{% guideUrl "foursome" %}">Foursome</a></li><li><a href="{% guideUrl "greensome" %}">Greensome</a></li>
+              <li><a href="{% guideUrl "bastboll" %}">Quatre balles</a></li><li><a href="{% guideUrl "vegas" %}">Vegas</a></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <div class="ftitle">Jeux annexes</div>
+            <ul>
+              <li><a href="{% guideUrl "birdiepott" %}">Cagnotte de Birdies</a></li><li><a href="{% guideUrl "snake" %}">Snake</a></li><li><a href="{% guideUrl "sandie" %}">Sandie</a></li>
+              <li><a href="{% guideUrl "narmast-flaggan" %}">Concours de précision</a></li><li><a href="{% guideUrl "langst-drive" %}">Concours de drive</a></li><li><a href="{% guideUrl "golfpoker" %}">Golf Poker</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="home-faq">
+      <div class="faq-wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Bon à savoir</span>
+          <h2>Questions fréquentes</h2>
+        </div>
+        <div class="faqlist reveal">
+          <div class="faq-item">
+            <p class="faq-q">Tout le groupe doit-il avoir l’app&nbsp;?</p>
+            <p class="faq-a">Non. Une seule personne peut gérer toute la partie et saisir les scores de chacun, les autres étant ajoutés comme invités. Pour suivre les parties en direct et recevoir des notifications, plusieurs joueurs peuvent télécharger l’app, mais une seule installation suffit pour jouer.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Est-ce gratuit&nbsp;?</p>
+            <p class="faq-a">Oui. La version gratuite comprend cinq formules principales et permet de jouer une formule principale plus un jeu annexe facultatif par partie, avec calcul automatique du solde final. Pro donne accès aux 21 formules, à davantage de combinaisons et à tout l’historique. Les nouveaux utilisateurs éligibles bénéficient de 14 jours d’essai gratuit. Dans les marchés en euros, Pro coûte 4,99&nbsp;€ par mois ou 29,99&nbsp;€ par an.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Vous jouez avec de l’argent&nbsp;: est-ce autorisé&nbsp;?</p>
+            <p class="faq-a">Wager Golf n’est pas une société de jeux d’argent et ne touche jamais aux fonds. L’app suit simplement les mises déjà convenues entre les joueurs et facilite le règlement direct après la partie.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">À qui l’app est-elle destinée&nbsp;?</p>
+            <p class="faq-a">Wager Golf s’adresse aux personnes de 17 ans ou plus et aux parties privées entre personnes qui se connaissent. L’app ne reçoit, ne conserve et ne transfère jamais les mises.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Mon parcours est-il disponible&nbsp;?</p>
+            <p class="faq-a">La version 1.7.1 comprend 3&nbsp;028 parcours en Suède, au Danemark, en Norvège, en Irlande, en Finlande, aux Pays-Bas, en Autriche, au Portugal, en Belgique, en Allemagne, en France, en Espagne et en Italie. Le catalogue est disponible dans les pays où cette version a été lancée.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">L’app applique-t-elle le bon handicap&nbsp;?</p>
+            <p class="faq-a">Oui. Le handicap de jeu est calculé selon le WHS pour le parcours et le repère choisis, puis les coups reçus sont répartis sur les bons trous grâce au Stroke Index. Des joueurs d’index différents peuvent ainsi s’affronter équitablement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONCLUSION -->
+    <section class="closing">
+      <div class="wrap reveal">
+        <span class="eyebrow">Prêt pour la prochaine partie</span>
+        <h2 style="margin-top:14px">Découvrez immédiatement <span class="accent">qui doit combien à qui.</span></h2>
+        <p>Les liens vers les boutiques apparaissent automatiquement dans les pays où l’app peut être installée.</p>
+        {% set storePlats = "startsida-avslut" %}
+        {% include "store-badges.njk" %}
+      </div>
+    </section>
+  </main>

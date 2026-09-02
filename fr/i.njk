@@ -1,0 +1,27 @@
+---
+permalink: /fr/i/index.html
+layout: base.njk
+key: page:invite
+updated: "2026-09-02"
+title: Vous avez été invité sur Wager Golf
+description: Jouez avec une mise entre amis, Wager Golf fait tous les calculs pour vous.
+eleventyExcludeFromCollections: true
+extraHead: '<meta name="robots" content="noindex, nofollow">'
+---
+<main id="main-content" tabindex="-1" class="invite" style="max-width:520px;margin:0 auto;padding:48px 20px 80px;text-align:center">
+  <div id="invite-card">
+    <p class="eyebrow" style="letter-spacing:2px;text-transform:uppercase;color:var(--brass-deep);font-size:12px;margin-bottom:16px">Invitation</p>
+    <h1 id="invite-title" style="font-size:clamp(1.4rem,5vw,2rem);margin-bottom:16px">Vous avez été invité sur Wager Golf</h1>
+    <p id="invite-sub" style="color:#555;margin-bottom:32px">Jouez avec une mise entre amis, Wager Golf fait tous les calculs pour vous.</p>
+    {#- Le serveur choisit la boutique adaptée au pays. -#}
+    <div data-release-open hidden>
+      <a id="dl" href="{{ site.downloadUrls[lang].generic }}" class="btn" data-download-link data-store-link data-ios-url="{{ site.downloadUrls[lang].ios }}" data-android-url="{{ site.downloadUrls[lang].android }}" style="display:inline-block;background:#0a2e21;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:1rem">Télécharger l’app</a>
+      <p style="color:#666;font-size:13px;margin-top:20px">Vous avez déjà l’app&nbsp;? Touchez de nouveau ce lien pour vous connecter dans Wager Golf.</p>
+    </div>
+    <div data-release-closed>
+      <span class="btn" style="display:inline-block;background:#0a2e21;color:#fff;padding:14px 32px;border-radius:8px;font-weight:600;font-size:1rem;opacity:.8;cursor:not-allowed">Pas encore disponible ici</span>
+      <p style="color:#666;font-size:13px;margin-top:20px">La version 1.7.1 est préparée pour 13 marchés. Aucun lien vers une boutique n’est activé tant que l’app ne peut pas être installée dans le pays.</p>
+    </div>
+  </div>
+  <script defer src="/assets/js/invite.js{% if assets.invite %}?v={{ assets.invite }}{% endif %}" data-api="{{ site.api }}" data-lang="{{ lang }}"></script>
+</main>

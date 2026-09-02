@@ -1,13 +1,14 @@
 // /go är den universella kampanjlänken: en URL som fungerar för alla
 // marknader, för QR-koder på tryck, poddar, radio, kläder och mässor.
 //
-// DIGITALA ANNONSER SKA INTE PEKA HIT. De ska peka direkt på /dk/, /no/ eller
-// /en/. En landningssida på annonsens eget språk ger högre relevansbetyg och
+// DIGITALA ANNONSER SKA INTE PEKA HIT. De ska peka direkt på målspråkets
+// landningssida, till exempel /dk/, /de/ eller /fr/. En landningssida på
+// annonsens eget språk ger högre relevansbetyg och
 // därmed lägre klickpris, och /go lägger bara till ett omdirigeringshopp.
 //
 // Att den ligger på en egen sökväg i stället för på / är hela poängen:
 // Googlebot indexerar aldrig /go (den är Disallow i robots.txt), så ingen av
-// indexeringsriskerna med en språkredirect på roten uppstår. Alla fyra
+// indexeringsriskerna med en språkredirect på roten uppstår. Alla elva
 // språkversionerna förblir fullt synliga för sökmotorerna.
 //
 // DUPLIKAT MED AVSIKT. Listan nedan och sanitizeCampaign finns också i
@@ -26,13 +27,15 @@
 // (varje tryckt QR-kod och poddlänk för den marknaden) fortfarande med
 // svenska startsidan, tyst, eftersom pickLang faller tillbaka på
 // DEFAULT_LANG för alla språk som inte står i listan nedan.
-const PREFIX = { sv: '', nb: '/no', da: '/dk', en: '/en' };
-const PUBLISHED = ['sv', 'nb', 'da', 'en'];
+const PREFIX = {
+  sv: '', nb: '/no', da: '/dk', en: '/en', fi: '/fi', nl: '/nl',
+  de: '/de', fr: '/fr', es: '/es', it: '/it', pt: '/pt',
+};
+const PUBLISHED = ['sv', 'nb', 'da', 'en', 'fi', 'nl', 'de', 'fr', 'es', 'it', 'pt'];
 const DEFAULT_LANG = 'sv';
-const ENGLISH_FALLBACK_LANGS = new Set(['fi', 'nl', 'de', 'fr', 'es', 'it', 'pt']);
 const MARKET_LANG = {
-  SE: 'sv', DK: 'da', NO: 'nb', IE: 'en', FI: 'en', NL: 'en', AT: 'en',
-  PT: 'en', BE: 'en', DE: 'en', FR: 'en', ES: 'en', IT: 'en',
+  SE: 'sv', DK: 'da', NO: 'nb', IE: 'en', FI: 'fi', NL: 'nl', AT: 'de',
+  PT: 'pt', BE: 'en', DE: 'de', FR: 'fr', ES: 'es', IT: 'it',
 };
 
 function requestCountry(request) {
@@ -42,7 +45,6 @@ function requestCountry(request) {
 function normalizeLang(value) {
   const base = String(value || '').toLowerCase().split('-')[0];
   if (base === 'no') return 'nb';
-  if (ENGLISH_FALLBACK_LANGS.has(base)) return 'en';
   return base;
 }
 

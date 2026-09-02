@@ -6,11 +6,13 @@ test('svenska ligger i roten utan prefix', () => {
   assert.strictEqual(routes.locales.sv.prefix, '');
 });
 
-test('marknadsbaserade prefix, språkbaserad hreflang', () => {
+test('lokala prefix och språkbaserad hreflang hålls isär', () => {
   assert.strictEqual(routes.locales.da.prefix, '/dk');
   assert.strictEqual(routes.locales.da.hreflang, 'da');
   assert.strictEqual(routes.locales.nb.prefix, '/no');
   assert.strictEqual(routes.locales.nb.hreflang, 'nb');
+  assert.strictEqual(routes.locales.de.prefix, '/de');
+  assert.strictEqual(routes.locales.pt.hreflang, 'pt-PT');
 });
 
 test('ingen hreflang är en landskod', () => {
@@ -34,6 +36,8 @@ test('pathFor bygger lokaliserade sökvägar', () => {
   assert.strictEqual(routes.pathFor('da', 'formats', 'stableford'), '/dk/spilformer/stableford/');
   assert.strictEqual(routes.pathFor('en', 'formats'), '/en/game-formats/');
   assert.strictEqual(routes.pathFor('sv', 'about'), '/om/');
+  assert.strictEqual(routes.pathFor('fi', 'formats'), '/fi/pelimuodot/');
+  assert.strictEqual(routes.pathFor('fr', 'glossary'), '/fr/glossaire/');
 });
 
 test('downloadPath är en färdig sökväg, inte ett segment', () => {
@@ -41,6 +45,9 @@ test('downloadPath är en färdig sökväg, inte ett segment', () => {
   assert.strictEqual(routes.locales.nb.downloadPath, '/ladda-ner?l=nb');
   assert.strictEqual(routes.locales.da.downloadPath, '/ladda-ner?l=da');
   assert.strictEqual(routes.locales.en.downloadPath, '/ladda-ner?l=en');
+  for (const lang of ['fi', 'nl', 'de', 'fr', 'es', 'it', 'pt']) {
+    assert.strictEqual(routes.locales[lang].downloadPath, `/ladda-ner?l=${lang}`);
+  }
 });
 
 test('svenskans downloadPath saknar avslutande snedstreck', () => {

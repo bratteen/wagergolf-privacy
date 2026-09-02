@@ -1,0 +1,87 @@
+---
+layout: base.njk
+key: page:formats
+updated: "2026-09-02"
+title: "Golfspelvormen: regels en puntentelling uitgelegd | Wager Golf"
+description: "Gidsen voor golfspelvormen. Skins, Matchplay, Nassau, Stableford en meer, met de regels, puntentelling en spelen met handicap."
+ogTitle: "Golfspelvormen"
+ogDescription: "Regels en puntentelling voor golfspelvormen: Skins, Matchplay, Nassau, Stableford en meer."
+permalink: /nl/spelvormen/
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "nl",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Start", "item": "https://wagergolf.se/nl/" },
+          { "@type": "ListItem", "position": 2, "name": "Spelvormen", "item": "https://wagergolf.se/nl/spelvormen/" }
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "name": "Golfspelvormen",
+        "url": "https://wagergolf.se/nl/spelvormen/",
+        "inLanguage": "nl",
+        "about": "Regels, puntentelling en handicap voor golfspelvormen",
+        "isPartOf": { "@id": "https://wagergolf.se/#website" },
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      }
+    ]
+  }
+---
+<main id="main-content" tabindex="-1">
+  <section class="subhero">
+    <div class="subhero-inner">
+      <div class="breadcrumb">
+        <a href="/nl/">Start</a><span class="sep">/</span><span>Spelvormen</span>
+      </div>
+      <h1>Golfspelvormen, <span class="accent">helder uitgelegd.</span></h1>
+      <p>Hoe werken Skins, Matchplay en Nassau precies, en hoe wordt de stand berekend? Hier vind je gidsen voor golfspelvormen met de regels, de afrekening en spelen met de juiste handicap.</p>
+    </div>
+  </section>
+
+  <div class="wrap hub-section">
+    {%- set cats = ["Klassiekers", "Spellen per hole", "Team", "Sidegames"] %}
+    {%- for cat in cats %}
+    {%- set inCat = collections.guides | byCategory(cat, lang) %}
+    {%- if inCat.length %}
+    <h2 class="hub-cat">{{ cat }}</h2>
+    <div class="hub-grid">
+      {%- for g in inCat %}
+      <a class="hub-card" href="{{ g.url }}">
+        <h3>{{ g.data.format }}{% if g.data.altName %} ({{ g.data.altName }}){% endif %}</h3>
+        <p>{{ g.data.cardText or g.data.lede }}</p>
+        <span class="meta">{{ g.data.players }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+
+  <div class="wrap hub-extra">
+    <p>Weet je niet wat je wilt spelen? Lees <a href="/nl/spelvormen/spelvorm-kiezen/">welke spelvorm bij jullie groep past</a>, vergelijk <a href="/nl/spelvormen/stableford-vs-strokeplay/">Stableford en Strokeplay</a> of zoek een term op in de <a href="/nl/woordenlijst/">golfwoordenlijst</a>.</p>
+  </div>
+</main>

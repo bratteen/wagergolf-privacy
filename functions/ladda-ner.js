@@ -1,6 +1,7 @@
 // /ladda-ner väljer både plattform och rätt storefront. Språk, marknad och
-// release-status är separata: fyra webbspråk täcker 13 marknader och bara en
-// marknad som uttryckligen finns i PUBLIC_MARKETS får en butiksomdirigering.
+// release-status är separata: elva webbspråk täcker 13 marknader och bara en
+// marknad som uttryckligen är öppen för rätt plattform får en
+// butiksomdirigering.
 //
 // Prioritet för marknaden:
 //   1. explicit ?m=SE (för annonser, QR-koder och test)
@@ -16,7 +17,16 @@ const APP_ID = 'id6767638917';
 const PLAY_ID = 'com.bratteen.wagergolf';
 const APPLE_PROVIDER_TOKEN = '128879444';
 
-export const PUBLIC_MARKETS = ['SE'];
+export const PUBLIC_MARKETS_BY_PLATFORM = {
+  ios: ['SE'],
+  android: [],
+};
+export const PUBLIC_MARKETS = [
+  ...new Set([
+    ...PUBLIC_MARKETS_BY_PLATFORM.ios,
+    ...PUBLIC_MARKETS_BY_PLATFORM.android,
+  ]),
+];
 export const TARGET_MARKET_CODES = [
   'SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT',
 ];
@@ -26,19 +36,29 @@ export const MARKETS = {
   DK: { locale: 'da', store: 'dk', play: 'da', gl: 'DK', campaign: 'webb-dk', home: '/dk/' },
   NO: { locale: 'nb', store: 'no', play: 'no', gl: 'NO', campaign: 'webb-no', home: '/no/' },
   IE: { locale: 'en', store: 'ie', play: 'en', gl: 'IE', campaign: 'webb-ie', home: '/en/' },
-  FI: { locale: 'en', store: 'fi', play: 'fi', gl: 'FI', campaign: 'webb-fi', home: '/en/' },
-  NL: { locale: 'en', store: 'nl', play: 'nl', gl: 'NL', campaign: 'webb-nl', home: '/en/' },
-  AT: { locale: 'en', store: 'at', play: 'de', gl: 'AT', campaign: 'webb-at', home: '/en/' },
-  PT: { locale: 'en', store: 'pt', play: 'pt-PT', gl: 'PT', campaign: 'webb-pt', home: '/en/' },
+  FI: { locale: 'fi', store: 'fi', play: 'fi', gl: 'FI', campaign: 'webb-fi', home: '/fi/' },
+  NL: { locale: 'nl', store: 'nl', play: 'nl', gl: 'NL', campaign: 'webb-nl', home: '/nl/' },
+  AT: { locale: 'de', store: 'at', play: 'de', gl: 'AT', campaign: 'webb-at', home: '/de/' },
+  PT: { locale: 'pt', store: 'pt', play: 'pt-PT', gl: 'PT', campaign: 'webb-pt', home: '/pt/' },
   BE: { locale: 'en', store: 'be', play: 'en', gl: 'BE', campaign: 'webb-be', home: '/en/' },
-  DE: { locale: 'en', store: 'de', play: 'de', gl: 'DE', campaign: 'webb-de', home: '/en/' },
-  FR: { locale: 'en', store: 'fr', play: 'fr', gl: 'FR', campaign: 'webb-fr', home: '/en/' },
-  ES: { locale: 'en', store: 'es', play: 'es', gl: 'ES', campaign: 'webb-es', home: '/en/' },
-  IT: { locale: 'en', store: 'it', play: 'it', gl: 'IT', campaign: 'webb-it', home: '/en/' },
+  DE: { locale: 'de', store: 'de', play: 'de', gl: 'DE', campaign: 'webb-de', home: '/de/' },
+  FR: { locale: 'fr', store: 'fr', play: 'fr', gl: 'FR', campaign: 'webb-fr', home: '/fr/' },
+  ES: { locale: 'es', store: 'es', play: 'es', gl: 'ES', campaign: 'webb-es', home: '/es/' },
+  IT: { locale: 'it', store: 'it', play: 'it', gl: 'IT', campaign: 'webb-it', home: '/it/' },
 };
 
-const DEFAULT_MARKET_FOR_LOCALE = { sv: 'SE', nb: 'NO', da: 'DK', en: 'IE' };
-const PUBLIC = new Set(PUBLIC_MARKETS);
+const DEFAULT_MARKET_FOR_LOCALE = {
+  sv: 'SE', nb: 'NO', da: 'DK', en: 'IE', fi: 'FI', nl: 'NL',
+  de: 'DE', fr: 'FR', es: 'ES', it: 'IT', pt: 'PT',
+};
+const PLAY_LOCALE_FOR_WEB_LOCALE = {
+  sv: 'sv', nb: 'no', da: 'da', en: 'en', fi: 'fi', nl: 'nl',
+  de: 'de', fr: 'fr', es: 'es', it: 'it', pt: 'pt-PT',
+};
+const PUBLIC_BY_PLATFORM = {
+  ios: new Set(PUBLIC_MARKETS_BY_PLATFORM.ios),
+  android: new Set(PUBLIC_MARKETS_BY_PLATFORM.android),
+};
 
 /** Strikt uppslagning. En okänd explicit landkod får aldrig falla tillbaka på
  * Sverige och råka skicka gated trafik till den enda öppna storefronten. */
@@ -50,7 +70,8 @@ export function marketFor(value) {
 
 function localeFor(value) {
   if (!value) return null;
-  const locale = String(value).trim().toLowerCase();
+  let locale = String(value).trim().toLowerCase().split('-')[0];
+  if (locale === 'no') locale = 'nb';
   return Object.prototype.hasOwnProperty.call(DEFAULT_MARKET_FOR_LOCALE, locale)
     ? locale
     : null;
@@ -89,7 +110,7 @@ function appStore(market, campaign) {
   return `${base}?${params}`;
 }
 
-function playStore(market, campaign) {
+export function playStore(market, campaign, locale) {
   const referrer = new URLSearchParams({
     utm_source: 'wagergolf.se',
     utm_medium: 'referral',
@@ -97,7 +118,9 @@ function playStore(market, campaign) {
   });
   const params = new URLSearchParams({
     id: PLAY_ID,
-    hl: market.play,
+    // gl väljer rätt landsbutik och l/hl väljer texten i den. De måste hållas
+    // isär för flerspråkiga marknader, framför allt nederländska/franska i BE.
+    hl: locale ? PLAY_LOCALE_FOR_WEB_LOCALE[locale] : market.play,
     gl: market.gl,
     referrer: referrer.toString(),
   });
@@ -113,21 +136,24 @@ function cleanCampaign(raw) {
 
 function requestedPlatform(url, ua) {
   const explicit = url.searchParams.get('p');
-  if (explicit === 'ios' || explicit === 'android') return explicit;
+  if (url.searchParams.has('p')) {
+    return explicit === 'ios' || explicit === 'android' ? explicit : null;
+  }
   if (/Android/i.test(ua)) return 'android';
   if (/iPhone|iPad|iPod/i.test(ua)) return 'ios';
   return null;
 }
 
 function homeFor(url, market) {
-  if (market) return market.home;
   const locale = localeFor(url.searchParams.get('l'));
-  return locale ? MARKETS[DEFAULT_MARKET_FOR_LOCALE[locale]].home : '/';
+  if (locale) return MARKETS[DEFAULT_MARKET_FOR_LOCALE[locale]].home;
+  return market ? market.home : '/';
 }
 
 export function onRequestGet({ request }) {
   const url = new URL(request.url);
   const { market } = resolveMarket(url, request.headers, request.cf?.country);
+  const locale = localeFor(url.searchParams.get('l'));
   const ua = request.headers.get('user-agent') || '';
   const platform = requestedPlatform(url, ua);
   const campaign = cleanCampaign(url.searchParams.get('c') || url.searchParams.get('utm_campaign'));
@@ -135,8 +161,8 @@ export function onRequestGet({ request }) {
   // Marknad saknas, är okänd eller är fortfarande under granskning: håll kvar
   // besökaren på rätt språkversion. Ingen gated storefront får läcka ut här.
   let target = `${homeFor(url, market)}#main-content`;
-  if (market && PUBLIC.has(market.gl)) {
-    if (platform === 'android') target = playStore(market, campaign);
+  if (market && platform && PUBLIC_BY_PLATFORM[platform].has(market.gl)) {
+    if (platform === 'android') target = playStore(market, campaign, locale);
     else if (platform === 'ios') target = appStore(market, campaign);
   }
 

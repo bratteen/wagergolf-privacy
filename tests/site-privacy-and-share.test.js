@@ -4,8 +4,14 @@ const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 const site = require('../_data/site.js');
+const routes = require('../_data/routes.js');
 
 const ROOT = path.join(__dirname, '..');
+
+const INVITE_OUTPUTS = routes.publishedLocales.map((lang) => {
+  const prefix = routes.locales[lang].prefix.replace(/^\//, '');
+  return prefix ? `${prefix}/i/index.html` : 'i/index.html';
+});
 
 test('webbstatistik och session replay är avstängda', () => {
   assert.strictEqual(site.cfBeaconToken, '');
@@ -16,7 +22,7 @@ test('webbstatistik och session replay är avstängda', () => {
     websiteId: '',
   });
 
-  for (const file of ['index.html', 'i/index.html', 'no/i/index.html', 'dk/i/index.html', 'en/i/index.html']) {
+  for (const file of ['index.html', ...INVITE_OUTPUTS]) {
     const html = fs.readFileSync(path.join(ROOT, '_site', file), 'utf8');
     assert.ok(!html.includes('analytics.bratt.se'), file);
     assert.ok(!html.includes('replay-sample.js'), file);
@@ -29,7 +35,7 @@ test('webbstatistik och session replay är avstängda', () => {
 });
 
 test('inbjudningssidor märks noindex och får hämtas för att direktivet ska läsas', () => {
-  for (const file of ['i/index.html', 'no/i/index.html', 'dk/i/index.html', 'en/i/index.html']) {
+  for (const file of INVITE_OUTPUTS) {
     const html = fs.readFileSync(path.join(ROOT, '_site', file), 'utf8');
     assert.match(html, /<meta name="robots" content="noindex, nofollow">/, file);
   }

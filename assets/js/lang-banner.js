@@ -13,6 +13,15 @@
 // webbläsaren aldrig renderar oavsett CSS, så listan kan aldrig råka synas
 // eller påverka layouten innan scriptet kört.
 (function () {
+  // Ett medvetet språkval gäller även på nästa sida. Länkarna finns både i
+  // header/sidfot och på noindex-inbjudningssidor där själva bannern saknas.
+  document.addEventListener('click', function (event) {
+    var target = event.target;
+    if (!target || typeof target.closest !== 'function') return;
+    if (!target.closest('[data-lang-link]')) return;
+    try { localStorage.setItem('wg-lang-dismissed', '1'); } catch (e) {}
+  });
+
   var el = document.getElementById('lang-banner');
   if (!el) return;
 
@@ -40,7 +49,6 @@
 
   // Första webbläsarspråket som vi faktiskt har en översättning för.
   var prefs = navigator.languages || [navigator.language || ''];
-  var englishFallbacks = ['fi', 'nl', 'de', 'fr', 'es', 'it', 'pt'];
   var match = null;
   var j;
   for (i = 0; i < prefs.length && !match; i++) {
@@ -49,13 +57,6 @@
       // nb och no är samma skriftspråk för vårt syfte.
       var altBase = alts[j].lang === 'nb' ? 'no' : alts[j].lang;
       if (base === altBase || base === alts[j].lang) { match = alts[j]; break; }
-    }
-    // Webbplatsen har fyra språk. För appens övriga sju språk är den
-    // publicerade engelska sidan den uttryckliga fallbacken.
-    if (!match && englishFallbacks.indexOf(base) !== -1) {
-      for (j = 0; j < alts.length; j++) {
-        if (alts[j].lang === 'en') { match = alts[j]; break; }
-      }
     }
   }
 
@@ -67,6 +68,7 @@
   var link = document.createElement('a');
   link.setAttribute('href', match.url);
   link.setAttribute('data-lang-link', match.lang);
+  link.setAttribute('lang', match.lang);
   // match.text är målspråkets sträng, se kommentaren i komponenten.
   link.textContent = match.text.replace('{language}', match.label) + ' →';
 

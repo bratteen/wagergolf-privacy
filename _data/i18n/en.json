@@ -1,8 +1,13 @@
 {
+  "skipLink": "Skip to content",
   "nav": {
     "features": "Features",
     "formats": "Game formats",
-    "download": "Download"
+    "download": "Download",
+    "primaryLabel": "Primary navigation",
+    "mobileLabel": "Mobile navigation",
+    "unavailable": "Not available here yet",
+    "soon": "Soon"
   },
   "breadcrumb": {
     "home": "Home"
@@ -30,10 +35,12 @@
     "privacy": "Privacy policy",
     "terms": "Terms of use",
     "contact": "Contact",
-    "tagline": "Built in Sweden, for the regular fourball"
+    "tagline": "Built in Sweden, for the regular fourball",
+    "navigationLabel": "Footer navigation"
   },
   "store": {
-    "sub": "DOWNLOAD ON"
+    "sub": "DOWNLOAD ON",
+    "unavailable": "NOT AVAILABLE HERE"
   },
   "switcher": {
     "label": "Language"

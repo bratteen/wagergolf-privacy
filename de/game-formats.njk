@@ -1,0 +1,87 @@
+---
+layout: base.njk
+key: page:formats
+updated: "2026-09-02"
+title: "Golf-Spielformen: Regeln und Wertung erklärt | Wager Golf"
+description: "Guides zu Golf-Spielformen. Skins, Lochspiel, Nassau, Stableford und mehr, mit Regeln, Wertung und Spiel mit Handicap."
+ogTitle: "Golf-Spielformen"
+ogDescription: "Regeln und Wertung für Golf-Spielformen: Skins, Lochspiel, Nassau, Stableford und mehr."
+permalink: /de/spielformen/
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "de",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://wagergolf.se/de/" },
+          { "@type": "ListItem", "position": 2, "name": "Spielformen", "item": "https://wagergolf.se/de/spielformen/" }
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "name": "Golf-Spielformen",
+        "url": "https://wagergolf.se/de/spielformen/",
+        "inLanguage": "de",
+        "about": "Regeln, Wertung und Handicap für Golf-Spielformen",
+        "isPartOf": { "@id": "https://wagergolf.se/#website" },
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      }
+    ]
+  }
+---
+<main id="main-content" tabindex="-1">
+  <section class="subhero">
+    <div class="subhero-inner">
+      <div class="breadcrumb">
+        <a href="/de/">Startseite</a><span class="sep">/</span><span>Spielformen</span>
+      </div>
+      <h1>Golf-Spielformen, <span class="accent">einfach erklärt.</span></h1>
+      <p>Wie funktionieren Skins, Lochspiel und Nassau wirklich, und wie wird gewertet? Hier findest du Guides zu Golf-Spielformen mit Regeln, Abrechnung und dem richtigen Spiel mit Handicap.</p>
+    </div>
+  </section>
+
+  <div class="wrap hub-section">
+    {%- set cats = ["Klassiker", "Lochspiele", "Team", "Nebenspiele"] %}
+    {%- for cat in cats %}
+    {%- set inCat = collections.guides | byCategory(cat, lang) %}
+    {%- if inCat.length %}
+    <h2 class="hub-cat">{{ cat }}</h2>
+    <div class="hub-grid">
+      {%- for g in inCat %}
+      <a class="hub-card" href="{{ g.url }}">
+        <h3>{{ g.data.format }}{% if g.data.altName %} ({{ g.data.altName }}){% endif %}</h3>
+        <p>{{ g.data.cardText or g.data.lede }}</p>
+        <span class="meta">{{ g.data.players }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+
+  <div class="wrap hub-extra">
+    <p>Könnt ihr euch nicht entscheiden? Lest, <a href="/de/spielformen/spielform-waehlen/">welche Spielform zu eurer Gruppe passt</a>, vergleicht <a href="/de/spielformen/stableford-vs-zaehlspiel/">Stableford und Zählspiel</a> oder schlagt Begriffe im <a href="/de/glossar/">Golfglossar</a> nach.</p>
+  </div>
+</main>

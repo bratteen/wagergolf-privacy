@@ -98,7 +98,6 @@
       "settlement": "manual",
       "reviewStatus": "project-reviewed",
       "releaseGate": "closed",
-      "servesAsFallbackFor": ["FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT"],
       "assets": {
         "home": {
           "file": "en/home.webp",
@@ -115,6 +114,104 @@
           "sourceSha256": "5cc728bec6893ae1a8f9127943e7772f2c139c1f41fb286fb7ca9135e6b43f97",
           "sha256": "825402c18a6b1ced1428f3ae4593de2990b1ca03ae8093ff12943864087e9eb1"
         }
+      }
+    },
+    {
+      "language": "fi",
+      "locale": "fi-FI",
+      "market": "FI",
+      "currency": "EUR",
+      "settlement": "manual",
+      "reviewStatus": "owner-waived-language-review",
+      "releaseGate": "closed",
+      "assets": {
+        "home": { "file": "fi/home.webp", "sourceSha256": "e01c4f387369a061275edc6243189a8318db2510fd070f2cef103f2aa48e11af", "sha256": "d13c8d0470a8eb4fe46f355367fd2318b14c39245ca48c271d660fda69621bbc" },
+        "live": { "file": "fi/live.webp", "sourceSha256": "196907dec599aecba4d3b3bb6380e4603fcf4aea7a240031fb1d74a1931e97b6", "sha256": "dff5e12781aad86900bab4287b66e5148bcb120323dc67c1cdf9bea520b98dcb" },
+        "settlement": { "file": "fi/settlement.webp", "sourceSha256": "429c607287652b8d156a9d393f6626f3fd12a62989083765ed002bf218e8d2fb", "sha256": "7de4669d5987e6885a7c35dfbee1b79b07f56b0b2f94257d5a803a4626199262" }
+      }
+    },
+    {
+      "language": "nl",
+      "locale": "nl-NL",
+      "market": "NL",
+      "currency": "EUR",
+      "settlement": "manual",
+      "reviewStatus": "owner-waived-language-review",
+      "releaseGate": "closed",
+      "assets": {
+        "home": { "file": "nl/home.webp", "sourceSha256": "c1baab2efeb6374645348fc4a35eb21758d039f5fc4dfb02a6cf148320141e2a", "sha256": "8b75750c335269351b14143816af75bf3eb2d3ce1a9037f17de320e4ec40daa9" },
+        "live": { "file": "nl/live.webp", "sourceSha256": "2377531b7fd994328c1466a695852bac7fc78d3698daa82c5e2405555fd3e322", "sha256": "fa0f1357f00530c3f4ac9bd7e3bc0306a279cea01c57b415ccbea98374180457" },
+        "settlement": { "file": "nl/settlement.webp", "sourceSha256": "a38b2503e3076b9fab99d51215d0129a2098caf700de36c0e43ebd8a3c800319", "sha256": "e1b85ca0f16621e517f42c69b50658c3665124936a7f1fc8f8374e41fa88b2a4" }
+      }
+    },
+    {
+      "language": "de",
+      "locale": "de-DE",
+      "market": "DE",
+      "currency": "EUR",
+      "settlement": "manual",
+      "reviewStatus": "owner-waived-language-review",
+      "releaseGate": "closed",
+      "assets": {
+        "home": { "file": "de/home.webp", "sourceSha256": "2d3fe35c1eb5c62c78641e1c097c2aa0a503f131341c51d72c0686033808a566", "sha256": "9b6c3833c2ceef42dc0554fdba0eb2ed0a6782c168eacef8542cd25fc624eac8" },
+        "live": { "file": "de/live.webp", "sourceSha256": "51e0e66e98ed2eb1abe59e93f2a551a55db9424d166305264a2d72de6e966fc1", "sha256": "b5e9ebe193fd82714d96dd569330bc522af731f40f308e66275535ce40cd0048" },
+        "settlement": { "file": "de/settlement.webp", "sourceSha256": "55eb3611d4507e7139547a8ba429cd59f68145499b99542eeb83ee7edf3e7280", "sha256": "7f1c8e339009a8bc4691a353da8fa035b21c24166f6377e09b559db9632ec4c1" }
+      }
+    },
+    {
+      "language": "fr",
+      "locale": "fr-FR",
+      "market": "FR",
+      "currency": "EUR",
+      "settlement": "manual",
+      "reviewStatus": "owner-waived-language-review",
+      "releaseGate": "closed",
+      "assets": {
+        "home": { "file": "fr/home.webp", "sourceSha256": "4d8a55b02bfa02204803649335ae0f8ef7af27a76b3971b82abd6ec113761508", "sha256": "62297de28ad42f01c06be1169d80b15d56e75f9ba6312adde9fd2422e11bed66" },
+        "live": { "file": "fr/live.webp", "sourceSha256": "25119997a1e1255806f6b2fa93aed357ebd73d653db7d640a557350c7efea809", "sha256": "a13baf2f35e5ecf0c9c6f30547166cfb965a4410b287c76a9565d28f9ff87089" },
+        "settlement": { "file": "fr/settlement.webp", "sourceSha256": "e1ed93ec9f20f94b2530ac1293d32ad294def5fd50d43947d42f5f3041895ff4", "sha256": "ef00b9e3f5183009f3e0f04f13dca7d1ec5b4c2c87e623de567f901c0d10df18" }
+      }
+    },
+    {
+      "language": "es",
+      "locale": "es-ES",
+      "market": "ES",
+      "currency": "EUR",
+      "settlement": "manual",
+      "reviewStatus": "owner-waived-language-review",
+      "releaseGate": "closed",
+      "assets": {
+        "home": { "file": "es/home.webp", "sourceSha256": "b20dc16b167e609a9cb21691622b42eda8ec391dd045c4ea3c5dc0281ca3f177", "sha256": "3102dc0e2d5d26e13308b9090d031973562ea7e74cf7950bd605cd5fe38d3b30" },
+        "live": { "file": "es/live.webp", "sourceSha256": "615d9682546f3806a82aba0de4570be706dc8e8983cff786595852c16bfaa482", "sha256": "f23da1b1d0577c5238de47e26dee832aab90ad99595037c96b6b34652df2ecf8" },
+        "settlement": { "file": "es/settlement.webp", "sourceSha256": "cb004aa4ef264b09b8f15ed9a1fe532bcd1b11a8addfb31ccde4843597256000", "sha256": "9135c75d5d6002f8fd5a0ad915b2e46ad45a93d2b81ecc2234ece904f1113c06" }
+      }
+    },
+    {
+      "language": "it",
+      "locale": "it-IT",
+      "market": "IT",
+      "currency": "EUR",
+      "settlement": "manual",
+      "reviewStatus": "owner-waived-language-review",
+      "releaseGate": "closed",
+      "assets": {
+        "home": { "file": "it/home.webp", "sourceSha256": "7d9afb43f668af8bc08bbd0a7008113afd858554915d72d92a51708c616bba96", "sha256": "e3acb704ce462a8fb243218f8bb6fe0a9c20fe4dcfda34114921f8aa3a9a5ce5" },
+        "live": { "file": "it/live.webp", "sourceSha256": "6df8a71a3233c3bfc16da9815cdc25880eb0d493ac2dceac1e341215db73f0e4", "sha256": "e6796126cc994e2948091cfae4cb92006527a64e551a4309f8f16f49ce53b45d" },
+        "settlement": { "file": "it/settlement.webp", "sourceSha256": "4ce31ecf97ebc2413e762a4c1e7f49ae07577dcb0d3ed53e58f3f794019e34c4", "sha256": "ceed2fd7bad3a38152f1cfb3a9351bdf546b70ccc1e34e572224d78d7d45e340" }
+      }
+    },
+    {
+      "language": "pt",
+      "locale": "pt-PT",
+      "market": "PT",
+      "currency": "EUR",
+      "settlement": "manual",
+      "reviewStatus": "owner-waived-language-review",
+      "releaseGate": "closed",
+      "assets": {
+        "home": { "file": "pt/home.webp", "sourceSha256": "368f3dad4e229f6f61556bf7e8145ef22c028465f39df8e6dd2daa33181ccf15", "sha256": "73c0f8af23584dcb594272b14eb8c22c03ade9e1517bd1060bd3f22bcaf172d6" },
+        "live": { "file": "pt/live.webp", "sourceSha256": "1b6ce95633e30df02ac00be0e50fc1243a31e8d615e6daa7a1bdf501a5892e13", "sha256": "fcfbb7ba03999cd37a8f23194d00bcf873f8ddee5c91c0643481a52abe4d775b" },
+        "settlement": { "file": "pt/settlement.webp", "sourceSha256": "ed1702c5b467b3c6fa020e1eaa9e16697922700fef11367dfefb7441c0f9e1f4", "sha256": "de9a142ccf386fb190a125087ffa29792e04871e3335802603ee414a15f56c8f" }
       }
     }
   ]

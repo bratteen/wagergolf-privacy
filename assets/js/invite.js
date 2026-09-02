@@ -24,6 +24,13 @@
     nb: { fallbackName: 'En golfkompis', title: ' har invitert deg til Wager Golf' },
     da: { fallbackName: 'En golfmakker', title: ' har inviteret dig til Wager Golf' },
     en: { fallbackName: 'A golf mate', title: ' has invited you to Wager Golf' },
+    fi: { fallbackName: 'Golfkaveri', title: ' kutsui sinut Wager Golfiin' },
+    nl: { fallbackName: 'Een golfmaat', title: ' heeft je uitgenodigd voor Wager Golf' },
+    de: { fallbackName: 'Ein Golffreund', title: ' hat dich zu Wager Golf eingeladen' },
+    fr: { fallbackName: 'Un partenaire de golf', title: ' vous a invité à rejoindre Wager Golf' },
+    es: { fallbackName: 'Un compañero de golf', title: ' te ha invitado a Wager Golf' },
+    it: { fallbackName: 'Un compagno di golf', title: ' ti ha invitato su Wager Golf' },
+    pt: { fallbackName: 'Um parceiro de golfe', title: ' convidou-te para o Wager Golf' },
   }[lang] || { fallbackName: 'A golf mate', title: ' has invited you to Wager Golf' };
 
   // Handle:t ligger i sökvägen, inte i en query-parameter: /i/<handle> är en

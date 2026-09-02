@@ -2,12 +2,15 @@ const test = require('node:test');
 const assert = require('node:assert');
 const { readdirSync } = require('node:fs');
 const path = require('node:path');
+const routes = require('../_data/routes.js');
 
 // Kontraktet varje språkfil måste uppfylla. Ett nytt språk läggs till genom
 // att släppa en <lang>.json i _data/i18n/ — testet nedan hittar filen
 // automatiskt via readdirSync, den behöver inte nämnas här.
 const REQUIRED = [
+  'skipLink',
   'nav.features', 'nav.formats', 'nav.download',
+  'nav.primaryLabel', 'nav.mobileLabel', 'nav.unavailable', 'nav.soon',
   'breadcrumb.home',
   'byline.by', 'byline.updated',
   'faq.heading',
@@ -15,7 +18,8 @@ const REQUIRED = [
   'article.related', 'article.ctaText',
   'footer.formats', 'footer.glossary', 'footer.about',
   'footer.privacy', 'footer.terms', 'footer.contact', 'footer.tagline',
-  'store.sub',
+  'footer.navigationLabel',
+  'store.sub', 'store.unavailable',
   'switcher.label',
   'banner.text', 'banner.close',
 ];
@@ -69,6 +73,13 @@ for (const file of files) {
 
 test('minst sv.json finns och testas', () => {
   assert.ok(files.includes('sv.json'));
+});
+
+test('varje publicerat språk har en egen språkfil', () => {
+  assert.deepStrictEqual(
+    routes.publishedLocales.map((lang) => `${lang}.json`).sort(),
+    files.sort(),
+  );
 });
 
 test('guide.ctaHeading har platshållaren för spelformens namn', () => {

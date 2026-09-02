@@ -1,4 +1,4 @@
-// Termordlista sv -> nb -> da -> en.
+// Termordlista för sajtens elva publicerade språk.
 //
 // Källan för hela översättningsarbetet. Byggs och granskas FÖRE en enda sida
 // översätts, eftersom slugs blir dyra att ändra så fort sidorna indexerats —
@@ -11,13 +11,14 @@
 //   TERMS    golftermer i brödtext. Fel här kostar trovärdighet hos en golfare
 //            men inget i sökmotorn.
 //
-// `source` säger hur säker raden är. Rader utan källa är min bedömning och bör
-// läsas av någon som spelar golf på språket innan de fryses:
+// `source` dokumenterar källan för den ursprungliga nordiska termmatrisen:
 //   "NGF"   Norges Golfforbund
 //   "DGU"   Dansk Golf Union
 //   "namn"  egennamn, oförändrat på alla språk
 //   "beslut" ingen etablerad term finns, namnet är valt medvetet
-//   ""      obekräftad, behöver granskas
+// De sju tillkommande språken speglar appens kanoniska locale-filer och
+// butikstexter. Ägaren godkände den 2 september 2026 att de publiceras utan en
+// separat språkgranskning; namn och sluggar låses därför av testerna nedan.
 //
 // SLUGGKONVENTION: diakriter skalas bort, som i de befintliga svenska sluggarna
 // (Bästboll -> bastboll, Längst drive -> langst-drive). Danska å blir aa och æ
@@ -139,6 +140,112 @@ const FORMATS = {
   },
 };
 
+// De sju europeiska språken följer appens kanoniska formatnamn. Nyckeln är
+// alltid den svenska guideidentiteten; värdet är [synligt namn, fryst slug,
+// eventuellt alternativnamn]. Den kompakta formen gör att samma matris går att
+// granska mot appens locale-filer utan att blanda in den nordiska historiken
+// ovan.
+const EXTRA_FORMATS = {
+  fi: {
+    slaggolf: ["Lyöntipeli", "lyontipeli"], matchspel: ["Reikäpeli", "reikapeli"],
+    stableford: ["Pistebogey", "pistebogey", "Stableford"], nassau: ["Nassau", "nassau"],
+    vegas: ["Vegas", "vegas"], wolf: ["Wolf", "wolf"], skins: ["Skins", "skins"],
+    scramble: ["Scramble", "scramble"], foursome: ["Foursome", "foursome"],
+    greensome: ["Greensome", "greensome"], sandie: ["Sandie", "sandie"],
+    snake: ["Snake", "snake"], quota: ["Quota", "quota"],
+    "bingo-bango-bongo": ["Bingo Bango Bongo", "bingo-bango-bongo"],
+    bastboll: ["Four-Ball", "four-ball"], "langst-drive": ["Pisin draivi", "pisin-draivi"],
+    "narmast-flaggan": ["Lähimmäs lippua", "lahimmas-lippua"],
+    birdiepott: ["Birdiet", "birdiet"], klubbroulette: ["Mailaruletti", "mailaruletti"],
+    golfpoker: ["Golfpokeri", "golfpokeri"], "split-sixes": ["Split Sixes", "split-sixes"],
+  },
+  nl: {
+    slaggolf: ["Strokeplay", "strokeplay"], matchspel: ["Matchplay", "matchplay"],
+    stableford: ["Stableford", "stableford"], nassau: ["Nassau", "nassau"],
+    vegas: ["Vegas", "vegas"], wolf: ["Wolf", "wolf"], skins: ["Skins", "skins"],
+    scramble: ["Scramble", "scramble"], foursome: ["Foursome", "foursome"],
+    greensome: ["Greensome", "greensome"], sandie: ["Sandie", "sandie"],
+    snake: ["Snake", "snake"], quota: ["Quota", "quota"],
+    "bingo-bango-bongo": ["Bingo Bango Bongo", "bingo-bango-bongo"],
+    bastboll: ["Fourball", "fourball"], "langst-drive": ["Longest drive", "longest-drive"],
+    "narmast-flaggan": ["Neary", "neary"], birdiepott: ["Birdiepot", "birdiepot", "Birdies"],
+    klubbroulette: ["Clubroulette", "clubroulette"], golfpoker: ["Golfpoker", "golfpoker"],
+    "split-sixes": ["Amerikaantje", "amerikaantje", "Split Sixes"],
+  },
+  de: {
+    slaggolf: ["Zählspiel", "zaehlspiel"], matchspel: ["Lochspiel", "lochspiel"],
+    stableford: ["Stableford", "stableford"], nassau: ["Nassau", "nassau"],
+    vegas: ["Vegas", "vegas"], wolf: ["Wolf", "wolf"], skins: ["Skins", "skins"],
+    scramble: ["Scramble", "scramble"], foursome: ["Vierer", "vierer"],
+    greensome: ["Greensome", "greensome"], sandie: ["Sandie", "sandie"],
+    snake: ["Snake", "snake"], quota: ["Quota", "quota"],
+    "bingo-bango-bongo": ["Bingo Bango Bongo", "bingo-bango-bongo"],
+    bastboll: ["Vierball", "vierball"], "langst-drive": ["Longest Drive", "longest-drive"],
+    "narmast-flaggan": ["Nearest to the Pin", "nearest-to-the-pin"],
+    birdiepott: ["Birdies", "birdie-pot"], klubbroulette: ["Schlägerroulette", "schlaegerroulette"],
+    golfpoker: ["Golfpoker", "golfpoker"], "split-sixes": ["Split Sixes", "split-sixes"],
+  },
+  fr: {
+    slaggolf: ["Stroke play", "stroke-play"], matchspel: ["Match play", "match-play"],
+    stableford: ["Stableford", "stableford"], nassau: ["Nassau", "nassau"],
+    vegas: ["Vegas", "vegas"], wolf: ["Wolf", "wolf"], skins: ["Skins", "skins"],
+    scramble: ["Scramble", "scramble"], foursome: ["Foursome", "foursome"],
+    greensome: ["Greensome", "greensome"], sandie: ["Sandie", "sandie"],
+    snake: ["Snake", "snake"], quota: ["Quota", "quota"],
+    "bingo-bango-bongo": ["Bingo Bango Bongo", "bingo-bango-bongo"],
+    bastboll: ["Quatre balles", "quatre-balles"], "langst-drive": ["Concours de drive", "concours-drive"],
+    "narmast-flaggan": ["Concours de précision", "concours-precision"],
+    birdiepott: ["Birdies", "cagnotte-birdies"], klubbroulette: ["Roulette des clubs", "roulette-clubs"],
+    golfpoker: ["Golf Poker", "poker-golf"], "split-sixes": ["Split Sixes", "split-sixes"],
+  },
+  es: {
+    slaggolf: ["Juego por golpes", "juego-por-golpes"], matchspel: ["Juego por hoyos", "juego-por-hoyos"],
+    stableford: ["Stableford", "stableford"], nassau: ["Nassau", "nassau"],
+    vegas: ["Vegas", "vegas"], wolf: ["Wolf", "wolf"], skins: ["Skins", "skins"],
+    scramble: ["Scramble", "scramble"], foursome: ["Foursomes", "foursomes"],
+    greensome: ["Greensome", "greensome"], sandie: ["Sandie", "sandie"],
+    snake: ["Snake", "snake"], quota: ["Quota", "quota"],
+    "bingo-bango-bongo": ["Bingo Bango Bongo", "bingo-bango-bongo"],
+    bastboll: ["Four-Ball", "four-ball"], "langst-drive": ["Drive más largo", "drive-mas-largo"],
+    "narmast-flaggan": ["Más cerca de la bandera", "mas-cerca-de-la-bandera"],
+    birdiepott: ["Bote de birdies", "bote-de-birdies", "Birdies"], klubbroulette: ["Ruleta de palos", "ruleta-de-palos"],
+    golfpoker: ["Póquer de golf", "poquer-de-golf"], "split-sixes": ["Split Sixes", "split-sixes"],
+  },
+  it: {
+    slaggolf: ["Stroke play", "stroke-play"], matchspel: ["Match play", "match-play"],
+    stableford: ["Stableford", "stableford"], nassau: ["Nassau", "nassau"],
+    vegas: ["Vegas", "vegas"], wolf: ["Wolf", "wolf"], skins: ["Skins", "skins"],
+    scramble: ["Scramble", "scramble"], foursome: ["Foursome", "foursome"],
+    greensome: ["Greensome", "greensome"], sandie: ["Sandie", "sandie"],
+    snake: ["Snake", "snake"], quota: ["Quota", "quota"],
+    "bingo-bango-bongo": ["Bingo Bango Bongo", "bingo-bango-bongo"],
+    bastboll: ["Quattro palle", "quattro-palle"], "langst-drive": ["Drive più lungo", "drive-piu-lungo"],
+    "narmast-flaggan": ["Più vicino alla bandiera", "piu-vicino-alla-bandiera"],
+    birdiepott: ["Birdie", "birdie"], klubbroulette: ["Roulette dei bastoni", "roulette-dei-bastoni"],
+    golfpoker: ["Poker golf", "poker-golf"], "split-sixes": ["Split Sixes", "split-sixes"],
+  },
+  pt: {
+    slaggolf: ["Jogo por pancadas", "jogo-por-pancadas"], matchspel: ["Jogo por buracos", "jogo-por-buracos"],
+    stableford: ["Stableford", "stableford"], nassau: ["Nassau", "nassau"],
+    vegas: ["Vegas", "vegas"], wolf: ["Wolf", "wolf"], skins: ["Skins", "skins"],
+    scramble: ["Scramble", "scramble"], foursome: ["Foursomes", "foursomes"],
+    greensome: ["Greensome", "greensome"], sandie: ["Sandie", "sandie"],
+    snake: ["Snake", "snake"], quota: ["Quota", "quota"],
+    "bingo-bango-bongo": ["Bingo Bango Bongo", "bingo-bango-bongo"],
+    bastboll: ["Quatro Bolas", "quatro-bolas"], "langst-drive": ["Drive mais longo", "drive-mais-longo"],
+    "narmast-flaggan": ["Mais perto da bandeira", "mais-perto-da-bandeira"],
+    birdiepott: ["Pote de birdies", "pote-de-birdies"], klubbroulette: ["Roleta de tacos", "roleta-de-tacos"],
+    golfpoker: ["Poker de golfe", "poker-de-golfe"], "split-sixes": ["Split Sixes", "split-sixes"],
+  },
+};
+
+for (const [lang, formats] of Object.entries(EXTRA_FORMATS)) {
+  for (const [key, [name, slug, altName]] of Object.entries(formats)) {
+    if (!FORMATS[key]) throw new Error(`Okänd formatnyckel i ${lang}: ${key}`);
+    FORMATS[key][lang] = { name, slug, ...(altName ? { altName } : {}) };
+  }
+}
+
 /** Kort form för egennamn: samma namn och slug på alla språk. */
 function n(name, slug) {
   return { name, slug: slug || name.toLowerCase() };
@@ -146,7 +253,8 @@ function n(name, slug) {
 
 // Golftermer i brödtext. Bara de som faktiskt skiljer sig — par, birdie, eagle,
 // bogey, tee, green, fairway, rough, bunker, putt, handicap, slope, scratch och
-// WHS är identiska på alla fyra språken och står därför inte här.
+// Basuppsättningen nedan täcker de fyra ursprungliga språken. De sju
+// tillkommande språkens exakta motsvarigheter läggs på i EXTRA_TERMS.
 const TERMS = {
   dubbelbogey: { sv: "Dubbelbogey", nb: "Dobbeltbogey", da: "Dobbeltbogey", en: "Double bogey" },
   "hole-in-one": { sv: "Hole in one", nb: "Hole in one", da: "Hole in one", en: "Hole-in-one" },
@@ -173,5 +281,78 @@ const TERMS = {
   slag: { sv: "Slag", nb: "Slag", da: "Slag", en: "Stroke" },
   poang: { sv: "Poäng", nb: "Poeng", da: "Point", en: "Points" },
 };
+
+const EXTRA_TERMS = {
+  fi: {
+    dubbelbogey: "Tuplabogey", "hole-in-one": "Hole-in-one", albatross: "Albatrossi",
+    spelhandicap: "Pelitasoitus", "stroke-index": "Väylän tasoitusindeksi",
+    "course-rating": "Course Rating", brutto: "Brutto", net: "Netto",
+    utslag: "Avauslyönti", pegga: "Tiiaus", honnor: "Avausvuoro", greenfee: "Green fee",
+    gimme: "Gimme", mulligan: "Mulligan", sidobet: "Sivuveto", pott: "Potti",
+    insats: "Panos", hal: "Väylä", runda: "Kierros", bana: "Kenttä",
+    spelform: "Pelimuoto", scorekort: "Tuloskortti", slag: "Lyönti", poang: "Pisteet",
+  },
+  nl: {
+    dubbelbogey: "Dubbele bogey", "hole-in-one": "Hole-in-one", albatross: "Albatros",
+    spelhandicap: "Baanhandicap", "stroke-index": "Stroke-index",
+    "course-rating": "Course Rating", brutto: "Bruto", net: "Netto", utslag: "Afslag",
+    pegga: "Opteeën", honnor: "Eer", greenfee: "Greenfee", gimme: "Gimme",
+    mulligan: "Mulligan", sidobet: "Sidebet", pott: "Pot", insats: "Inzet", hal: "Hole",
+    runda: "Ronde", bana: "Baan", spelform: "Spelvorm", scorekort: "Scorekaart",
+    slag: "Slag", poang: "Punten",
+  },
+  de: {
+    dubbelbogey: "Doppelbogey", "hole-in-one": "Hole-in-one", albatross: "Albatros",
+    spelhandicap: "Playing Handicap", "stroke-index": "Vorgabenindex",
+    "course-rating": "Course Rating", brutto: "Brutto", net: "Netto", utslag: "Abschlag",
+    pegga: "Aufteen", honnor: "Ehre", greenfee: "Greenfee", gimme: "Geschenkter Putt",
+    mulligan: "Mulligan", sidobet: "Nebenwette", pott: "Pot", insats: "Einsatz", hal: "Loch",
+    runda: "Runde", bana: "Golfplatz", spelform: "Spielform", scorekort: "Scorekarte",
+    slag: "Schlag", poang: "Punkte",
+  },
+  fr: {
+    dubbelbogey: "Double bogey", "hole-in-one": "Trou en un", albatross: "Albatros",
+    spelhandicap: "Handicap de jeu", "stroke-index": "Index du trou",
+    "course-rating": "Course Rating", brutto: "Brut", net: "Net", utslag: "Mise en jeu",
+    pegga: "Placer sur tee", honnor: "Honneur", greenfee: "Green fee", gimme: "Donné",
+    mulligan: "Mulligan", sidobet: "Pari annexe", pott: "Cagnotte", insats: "Mise", hal: "Trou",
+    runda: "Partie", bana: "Parcours", spelform: "Formule de jeu", scorekort: "Carte de score",
+    slag: "Coup", poang: "Points",
+  },
+  es: {
+    dubbelbogey: "Doble bogey", "hole-in-one": "Hoyo en uno", albatross: "Albatros",
+    spelhandicap: "Hándicap de Juego", "stroke-index": "Índice de golpes",
+    "course-rating": "Course Rating", brutto: "Bruto", net: "Neto", utslag: "Salida",
+    pegga: "Colocar en el tee", honnor: "Honor", greenfee: "Green fee", gimme: "Concedido",
+    mulligan: "Mulligan", sidobet: "Apuesta paralela", pott: "Bote", insats: "Apuesta", hal: "Hoyo",
+    runda: "Vuelta", bana: "Campo", spelform: "Modalidad de juego",
+    scorekort: "Tarjeta de resultados", slag: "Golpe", poang: "Puntos",
+  },
+  it: {
+    dubbelbogey: "Doppio bogey", "hole-in-one": "Buca in uno", albatross: "Albatross",
+    spelhandicap: "Playing Handicap", "stroke-index": "Indice di difficoltà",
+    "course-rating": "Course Rating", brutto: "Lordo", net: "Netto", utslag: "Colpo dal tee",
+    pegga: "Piazzare sul tee", honnor: "Onore", greenfee: "Green fee", gimme: "Concesso",
+    mulligan: "Mulligan", sidobet: "Scommessa laterale", pott: "Montepremi", insats: "Posta",
+    hal: "Buca", runda: "Giro", bana: "Campo", spelform: "Formula di gioco",
+    scorekort: "Scorecard", slag: "Colpo", poang: "Punti",
+  },
+  pt: {
+    dubbelbogey: "Duplo bogey", "hole-in-one": "Hole-in-one", albatross: "Albatroz",
+    spelhandicap: "Handicap de Jogo", "stroke-index": "Índice de pancadas",
+    "course-rating": "Course Rating", brutto: "Bruto", net: "Net", utslag: "Saída",
+    pegga: "Colocar no tee", honnor: "Honra", greenfee: "Green fee", gimme: "Concedida",
+    mulligan: "Mulligan", sidobet: "Aposta paralela", pott: "Pote", insats: "Aposta",
+    hal: "Buraco", runda: "Volta", bana: "Campo", spelform: "Modalidade de jogo",
+    scorekort: "Cartão de resultados", slag: "Pancada", poang: "Pontos",
+  },
+};
+
+for (const [lang, terms] of Object.entries(EXTRA_TERMS)) {
+  for (const [key, value] of Object.entries(terms)) {
+    if (!TERMS[key]) throw new Error(`Okänd termnyckel i ${lang}: ${key}`);
+    TERMS[key][lang] = value;
+  }
+}
 
 module.exports = { FORMATS, TERMS };

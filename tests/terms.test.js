@@ -20,6 +20,42 @@ function guidesInRepo() {
   return out;
 }
 
+function scalar(source, key) {
+  const match = source.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'));
+  if (!match) return null;
+  const value = match[1].trim();
+  if (
+    value.length >= 2 &&
+    ((value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'")))
+  ) {
+    return value.slice(1, -1);
+  }
+  return value;
+}
+
+/** Guide-frontmatter för ett publicerat språk, nycklat med svensk identitet. */
+function localizedGuides(lang) {
+  const prefix = routes.locales[lang].prefix.replace(/^\//, '');
+  const dir = lang === 'sv' ? 'spelformer/guides' : `${prefix}/spelformer/guides`;
+  const out = {};
+
+  for (const file of readdirSync(dir).filter((name) => name.endsWith('.md'))) {
+    const source = readFileSync(`${dir}/${file}`, 'utf8');
+    const slug = scalar(source, 'slug');
+    const key = lang === 'sv' ? slug : scalar(source, 'key')?.replace(/^guide:/, '');
+    assert.ok(key, `${dir}/${file} saknar språkoberoende guide:key`);
+    assert.ok(!out[key], `${lang}: guide:${key} finns i mer än en fil`);
+    out[key] = {
+      slug,
+      name: scalar(source, 'format'),
+      altName: scalar(source, 'altName'),
+    };
+  }
+
+  return out;
+}
+
 const REPO = guidesInRepo();
 
 // Den viktigaste kontrollen: ordlistan ska beskriva sajten som den ÄR. Glider
@@ -49,7 +85,31 @@ test('svenskan i ordlistan matchar guidernas frontmatter exakt', () => {
   }
 });
 
-test('varje format har alla fyra språken med namn och slug', () => {
+test('alla publicerade språkguider matchar ordlistans namn, slug och altName', () => {
+  for (const lang of routes.publishedLocales) {
+    const guides = localizedGuides(lang);
+    assert.deepStrictEqual(
+      Object.keys(guides).sort(),
+      Object.keys(FORMATS).sort(),
+      `${lang}: guideuppsättningen skiljer sig från ordlistan`,
+    );
+
+    for (const [key, guide] of Object.entries(guides)) {
+      const expected = FORMATS[key][lang];
+      assert.deepStrictEqual(
+        guide,
+        {
+          slug: expected.slug,
+          name: expected.name,
+          altName: expected.altName || null,
+        },
+        `${lang}: guide:${key} matchar inte ordlistan`,
+      );
+    }
+  }
+});
+
+test('varje format har alla elva språken med namn och slug', () => {
   for (const [key, entry] of Object.entries(FORMATS)) {
     for (const lang of LANGS) {
       assert.ok(entry[lang], `${key} saknar ${lang}`);
@@ -86,7 +146,7 @@ test('inga två format delar slug inom samma språk', () => {
   }
 });
 
-test('varje term har alla fyra språken', () => {
+test('varje term har alla elva språken', () => {
   for (const [key, entry] of Object.entries(TERMS)) {
     for (const lang of LANGS) {
       assert.ok(entry[lang], `termen "${key}" saknar ${lang}`);
@@ -95,8 +155,8 @@ test('varje term har alla fyra språken', () => {
 });
 
 test('source-fältet finns på varje format, även när det är tomt', () => {
-  // Tomt värde betyder "obekräftad, granska innan slugs fryses". Saknat fält
-  // betyder att någon glömt fundera på saken — det är skillnaden.
+  // Fältet dokumenterar hur den ursprungliga nordiska termen valdes. Saknat
+  // fält betyder att någon glömt fundera på saken.
   for (const [key, entry] of Object.entries(FORMATS)) {
     assert.strictEqual(
       typeof entry.source,

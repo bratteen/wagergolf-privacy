@@ -1,12 +1,12 @@
 // Vilka lokaliserade appskärmbilder som faktiskt finns på disk.
 //
-// Rotbilderna innehåller det svenska appgränssnittet. Publicerade norska,
-// danska och engelska varianter ligger i egna språkkataloger med rätt valuta
-// och betalningsflöde för respektive exempelmarknad.
+// Rotbilderna innehåller det svenska appgränssnittet. Alla tio andra språk
+// ligger i egna språkkataloger med rätt valuta och betalningsflöde för sin
+// exempelmarknad.
 //
-// Mallen gör valet additivt: finns ingen bild i sidans språk används engelska
-// före den svenska roten. Släpps en bild in i assets/shots/<lang>/ plockas
-// den upp automatiskt överallt där shot-shortcoden används.
+// Mallen behåller en defensiv engelsk fallback om en enskild bild skulle
+// saknas, men manifesttestet kräver tre riktiga bilder för varje publicerat
+// språk.
 const fs = require("fs");
 const path = require("path");
 

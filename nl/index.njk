@@ -1,0 +1,357 @@
+---
+layout: base.njk
+key: page:home
+updated: "2026-09-02"
+permalink: /nl/
+title: "Wager Golf, spellen met inzet zonder papier of rekenmachine"
+description: "Wager Golf houdt de stand bij wanneer de groep met inzet speelt. Versie 1.7.1 bevat 21 spelvormen en 3 028 golfbanen in 13 landen."
+ogTitle: "Wager Golf, spellen met inzet"
+ogDescription: "Speel met inzet zonder papier of rekenmachine. 21 spelvormen en automatische berekening van de afrekening."
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "nl",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://wagergolf.se/#person",
+        "name": "Gustaf Bratt",
+        "url": "https://wagergolf.se/nl/over-ons/"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Wager Golf, spellen met inzet",
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "SportsApplication",
+        "url": "https://wagergolf.se/nl/",
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ],
+        "inLanguage": "nl",
+        "publisher": { "@id": "https://wagergolf.se/#org" },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Heeft iedereen in de groep de app nodig?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nee. Eén persoon kan de hele ronde beheren en de scores voor iedereen invoeren. De andere spelers worden als gast toegevoegd. Willen jullie elkaars rondes live volgen en meldingen ontvangen, dan kunnen meer spelers de app downloaden, maar één persoon is genoeg."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Wager Golf gratis?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ja. De gratis versie bevat vijf hoofdspelvormen en laat je per ronde één hoofdspel plus één optionele sidegame spelen, met automatische berekening van de afrekening. Pro ontgrendelt alle 21 spelvormen, meer combinaties en de volledige geschiedenis. Nieuwe gebruikers die in aanmerking komen krijgen een gratis proefperiode van 14 dagen. In eurolanden kost Pro €4,99 per maand of €29,99 per jaar."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Jullie spelen met geld. Mag dat?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Wager Golf is geen kansspelbedrijf en raakt het geld nooit aan. De app houdt alleen bij wat jullie onderling hebben afgesproken, berekent de afrekening en laat zien wie wie moet betalen. Wager Golf verwerkt, bewaart of verstuurt nooit inzetgeld."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Voor wie is de app bedoeld?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Wager Golf is bedoeld voor personen van 17 jaar of ouder en voor privérondes tussen mensen die elkaar kennen. De app ontvangt, bewaart of verstuurt nooit inzetgeld."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Staat mijn golfbaan in de app?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Versie 1.7.1 bevat 3 028 golfbanen in Zweden, Denemarken, Noorwegen, Ierland, Finland, Nederland, Oostenrijk, Portugal, België, Duitsland, Frankrijk, Spanje en Italië. De banencatalogus is beschikbaar in de landen waar deze versie is uitgebracht."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Gebruikt de app de juiste handicap?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ja. De baanhandicap wordt volgens WHS per baan en tee berekend. De handicapslagen worden via de stroke index aan de juiste holes toegewezen. Zo kunnen spelers met verschillende handicaps eerlijk in dezelfde ronde spelen."
+            }
+          }
+        ]
+      }
+    ]
+  }
+---
+  <main id="main-content" data-download-anchor tabindex="-1">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow on-dark">Versie 1.7.1 voor 13 markten</span>
+          <h1>Genoeg van spelen <span class="accent">voor de eer?</span></h1>
+          <p class="lede">Wager Golf houdt de stand bij wanneer de groep met inzet speelt. De app berekent 21 spelvormen automatisch en laat na de ronde precies zien wie wie moet betalen. Geen papier, geen rekenmachine en geen discussie op hole 19.</p>
+          <div class="cta-row">
+            {% set storePlats = "startsida-hero" %}
+            {% include "store-badges.njk" %}
+            <span class="cta-note" data-release-open hidden>Gratis te downloaden in jouw land.</span>
+            <span class="cta-note" data-release-closed>Nog niet beschikbaar voor jouw apparaat in dit land.</span>
+          </div>
+          <p class="hero-proof">
+            <span class="hero-proof-stars" role="img" aria-label="5 van 5 sterren">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</span>
+            <span class="hero-proof-text">5,0 van 5 in de Zweedse App Store</span>
+          </p>
+        </div>
+        <div class="hero-phone">
+          <img src="{% shot "live" %}" alt="Live scorekaart van Wager Golf op een iPhone" loading="eager" fetchpriority="high" width="640" height="1306">
+          <span class="hero-stamp">Hole voor hole, live</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="holestrip" aria-hidden="true">
+      <div class="wrap holestrip-inner">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+        <span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+        <span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="wrap">
+        <div class="stats-grid reveal">
+          <div class="stat">
+            <div class="num brass">21</div>
+            <div class="label">Spelvormen met automatische berekening van de afrekening</div>
+          </div>
+          <div class="stat">
+            <div class="num">3 028</div>
+            <div class="label">Golfbanen in 13 landen in versie 1.7.1</div>
+          </div>
+          <div class="stat">
+            <div class="num">5</div>
+            <div class="label">Gratis hoofdspelvormen, met automatische berekening van de afrekening</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="steps">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Zo werkt het</span>
+          <h2>Drie stappen, zonder papier</h2>
+        </div>
+        <div class="steps-grid reveal">
+          <div class="step">
+            <div class="step-num">01</div>
+            <h3>Voeg de groep toe</h3>
+            <p>Kies de baan en 2 tot 4 spelers. Kies een spelvorm of laat de app er een voorstellen. Jullie stellen de inzet één keer in.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <h3>Houd de ronde bij</h3>
+            <p>Voer per hole de slagen in. De app berekent live de punten, slagen en leider, met de juiste handicap voor iedere speler.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <h3>Reken af</h3>
+            <p>Na de ronde berekent de app wie welk bedrag aan wie moet betalen en beperkt hij het aantal betalingen. Geen discussie op hole 19.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <!-- Alle drie zijn geverifieerde App Store-beoordelingen van vijf sterren.
+    De citaten zijn vertaald uit de gepubliceerde Zweedse tekst, zoals ook in de interface staat vermeld.
+    Eric J Karlsson · Nacka Golf, Taashiie/Natasha · Troxhammar GK, Buffshady/Philip · Golfstar.
+    Controleer ze via itunes.apple.com/se/rss/customerreviews/id=6767638917/sortBy=mostRecent/json -->
+    <section class="voices">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Uit de groep</span>
+          <h2>Golfers die niet meer zelf rekenen</h2>
+        </div>
+        {% macro stars() %}<div class="voice-stars" role="img" aria-label="5 van 5 sterren">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</div>{% endmacro %}
+        <div class="voices-grid reveal">
+          <figure class="voice">
+            <blockquote>Werkt goed met veel spelvormen en de berekening na afloop van de ronde verloopt vlekkeloos.</blockquote>
+            <figcaption>{{ stars() }}<span class="v-name">Eric K.</span><span class="v-meta">Nacka Golf · App Store</span></figcaption>
+          </figure>
+          <figure class="voice">
+            <blockquote>Goede, leuke app! Veel verschillende spelvormen.</blockquote>
+            <figcaption>{{ stars() }}<span class="v-name">Natasha</span><span class="v-meta">Troxhammar GK · App Store</span></figcaption>
+          </figure>
+          <figure class="voice">
+            <blockquote>Echt heel leuk! Erg vernieuwend.</blockquote>
+            <figcaption>{{ stars() }}<span class="v-name">Philip</span><span class="v-meta">Golfstar · App Store</span></figcaption>
+          </figure>
+        </div>
+        <p class="voices-note" style="text-align:center;color:var(--ink-faint);font-size:13px;margin-top:18px">Geverifieerde App Store-beoordelingen, vertaald uit het Zweeds.</p>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <div id="funktioner"></div>
+    <section class="feature">
+      <div class="wrap feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow">De scorekaart</span>
+          <h2>Houd de ronde bij, hole voor hole</h2>
+          <p>De hele groep op één scorekaart. Par als subtiele hulp, klassieke markeringen voor birdies en bogeys en een klassement dat tijdens het spelen wordt bijgewerkt. Nooit meer de tel kwijtraken op de 14e.</p>
+        </div>
+        <div class="feature-shot">
+          <img src="{% shot "live" %}" alt="Live scorekaart" loading="lazy" width="640" height="1306">
+        </div>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div class="wrap feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow">De afrekening</span>
+          <h2>Precies berekend wie wie moet betalen</h2>
+          <p>Na de ronde berekent de app het nettoresultaat van iedere speler en beperkt hij de afrekening tot zo weinig mogelijk betalingen. Wager Golf laat zien wie welk bedrag aan wie moet betalen, maar verwerkt, bewaart of verstuurt nooit inzetgeld.</p>
+        </div>
+        <div class="feature-shot">
+          <img src="{% shot "settlement" %}" alt="Berekende afrekening" loading="lazy" width="640" height="1306">
+        </div>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div class="wrap feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow">Het seizoen</span>
+          <h2>De strijd gaat tussen de rondes door</h2>
+          <p>Een seizoenssaldo, een klassement en een overzicht waarin je de rondes van vrienden live volgt. Moedig ze aan vanaf de bank en zie wie bovenaan staat wanneer het jaar wordt opgeteld.</p>
+        </div>
+        <div class="feature-shot">
+          <img src="{% shot "home" %}" alt="Seizoenssaldo en klassement" loading="lazy" width="640" height="1306">
+        </div>
+      </div>
+    </section>
+
+    <!-- GAME FORMATS -->
+    <section class="formats" id="game-formats">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="eyebrow on-dark">21 manieren om de ronde spannender te maken</span>
+          <h2>Speel op jullie manier</h2>
+          <p>Vijf hoofdspelvormen zijn gratis. Per ronde speel je één hoofdspel en één optionele sidegame. Pro ontgrendelt alle 21 spelvormen, meer combinaties en de volledige geschiedenis. Alles met de juiste WHS-handicap en automatische berekening van de afrekening.</p>
+        </div>
+        <div class="card-grid reveal">
+          <div class="fcard">
+            <div class="ftitle">Klassiekers</div>
+            <ul>
+              <li><a href="{% guideUrl "skins" %}">Skins</a></li><li><a href="{% guideUrl "matchspel" %}">Matchplay</a></li><li><a href="{% guideUrl "nassau" %}">Nassau</a></li>
+              <li><a href="{% guideUrl "stableford" %}">Stableford</a></li><li><a href="{% guideUrl "quota" %}">Quota</a></li><li><a href="{% guideUrl "slaggolf" %}">Strokeplay</a></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <div class="ftitle">Spellen per hole</div>
+            <ul>
+              <li><a href="{% guideUrl "wolf" %}">Wolf</a></li><li><a href="{% guideUrl "bingo-bango-bongo" %}">Bingo Bango Bongo</a></li>
+              <li><a href="{% guideUrl "split-sixes" %}">Amerikaantje</a></li><li><a href="{% guideUrl "klubbroulette" %}">Clubroulette</a></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <div class="ftitle">Team</div>
+            <ul>
+              <li><a href="{% guideUrl "scramble" %}">Scramble</a></li><li><a href="{% guideUrl "foursome" %}">Foursome</a></li><li><a href="{% guideUrl "greensome" %}">Greensome</a></li>
+              <li><a href="{% guideUrl "bastboll" %}">Fourball</a></li><li><a href="{% guideUrl "vegas" %}">Vegas</a></li>
+            </ul>
+          </div>
+          <div class="fcard">
+            <div class="ftitle">Sidegames</div>
+            <ul>
+              <li><a href="{% guideUrl "birdiepott" %}">Birdies</a></li><li><a href="{% guideUrl "snake" %}">Snake</a></li><li><a href="{% guideUrl "sandie" %}">Sandie</a></li>
+              <li><a href="{% guideUrl "narmast-flaggan" %}">Neary</a></li><li><a href="{% guideUrl "langst-drive" %}">Longest drive</a></li><li><a href="{% guideUrl "golfpoker" %}">Golfpoker</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="home-faq">
+      <div class="faq-wrap">
+        <div class="head reveal">
+          <span class="eyebrow">Goed om te weten</span>
+          <h2>Veelgestelde vragen</h2>
+        </div>
+        <div class="faqlist reveal">
+          <div class="faq-item">
+            <p class="faq-q">Heeft iedereen in de groep de app nodig?</p>
+            <p class="faq-a">Nee. Eén persoon kan de hele ronde beheren en de scores voor iedereen invoeren. De andere spelers worden als gast toegevoegd. Willen jullie elkaars rondes live volgen en meldingen ontvangen, dan kunnen meer spelers de app downloaden, maar één persoon is genoeg.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Is de app gratis?</p>
+            <p class="faq-a">Ja. De gratis versie bevat vijf hoofdspelvormen en laat je per ronde één hoofdspel plus één optionele sidegame spelen, met automatische berekening van de afrekening. Pro ontgrendelt alle 21 spelvormen, meer combinaties en de volledige geschiedenis. Nieuwe gebruikers die in aanmerking komen krijgen een gratis proefperiode van 14 dagen. In eurolanden kost Pro €4,99 per maand of €29,99 per jaar.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Jullie spelen met geld. Mag dat?</p>
+            <p class="faq-a">Wager Golf is geen kansspelbedrijf en raakt het geld nooit aan. De app houdt alleen bij wat jullie onderling hebben afgesproken, berekent de afrekening en laat zien wie wie moet betalen. Wager Golf verwerkt, bewaart of verstuurt nooit inzetgeld.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Voor wie is de app bedoeld?</p>
+            <p class="faq-a">Wager Golf is bedoeld voor personen van 17 jaar of ouder en voor privérondes tussen mensen die elkaar kennen. De app ontvangt, bewaart of verstuurt nooit inzetgeld.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Staat mijn golfbaan in de app?</p>
+            <p class="faq-a">Versie 1.7.1 bevat 3 028 golfbanen in Zweden, Denemarken, Noorwegen, Ierland, Finland, Nederland, Oostenrijk, Portugal, België, Duitsland, Frankrijk, Spanje en Italië. De banencatalogus is beschikbaar in de landen waar deze versie is uitgebracht.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Gebruikt de app de juiste handicap?</p>
+            <p class="faq-a">Ja. De baanhandicap wordt volgens WHS per baan en tee berekend. De handicapslagen worden via de stroke index aan de juiste holes toegewezen. Zo kunnen spelers met verschillende handicaps eerlijk in dezelfde ronde spelen.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="closing">
+      <div class="wrap reveal">
+        <span class="eyebrow">Klaar voor de volgende ronde</span>
+        <h2 style="margin-top:14px">Zie meteen <span class="accent">wie wie moet betalen.</span></h2>
+        <p>Houd de score bij, laat Wager Golf de afrekening berekenen en regel de betaling daarna onderling zoals jullie gewend zijn.</p>
+        {% set storePlats = "startsida-bottom" %}
+        {% include "store-badges.njk" %}
+      </div>
+    </section>
+  </main>

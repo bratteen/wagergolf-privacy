@@ -1,0 +1,90 @@
+---
+layout: page-article.njk
+key: page:about
+updated: "2026-09-02"
+permalink: /pt/sobre-nos/
+title: "Sobre o Wager Golf, a app que faz as contas | Wager Golf"
+description: "Conheça o Wager Golf e Gustaf Bratt, o golfista por detrás da app que calcula 21 modalidades com o Handicap de Jogo WHS correto e mostra quem paga a quem."
+ogType: article
+h1: "Sobre o Wager Golf"
+lede: "O Wager Golf nasceu de um golfista cansado do papel, da calculadora e das discussões no buraco 19. Esta é a versão curta da razão de existir da app e de quem está por detrás dela."
+breadcrumb:
+  - name: "Sobre nós"
+faq:
+  - q: "Quem criou o Wager Golf?"
+    a: "A app foi criada por Gustaf Bratt, um golfista sueco que joga com apostas no seu próprio grupo e se cansou de calcular o pote à mão. Os guias deste site são da mesma pessoa, por isso as regras coincidem com as que a app utiliza."
+  - q: "O Wager Golf é uma empresa de apostas?"
+    a: "Não. O Wager Golf não recebe as apostas e não existe uma casa que ganhe. A app apenas acompanha o jogo que os jogadores já acordaram, calcula o saldo final com o handicap correto e mostra quem deve pagar a quem."
+  - q: "A app utiliza mesmo o handicap correto?"
+    a: "Sim. O Handicap de Jogo é calculado segundo o WHS para cada campo e tee, e as pancadas recebidas são atribuídas aos buracos corretos através do Índice de pancadas. Os resultados net são comparados buraco a buraco para que jogadores de níveis diferentes possam competir em igualdade."
+ctaHeading: "Wager Golf em 13 mercados"
+ctaText: "A versão 1.7.1 está preparada para 13 mercados. As ligações para as lojas só aparecem nos países onde a app pode ser instalada."
+relatedLinks:
+  - name: "Modalidades de jogo"
+    url: "/pt/modalidades-de-jogo/"
+  - name: "Glossário de golfe"
+    url: "/pt/glossario/"
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "pt-PT",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://wagergolf.se/#person",
+        "name": "Gustaf Bratt",
+        "url": "https://wagergolf.se/pt/sobre-nos/",
+        "description": "Golfista sueco e fundador do Wager Golf.",
+        "knowsAbout": ["golfe", "modalidades de jogo de golfe", "handicap de golfe", "WHS"]
+      },
+      {
+        "@type": "AboutPage",
+        "name": "Sobre o Wager Golf",
+        "url": "https://wagergolf.se/pt/sobre-nos/",
+        "inLanguage": "pt-PT",
+        "isPartOf": { "@id": "https://wagergolf.se/#website" },
+        "about": { "@id": "https://wagergolf.se/#org" },
+        "mainEntity": { "@id": "https://wagergolf.se/#person" }
+      }
+    ]
+  }
+---
+<h2>Porque existe a app</h2>
+<p>Jogar com apostas no campo exige contas. Skins que transitam de um buraco para o seguinte, um Nassau com um press nos segundos nove, um Pote de birdies separado e tudo distribuído com o Handicap de Jogo correto. Com papel e calculadora, costuma terminar numa discussão no buraco 19: alguém recorda mal o pote e outra pessoa nunca recebeu as suas pancadas.</p>
+<p>O Wager Golf faz as contas. Escolhem o campo e a modalidade, registam os resultados buraco a buraco e a app mantém o saldo atualizado. No fim da volta, mostra quem deve pagar a quem. Sem papéis soltos nem cálculos mentais.</p>
+<ul>
+<li><strong>21 modalidades de jogo</strong> com cálculo automático do saldo final, desde <a href="{% guideUrl "skins" %}">Skins</a> e <a href="{% guideUrl "matchspel" %}">Jogo por buracos</a> até <a href="{% guideUrl "nassau" %}">Nassau</a>, jogos por equipas e jogos secundários. Cinco modalidades principais e um jogo secundário opcional por volta são grátis; o Pro desbloqueia a seleção completa e mais combinações.</li>
+<li><strong>Handicap WHS correto.</strong> O Handicap de Jogo é calculado para o campo e o tee escolhidos, e as pancadas recebidas são atribuídas aos buracos corretos através do Índice de pancadas. Os resultados net são comparados buraco a buraco para que um grupo com handicaps diferentes jogue em igualdade.</li>
+<li><strong>3&nbsp;028 campos em 13 países europeus</strong> estão incluídos na versão 1.7.1, com par e Índice de pancadas. O catálogo está disponível nos países onde a versão foi lançada.</li>
+<li><strong>Saldo já calculado.</strong> A app reduz o número de pagamentos e mostra exatamente quem deve pagar a quem. Os jogadores pagam diretamente entre si pelo método que escolherem.</li>
+</ul>
+<h2>Quem está por detrás</h2>
+<p>O Wager Golf foi criado por Gustaf Bratt, um golfista sueco que joga com o mesmo grupo de amigos e conhece as mesmas discussões sobre o pote que quase todos. A app nasceu para resolver um problema concreto no seu próprio grupo, não como um produto desenhado num quadro. Nota-se nos pormenores: inclui as modalidades realmente jogadas, aplica corretamente o WHS e fala como a casa do clube, não como uma empresa de apostas.</p>
+<p>O Wager Golf não é uma empresa de apostas. Não existe uma banca que receba dinheiro nem uma casa que ganhe. A app nunca processa, guarda ou transfere o dinheiro das apostas. Apenas acompanha o que acordaram e ajuda os jogadores a acertarem as contas diretamente entre si.</p>
+<h2>Porque existem estes guias</h2>
+<p>Grande parte do que existe online sobre modalidades de golfe é superficial e as regras variam frequentemente entre fontes. Como transita realmente um Skin? Como se calcula um <a href="{% guideUrl "quota" %}">Quota</a> num grupo com níveis diferentes? O que faz um press num Nassau?</p>
+<p><a href="/pt/modalidades-de-jogo/">Os guias deste site</a> respondem a essas perguntas com precisão. Cada um explica a modalidade, como se joga, como se calcula o pote e qual o papel do handicap, com números e exemplos concretos. São escritos pela mesma pessoa que criou a app, por isso as regras do texto são as que o Wager Golf calcula.</p>
+<p>Para ver como uma modalidade funciona na prática, comecem pelos clássicos: <a href="{% guideUrl "skins" %}">Skins</a>, <a href="{% guideUrl "matchspel" %}">Jogo por buracos</a> e <a href="{% guideUrl "stableford" %}">Stableford</a>.</p>

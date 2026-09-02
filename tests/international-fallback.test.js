@@ -13,6 +13,13 @@ function runLanguageBanner(languages, current = 'sv') {
     ['nb', '/no/', 'Norsk'],
     ['da', '/dk/', 'Dansk'],
     ['en', '/en/', 'English'],
+    ['fi', '/fi/', 'Suomi'],
+    ['nl', '/nl/', 'Nederlands'],
+    ['de', '/de/', 'Deutsch'],
+    ['fr', '/fr/', 'Français'],
+    ['es', '/es/', 'Español'],
+    ['it', '/it/', 'Italiano'],
+    ['pt', '/pt/', 'Português'],
   ].map(([lang, url, label]) => ({
     getAttribute(name) {
       return { 'data-lang': lang, 'data-url': url, 'data-label': label, 'data-text': '{language}' }[name] || '';
@@ -29,7 +36,10 @@ function runLanguageBanner(languages, current = 'sv') {
   };
   const close = { addEventListener() {} };
   const template = { content: { querySelectorAll() { return targets; } } };
+  const documentHandlers = {};
+  const storage = new Map();
   const document = {
+    addEventListener(type, handler) { documentHandlers[type] = handler; },
     getElementById(id) {
       return { 'lang-banner': banner, 'lang-banner-alts': template, 'lang-banner-text': text, 'lang-banner-close': close }[id];
     },
@@ -44,18 +54,33 @@ function runLanguageBanner(languages, current = 'sv') {
   vm.runInNewContext(source, {
     document,
     navigator: { languages },
-    localStorage: { getItem() { return null; }, setItem() {} },
+    localStorage: {
+      getItem(key) { return storage.get(key) || null; },
+      setItem(key, value) { storage.set(key, value); },
+    },
   });
-  return { banner, link: text.child };
+  return { banner, link: text.child, documentHandlers, storage };
 }
 
-test('expansionsspråk erbjuds den engelska webb-fallbacken', () => {
-  for (const language of ['fi-FI', 'nl-NL', 'de-DE', 'fr-FR', 'es-ES', 'it-IT', 'pt-PT']) {
+test('nya webbspråk erbjuds sin egen motsvarande sida', () => {
+  const expected = {
+    'fi-FI': ['/fi/', 'fi'], 'nl-NL': ['/nl/', 'nl'], 'de-DE': ['/de/', 'de'],
+    'fr-FR': ['/fr/', 'fr'], 'es-ES': ['/es/', 'es'], 'it-IT': ['/it/', 'it'],
+    'pt-PT': ['/pt/', 'pt'],
+  };
+  for (const [language, [url, lang]] of Object.entries(expected)) {
     const { banner, link } = runLanguageBanner([language]);
     assert.strictEqual(banner.hidden, false, language);
-    assert.strictEqual(link.attrs.href, '/en/', language);
-    assert.strictEqual(link.attrs['data-lang-link'], 'en', language);
+    assert.strictEqual(link.attrs.href, url, language);
+    assert.strictEqual(link.attrs['data-lang-link'], lang, language);
+    assert.strictEqual(link.attrs.lang, lang, language);
   }
+});
+
+test('ett medvetet språkval stänger framtida språkförslag', () => {
+  const { documentHandlers, storage } = runLanguageBanner(['de-DE']);
+  documentHandlers.click({ target: { closest() { return {}; } } });
+  assert.strictEqual(storage.get('wg-lang-dismissed'), '1');
 });
 
 test('norska går till bokmål och okänt språk får inget felaktigt förslag', () => {
@@ -97,6 +122,13 @@ test('personaliserad inbjudningsrubrik följer sidans språk', async () => {
     nb: 'Mira har invitert deg til Wager Golf',
     da: 'Mira har inviteret dig til Wager Golf',
     en: 'Mira has invited you to Wager Golf',
+    fi: 'Mira kutsui sinut Wager Golfiin',
+    nl: 'Mira heeft je uitgenodigd voor Wager Golf',
+    de: 'Mira hat dich zu Wager Golf eingeladen',
+    fr: 'Mira vous a invité à rejoindre Wager Golf',
+    es: 'Mira te ha invitado a Wager Golf',
+    it: 'Mira ti ha invitato su Wager Golf',
+    pt: 'Mira convidou-te para o Wager Golf',
   };
   for (const [lang, expected] of Object.entries(suffixes)) {
     assert.strictEqual(await personalizedInvite(lang, 'Mira'), expected);
@@ -108,7 +140,10 @@ test('personaliserad inbjudningsrubrik följer sidans språk', async () => {
 });
 
 test('alla invite-mallar följer samma landsstyrda och fail-closed releasegrind', () => {
-  for (const file of ['i/index.njk', 'no/i.njk', 'dk/i.njk', 'en/i.njk']) {
+  const routes = require('../_data/routes.js');
+  const files = Object.values(routes.locales).map(({ prefix }) =>
+    prefix ? `${prefix.slice(1)}/i.njk` : 'i/index.njk');
+  for (const file of files) {
     const source = fs.readFileSync(path.join(ROOT, file), 'utf8');
     assert.ok(source.includes('data-release-open hidden'), file);
     assert.ok(source.includes('data-release-closed'), file);

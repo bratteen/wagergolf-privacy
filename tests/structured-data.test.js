@@ -38,6 +38,12 @@ test('breadcrumb använder de skickade namnen', () => {
     ['Home', 'Game formats', 'Stableford']);
 });
 
+test('breadcrumb-länken hem följer guidens språk', () => {
+  const graph = JSON.parse(guideGraph({ ...ARGS, lang: 'de' }));
+  const crumbs = graph['@graph'].find((n) => n['@type'] === 'BreadcrumbList');
+  assert.strictEqual(crumbs.itemListElement[0].item, 'https://wagergolf.se/de/');
+});
+
 test('FAQPage läggs bara till när det finns frågor', () => {
   const utan = JSON.parse(guideGraph({ ...ARGS, faq: [] }));
   assert.ok(!utan['@graph'].some((n) => n['@type'] === 'FAQPage'));
