@@ -2,7 +2,7 @@
 slug: lengste-drive
 key: guide:langst-drive
 format: Lengste drive
-category: Sidebet
+category: Sidespill
 players: "2 til 4 spillere"
 order: 5
 title: "Lengste drive: regler for longest drive-betet | Wager Golf"
@@ -54,4 +54,4 @@ Legger man sammen begge hullene, blir det totale nettoresultatet over runden:
 - Erik: −60 (−30 på hvert hull)
 - Den fjerde spilleren: −60 (−30 på hvert hull)
 
-Summen blir 0, et pott-nøytralt oppgjør der det som er vunnet, alltid tilsvarer det som er tapt. Wager Golf teller pottene og viser hvem som skylder hva, og oppgjøret skjer direkte i appen.
+Summen blir 0, et pott-nøytralt oppgjør der det som er vunnet, alltid tilsvarer det som er tapt. Wager Golf teller pottene og viser hvem som skylder hva.

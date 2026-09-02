@@ -58,7 +58,7 @@ It is this allocation that lets a 28-handicapper and a 9-handicapper play the sa
 
 36 points is the benchmark. It means you averaged a net par on every hole — in other words, played exactly to your handicap. Get above 36 and you have had a genuinely good day. Most club rounds land somewhere between 30 and 34.
 
-In a wager everyone puts in a stake, and whoever has the most points at the end takes the pot. A tie splits it. Wager Golf counts the points hole by hole with the correct WHS strokes, shows the standing live and settles the pot automatically when you walk off.
+In a wager everyone puts in a stake, and whoever has the most points at the end takes the pot. A tie splits it. Wager Golf counts the points hole by hole with the correct WHS strokes, shows the standing live and works out who owes whom when you walk off.
 
 ## When does Stableford suit?
 

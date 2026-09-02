@@ -35,7 +35,7 @@ Slagspill, eller slaggolf, er golf i sin reneste form. Du teller hvert slag du g
 
 I en blandet gjeng spilles slagspill på netto. Du får handicapslagene dine fordelt på de vanskeligste hullene etter banens handicap-indeks, og de trekkes fra bruttototalen din. Det er slik en 20-handicapper og en 8-handicapper kan gjøre opp på like vilkår. Uten handicap er det rene bruttoslag som gjelder, altså lavest faktiske total.
 
-Wager Golf summerer slagene hull for hull, regner netto med riktige WHS-slag og gjør opp potten automatisk, selv om dere velger å avslutte tidlig.
+Wager Golf summerer slagene hull for hull, regner ut nettoen med riktige WHS-slag og viser hvem som skylder hvem, selv om dere velger å avslutte tidlig.
 
 ## Når passer slagspill?
 

@@ -2,14 +2,14 @@
 slug: birdiepott
 key: guide:birdiepott
 format: Birdiepott
-category: Sidebet
+category: Sidespill
 players: "2 til 4 spillere"
 order: 1
 title: "Birdiepott i golf: regler og utregning | Wager Golf"
 description: "Birdiepott forklart. Alle legger inn en innsats, flest birdier i løpet av runden tar potten. Regler, hvordan eagler telles og varianten der hver birdie betales direkte."
 h1: "Birdiepott"
 lede: "Alle legger en innsats i potten. Flest birdier når runden er slutt, tar alt. Den enkleste måten å sette litt ekstra på spill uten å krangle."
-cardText: "Alle satser, flest birdier tar potten. Det enkleste sidebetet."
+cardText: "Alle satser, flest birdier tar potten. Det enkleste sidespillet."
 faq:
   - q: "Telles en eagle som to birdier?"
     a: "Nei. En eagle eller bedre telles som én birdie på det hullet, altså én betaling per hull. Du får ikke dobbelt for at hullet var enda bedre."
@@ -24,7 +24,7 @@ related: [snake, sandie, golfpoker]
 
 ## Hva er birdiepott?
 
-Birdiepott er det perfekte lille sidebetet, lett å legge oppå hvilken som helst hovedform. Alle legger en slant i potten før runden, og den som gjør flest birdier, tar hele potten. Det gir en ekstra grunn til å gå for det på de korte hullene, og en birdie smaker med det samme litt søtere.
+Birdiepott er det perfekte lille sidespillet, lett å legge oppå hvilken som helst hovedform. Alle legger en slant i potten før runden, og den som gjør flest birdier, tar hele potten. Det gir en ekstra grunn til å gå for det på de korte hullene, og en birdie smaker med det samme litt søtere.
 
 ## Slik spiller du
 
@@ -38,7 +38,7 @@ Birdiepott er det perfekte lille sidebetet, lett å legge oppå hvilken som hels
 
 I stedet for en pott kan dere spille birdier som direktebetaling. Da betaler de andre spillerne birdie-spilleren innsatsen hver, hver gang noen gjør birdie. Den varianten gir raskere respons og kan svinge mer, siden en spiller som birder tre hull, henter inn fra alle de andre tre ganger.
 
-Wager Golf holder styr på birdier hull for hull, regner både pott- og per-birdie-varianten og gjør opp automatisk når runden er slutt.
+Wager Golf holder styr på birdier hull for hull, regner både pott- og per-birdie-varianten og viser hvem som skylder hvem når runden er slutt.
 
 ## Et eksempel med penger
 
@@ -51,4 +51,4 @@ I løpet av runden gjør Anna tre birdier, Bea én, og de andre to ingen. Anna h
 - Spiller 3: −50
 - Spiller 4: −50
 
-Summen blir null, potten er pott-nøytral. Hadde to spillere gjort like mange birdier, hadde de delt potten, 100 hver, og landet på +50 hver mens de andre to fortsatt ligger −50. Wager Golf teller birdiene hull for hull og gjør opp summen når runden er slutt.
+Summen blir null, potten er pott-nøytral. Hadde to spillere gjort like mange birdier, hadde de delt potten, 100 hver, og landet på +50 hver mens de andre to fortsatt ligger −50. Wager Golf teller birdiene hull for hull og viser hvem som skylder hvem når runden er slutt.

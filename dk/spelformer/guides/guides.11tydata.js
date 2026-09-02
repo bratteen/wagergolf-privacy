@@ -21,7 +21,7 @@ module.exports = {
   // Guidernas ursprungliga publicering. Override med `published:` i en guide
   // om den skapas senare. `updated:` sätts per guide när innehållet ändras.
   published: "2026-06-14",
-  updated: "2026-06-20",
+  updated: "2026-09-02",
   eleventyComputed: {
     // key är språkoberoende och kopplar ihop översättningarna av samma guide.
     // data.key vinner om den finns: specen översätter sluggen

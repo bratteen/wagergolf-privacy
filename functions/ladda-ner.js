@@ -1,84 +1,151 @@
-// /ladda-ner skickar besökaren till rätt butik utifrån enheten: iPhone och
-// iPad till App Store, Android till Google Play, allt annat till startsidans
-// knappar där båda alternativen syns.
+// /ladda-ner väljer både plattform och rätt storefront. Språk, marknad och
+// release-status är separata: fyra webbspråk täcker 13 marknader och bara en
+// marknad som uttryckligen finns i PUBLIC_MARKETS får en butiksomdirigering.
 //
-// Görs server-side i stället för med klient-JS så länken fungerar även utan
-// JavaScript och kan användas rakt i annonser, mejl och QR-koder. En och samma
-// URL landar då alltid rätt.
+// Prioritet för marknaden:
+//   1. explicit ?m=SE (för annonser, QR-koder och test)
+//   2. Cloudflares request.cf.country
+//   3. CF-IPCountry-headern, om zonens GeoIP-transform är aktiv
+// Utan en verifierad marknad öppnas ingen butik. ?l= väljer bara vilken
+// språkversion besökaren hålls kvar på.
 //
-// EN endpoint för alla språk, marknaden i query-strängen (?l=da). Specen
-// tänkte sig lokaliserade sökvägar (/dk/hent), men det kräver en Pages
-// Function per språk, och endpointen är en omdirigering som aldrig indexeras
-// (se Disallow: /ladda-ner i robots.njk) — en lokaliserad slug hade varit
-// kosmetik utan SEO-värde.
-//
-// Butikslänkarna är kampanjmärkta så App Store Connect och Play Console kan
-// visa hur många som faktiskt laddade ner via sajten, inte bara hur många som
-// klickade.
-//
-// Speglar MARKETS i _data/site.js. Cloudflare-funktioner byggs separat och kan
-// inte importera den filen: .eleventy.js passthrough-kopierar functions/ in i
-// _site/, och deployen skickar bara _site. Ändras något där måste det ändras
-// här också — tests/store-urls.test.js och tests/ladda-ner.test.mjs
-// kontrollerar samma marknadsvärden var för sig, inte mot varandra, så synken
-// är manuell.
+// Funktionen kan inte importera _data/site.js eftersom Pages Functions byggs
+// separat. tests/store-urls.test.js jämför därför båda konfigurationerna och
+// gör deployen fail-closed om de driver isär.
 const APP_ID = 'id6767638917';
 const PLAY_ID = 'com.bratteen.wagergolf';
 const APPLE_PROVIDER_TOKEN = '128879444';
 
-const MARKETS = {
-  sv: { store: 'se', play: 'sv', gl: 'SE', campaign: 'webb', home: '/' },
-  nb: { store: 'no', play: 'no', gl: 'NO', campaign: 'webb-no', home: '/no/' },
-  da: { store: 'dk', play: 'da', gl: 'DK', campaign: 'webb-dk', home: '/dk/' },
-  en: { store: 'us', play: 'en', gl: 'US', campaign: 'webb-en', home: '/en/' },
+export const PUBLIC_MARKETS = ['SE'];
+export const TARGET_MARKET_CODES = [
+  'SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT',
+];
+
+export const MARKETS = {
+  SE: { locale: 'sv', store: 'se', play: 'sv', gl: 'SE', campaign: 'webb', home: '/' },
+  DK: { locale: 'da', store: 'dk', play: 'da', gl: 'DK', campaign: 'webb-dk', home: '/dk/' },
+  NO: { locale: 'nb', store: 'no', play: 'no', gl: 'NO', campaign: 'webb-no', home: '/no/' },
+  IE: { locale: 'en', store: 'ie', play: 'en', gl: 'IE', campaign: 'webb-ie', home: '/en/' },
+  FI: { locale: 'en', store: 'fi', play: 'fi', gl: 'FI', campaign: 'webb-fi', home: '/en/' },
+  NL: { locale: 'en', store: 'nl', play: 'nl', gl: 'NL', campaign: 'webb-nl', home: '/en/' },
+  AT: { locale: 'en', store: 'at', play: 'de', gl: 'AT', campaign: 'webb-at', home: '/en/' },
+  PT: { locale: 'en', store: 'pt', play: 'pt-PT', gl: 'PT', campaign: 'webb-pt', home: '/en/' },
+  BE: { locale: 'en', store: 'be', play: 'en', gl: 'BE', campaign: 'webb-be', home: '/en/' },
+  DE: { locale: 'en', store: 'de', play: 'de', gl: 'DE', campaign: 'webb-de', home: '/en/' },
+  FR: { locale: 'en', store: 'fr', play: 'fr', gl: 'FR', campaign: 'webb-fr', home: '/en/' },
+  ES: { locale: 'en', store: 'es', play: 'es', gl: 'ES', campaign: 'webb-es', home: '/en/' },
+  IT: { locale: 'en', store: 'it', play: 'it', gl: 'IT', campaign: 'webb-it', home: '/en/' },
 };
 
-/** Marknad från ?l=. Okänt eller saknat språk faller tillbaka på svenska, så
- *  en trasig eller föråldrad länk aldrig ger en tom eller trasig omdirigering. */
-export function marketFor(lang) {
-  return MARKETS[lang] || MARKETS.sv;
+const DEFAULT_MARKET_FOR_LOCALE = { sv: 'SE', nb: 'NO', da: 'DK', en: 'IE' };
+const PUBLIC = new Set(PUBLIC_MARKETS);
+
+/** Strikt uppslagning. En okänd explicit landkod får aldrig falla tillbaka på
+ * Sverige och råka skicka gated trafik till den enda öppna storefronten. */
+export function marketFor(value) {
+  if (!value) return null;
+  const code = String(value).trim().toUpperCase();
+  return MARKETS[code] || null;
 }
 
-// Bygg alltid på den landsprefixade adressen. App Store Connects egen
-// kampanjlänkgenerator ger formen /app/apple-store/id..., men den svarar 404 i
-// vanlig webbläsare. pt och ct läses av Apple oavsett sökväg.
-function appStore(market) {
+function localeFor(value) {
+  if (!value) return null;
+  const locale = String(value).trim().toLowerCase();
+  return Object.prototype.hasOwnProperty.call(DEFAULT_MARKET_FOR_LOCALE, locale)
+    ? locale
+    : null;
+}
+
+export function resolveMarket(url, headers, cfCountry = '') {
+  if (url.searchParams.has('m')) {
+    const explicit = marketFor(url.searchParams.get('m'));
+    return { market: explicit, invalidExplicitMarket: !explicit };
+  }
+
+  // request.cf.country är den kanoniska Workers-signalen. Headern finns bara
+  // när IP Geolocation/Managed Transform är aktiv och är därför fallback.
+  const geoCode = cfCountry || headers.get('CF-IPCountry');
+  if (geoCode) {
+    const geo = marketFor(geoCode);
+    // Cloudflare känner ibland igen en besökare utanför de 13 marknaderna.
+    // En sådan träff får aldrig falla vidare till engelska standardmarknaden
+    // Irland och därmed skapa en butikslänk utanför lanseringsområdet.
+    return { market: geo, invalidExplicitMarket: !geo };
+  }
+
+  // Språk avgör bara vilken sida vi håller besökaren på. Utan uttrycklig
+  // marknad eller verifierad GeoIP öppnas ingen storefront.
+  return { market: null, invalidExplicitMarket: false };
+}
+
+function appStore(market, campaign) {
   const base = `https://apps.apple.com/${market.store}/app/${APP_ID}`;
   if (!APPLE_PROVIDER_TOKEN) return base;
-  return `${base}?pt=${APPLE_PROVIDER_TOKEN}&ct=${market.campaign}&mt=8`;
+  const params = new URLSearchParams({
+    pt: APPLE_PROVIDER_TOKEN,
+    ct: campaign || market.campaign,
+    mt: '8',
+  });
+  return `${base}?${params}`;
 }
 
-function playStore(market) {
-  const referrer = `utm_source=wagergolf.se&utm_medium=referral&utm_campaign=${market.campaign}`;
+function playStore(market, campaign) {
+  const referrer = new URLSearchParams({
+    utm_source: 'wagergolf.se',
+    utm_medium: 'referral',
+    utm_campaign: campaign || market.campaign,
+  });
   const params = new URLSearchParams({
-    id: PLAY_ID, hl: market.play, gl: market.gl, referrer,
+    id: PLAY_ID,
+    hl: market.play,
+    gl: market.gl,
+    referrer: referrer.toString(),
   });
   return `https://play.google.com/store/apps/details?${params}`;
 }
 
+function cleanCampaign(raw) {
+  return raw
+    ? String(raw).toLowerCase().replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+/, '').slice(0, 40).replace(/-+$/, '')
+    : '';
+}
+
+function requestedPlatform(url, ua) {
+  const explicit = url.searchParams.get('p');
+  if (explicit === 'ios' || explicit === 'android') return explicit;
+  if (/Android/i.test(ua)) return 'android';
+  if (/iPhone|iPad|iPod/i.test(ua)) return 'ios';
+  return null;
+}
+
+function homeFor(url, market) {
+  if (market) return market.home;
+  const locale = localeFor(url.searchParams.get('l'));
+  return locale ? MARKETS[DEFAULT_MARKET_FOR_LOCALE[locale]].home : '/';
+}
+
 export function onRequestGet({ request }) {
   const url = new URL(request.url);
-  const market = marketFor(url.searchParams.get('l'));
+  const { market } = resolveMarket(url, request.headers, request.cf?.country);
   const ua = request.headers.get('user-agent') || '';
+  const platform = requestedPlatform(url, ua);
+  const campaign = cleanCampaign(url.searchParams.get('c') || url.searchParams.get('utm_campaign'));
 
-  // Android testas först: Android-webbläsare kan innehålla "Linux" men aldrig
-  // "iPhone", medan vissa inbäddade iOS-vyer nämner både iPhone och Android.
-  //
-  // Ingen igenkänd mobil: skicka till språkets egen startsida, där båda
-  // knapparna syns. Att skicka en dansk besökare till den svenska roten vore
-  // en språkbyte mitt i ett klick.
-  let target = `${market.home}#top`;
-  if (/Android/i.test(ua)) target = playStore(market);
-  else if (/iPhone|iPad|iPod/i.test(ua)) target = appStore(market);
+  // Marknad saknas, är okänd eller är fortfarande under granskning: håll kvar
+  // besökaren på rätt språkversion. Ingen gated storefront får läcka ut här.
+  let target = `${homeFor(url, market)}#main-content`;
+  if (market && PUBLIC.has(market.gl)) {
+    if (platform === 'android') target = playStore(market, campaign);
+    else if (platform === 'ios') target = appStore(market, campaign);
+  }
 
   return new Response(null, {
     status: 302,
     headers: {
       Location: target,
-      // Svaret varierar med enheten, så det får aldrig cachas delat. Utan detta
-      // riskerar en Android-användare att få iOS-omdirigeringen ur cachen.
       'Cache-Control': 'no-store',
-      Vary: 'User-Agent',
+      Vary: 'User-Agent, CF-IPCountry',
     },
   });
 }

@@ -16,13 +16,26 @@ npm run build      # bygger till _site/
 ## Deploya
 
 ```bash
-npm run deploy     # bygger _site/ och deployar den till Cloudflare Pages
-# = eleventy && wrangler pages deploy _site
+npm run deploy     # kontrollerar, bygger, deployar production och pingar IndexNow
 ```
 
 VIKTIGT: deploya `_site/` (den byggda sidan), aldrig repo-roten. Gamla flödet
 `wrangler pages deploy .` skulle ladda upp källan (.njk, node_modules) och förstöra
 sajten.
+
+`npm run deploy` tvingar Cloudflare-branchen `main` och får därför endast köras
+från en ren, uppdaterad checkout av GitHubs `main` efter grön CI. Från en
+feature-branch ska en separat preview användas:
+
+```bash
+npm run check
+npx wrangler pages deploy _site --project-name=wagergolf --branch=<feature-branch>
+```
+
+Preview-kommandot ovan publicerar inte production och kör inte IndexNow.
+Före varje production-deploy ska Cloudflare Pages-dashboardens automatiska
+Web Analytics också vara avstängd; dashboarden kan injicera statistik även när
+repo-konfigurationen inte innehåller något analysscript.
 
 ## Struktur
 
@@ -50,8 +63,9 @@ språk). De kan inte importera därifrån: `.eleventy.js` passthrough-kopierar
 `functions/` rakt in i `_site/`, och deployen skickar bara `_site/` — `_data/`
 följer aldrig med. Ändras något i den ena filen måste motsvarande värde ändras
 för hand i den andra. Testerna (`tests/go.test.mjs`, `tests/campaign.test.js`,
-`tests/store-urls.test.js`, `tests/ladda-ner.test.mjs`) kontrollerar båda
-sidorna var för sig, inte mot varandra, så synken är manuell.
+`tests/store-urls.test.js`, `tests/ladda-ner.test.mjs`) kontrollerar både varje
+sida och den gemensamma marknads-/releasekonfigurationen mot varandra. Synken
+är ändå explicit eftersom Pages Functions inte kan importera `_data/` i drift.
 
 ## Uppdatera juridiksidorna
 
@@ -145,28 +159,27 @@ genom att:
    commit som språkets sista sida. Innan dess kan språket byggas och
    granskas lokalt utan att synas i hreflang, språkväljaren, bannern eller
    sitemapen — allt filtrerar mot den listan.
-6. Spegla samma språk i `PUBLISHED` i `functions/go.js`. Den listan är EN
-   EGEN KOPIA av `publishedLocales`, inte utledd från `_data/routes.js` —
-   se DUPLIKAT-kommentaren i filen för varför (`functions/` deployas utan
-   `_data/`). Uppdateras bara steg 5, svarar `/go?l=nb` fortfarande med
-   svenska startsidan: `pickLang` faller tillbaka på `DEFAULT_LANG` för
-   varje språk som inte står i `PUBLISHED`, tyst och utan byggfel. Varje
-   tryckt QR-kod och poddlänk för marknaden pekar då fel tills detta steg
-   görs. Testerna i `tests/go.test.mjs` kontrollerar bara `PUBLISHED` mot
-   sig själv, inte mot `_data/routes.js`, så synken är manuell och måste
-   göras i samma commit som steg 5.
+6. Spegla samma språk i `PUBLISHED` i både `functions/go.js` och
+   `functions/i/[[path]].js`. Listorna är EGNA KOPIOR av `publishedLocales`,
+   inte utledda från `_data/routes.js`; Pages Functions deployas utan `_data/`.
+   Om bara steg 5 görs kan kampanj- och inbjudningslänkar fortfarande servera
+   fel språk. `tests/published-in-sync.test.js` jämför alla tre listorna och
+   stoppar bygget om de driver isär, men ändringen ska ändå göras i samma
+   commit som steg 5.
 
 Hreflang, språkväljaren, bannern och sitemap härleds automatiskt ur sidornas
 `key` och `publishedLocales` i `_data/routes.js` — inget av det behöver röras
-för att lägga till ett språk. `/go` är undantaget: dess `PUBLISHED`-lista
-(steg 6) är en egen kopia som måste uppdateras för hand.
+för att lägga till ett språk. `/go` och `/i/*` är undantagen: deras
+`PUBLISHED`-listor (steg 6) är egna kopior som måste uppdateras för hand.
 
-Nedladdningslänken (`functions/ladda-ner.js`) behöver inget arbete per
-språk heller: den är en enda endpoint för alla marknader, med marknaden i
-query-strängen (`downloadPath` i `_data/routes.js`, t.ex.
-`/ladda-ner?l=da`) snarare än ett eget sökvägssegment per språk som `no/`
-eller `dk/`. En lokaliserad slug hade varit kosmetik — endpointen är en
-omdirigering som aldrig indexeras.
+Nedladdningslänken (`functions/ladda-ner.js`) är en enda endpoint för alla
+13 marknader. Marknad väljs i ordningen explicit `?m=`, Workers verifierade
+`request.cf.country` och därefter `CF-IPCountry`-headern. Saknas ett verifierat
+land öppnas ingen butik. `?l=` anger endast webbspråk, aldrig storefront.
+Bara länder i `PUBLIC_MARKETS` får en butiksomdirigering; övriga hålls kvar på
+rätt landningssida tills versionen faktiskt går att installera där.
+`_data/site.js` och funktionen speglar samma lista och testerna fäller bygget
+om de driver isär.
 
 Använd hreflang-koderna `nb`, `da` och `en` — aldrig `dk` eller `se`. De är
 landskoder (samma som ligger i sökvägen och i App Store-storefronten), inte
@@ -200,9 +213,10 @@ i sitemap, 540 hreflang-alternativ och noll `noindex`.
 
 ### Lokaliserade appskärmbilder
 
-Bilderna i `assets/shots/` visar appens gränssnitt, och det är på svenska. En
-besökare som ser "Hål 3" mitt i det som ska övertyga hen att ladda ner får
-svaret gratis: appen är inte på mitt språk.
+Bilderna i roten av `assets/shots/` är svenska. Norska, danska och engelska
+versioner finns i respektive språkmapp, med rätt valuta och providerneutral
+uppgörelse utanför Sverige. En besökare ska aldrig mötas av ett annat språks
+appgränssnitt eller en betalningsleverantör som inte finns i marknaden.
 
 Sidorna refererar bilderna med shortcoden `{% shot "live" %}`, inte med en
 hårdkodad sökväg. Uppslagsordningen är sidans språk, sedan engelska, sedan

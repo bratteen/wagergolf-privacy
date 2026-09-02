@@ -162,7 +162,7 @@ const TERMS = {
   greenfee: { sv: "Greenfee", nb: "Greenfee", da: "Greenfee", en: "Green fee" },
   gimme: { sv: "Gimme", nb: "Gimme", da: "Gimme", en: "Gimme" },
   mulligan: { sv: "Mulligan", nb: "Mulligan", da: "Mulligan", en: "Mulligan" },
-  sidobet: { sv: "Sidobet", nb: "Sidebet", da: "Sidebet", en: "Side bet" },
+  sidobet: { sv: "Sidobet", nb: "Sidespill", da: "Sidespil", en: "Side bet" },
   pott: { sv: "Pott", nb: "Pott", da: "Pulje", en: "Pot" },
   insats: { sv: "Insats", nb: "Innsats", da: "Indsats", en: "Stake" },
   hal: { sv: "Hål", nb: "Hull", da: "Hul", en: "Hole" },

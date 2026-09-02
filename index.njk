@@ -1,11 +1,11 @@
 ---
 layout: base.njk
 key: page:home
-updated: "2026-08-08"
+updated: "2026-09-02"
 title: "Wager Golf, golfvad utan papper och miniräknare"
-description: "Wager Golf håller räkningen när gänget spelar om pengar på banan. 21 spelformer, automatisk avräkning och över 1 000 banor i Sverige, Danmark och Norge."
+description: "Wager Golf håller räkningen när gänget spelar om pengar på banan. 21 spelformer, automatisk nettoberäkning och 3 028 banor i 13 länder i version 1.7.1."
 ogTitle: "Wager Golf"
-ogDescription: "Golfvad utan papper och miniräknare. 21 spelformer, automatisk avräkning, Swish-uppgörelse."
+ogDescription: "Golfvad utan papper och miniräknare. 21 spelformer, automatisk nettoberäkning och Swish-genväg i Sverige."
 structuredData: |
   {
     "@context": "https://schema.org",
@@ -23,7 +23,10 @@ structuredData: |
           "height": 192
         },
         "founder": { "@id": "https://wagergolf.se/#person" },
-        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ]
       },
       {
         "@type": "WebSite",
@@ -44,8 +47,11 @@ structuredData: |
         "name": "Wager Golf",
         "operatingSystem": "iOS, Android",
         "applicationCategory": "SportsApplication",
-        "url": "https://apps.apple.com/se/app/id6767638917",
-        "sameAs": "https://apps.apple.com/se/app/id6767638917",
+        "url": "https://wagergolf.se/",
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ],
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "SEK" },
         "publisher": { "@id": "https://wagergolf.se/#org" }
       },
@@ -61,17 +67,22 @@ structuredData: |
           {
             "@type": "Question",
             "name": "Är Wager Golf gratis?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Ja, appen är gratis att ladda ner och spela. Alla 21 spelformer och uppgörelsen ingår. Det finns en frivillig Pro-nivå, men du behöver inte betala för att göra upp en runda med gänget." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Gratisnivån har fem huvudspelformer och låter dig spela ett huvudspel plus ett valfritt sidobet per runda, med automatisk uträkning av uppgörelsen. Pro låser upp alla 21 spelformer, fler kombinationer och full historik. Berättigade nya användare får 14 dagar gratis. I Sverige kostar Pro därefter 49 kr per månad eller 299 kr per år." }
           },
           {
             "@type": "Question",
             "name": "Ni spelar om pengar, är det tillåtet?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Wager Golf är inget spelbolag och rör aldrig pengarna. Appen håller bara räkningen på det ni redan kommit överens om er emellan och gör uppgörelsen enkel med Swish, precis som när ni redan gör upp efter rundan." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Wager Golf är inget spelbolag och rör aldrig pengarna. Appen håller bara räkningen på det ni redan kommit överens om er emellan och visar vem som är skyldig vem. I Sverige kan den som ska betala öppna Swish med rätt belopp och mottagare." }
+          },
+          {
+            "@type": "Question",
+            "name": "Vem är appen avsedd för?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Wager Golf är avsedd för personer som är minst 17 år och för privata rundor mellan människor som känner varandra. Appen tar aldrig emot, håller eller överför insatser." }
           },
           {
             "@type": "Question",
             "name": "Funkar min bana?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Över 1 000 banor i Sverige, Danmark och Norge finns inlagda med par och stroke-index, så du väljer bara bana och börjar scora. Slaggolf, Front 9 eller Back 9, appen sköter resten." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Version 1.7.1 innehåller 3 028 banor i 13 europeiska länder med par och stroke-index. Katalogen är tillgänglig i de länder där versionen har lanserats." }
           },
           {
             "@type": "Question",
@@ -83,18 +94,19 @@ structuredData: |
     ]
   }
 ---
-  <main id="top">
+  <main id="main-content" data-download-anchor tabindex="-1">
     <!-- HERO -->
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow on-dark">Nu på App Store och Google Play</span>
+          <span class="eyebrow on-dark">Version 1.7.1 för 13 marknader</span>
           <h1>Spela om <span class="accent">mer än äran.</span></h1>
-          <p class="lede">Wager Golf håller räkningen när gänget gör upp på banan. 21 spelformer räknas automatiskt och Swish gör upp potten när rundan är slut. Inget papper, ingen miniräknare, inget tjafs vid 19:e.</p>
+          <p class="lede">Wager Golf håller räkningen när gänget gör upp på banan. 21 spelformer räknas automatiskt, och appen visar vem som är skyldig vem när rundan är slut. I Sverige öppnas Swish med rätt belopp. Inget papper, ingen miniräknare, inget tjafs vid 19:e.</p>
           <div class="cta-row">
             {% set storePlats = "startsida-hero" %}
             {% include "store-badges.njk" %}
-            <span class="cta-note">Gratis, för iPhone och Android</span>
+            <span class="cta-note" data-release-open hidden>Gratis, för iPhone och Android i ditt land</span>
+            <span class="cta-note" data-release-closed>Inte tillgänglig i det här landet ännu. Butikslänkar öppnas land för land.</span>
           </div>
           <p class="hero-proof">
             <span class="hero-proof-stars" role="img" aria-label="5 av 5 stjärnor">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</span>
@@ -122,15 +134,15 @@ structuredData: |
         <div class="stats-grid reveal">
           <div class="stat">
             <div class="num brass">21</div>
-            <div class="label">Spelformer med automatisk avräkning</div>
+            <div class="label">Spelformer med automatisk nettoberäkning</div>
           </div>
           <div class="stat">
-            <div class="num">1 000+</div>
-            <div class="label">Banor i Sverige, Danmark och Norge med par och stroke-index</div>
+            <div class="num">3 028</div>
+            <div class="label">Banor i 13 länder i version 1.7.1</div>
           </div>
           <div class="stat">
             <div class="num" style="font-size:46px">Swish</div>
-            <div class="label">Uppgörelse direkt när rundan är slut</div>
+            <div class="label">Betalningsgenväg i Sverige</div>
           </div>
         </div>
       </div>
@@ -156,8 +168,8 @@ structuredData: |
           </div>
           <div class="step">
             <div class="step-num">03</div>
-            <h3>Gör upp med Swish</h3>
-            <p>När ni går in räknar appen ut vem som är skyldig vem och öppnar Swish med rätt belopp. Inga tvister vid 19:e.</p>
+            <h3>Betala med Swish i Sverige</h3>
+            <p>När ni går in räknar appen ut vem som är skyldig vem. I Sverige kan den som ska betala öppna Swish med rätt belopp. Inga tvister vid 19:e.</p>
           </div>
         </div>
       </div>
@@ -211,10 +223,10 @@ structuredData: |
         <div class="feature-text">
           <span class="eyebrow">Uppgörelsen</span>
           <h2>Vem är skyldig vem, uträknat</h2>
-          <p>När rundan är slut räknar appen ut nettot per spelare och slår ihop allt till så få betalningar som möjligt. En knapp öppnar Swish med rätt belopp. Inga tvister vid 19:e hålet.</p>
+          <p>När rundan är slut räknar appen ut nettot per spelare och slår ihop allt till så få betalningar som möjligt. I Sverige kan den som ska betala öppna Swish med rätt belopp. Inga tvister vid 19:e hålet.</p>
         </div>
         <div class="feature-shot">
-          <img src="{% shot "settlement" %}" alt="Automatisk uppgörelse" loading="lazy" width="640" height="1306">
+          <img src="{% shot "settlement" %}" alt="Uträknad uppgörelse" loading="lazy" width="640" height="1306">
         </div>
       </div>
     </section>
@@ -238,7 +250,7 @@ structuredData: |
         <div class="head reveal">
           <span class="eyebrow on-dark">21 sätt att göra rundan intressant</span>
           <h2>Spela på ert sätt</h2>
-          <p>Klassikerna, hålspelen, lagformaten och sidobetten, fritt kombinerbara i samma runda. Allt med riktig WHS-handicap och automatisk avräkning.</p>
+          <p>Fem huvudspelformer ingår gratis, med ett huvudspel och ett valfritt sidobet per runda. Pro låser upp alla 21, fler kombinationer och full historik. Allt med riktig WHS-handicap och automatisk uträkning av uppgörelsen.</p>
         </div>
         <div class="card-grid reveal">
           <div class="fcard">
@@ -287,15 +299,19 @@ structuredData: |
           </div>
           <div class="faq-item">
             <p class="faq-q">Är det gratis?</p>
-            <p class="faq-a">Ja, appen är gratis att ladda ner och spela. Alla 21 spelformer och uppgörelsen ingår. Det finns en frivillig Pro-nivå, men du behöver inte betala för att göra upp en runda med gänget.</p>
+            <p class="faq-a">Ja. Gratisnivån har fem huvudspelformer och låter dig spela ett huvudspel plus ett valfritt sidobet per runda, med automatisk uträkning av uppgörelsen. Pro låser upp alla 21 spelformer, fler kombinationer och full historik. Berättigade nya användare får 14 dagar gratis. I Sverige kostar Pro därefter 49 kr per månad eller 299 kr per år.</p>
           </div>
           <div class="faq-item">
             <p class="faq-q">Ni spelar om pengar, är det tillåtet?</p>
-            <p class="faq-a">Wager Golf är inget spelbolag och rör aldrig pengarna. Appen håller bara räkningen på det ni redan kommit överens om er emellan och gör uppgörelsen enkel med Swish, precis som när ni redan gör upp efter rundan.</p>
+            <p class="faq-a">Wager Golf är inget spelbolag och rör aldrig pengarna. Appen håller bara räkningen på det ni redan kommit överens om er emellan och visar vem som är skyldig vem. I Sverige kan den som ska betala öppna Swish med rätt belopp och mottagare.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Vem är appen avsedd för?</p>
+            <p class="faq-a">Wager Golf är avsedd för personer som är minst 17 år och för privata rundor mellan människor som känner varandra. Appen tar aldrig emot, håller eller överför insatser.</p>
           </div>
           <div class="faq-item">
             <p class="faq-q">Funkar min bana?</p>
-            <p class="faq-a">Över 1 000 banor i Sverige, Danmark och Norge finns inlagda med par och stroke-index, så du väljer bara bana och börjar scora. Slaggolf, Front 9 eller Back 9, appen sköter resten.</p>
+            <p class="faq-a">Version 1.7.1 innehåller 3 028 banor i 13 europeiska länder med par och stroke-index. Katalogen är tillgänglig i de länder där versionen har lanserats.</p>
           </div>
           <div class="faq-item">
             <p class="faq-q">Räknar appen med rätt handicap?</p>
@@ -309,8 +325,8 @@ structuredData: |
     <section class="closing">
       <div class="wrap reveal">
         <span class="eyebrow">Redo för nästa runda</span>
-        <h2 style="margin-top:14px">Gör upp på <span class="accent">en sekund.</span></h2>
-        <p>Ladda ner gratis, lägg till gänget och börja spela.</p>
+        <h2 style="margin-top:14px">Se vem som är skyldig vem <span class="accent">direkt.</span></h2>
+        <p>Butikslänkarna visas automatiskt i de länder där appen kan installeras.</p>
         {% set storePlats = "startsida-avslut" %}
         {% include "store-badges.njk" %}
       </div>

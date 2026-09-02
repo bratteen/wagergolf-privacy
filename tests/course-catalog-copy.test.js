@@ -38,6 +38,28 @@ for (const file of MARKET_COPY_FILES) {
 test('lokala gratistilbud använder respektive marknads valuta', () => {
   const danish = readFileSync(resolve(ROOT, 'dk/index.njk'), 'utf8');
   const norwegian = readFileSync(resolve(ROOT, 'no/index.njk'), 'utf8');
+  const english = readFileSync(resolve(ROOT, 'en/index.njk'), 'utf8');
   assert.ok(danish.includes('"priceCurrency": "DKK"'));
   assert.ok(norwegian.includes('"priceCurrency": "NOK"'));
+  assert.ok(english.includes('"priceCurrency": "EUR"'));
+});
+
+test('version 1.7.1-kopian anger 3 028 banor men lovar inte en öppen internationell release', () => {
+  const homes = ['index.njk', 'no/index.njk', 'dk/index.njk', 'en/index.njk']
+    .map((file) => readFileSync(resolve(ROOT, file), 'utf8'));
+  for (const source of homes) {
+    assert.match(source, /3[ ,.\u00a0]028/);
+    assert.match(source, /1\.7\.1/);
+    assert.ok(!/Now on the App Store|Nå på App Store|Nu i App Store/.test(source));
+  }
+});
+
+test('gratisnivån, Pro och åldersgränsen beskrivs på alla startsidor', () => {
+  const homes = ['index.njk', 'no/index.njk', 'dk/index.njk', 'en/index.njk']
+    .map((file) => readFileSync(resolve(ROOT, file), 'utf8'));
+  for (const source of homes) {
+    assert.match(source, /(?:fem|five) (?:huvudspelformer|hovedspill|hovedspil|main game formats)/i);
+    assert.match(source, /14(?:-| )(?:dagar|dager|dage|day)/i);
+    assert.match(source, /17 (?:år|years|or older)/i);
+  }
 });

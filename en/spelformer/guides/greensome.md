@@ -50,7 +50,7 @@ The team handicap in a Greensome is 60 per cent of the lower handicap plus 40 pe
 
 The temptation is always to choose the longest tee shot, but think one shot further. A slightly shorter drive sitting on the fairway with a clear line to the green is often worth more than a long one in the semi-rough. Think about who plays next, too: choose one player's drive and it is their partner who hits the approach, so pick the tee shot that hands your stronger player the ball they actually want.
 
-Wager Golf works out the allowance, keeps track of whose turn it is and settles the match automatically.
+Wager Golf works out the allowance, keeps track of whose turn it is and shows the match result automatically.
 
 ## When does a Greensome suit?
 

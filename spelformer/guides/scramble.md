@@ -63,5 +63,5 @@ Wager Golf räknar lag-allowance, lagens score per hål och uppgörelsen åt er,
 
 <figure class="guide-figure">
   <img src="{% shot "settlement" %}" alt="Wager Golf uppgörelse efter en scramble" width="640" height="1306" loading="lazy">
-  <figcaption>Appen räknar lag-allowance och gör upp uppgörelsen, ni fokuserar på bästa bollen.</figcaption>
+  <figcaption>Appen räknar lag-allowance och uppgörelsen, ni fokuserar på bästa bollen.</figcaption>
 </figure>

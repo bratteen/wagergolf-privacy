@@ -2,7 +2,7 @@
 slug: laengste-drive
 key: guide:langst-drive
 format: Længste drive
-category: Sidebet
+category: Sidespil
 players: "2 til 4 spillere"
 order: 5
 title: "Længste drive: regler for longest drive-bettet | Wager Golf"

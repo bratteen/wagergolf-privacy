@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-02",
+  "appVersion": "1.7.1",
+  "captureSet": "final localized iOS store captures",
+  "frame": "iPhone 17 Pro Max Portrait, Deep Blue",
+  "output": {
+    "format": "webp",
+    "width": 640,
+    "height": 1306,
+    "alpha": true
+  },
+  "locales": [
+    {
+      "language": "sv",
+      "locale": "sv-SE",
+      "market": "SE",
+      "currency": "SEK",
+      "settlement": "swish",
+      "reviewStatus": "project-reviewed",
+      "releaseGate": "open",
+      "assets": {
+        "home": {
+          "file": "home.webp",
+          "sourceSha256": "e1203c7b44ad751de1044a36254367e5b448a38b76a15cdf0f91cc6ddc8529ff",
+          "sha256": "ecbf722b7c285bfda99f8b72e0fd9298f3d64e5aa6ff4f53490e673cfc33cf55"
+        },
+        "live": {
+          "file": "live.webp",
+          "sourceSha256": "4b2eeeafc8d8a382c6a31ee8e42984e19f27d3573840f92549680cdb247c8daa",
+          "sha256": "fdb93f319f8fc3bb1aab148b5110e002785417665072c14774301c159e65d9a1"
+        },
+        "settlement": {
+          "file": "settlement.webp",
+          "presentation": "per-format-breakdown",
+          "sourceSha256": "24704d40fba14f862e8bb2ed598c1574db3a5aeb77856dcefe8d78905d68d780",
+          "sha256": "0cab63c1725f917987d5d26075b1f3521983096f7ab739a7c79802dae90b9dde"
+        }
+      }
+    },
+    {
+      "language": "nb",
+      "locale": "no-NO",
+      "market": "NO",
+      "currency": "NOK",
+      "settlement": "manual",
+      "reviewStatus": "project-reviewed",
+      "releaseGate": "closed",
+      "assets": {
+        "home": {
+          "file": "nb/home.webp",
+          "sourceSha256": "a1acfe769841074cc5f52d7f30a825125c325df4c215701981331ff70a8894a0",
+          "sha256": "25913e2fdd4c3d37b79377a516805da759a82b5ac837fc59291394533469cbcf"
+        },
+        "live": {
+          "file": "nb/live.webp",
+          "sourceSha256": "b50916062ef107d164e3e538e0e63678675150968d6d92176e5e9efc33988a59",
+          "sha256": "33a736e406623109db41861204d9b9f3cfcb0511cb37f2bf9459a98d7ea96f4e"
+        },
+        "settlement": {
+          "file": "nb/settlement.webp",
+          "sourceSha256": "d9d8e3db6c66c5ea254ef1895fd88d43603879fba942f4b688affb3630430ad2",
+          "sha256": "22d93d305295c31eb2181f2833aff7a0c61f848335a0c46c46bafa7a11c52883"
+        }
+      }
+    },
+    {
+      "language": "da",
+      "locale": "da-DK",
+      "market": "DK",
+      "currency": "DKK",
+      "settlement": "manual",
+      "reviewStatus": "project-reviewed",
+      "releaseGate": "closed",
+      "assets": {
+        "home": {
+          "file": "da/home.webp",
+          "sourceSha256": "5accedb119d517f72b7af529e8c0f00e32a59f57b1267eef4ba69ddc3c73af8d",
+          "sha256": "a89cc5d17903767efbd879a77d77e26d27d6c8c526b2716479d6f963a5aef4d8"
+        },
+        "live": {
+          "file": "da/live.webp",
+          "sourceSha256": "10abc4346434e5ee0372f9356a20958c8153bafbc6d220729e6bb522ef75c6fc",
+          "sha256": "fe03befb87c3b8c71c28976b1e8808f248db21694cbe69ba08fe4b4724087441"
+        },
+        "settlement": {
+          "file": "da/settlement.webp",
+          "sourceSha256": "f1b0d4f6735fd1f1c2040279873acbcfeee9220033ddc8a5a6df07c2459394ad",
+          "sha256": "41de74e9e82575f39940d6d40f6a057d51086200413d5b6195f70d6a9995ea71"
+        }
+      }
+    },
+    {
+      "language": "en",
+      "locale": "en-GB",
+      "market": "IE",
+      "currency": "EUR",
+      "settlement": "manual",
+      "reviewStatus": "project-reviewed",
+      "releaseGate": "closed",
+      "servesAsFallbackFor": ["FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT"],
+      "assets": {
+        "home": {
+          "file": "en/home.webp",
+          "sourceSha256": "cfd769cb721f2650193bd3722d83e0ba350a1f3ea9249d53718677d152ae1b7a",
+          "sha256": "045ffd430bbc10ef94d82f2411eb3f726ad4d1b83876b76eb66510c3e147fe27"
+        },
+        "live": {
+          "file": "en/live.webp",
+          "sourceSha256": "a59ae5a55a68d4bd6e2501782bcee9fb9bd20fb3ce50d217f9d09a6265e480f5",
+          "sha256": "09cf376ac5e268f24320d67d028662328aae8cbe7b5c5214745d009252f8a951"
+        },
+        "settlement": {
+          "file": "en/settlement.webp",
+          "sourceSha256": "5cc728bec6893ae1a8f9127943e7772f2c139c1f41fb286fb7ca9135e6b43f97",
+          "sha256": "825402c18a6b1ced1428f3ae4593de2990b1ca03ae8093ff12943864087e9eb1"
+        }
+      }
+    }
+  ]
+}

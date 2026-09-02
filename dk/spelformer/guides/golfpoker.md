@@ -2,7 +2,7 @@
 slug: golfpoker
 key: guide:golfpoker
 format: Golfpoker
-category: Sidebet
+category: Sidespil
 players: "2 til 4 spillere"
 order: 6
 title: "Golfpoker: regler, kort og bedste hånd | Wager Golf"
@@ -22,7 +22,7 @@ related: [birdiepott, snake, sandie]
 
 ## Hvad er golfpoker?
 
-Golfpoker fletter golf og poker sammen til et sidebet, der belønner både godt spil og god putning. Du tjener spillekort ved at præstere på banen, og til sidst er det din bedste femkortshånd, ikke din score, der afgør, om du tager puljen. Det betyder, at selv en spiller, der ikke vinder selve runden, kan tage pengene med sig med den rette lykke i kortene.
+Golfpoker fletter golf og poker sammen til et sidespil, der belønner både godt spil og god putning. Du tjener spillekort ved at præstere på banen, og til sidst er det din bedste femkortshånd, ikke din score, der afgør, om du tager puljen. Det betyder, at selv en spiller, der ikke vinder selve runden, kan tage pengene med sig med den rette lykke i kortene.
 
 ## Sådan tjener du kort
 

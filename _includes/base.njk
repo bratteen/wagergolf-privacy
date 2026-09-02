@@ -34,6 +34,11 @@
   <link rel="stylesheet" href="/assets/fonts/fonts.css{% if assets.fonts %}?v={{ assets.fonts }}{% endif %}">
   <link rel="stylesheet" href="/assets/css/site.css{% if assets.css %}?v={{ assets.css }}{% endif %}">
 
+  {#- Releasegrinden får aldrig vänta på en tredjepartsleverantör. Ladda dess
+      lokala script före eventuella analytics-script. Den statiska sidan är
+      fail-closed tills /market-status bekräftar ett öppet land. -#}
+  <script defer src="/assets/js/release-status.js{% if assets.releaseStatus %}?v={{ assets.releaseStatus }}{% endif %}"></script>
+
   {% if structuredData %}<script type="application/ld+json">{{ structuredData | safe }}</script>{% endif %}
   {%- if not routes.publishedLocales.includes(lang) %}
   {#- Språkkatalogerna byggs och deployas även innan språket är publicerat, så
@@ -48,7 +53,8 @@
   {% if site.umami.websiteId %}<script defer src="{{ site.umami.src }}" data-website-id="{{ site.umami.websiteId }}"></script>
   {% if site.umami.recorderSrc %}<script defer src="/assets/js/replay-sample.js{% if assets.replay %}?v={{ assets.replay }}{% endif %}" data-recorder-src="{{ site.umami.recorderSrc }}" data-website-id="{{ site.umami.websiteId }}" data-sample-rate="{{ site.umami.replaySampleRate }}"></script>{% endif %}{% endif %}
 </head>
-<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %} data-release-locale="{{ lang }}">
+  <a class="skip-link" href="#main-content">{% if lang == "sv" %}Hoppa till innehållet{% elif lang == "nb" %}Hopp til innholdet{% elif lang == "da" %}Gå til indholdet{% else %}Skip to content{% endif %}</a>
   {%- include "language-banner.njk" %}
   <header>
     <div class="wrap nav">
@@ -56,10 +62,11 @@
         <img src="/assets/logo.png" alt="" width="42" height="42">
         <span>WAGER GOLF</span>
       </a>
-      <nav class="nav-links">
+      <nav class="nav-links" aria-label="{% if lang == 'sv' %}Huvudnavigation{% elif lang == 'nb' %}Hovednavigasjon{% elif lang == 'da' %}Hovednavigation{% else %}Primary navigation{% endif %}">
         <a href="{{ routes.homeFor(lang) }}#funktioner">{{ t.nav.features }}</a>
         <a class="nav-keep" href="{{ routes.pathFor(lang, 'formats') }}">{{ t.nav.formats }}</a>
-        <a class="nav-cta" href="{{ routes.locales[lang].downloadPath }}" data-download-link data-store-link data-ios-url="{{ site.storeUrls[lang].appStore }}" data-android-url="{{ site.storeUrls[lang].playStore }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
+        <a class="nav-cta" data-release-open hidden href="{{ site.downloadUrls[lang].generic }}" data-download-link data-store-link data-ios-url="{{ site.downloadUrls[lang].ios }}" data-android-url="{{ site.downloadUrls[lang].android }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
+        <span class="nav-cta is-disabled" data-release-closed>{% if lang == "sv" %}Inte tillgänglig här än{% elif lang == "nb" %}Ikke tilgjengelig her ennå{% elif lang == "da" %}Ikke tilgængelig her endnu{% else %}Not available here yet{% endif %}</span>
         {#- <div>, inte <nav>: den här inkluderingen ligger inuti
             <nav class="nav-links"> ovan, och ett nästlat nav-landmark är
             förvirrande för skärmläsare. Se kommentaren i
@@ -67,6 +74,29 @@
         {%- set langSwitchTag = "div" %}
         {%- include "language-switcher.njk" %}
       </nav>
+      {#- På smala skärmar ryms inte både ordmärket, butiksknappen,
+          innehållslänkarna och fyra fullständiga språknamn på en rad.
+          Ett native <details> ger en tangentbordsstyrd meny utan JavaScript,
+          samtidigt som alla språk ligger kvar som riktiga länkar i DOM:en. -#}
+      <div class="mobile-nav">
+        <a class="nav-cta" data-release-open hidden href="{{ site.downloadUrls[lang].generic }}" data-download-link data-store-link data-ios-url="{{ site.downloadUrls[lang].ios }}" data-android-url="{{ site.downloadUrls[lang].android }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
+        <span class="nav-cta is-disabled" data-release-closed><span class="mobile-status-long">{% if lang == 'sv' %}Inte tillgänglig här än{% elif lang == 'nb' %}Ikke tilgjengelig her ennå{% elif lang == 'da' %}Ikke tilgængelig her endnu{% else %}Not available here yet{% endif %}</span><span aria-hidden="true">{% if lang == "en" %}Soon{% else %}Snart{% endif %}</span></span>
+        <details class="mobile-menu">
+          <summary aria-label="Wager Golf: {{ t.nav.formats }}, {{ t.switcher.label }}">
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M4 7h16M4 12h16M4 17h16"/>
+            </svg>
+          </summary>
+          <div class="mobile-menu-panel">
+            <nav class="mobile-menu-links" aria-label="{% if lang == 'sv' %}Mobilnavigation{% elif lang == 'nb' %}Mobilnavigasjon{% elif lang == 'da' %}Mobilnavigation{% else %}Mobile navigation{% endif %}">
+              <a href="{{ routes.homeFor(lang) }}#funktioner">{{ t.nav.features }}</a>
+              <a href="{{ routes.pathFor(lang, 'formats') }}">{{ t.nav.formats }}</a>
+            </nav>
+            {%- set langSwitchTag = "div" %}
+            {%- include "language-switcher.njk" %}
+          </div>
+        </details>
+      </div>
     </div>
   </header>
 
@@ -79,7 +109,7 @@
           <img src="/assets/logo.png" alt="" width="34" height="34">
           <span>Wager Golf</span>
         </div>
-        <nav class="foot-links">
+        <nav class="foot-links" aria-label="{% if lang == 'sv' %}Sidfotsnavigation{% elif lang == 'nb' %}Bunntekstnavigasjon{% elif lang == 'da' %}Sidefodsnavigation{% else %}Footer navigation{% endif %}">
           <a href="{{ routes.pathFor(lang, 'formats') }}">{{ t.footer.formats }}</a>
           <a href="{{ routes.pathFor(lang, 'glossary') }}">{{ t.footer.glossary }}</a>
           <a href="{{ routes.pathFor(lang, 'about') }}">{{ t.footer.about }}</a>
@@ -108,5 +138,6 @@
 
   <script defer src="/assets/js/reveal.js"></script>
   <script defer src="/assets/js/download-link.js{% if assets.download %}?v={{ assets.download }}{% endif %}"></script>
+  <script defer src="/assets/js/mobile-menu.js{% if assets.mobileMenu %}?v={{ assets.mobileMenu }}{% endif %}"></script>
 </body>
 </html>

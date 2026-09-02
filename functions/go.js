@@ -17,9 +17,8 @@
 // resolva till ingenting i produktion. Att passthrough-kopiera lib/ vore
 // värre — då låg den publikt på /lib/.
 // Ändras något här måste motsvarande ändring göras i _data/routes.js och
-// lib/campaign.js. Testerna i tests/go.test.mjs och tests/campaign.test.js
-// kontrollerar samma värden från båda hållen, men INTE mot varandra —
-// synken är manuell.
+// lib/campaign.js. Tester kontrollerar både beteendet och att PUBLISHED-listan
+// speglar _data/routes.js, men synken i källan är fortfarande explicit.
 //
 // PUBLISHED SPEGLAR publishedLocales I _data/routes.js MEN UPPDATERAS INTE
 // AUTOMATISKT MED DEN. README:s checklista "Lägga till ett språk" har ett
@@ -30,6 +29,47 @@
 const PREFIX = { sv: '', nb: '/no', da: '/dk', en: '/en' };
 const PUBLISHED = ['sv', 'nb', 'da', 'en'];
 const DEFAULT_LANG = 'sv';
+const ENGLISH_FALLBACK_LANGS = new Set(['fi', 'nl', 'de', 'fr', 'es', 'it', 'pt']);
+const MARKET_LANG = {
+  SE: 'sv', DK: 'da', NO: 'nb', IE: 'en', FI: 'en', NL: 'en', AT: 'en',
+  PT: 'en', BE: 'en', DE: 'en', FR: 'en', ES: 'en', IT: 'en',
+};
+
+function requestCountry(request) {
+  return String(request.cf?.country || request.headers.get('CF-IPCountry') || '').toUpperCase();
+}
+
+function normalizeLang(value) {
+  const base = String(value || '').toLowerCase().split('-')[0];
+  if (base === 'no') return 'nb';
+  if (ENGLISH_FALLBACK_LANGS.has(base)) return 'en';
+  return base;
+}
+
+function acceptedLanguageRanges(header) {
+  return String(header || '')
+    .split(',')
+    .map((entry, index) => {
+      const [range, ...parameters] = entry.trim().split(';');
+      if (!range) return null;
+
+      let quality = 1;
+      let qualitySeen = false;
+      for (const parameter of parameters) {
+        const match = /^q\s*=\s*(.+)$/i.exec(parameter.trim());
+        if (!match) continue;
+        if (qualitySeen || !/^(?:0(?:\.\d{0,3})?|1(?:\.0{0,3})?)$/.test(match[1])) {
+          return null;
+        }
+        qualitySeen = true;
+        quality = Number(match[1]);
+      }
+
+      return quality > 0 ? { range, quality, index } : null;
+    })
+    .filter(Boolean)
+    .sort((a, b) => b.quality - a.quality || a.index - b.index);
+}
 
 /** Butikernas kampanjfält är fritext men trivs inte med mellanslag, versaler
  *  eller emoji. Metas {{campaign.name}} expanderar till kampanjnamnet precis
@@ -56,31 +96,47 @@ export function sanitizeCampaign(raw) {
  *  då först upptäckas i produktion. */
 export function pickLang(url, request, published = PUBLISHED) {
   const forced = url.searchParams.get('l');
-  if (forced && published.includes(forced)) return forced;
+  const forcedLang = normalizeLang(forced);
+  if (forced && published.includes(forcedLang)) return forcedLang;
   if (forced) return DEFAULT_LANG;
 
-  const header = (request.headers.get('accept-language') || '').toLowerCase();
-  for (const part of header.split(',')) {
-    const base = part.split(';')[0].trim().split('-')[0];
-    // "no" och "nb" är samma skriftspråk för vårt syfte.
-    const lang = base === 'no' ? 'nb' : base;
+  const header = request.headers.get('accept-language') || '';
+  for (const { range } of acceptedLanguageRanges(header)) {
+    const lang = normalizeLang(range);
     if (published.includes(lang)) return lang;
   }
+  const geoLang = MARKET_LANG[requestCountry(request)];
+  if (geoLang && published.includes(geoLang)) return geoLang;
   return DEFAULT_LANG;
+}
+
+function pickMarket(url, request) {
+  if (url.searchParams.has('m')) {
+    // Även en ogiltig explicit kod måste följa med till landningssidan så
+    // /market-status kan stoppa den. Om den tappas här kan GeoIP maskera en
+    // trasig QR-/kampanjlänk och öppna en annan storefront.
+    return String(url.searchParams.get('m') || '').slice(0, 16).toUpperCase();
+  }
+  const geo = requestCountry(request);
+  return MARKET_LANG[geo] ? geo : '';
 }
 
 export function onRequestGet({ request }) {
   const url = new URL(request.url);
   const lang = pickLang(url, request);
   const campaign = sanitizeCampaign(url.searchParams.get('c'));
+  const market = pickMarket(url, request);
+  const hasMarket = url.searchParams.has('m') || Boolean(market);
 
   let target = `${PREFIX[lang]}/`;
-  if (campaign) {
-    const params = new URLSearchParams({
-      utm_source: campaign,
-      utm_medium: 'offline',
-      utm_campaign: campaign,
-    });
+  if (campaign || hasMarket) {
+    const params = new URLSearchParams();
+    if (campaign) {
+      params.set('utm_source', campaign);
+      params.set('utm_medium', 'offline');
+      params.set('utm_campaign', campaign);
+    }
+    if (hasMarket) params.set('m', market);
     target += `?${params}`;
   }
 
@@ -90,7 +146,7 @@ export function onRequestGet({ request }) {
       Location: target,
       // Svaret varierar med besökarens språk och får aldrig cachas delat.
       'Cache-Control': 'no-store',
-      Vary: 'Accept-Language',
+      Vary: 'Accept-Language, CF-IPCountry',
     },
   });
 }

@@ -55,7 +55,7 @@ Texas Scramble er den mest almindelige variant, og den mange søger på specifik
 
 Lad den mindst pressede spiller slå ud først, så den længste eller sikreste kan gå efter det, vel vidende at en bold allerede er i spil. På green er rækkefølgen værdifuld den anden vej: lad en spiller putte først som lodning, så kan den næste læse puttet på din bold. Små marginaler, men de afgør tætte matcher.
 
-Wager Golf beregner holdets allowance, holdets score per hul og gør opgørelsen op for jer, så I kun skal koncentrere jer om at vælge den bedste bold.
+Wager Golf beregner holdets allowance, holdets score per hul og opgørelsen, så I kun skal koncentrere jer om at vælge den bedste bold.
 
 ## Almindelige fejl
 
@@ -64,5 +64,5 @@ Wager Golf beregner holdets allowance, holdets score per hul og gør opgørelsen
 
 <figure class="guide-figure">
   <img src="{% shot "settlement" %}" alt="Wager Golf-opgørelse efter en scramble" width="640" height="1306" loading="lazy">
-  <figcaption>Appen beregner holdets allowance og gør opgørelsen op, I fokuserer på den bedste bold.</figcaption>
+  <figcaption>Appen beregner holdets allowance og opgørelsen, I fokuserer på den bedste bold.</figcaption>
 </figure>

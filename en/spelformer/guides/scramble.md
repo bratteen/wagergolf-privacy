@@ -64,5 +64,5 @@ Wager Golf works out the team allowance, the teams' scores per hole and the sett
 
 <figure class="guide-figure">
   <img src="{% shot "settlement" %}" alt="Wager Golf settlement after a scramble" width="640" height="1306" loading="lazy">
-  <figcaption>The app works out the team allowance and settles up, so you can focus on the best ball.</figcaption>
+  <figcaption>The app works out the team allowance and shows who owes whom, so you can focus on the best ball.</figcaption>
 </figure>

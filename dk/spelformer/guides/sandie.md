@@ -2,7 +2,7 @@
 slug: sandie
 key: guide:sandie
 format: Sandie
-category: Sidebet
+category: Sidespil
 players: "2 til 4 spillere"
 order: 3
 title: "Sandie i golf: regler for bunker-bettet | Wager Golf"
@@ -24,7 +24,7 @@ related: [birdiepott, snake, golfpoker]
 
 ## Hvad er en sandie?
 
-En sandie er golfens belønning til den, der nægter at lade en bunker ødelægge hullet. Havner du i sandet, men alligevel skraber par eller bedre sammen, har du lavet en sandie, og de andre i flokken må af med penge. Det er et klassisk sidebet, der gør selv et besøg i bunkeren til noget at håbe på.
+En sandie er golfens belønning til den, der nægter at lade en bunker ødelægge hullet. Havner du i sandet, men alligevel skraber par eller bedre sammen, har du lavet en sandie, og de andre i flokken må af med penge. Det er et klassisk sidespil, der gør selv et besøg i bunkeren til noget at håbe på.
 
 ## Sådan spiller du
 
@@ -35,7 +35,7 @@ En sandie er golfens belønning til den, der nægter at lade en bunker ødelægg
 
 ## Sådan beregnes det
 
-Sandie tælles live, hul for hul. Hver gang du markerer, at du har reddet par ud af bunkeren, flytter pengene sig med det samme: du plus indsatsen gange antallet af medspillere, hver af dem minus indsatsen. Det gør, at en spiller med et par gode bunkerredninger kan ende med at gå plus på sidebettet alene.
+Sandie tælles live, hul for hul. Hver gang du markerer, at du har reddet par ud af bunkeren, flytter pengene sig med det samme: du plus indsatsen gange antallet af medspillere, hver af dem minus indsatsen. Det gør, at en spiller med et par gode bunkerredninger kan ende med at gå plus på sidespillet alene.
 
 Wager Golf holder styr på, hvilke huller du har været i bunkeren på, og tæller sandies automatisk, så I slipper for at diskutere, hvem der forestillede sig den følelse ved 7.
 
@@ -52,4 +52,4 @@ Efter runden ser det sådan ud:
 
 Tre spillere, der betaler 50 hver, bliver præcis 150 ind til Erik. Det går lige op. Laver flere i flokken deres egne sandies, udligner beløbene hinanden, og nettoen er det, der viser sig til sidst.
 
-Wager Golf holder styr på, hvilke huller hver enkelt har ligget i bunkeren på, tæller sandies løbende og gør beløbet op, når runden er slut.
+Wager Golf holder styr på, hvilke huller hver enkelt har ligget i bunkeren på, tæller sandies løbende og viser, hvem der skylder hvem, når runden er slut.

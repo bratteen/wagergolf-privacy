@@ -2,7 +2,7 @@
 slug: naermest-flagget
 key: guide:narmast-flaggan
 format: Nærmest flagget
-category: Sidebet
+category: Sidespill
 players: "2 til 4 spillere"
 order: 4
 title: "Nærmest flagget: regler for closest to the pin | Wager Golf"
@@ -51,4 +51,4 @@ På hull 16 bommer alle på green unntatt Erik, som vinner den andre potten på 
 - Vinneren tar hele potten, nettoen blir potten minus egen innsats
 - Ingen på green, ingen vinner: innsatsene blir stående, ingen penger rører seg
 
-Legg sammen begge hullene: Anna vinner hull 7 (+150), men taper innsatsen sin på hull 16 (-50), netto +100. Erik det samme, bare motsatt vei, netto +100. De to andre taper innsatsen sin på begge hullene, -50 pluss -50, altså -100 hver. Summen går jevnt opp: +100, +100, -100, -100. Wager Golf teller pottene hull for hull og gjør opp.
+Legg sammen begge hullene: Anna vinner hull 7 (+150), men taper innsatsen sin på hull 16 (-50), netto +100. Erik det samme, bare motsatt vei, netto +100. De to andre taper innsatsen sin på begge hullene, -50 pluss -50, altså -100 hver. Summen går jevnt opp: +100, +100, -100, -100. Wager Golf teller pottene hull for hull og viser hvem som skylder hvem.

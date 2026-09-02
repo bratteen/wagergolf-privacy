@@ -2,7 +2,7 @@
 slug: snake
 key: guide:snake
 format: Snake
-category: Sidebet
+category: Sidespill
 players: "2 til 4 spillere"
 order: 2
 title: "Snake i golf: regler for tre-putt-spillet | Wager Golf"
@@ -51,4 +51,4 @@ I løpet av runden skjer det tre tre-putter:
 
 Ingen tre-putter på 17 eller 18, så Anna forlater siste green med ormen. Hun betaler hele potten på 150, som deles jevnt mellom de tre andre. Hver av Björn, Cecilia og David får 50. Netto blir Anna minus 150, de andre pluss 50 hver. Hadde ingen tre-puttet i det hele tatt, hadde ingen penger rørt seg.
 
-Wager Golf teller potten hull for hull og gjør opp summen når runden er slutt.
+Wager Golf teller potten hull for hull og viser hvem som skylder hvem når runden er slutt.
