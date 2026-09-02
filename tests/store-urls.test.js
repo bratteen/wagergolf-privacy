@@ -16,6 +16,13 @@ test('varje webbspråk har en säker standard-storefront', () => {
   assert.ok(site.storeUrls.nb.appStore.includes('/no/'));
   assert.ok(site.storeUrls.da.appStore.includes('/dk/'));
   assert.ok(site.storeUrls.en.appStore.includes('/ie/'));
+  assert.ok(site.storeUrls.fi.appStore.includes('/fi/'));
+  assert.ok(site.storeUrls.nl.appStore.includes('/nl/'));
+  assert.ok(site.storeUrls.de.appStore.includes('/de/'));
+  assert.ok(site.storeUrls.fr.appStore.includes('/fr/'));
+  assert.ok(site.storeUrls.es.appStore.includes('/es/'));
+  assert.ok(site.storeUrls.it.appStore.includes('/it/'));
+  assert.ok(site.storeUrls.pt.appStore.includes('/pt/'));
   assert.ok(!JSON.stringify(site.storeUrls).includes('/us/'));
 });
 
@@ -26,12 +33,21 @@ test('kampanjnamnen är marknadsbaserade och engelska standarden är Irland', ()
   assert.strictEqual(site.storeUrls.en.campaign, 'webb-ie');
 });
 
-test('bara Sverige är öppet medan version 1.7.1 granskas', () => {
+test('bara App Store i Sverige är öppen tills Google Play har version 1.7.1', () => {
   assert.deepStrictEqual(site.release.publicMarketCodes, ['SE']);
+  assert.deepStrictEqual(site.release.publicMarketCodesByPlatform, {
+    ios: ['SE'],
+    android: [],
+  });
+  assert.strictEqual(site.marketUrls.SE.iosPublic, true);
+  assert.strictEqual(site.marketUrls.SE.androidPublic, false);
   assert.strictEqual(site.localeRelease.sv.public, true);
   assert.strictEqual(site.localeRelease.nb.public, false);
   assert.strictEqual(site.localeRelease.da.public, false);
   assert.strictEqual(site.localeRelease.en.public, false);
+  for (const lang of ['fi', 'nl', 'de', 'fr', 'es', 'it', 'pt']) {
+    assert.strictEqual(site.localeRelease[lang].public, false, lang);
+  }
 });
 
 test('alla marknader har landsspecifika butikslänkar', () => {
@@ -76,8 +92,14 @@ test('både desktop- och mobilnav följer releasegrinden', () => {
 
 test('butiksknappar är fail-closed tills besökarens land har verifierats', () => {
   const badges = fs.readFileSync(path.join(__dirname, '..', '_includes/store-badges.njk'), 'utf8');
-  assert.match(badges, /data-release-open hidden/);
-  assert.match(badges, /data-release-closed/);
+  assert.match(badges, /data-release-ios-open hidden/);
+  assert.match(badges, /data-release-ios-closed/);
+  assert.match(badges, /data-release-android-open hidden/);
+  assert.match(badges, /data-release-android-closed/);
+  assert.strictEqual((badges.match(/data-release-ios-open hidden/g) || []).length, 1);
+  assert.strictEqual((badges.match(/data-release-android-open hidden/g) || []).length, 1);
+  assert.strictEqual((badges.match(/site\.downloadUrls\[lang\]\.ios/g) || []).length, 1);
+  assert.strictEqual((badges.match(/site\.downloadUrls\[lang\]\.android/g) || []).length, 1);
   assert.ok(!badges.includes('site.localeRelease[lang].public'));
 });
 

@@ -1,8 +1,13 @@
 {
+  "skipLink": "Hopp til innholdet",
   "nav": {
     "features": "Funksjoner",
     "formats": "Spilleformer",
-    "download": "Last ned"
+    "download": "Last ned",
+    "primaryLabel": "Hovednavigasjon",
+    "mobileLabel": "Mobilnavigasjon",
+    "unavailable": "Ikke tilgjengelig her ennå",
+    "soon": "Snart"
   },
   "breadcrumb": {
     "home": "Hjem"
@@ -30,10 +35,12 @@
     "privacy": "Personvern",
     "terms": "Brukervilkår",
     "contact": "Kontakt",
-    "tagline": "Bygget i Sverige, for golfgjengen"
+    "tagline": "Bygget i Sverige, for golfgjengen",
+    "navigationLabel": "Bunntekstnavigasjon"
   },
   "store": {
-    "sub": "LAST NED PÅ"
+    "sub": "LAST NED PÅ",
+    "unavailable": "IKKE TILGJENGELIG HER"
   },
   "switcher": {
     "label": "Språk"

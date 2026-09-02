@@ -1,0 +1,52 @@
+{
+  "skipLink": "Saltar para o conteúdo",
+  "nav": {
+    "features": "Funcionalidades",
+    "formats": "Modalidades de jogo",
+    "download": "Descarregar",
+    "primaryLabel": "Navegação principal",
+    "mobileLabel": "Navegação móvel",
+    "unavailable": "Ainda não disponível aqui",
+    "soon": "Em breve"
+  },
+  "breadcrumb": {
+    "home": "Início"
+  },
+  "byline": {
+    "by": "Por",
+    "updated": "Atualizado"
+  },
+  "faq": {
+    "heading": "Perguntas frequentes"
+  },
+  "guide": {
+    "ctaHeading": "Deixa de calcular {format} à mão",
+    "ctaText": "O Wager Golf calcula automaticamente os resultados da modalidade e o acerto de contas com o Handicap de Jogo WHS correto e mostra exatamente quem deve a quem.",
+    "related": "Mais modalidades de jogo"
+  },
+  "article": {
+    "related": "Ler a seguir",
+    "ctaText": "O Wager Golf calcula automaticamente os resultados da modalidade e o acerto de contas com o Handicap de Jogo WHS correto e mostra exatamente quem deve a quem."
+  },
+  "footer": {
+    "formats": "Modalidades de jogo",
+    "glossary": "Glossário",
+    "about": "Sobre nós",
+    "privacy": "Política de privacidade",
+    "terms": "Termos de utilização",
+    "contact": "Contacto",
+    "tagline": "Criado por um golfista, para grupos de golfe",
+    "navigationLabel": "Navegação do rodapé"
+  },
+  "store": {
+    "sub": "DESCARREGAR",
+    "unavailable": "NÃO DISPONÍVEL AQUI"
+  },
+  "switcher": {
+    "label": "Idioma"
+  },
+  "banner": {
+    "text": "Esta página também está disponível em {language}",
+    "close": "Fechar"
+  }
+}

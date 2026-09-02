@@ -1,8 +1,13 @@
 {
+  "skipLink": "Gå til indholdet",
   "nav": {
     "features": "Funktioner",
     "formats": "Spilleformer",
-    "download": "Hent"
+    "download": "Hent",
+    "primaryLabel": "Hovednavigation",
+    "mobileLabel": "Mobilnavigation",
+    "unavailable": "Ikke tilgængelig her endnu",
+    "soon": "Snart"
   },
   "breadcrumb": {
     "home": "Hjem"
@@ -30,10 +35,12 @@
     "privacy": "Privatlivspolitik",
     "terms": "Brugerbetingelser",
     "contact": "Kontakt",
-    "tagline": "Bygget i Sverige, til golfvennerne"
+    "tagline": "Bygget i Sverige, til golfvennerne",
+    "navigationLabel": "Sidefodsnavigation"
   },
   "store": {
-    "sub": "HENT PÅ"
+    "sub": "HENT PÅ",
+    "unavailable": "IKKE TILGÆNGELIG HER"
   },
   "switcher": {
     "label": "Sprog"

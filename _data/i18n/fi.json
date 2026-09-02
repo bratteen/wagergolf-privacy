@@ -1,0 +1,52 @@
+{
+  "skipLink": "Siirry sisältöön",
+  "nav": {
+    "features": "Ominaisuudet",
+    "formats": "Pelimuodot",
+    "download": "Lataa",
+    "primaryLabel": "Päänavigointi",
+    "mobileLabel": "Mobiilinavigointi",
+    "unavailable": "Ei vielä saatavilla täällä",
+    "soon": "Pian"
+  },
+  "breadcrumb": {
+    "home": "Etusivu"
+  },
+  "byline": {
+    "by": "Kirjoittanut",
+    "updated": "Päivitetty"
+  },
+  "faq": {
+    "heading": "Usein kysytyt kysymykset"
+  },
+  "guide": {
+    "ctaHeading": "Ei enää käsin laskemista: {format}",
+    "ctaText": "Wager Golf laskee pelimuodon tulokset ja maksujen selvityksen automaattisesti oikealla WHS-tasoituksella ja näyttää tarkalleen, kuka maksaa kenelle.",
+    "related": "Lisää pelimuotoja"
+  },
+  "article": {
+    "related": "Lue seuraavaksi",
+    "ctaText": "Wager Golf laskee pelimuodon tulokset ja maksujen selvityksen automaattisesti oikealla WHS-tasoituksella ja näyttää tarkalleen, kuka maksaa kenelle."
+  },
+  "footer": {
+    "formats": "Pelimuodot",
+    "glossary": "Sanasto",
+    "about": "Tietoa",
+    "privacy": "Tietosuojakäytäntö",
+    "terms": "Käyttöehdot",
+    "contact": "Yhteystiedot",
+    "tagline": "Golfaajan rakentama, golfporukoille",
+    "navigationLabel": "Alatunnisteen navigointi"
+  },
+  "store": {
+    "sub": "LATAA",
+    "unavailable": "EI SAATAVILLA TÄÄLLÄ"
+  },
+  "switcher": {
+    "label": "Kieli"
+  },
+  "banner": {
+    "text": "Tämä sivu on saatavilla myös tällä kielellä: {language}",
+    "close": "Sulje"
+  }
+}

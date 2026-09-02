@@ -1,0 +1,95 @@
+---
+layout: page-article.njk
+key: page:about
+updated: "2026-09-02"
+permalink: /fi/tietoa/
+title: "Tietoa Wager Golfista, sovelluksesta joka laskee puolestasi | Wager Golf"
+description: "Tietoa Wager Golfista ja sen tekijästä Gustaf Brattista. Sovellus laskee 21 pelimuotoa oikealla WHS-tasoituksella ja näyttää, kuka on velkaa kenelle."
+ogType: article
+h1: "Tietoa Wager Golfista"
+lede: "Wager Golfin rakensi golfaaja, joka kyllästyi paperiin, laskimiin ja kierroksen jälkeisiin väittelyihin. Tässä on lyhyesti, miksi sovellus on olemassa ja kuka sen teki."
+breadcrumb:
+  - name: "Tietoa"
+faq:
+  - q: "Kuka rakensi Wager Golfin?"
+    a: "Sovelluksen rakensi Gustaf Bratt, ruotsalainen golfaaja, joka pelaa oman porukkansa kanssa panoksilla ja kyllästyi laskemaan potin käsin. Myös tämän sivuston oppaat ovat hänen kirjoittamiaan, joten tekstien säännöt vastaavat sovelluksen laskentaa."
+  - q: "Onko Wager Golf rahapeliyhtiö?"
+    a: "Ei. Wager Golf ei vastaanota panoksia eikä pelissä ole taloa, joka voittaisi. Sovellus pitää vain kirjaa pelistä, josta olette jo sopineet keskenänne, laskee loppusaldon oikealla tasoituksella ja näyttää, kuka on velkaa kenelle."
+  - q: "Käyttääkö sovellus todella oikeaa tasoitusta?"
+    a: "Kyllä. Pelitasoitus lasketaan WHS-järjestelmän mukaan kentälle ja valitulle tiipaikalle, ja lyönnit jaetaan oikeille rei'ille kentän tasoitusindeksin perusteella. Nettotuloksia verrataan reikä reiältä, joten eritasoiset pelaajat voivat kohdata samalla kierroksella reilusti."
+ctaHeading: "Wager Golf 13 markkinalla"
+ctaText: "Versio 1.7.1 on valmisteltu 13 markkinalle. Kauppalinkit näkyvät vain maissa, joissa sovelluksen voi asentaa."
+relatedLinks:
+  - name: "Pelimuodot"
+    url: "/fi/pelimuodot/"
+  - name: "Golfsanasto"
+    url: "/fi/sanasto/"
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "fi-FI",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://wagergolf.se/#person",
+        "name": "Gustaf Bratt",
+        "url": "https://wagergolf.se/fi/tietoa/",
+        "description": "Ruotsalainen golfaaja ja Wager Golfin perustaja.",
+        "knowsAbout": [
+          "golf",
+          "golfin pelimuodot",
+          "golftasoitus",
+          "WHS"
+        ]
+      },
+      {
+        "@type": "AboutPage",
+        "name": "Tietoa Wager Golfista",
+        "url": "https://wagergolf.se/fi/tietoa/",
+        "inLanguage": "fi-FI",
+        "isPartOf": { "@id": "https://wagergolf.se/#website" },
+        "about": { "@id": "https://wagergolf.se/#org" },
+        "mainEntity": { "@id": "https://wagergolf.se/#person" }
+      }
+    ]
+  }
+---
+<h2>Miksi sovellus on olemassa</h2>
+<p>Kun kentällä pelataan panoksilla, jonkun on laskettava. Skins-potti siirtyy reiältä toiselle, Nassaun takaysillä käynnistyy pressi, sivussa kulkee birdiepotti ja kaikki pitää jakaa oikean pelitasoituksen mukaan. Paperilla ja laskimella lopputulos on usein väittely klubilla: yksi muistaa potin väärin ja toinen ei saanut hänelle kuuluvia tasoituslyöntejä.</p>
+<p>Wager Golf laskee puolestanne. Valitsette kentän ja pelimuodon, kirjaatte tulokset reikä reiältä, ja sovellus näyttää tilanteen koko kierroksen ajan. Lopuksi se kertoo, kuka on velkaa kenelle. Ei paperilappuja eikä päässälaskua.</p>
+<ul>
+<li><strong>21 pelimuotoa</strong> automaattisella loppusaldon laskennalla, esimerkiksi <a href="{% guideUrl "skins" %}">Skins</a>, <a href="{% guideUrl "matchspel" %}">Reikäpeli</a>, <a href="{% guideUrl "nassau" %}">Nassau</a>, joukkuepelit ja sivupelit. Viisi pääpeliä ja yksi valinnainen sivupeli kierrosta kohti ovat maksuttomia. Pro avaa koko valikoiman ja useampia yhdistelmiä.</li>
+<li><strong>Oikea WHS-tasoitus.</strong> Pelitasoitus lasketaan kentälle ja tiipaikalle, ja tasoituslyönnit jaetaan oikeille rei'ille tasoitusindeksin mukaan. Nettotuloksia verrataan reikä reiältä, jotta eritasoinen ryhmä voi pelata reilusti.</li>
+<li><strong>3 028 kenttää 13 Euroopan maassa</strong> sisältyy versioon 1.7.1 par- ja tasoitusindeksitietoineen. Luettelo on käytettävissä maissa, joissa versio on julkaistu.</li>
+<li><strong>Loppusaldo valmiiksi laskettuna.</strong> Sovellus minimoi maksujen määrän ja näyttää tarkasti, kuka maksaa kenelle. Se ei vastaanota, säilytä tai siirrä rahaa.</li>
+</ul>
+<h2>Kuka sovelluksen teki</h2>
+<p>Wager Golfin rakensi Gustaf Bratt, ruotsalainen golfaaja, joka pelaa saman porukan kanssa ja tuntee samat pottia koskevat väittelyt kuin monet muutkin. Sovellus syntyi ratkaisemaan konkreettisen ongelman omassa neljän hengen ryhmässä, ei piirustuspöydällä keksittynä tuotteena. Se näkyy yksityiskohdissa: mukana ovat pelimuodot, joita kentällä oikeasti pelataan, tasoitus lasketaan kunnolla WHS:n mukaan ja sävy kuuluu golfklubille, ei rahapeliyhtiölle.</p>
+<p>Wager Golf ei ole rahapeliyhtiö. Se ei vastaanota panoksia, eikä pelissä ole taloa, joka voittaisi. Sovellus pitää vain kirjaa siitä, mistä olette jo sopineet keskenänne, laskee tulokset ja näyttää, kuka on velkaa kenelle. Pelaajat hoitavat mahdolliset maksut itse sovelluksen ulkopuolella.</p>
+<h2>Miksi oppaat ovat olemassa</h2>
+<p>Monet verkosta löytyvät golfin pelimuotojen kuvaukset ovat pintapuolisia, ja säännöt vaihtelevat lähteestä toiseen. Miten Skins-potti oikeasti siirtyy? Miten <a href="{% guideUrl "quota" %}">Quota</a> lasketaan eritasoiselle ryhmälle? Mitä pressi tekee Nassaussa?</p>
+<p><a href="/fi/pelimuodot/">Tämän sivuston oppaat</a> vastaavat kysymyksiin perusteellisesti. Jokainen opas kertoo, mikä pelimuoto on, miten sitä pelataan, miten potti lasketaan ja miten tasoitus vaikuttaa. Mukana on konkreettisia lukuja ja esimerkkejä. Oppaat on kirjoittanut sama henkilö, joka rakensi sovelluksen, joten tekstien säännöt ovat samat, joita sovellus käyttää.</p>
+<p>Jos haluat nähdä, miten pelimuoto toimii käytännössä, aloita klassikoista: <a href="{% guideUrl "skins" %}">Skins</a>, <a href="{% guideUrl "matchspel" %}">Reikäpeli</a> ja <a href="{% guideUrl "stableford" %}">Pistebogey</a>.</p>

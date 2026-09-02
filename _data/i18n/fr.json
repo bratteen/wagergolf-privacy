@@ -1,0 +1,52 @@
+{
+  "skipLink": "Aller au contenu",
+  "nav": {
+    "features": "Fonctionnalités",
+    "formats": "Formules de jeu",
+    "download": "Télécharger",
+    "primaryLabel": "Navigation principale",
+    "mobileLabel": "Navigation mobile",
+    "unavailable": "Pas encore disponible ici",
+    "soon": "Bientôt"
+  },
+  "breadcrumb": {
+    "home": "Accueil"
+  },
+  "byline": {
+    "by": "Par",
+    "updated": "Mis à jour"
+  },
+  "faq": {
+    "heading": "Questions fréquentes"
+  },
+  "guide": {
+    "ctaHeading": "Ne calculez plus {format} à la main",
+    "ctaText": "Wager Golf calcule automatiquement le résultat de la formule et le règlement avec le bon handicap WHS, puis indique exactement qui doit combien à qui.",
+    "related": "Plus de formules de jeu"
+  },
+  "article": {
+    "related": "À lire aussi",
+    "ctaText": "Wager Golf calcule automatiquement le résultat de la formule et le règlement avec le bon handicap WHS, puis indique exactement qui doit combien à qui."
+  },
+  "footer": {
+    "formats": "Formules de jeu",
+    "glossary": "Glossaire",
+    "about": "À propos",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d’utilisation",
+    "contact": "Contact",
+    "tagline": "Créé par un golfeur, pour les groupes de golf",
+    "navigationLabel": "Navigation du pied de page"
+  },
+  "store": {
+    "sub": "TÉLÉCHARGER",
+    "unavailable": "NON DISPONIBLE ICI"
+  },
+  "switcher": {
+    "label": "Langue"
+  },
+  "banner": {
+    "text": "Cette page est également disponible en {language}",
+    "close": "Fermer"
+  }
+}

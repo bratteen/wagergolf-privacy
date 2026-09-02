@@ -1,0 +1,90 @@
+---
+layout: page-article.njk
+key: page:about
+updated: "2026-09-02"
+permalink: /fr/a-propos/
+title: "À propos de Wager Golf, l’app qui fait les calculs | Wager Golf"
+description: "Découvrez Wager Golf et Gustaf Bratt, le golfeur derrière l’app qui calcule 21 formules avec le bon handicap WHS et indique qui doit combien à qui."
+ogType: article
+h1: "À propos de Wager Golf"
+lede: "Wager Golf a été créé par un golfeur lassé du papier, des calculatrices et des discussions au 19e trou. Voici pourquoi l’app existe et qui se trouve derrière."
+breadcrumb:
+  - name: "À propos"
+faq:
+  - q: "Qui a créé Wager Golf ?"
+    a: "L’app a été créée par Gustaf Bratt, un golfeur suédois qui joue avec des mises dans son propre groupe et en avait assez de calculer la cagnotte à la main. Les guides de ce site sont écrits par la même personne : leurs règles correspondent donc à celles utilisées par l’app."
+  - q: "Wager Golf est-il une société de jeux d’argent ?"
+    a: "Non. Wager Golf ne collecte aucune mise et il n’y a aucune banque qui gagne. L’app suit simplement la partie déjà convenue entre les joueurs, calcule le solde final avec le bon handicap et indique qui doit combien à qui."
+  - q: "L’app utilise-t-elle vraiment le bon handicap ?"
+    a: "Oui. Le handicap de jeu est calculé selon le WHS pour chaque parcours et repère de départ, puis les coups reçus sont attribués aux bons trous à l’aide du Stroke Index. Les scores nets sont comparés trou par trou afin que des joueurs d’index différents puissent s’affronter équitablement."
+ctaHeading: "Wager Golf dans 13 marchés"
+ctaText: "La version 1.7.1 est préparée pour 13 marchés. Les liens vers les boutiques n’apparaissent que dans les pays où l’app peut être installée."
+relatedLinks:
+  - name: "Formules de jeu"
+    url: "/fr/formules-de-jeu/"
+  - name: "Glossaire du golf"
+    url: "/fr/glossaire/"
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "fr",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://wagergolf.se/#person",
+        "name": "Gustaf Bratt",
+        "url": "https://wagergolf.se/fr/a-propos/",
+        "description": "Golfeur suédois et fondateur de Wager Golf.",
+        "knowsAbout": ["golf", "formules de jeu au golf", "handicap au golf", "WHS"]
+      },
+      {
+        "@type": "AboutPage",
+        "name": "À propos de Wager Golf",
+        "url": "https://wagergolf.se/fr/a-propos/",
+        "inLanguage": "fr",
+        "isPartOf": { "@id": "https://wagergolf.se/#website" },
+        "about": { "@id": "https://wagergolf.se/#org" },
+        "mainEntity": { "@id": "https://wagergolf.se/#person" }
+      }
+    ]
+  }
+---
+<h2>Pourquoi l’app existe</h2>
+<p>Jouer avec des mises sur le parcours impose quelques calculs. Des Skins reportés d’un trou à l’autre, un Nassau avec un press au retour, une cagnotte de Birdies en parallèle, le tout à répartir selon le bon handicap de jeu. Avec du papier et une calculatrice, cela finit souvent par une discussion au 19e trou&nbsp;: l’un se souvient mal de la cagnotte, l’autre n’a pas reçu ses coups.</p>
+<p>Wager Golf fait les calculs pour vous. Choisissez le parcours et la formule, saisissez les scores trou par trou et l’app tient le résultat à jour. À la fin de la partie, elle indique qui doit combien à qui. Plus de feuilles volantes ni de calcul mental.</p>
+<ul>
+<li><strong>21 formules de jeu</strong> avec calcul automatique du solde final, des <a href="{% guideUrl "skins" %}">Skins</a> et du <a href="{% guideUrl "matchspel" %}">Match play</a> au <a href="{% guideUrl "nassau" %}">Nassau</a>, aux jeux en équipe et aux jeux annexes. Cinq formules principales et un jeu annexe facultatif par partie sont gratuits&nbsp;; Pro donne accès à toute la sélection et à davantage de combinaisons.</li>
+<li><strong>Un vrai handicap WHS.</strong> Le handicap de jeu est calculé pour le parcours et le repère choisis, puis les coups reçus sont répartis sur les bons trous selon le Stroke Index. Les scores nets sont comparés trou par trou pour qu’un groupe d’index variés puisse jouer équitablement.</li>
+<li><strong>3&nbsp;028 parcours dans 13 pays européens</strong> sont inclus dans la version 1.7.1 avec le par et le Stroke Index. Le catalogue est disponible dans les pays où cette version a été lancée.</li>
+<li><strong>Un règlement déjà calculé.</strong> L’app réduit le nombre de paiements et indique précisément qui paie qui.</li>
+</ul>
+<h2>Qui se trouve derrière</h2>
+<p>Wager Golf a été créé par Gustaf Bratt, un golfeur suédois qui joue avec le même groupe d’amis et connaît les mêmes discussions autour de la cagnotte que beaucoup d’entre nous. L’app répond à un problème concret rencontré dans sa propre partie, pas à une idée dessinée sur un tableau. Cela se voit dans les détails&nbsp;: elle propose les formules réellement jouées, applique correctement le WHS et adopte le ton du clubhouse plutôt que celui d’une société de jeux d’argent.</p>
+<p>Wager Golf n’est pas une société de jeux d’argent. L’app ne reçoit, ne conserve et ne transfère jamais les mises. Elle suit simplement ce que les joueurs ont convenu entre eux et facilite le règlement direct entre eux.</p>
+<h2>Pourquoi ces guides existent</h2>
+<p>Beaucoup de contenus en ligne sur les formules de golf restent superficiels, et les règles varient souvent d’une source à l’autre. Comment un Skin est-il réellement reporté&nbsp;? Comment calcule-t-on un <a href="{% guideUrl "quota" %}">Quota</a> pour un groupe d’index variés&nbsp;? À quoi sert un press dans un Nassau&nbsp;?</p>
+<p><a href="/fr/formules-de-jeu/">Les guides de ce site</a> répondent précisément à ces questions. Chaque guide explique la formule, son déroulement, le calcul de la cagnotte et le rôle du handicap, avec des chiffres et des exemples concrets. Ils sont écrits par la personne qui a créé l’app&nbsp;: les règles du texte sont donc celles que l’app calcule.</p>
+<p>Pour voir comment une formule se joue en pratique, commencez par les classiques&nbsp;: <a href="{% guideUrl "skins" %}">Skins</a>, <a href="{% guideUrl "matchspel" %}">Match play</a> et <a href="{% guideUrl "stableford" %}">Stableford</a>.</p>

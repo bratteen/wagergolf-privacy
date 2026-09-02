@@ -1,0 +1,82 @@
+---
+layout: base.njk
+key: page:formats
+updated: "2026-09-02"
+title: "Golfin pelimuodot: säännöt ja pisteenlasku | Wager Golf"
+description: "Oppaat golfin pelimuotoihin. Skins, Reikäpeli, Nassau, Pistebogey ja muut: säännöt, pisteenlasku ja tasoituksella pelaaminen."
+ogTitle: "Golfin pelimuodot"
+ogDescription: "Golfin pelimuotojen säännöt ja pisteenlasku: Skins, Reikäpeli, Nassau, Pistebogey ja paljon muuta."
+permalink: /fi/pelimuodot/
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": { "@type": "ImageObject", "url": "https://wagergolf.se/assets/logo.png", "width": 192, "height": 192 },
+        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "fi-FI",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Etusivu", "item": "https://wagergolf.se/fi/" },
+          { "@type": "ListItem", "position": 2, "name": "Pelimuodot", "item": "https://wagergolf.se/fi/pelimuodot/" }
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "name": "Golfin pelimuodot",
+        "url": "https://wagergolf.se/fi/pelimuodot/",
+        "inLanguage": "fi-FI",
+        "about": "Golfin pelimuotojen säännöt, pisteenlasku ja tasoitukset",
+        "isPartOf": { "@id": "https://wagergolf.se/#website" },
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      }
+    ]
+  }
+---
+<main id="main-content" tabindex="-1">
+  <section class="subhero">
+    <div class="subhero-inner">
+      <div class="breadcrumb">
+        <a href="/fi/">Etusivu</a><span class="sep">/</span><span>Pelimuodot</span>
+      </div>
+      <h1>Golfin pelimuodot, <span class="accent">selitettyinä.</span></h1>
+      <p>Miten Skins, Reikäpeli ja Nassau oikeasti toimivat, ja miten tulokset lasketaan? Täältä löydät golfin pelimuotojen oppaat, säännöt, pisteenlaskun sekä ohjeet oikealla tasoituksella pelaamiseen.</p>
+    </div>
+  </section>
+
+  <div class="wrap hub-section">
+    {%- set cats = ["Klassikot", "Reikäpelit", "Joukkue", "Sivupelit"] %}
+    {%- for cat in cats %}
+    {%- set inCat = collections.guides | byCategory(cat, lang) %}
+    {%- if inCat.length %}
+    <h2 class="hub-cat">{{ cat }}</h2>
+    <div class="hub-grid">
+      {%- for g in inCat %}
+      <a class="hub-card" href="{{ g.url }}">
+        <h3>{{ g.data.format }}{% if g.data.altName %} ({{ g.data.altName }}){% endif %}</h3>
+        <p>{{ g.data.cardText or g.data.lede }}</p>
+        <span class="meta">{{ g.data.players }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+
+  <div class="wrap hub-extra">
+    <p>Etkö tiedä, mitä pelata? Lue <a href="/fi/pelimuodot/pelimuodon-valinta/">mikä pelimuoto sopii ryhmällesi</a>, vertaa <a href="/fi/pelimuodot/pistebogey-vs-lyontipeli/">Pistebogeyta ja Lyöntipeliä</a> tai tarkista käsitteet <a href="/fi/sanasto/">golfsanastosta</a>.</p>
+  </div>
+</main>

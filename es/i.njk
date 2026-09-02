@@ -1,0 +1,27 @@
+---
+permalink: /es/i/index.html
+layout: base.njk
+key: page:invite
+updated: "2026-09-02"
+title: Te han invitado a Wager Golf
+description: Juega con apuestas entre amigos y deja que Wager Golf haga todos los cálculos.
+eleventyExcludeFromCollections: true
+extraHead: '<meta name="robots" content="noindex, nofollow">'
+---
+<main id="main-content" tabindex="-1" class="invite" style="max-width:520px;margin:0 auto;padding:48px 20px 80px;text-align:center">
+  <div id="invite-card">
+    <p class="eyebrow" style="letter-spacing:2px;text-transform:uppercase;color:var(--brass-deep);font-size:12px;margin-bottom:16px">Invitación</p>
+    <h1 id="invite-title" style="font-size:clamp(1.4rem,5vw,2rem);margin-bottom:16px">Te han invitado a Wager Golf</h1>
+    <p id="invite-sub" style="color:#555;margin-bottom:32px">Juega con apuestas entre amigos y deja que Wager Golf haga todos los cálculos.</p>
+    {#- El servidor elige la tienda adecuada para el país. -#}
+    <div data-release-open hidden>
+      <a id="dl" href="{{ site.downloadUrls[lang].generic }}" class="btn" data-download-link data-store-link data-ios-url="{{ site.downloadUrls[lang].ios }}" data-android-url="{{ site.downloadUrls[lang].android }}" style="display:inline-block;background:#0a2e21;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:1rem">Descargar la app</a>
+      <p style="color:#666;font-size:13px;margin-top:20px">¿Ya tienes la app? Toca este enlace otra vez para conectar en Wager Golf.</p>
+    </div>
+    <div data-release-closed>
+      <span class="btn" style="display:inline-block;background:#0a2e21;color:#fff;padding:14px 32px;border-radius:8px;font-weight:600;font-size:1rem;opacity:.8;cursor:not-allowed">Aún no disponible aquí</span>
+      <p style="color:#666;font-size:13px;margin-top:20px">La versión 1.7.1 está preparada para 13 mercados. No se activa ningún enlace a las tiendas hasta que la app pueda instalarse en el país.</p>
+    </div>
+  </div>
+  <script defer src="/assets/js/invite.js{% if assets.invite %}?v={{ assets.invite }}{% endif %}" data-api="{{ site.api }}" data-lang="{{ lang }}"></script>
+</main>

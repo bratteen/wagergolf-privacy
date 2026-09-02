@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert';
 import { createRequire } from 'node:module';
 import {
-  onRequestGet, marketFor, resolveMarket, MARKETS, PUBLIC_MARKETS, TARGET_MARKET_CODES,
+  onRequestGet, marketFor, resolveMarket, playStore, MARKETS, PUBLIC_MARKETS,
+  PUBLIC_MARKETS_BY_PLATFORM, TARGET_MARKET_CODES,
 } from '../functions/ladda-ner.js';
 
 const require = createRequire(import.meta.url);
@@ -37,13 +38,44 @@ test('stängd språkmarknad hålls kvar på sin startsida', async () => {
   assert.strictEqual(res.headers.get('Location'), '/dk/#main-content');
 });
 
-test('explicit plattform fungerar utan mobil user-agent', async () => {
+test('explicit iOS fungerar utan mobil user-agent medan Android hålls stängt', async () => {
+  const ios = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?m=SE&p=ios', DESKTOP),
+  });
+  assert.match(ios.headers.get('Location'), /apps\.apple\.com\/se\//);
+
   const res = await onRequestGet({
     request: req('https://wagergolf.se/ladda-ner?m=SE&p=android', DESKTOP),
   });
-  const loc = res.headers.get('Location');
-  assert.match(loc, /play\.google\.com/);
-  assert.strictEqual(new URL(loc).searchParams.get('gl'), 'SE');
+  assert.strictEqual(res.headers.get('Location'), '/#main-content');
+});
+
+test('Android-UA i Sverige hålls kvar tills Google Play har version 1.7.1', async () => {
+  const res = await onRequestGet({
+    request: reqWithCf('https://wagergolf.se/ladda-ner', 'SE', ANDROID),
+  });
+  assert.strictEqual(res.headers.get('Location'), '/#main-content');
+});
+
+test('ogiltig explicit plattform är fail-closed och faller inte tillbaka på UA', async () => {
+  const res = await onRequestGet({
+    request: reqWithCf('https://wagergolf.se/ladda-ner?p=play', 'SE', IPHONE),
+  });
+  assert.strictEqual(res.headers.get('Location'), '/#main-content');
+});
+
+test('Play använder valt webbspråk utan att byta landsbutik', async () => {
+  const cases = [
+    ['nl', 'nl'],
+    ['fr-BE', 'fr'],
+    ['pt-PT', 'pt-PT'],
+  ];
+  for (const [language, expectedPlayLocale] of cases) {
+    const locale = language.toLowerCase().split('-')[0];
+    const target = new URL(playStore(MARKETS.BE, '', locale));
+    assert.strictEqual(target.searchParams.get('gl'), 'BE', language);
+    assert.strictEqual(target.searchParams.get('hl'), expectedPlayLocale, language);
+  }
 });
 
 test('desktop faller tillbaka på språkets startsida, inte roten', async () => {
@@ -51,6 +83,20 @@ test('desktop faller tillbaka på språkets startsida, inte roten', async () => 
     request: req('https://wagergolf.se/ladda-ner?l=da', DESKTOP),
   });
   assert.strictEqual(res.headers.get('Location'), '/dk/#main-content');
+});
+
+test('regionala språkkoder hålls kvar på rätt lokal sida', async () => {
+  const cases = [
+    ['pt-PT', '/pt/#main-content'],
+    ['de-AT', '/de/#main-content'],
+    ['no-NO', '/no/#main-content'],
+  ];
+  for (const [language, expected] of cases) {
+    const res = await onRequestGet({
+      request: req(`https://wagergolf.se/ladda-ner?l=${language}`, DESKTOP),
+    });
+    assert.strictEqual(res.headers.get('Location'), expected, language);
+  }
 });
 
 test('saknad GeoIP håller svensk desktop på sidan utan att öppna butik', async () => {
@@ -112,6 +158,7 @@ test('kampanj följer med efter marknadsvalet', async () => {
 test('funktions- och sajtkonfigurationen innehåller samma marknader och grind', () => {
   assert.deepStrictEqual(TARGET_MARKET_CODES, site.release.targetMarketCodes);
   assert.deepStrictEqual(PUBLIC_MARKETS, site.release.publicMarketCodes);
+  assert.deepStrictEqual(PUBLIC_MARKETS_BY_PLATFORM, site.release.publicMarketCodesByPlatform);
   for (const code of TARGET_MARKET_CODES) {
     assert.deepStrictEqual(MARKETS[code], {
       locale: site.markets[code].locale,

@@ -6,11 +6,11 @@ eleventyExcludeFromCollections: true
 
 > iOS- och Android-app som håller räkningen när golfgänget spelar om pengar på banan: 21 spelformer med automatisk nettoberäkning enligt WHS-handicap och privat uppgörelse när rundan är slut. Version 1.7.1 innehåller 3 028 banor i 13 europeiska länder. Sajten wagergolf.se innehåller djupa, oberoende guider till golfens spelformer.
 
-Wager Golf är byggd av Gustaf Bratt. Guiderna nedan förklarar varje spelforms regler, hur poängen och pengarna räknas, och hur formatet spelas med rätt handicap. De är skrivna för svenska golfare och uppdaterade 2026.
+Wager Golf är byggd av Gustaf Bratt. Guiderna förklarar varje spelforms regler, hur poängen och pengarna räknas, och hur formatet spelas med rätt handicap. Samma fullständiga guidebibliotek finns på svenska, norskt bokmål, danska, engelska, finska, nederländska, tyska, franska, spanska, italienska och portugisiska och är uppdaterat 2026.
 
 Gratisnivån innehåller fem huvudspelformer och högst ett huvudspel plus ett valfritt sidobet per runda, med automatisk uträkning av uppgörelsen. Pro låser upp alla 21 spelformer, fler kombinationer och full historik. Berättigade nya användare får 14 dagars gratis provperiod. Wager Golf är avsedd för personer som är minst 17 år och appen tar aldrig emot, håller eller överför insatser.
 
-De 13 marknaderna är Sverige, Danmark, Norge, Irland, Finland, Nederländerna, Österrike, Portugal, Belgien, Tyskland, Frankrike, Spanien och Italien. Butikslänkar aktiveras bara i de länder där appen faktiskt kan installeras. Engelska är webb-fallback för marknader utan en egen webböversättning.
+De 13 marknaderna är Sverige, Danmark, Norge, Irland, Finland, Nederländerna, Österrike, Portugal, Belgien, Tyskland, Frankrike, Spanien och Italien. Butikslänkar aktiveras bara i de länder där appen faktiskt kan installeras. Tyska används för både Tyskland och Österrike; nederländska och franska finns för Belgien, där engelska är den neutrala standarden om inget av språken har valts eller föredras av webbläsaren.
 
 ## Spelformer, guider
 {% set cats = ["Klassiker", "Hålspel", "Lag", "Sidobet"] %}{% for cat in cats %}
@@ -21,6 +21,8 @@ De 13 marknaderna är Sverige, Danmark, Norge, Irland, Finland, Nederländerna, 
 
 - [Spelformer, översikt]({{ site.url }}/spelformer/): Nav med alla guider till golfens spelformer, grupperade i klassiker, hålspel, lag och sidobet.
 - [Om Wager Golf]({{ site.url }}/om/): Vem som ligger bakom appen och guiderna.
+{% for locale in routes.publishedLocales %}{% if locale != "sv" %}- [{{ routes.locales[locale].label }}]({{ site.url }}{{ routes.homeFor(locale) }}): Fullständigt lokaliserad startsida, spelformer och guider.
+{% endif %}{% endfor %}
 - [Öppna App Store där appen är tillgänglig]({{ site.downloadUrls.sv.ios }}): Wager Golf för iPhone.
 - [Öppna Google Play där appen är tillgänglig]({{ site.downloadUrls.sv.android }}): Wager Golf för Android.
 

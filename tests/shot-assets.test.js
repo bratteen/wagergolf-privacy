@@ -7,6 +7,7 @@ const path = require('node:path');
 const ROOT = path.join(__dirname, '..');
 const SHOTS = path.join(ROOT, 'assets', 'shots');
 const manifest = require('../assets/shots/manifest.json');
+const routes = require('../_data/routes.js');
 
 function readVp8xMetadata(buffer) {
   assert.strictEqual(buffer.subarray(0, 4).toString('ascii'), 'RIFF');
@@ -26,7 +27,7 @@ function readVp8xMetadata(buffer) {
 test('alla publicerade språk har tre verifierade telefonbilder', () => {
   assert.deepStrictEqual(
     manifest.locales.map(({ language }) => language),
-    ['sv', 'nb', 'da', 'en'],
+    routes.publishedLocales,
   );
 
   for (const locale of manifest.locales) {

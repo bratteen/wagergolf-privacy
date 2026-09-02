@@ -1,0 +1,52 @@
+{
+  "skipLink": "Ga naar inhoud",
+  "nav": {
+    "features": "Functies",
+    "formats": "Spelvormen",
+    "download": "Downloaden",
+    "primaryLabel": "Hoofdnavigatie",
+    "mobileLabel": "Mobiele navigatie",
+    "unavailable": "Hier nog niet beschikbaar",
+    "soon": "Binnenkort"
+  },
+  "breadcrumb": {
+    "home": "Start"
+  },
+  "byline": {
+    "by": "Door",
+    "updated": "Bijgewerkt"
+  },
+  "faq": {
+    "heading": "Veelgestelde vragen"
+  },
+  "guide": {
+    "ctaHeading": "Bereken {format} niet meer met de hand",
+    "ctaText": "Wager Golf berekent de uitslag van de spelvorm en de afrekening automatisch met de juiste WHS-handicap en laat precies zien wie wie moet betalen.",
+    "related": "Meer spelvormen"
+  },
+  "article": {
+    "related": "Lees verder",
+    "ctaText": "Wager Golf berekent de uitslag van de spelvorm en de afrekening automatisch met de juiste WHS-handicap en laat precies zien wie wie moet betalen."
+  },
+  "footer": {
+    "formats": "Spelvormen",
+    "glossary": "Woordenlijst",
+    "about": "Over ons",
+    "privacy": "Privacybeleid",
+    "terms": "Gebruiksvoorwaarden",
+    "contact": "Contact",
+    "tagline": "Gemaakt door een golfer, voor golfgroepen",
+    "navigationLabel": "Voettekstnavigatie"
+  },
+  "store": {
+    "sub": "DOWNLOADEN",
+    "unavailable": "HIER NIET BESCHIKBAAR"
+  },
+  "switcher": {
+    "label": "Taal"
+  },
+  "banner": {
+    "text": "Deze pagina is ook beschikbaar in: {language}",
+    "close": "Sluiten"
+  }
+}

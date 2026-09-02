@@ -11,7 +11,7 @@ const reqWithCf = (url, country, headers = {}) => {
 
 // Full uppsättning för att testa själva språkvalslogiken oberoende av vilka
 // språk som råkar vara publicerade just nu.
-const ALLA = ['sv', 'nb', 'da', 'en'];
+const ALLA = ['sv', 'nb', 'da', 'en', 'fi', 'nl', 'de', 'fr', 'es', 'it', 'pt'];
 
 test('sanerar Metas kampanjnamn till något butiken accepterar', () => {
   assert.strictEqual(sanitizeCampaign('WG DK - Reels 🏌'), 'wg-dk-reels');
@@ -29,7 +29,7 @@ test('sanerad sträng kortas och slutar aldrig på bindestreck', () => {
 
 test('l tvingar språk oavsett Accept-Language', () => {
   // pickLang testas här direkt med en injicerad publicerad-lista som
-  // innehåller alla fyra språk, så själva valet ("da" trumfar Accept-Language)
+  // innehåller alla elva språk, så själva valet ("da" trumfar Accept-Language)
   // går att verifiera direkt mot en uttrycklig lista.
   const url = new URL('https://wagergolf.se/go?l=da');
   const request = req('https://wagergolf.se/go?l=da', { 'accept-language': 'en-US,en;q=0.9' });
@@ -48,20 +48,20 @@ test('no och nb är samma skriftspråk för vårt syfte', () => {
   assert.strictEqual(pickLang(url, request, ALLA), 'nb');
 });
 
-test('appspråk utan egen webbsida får engelsk fallback', () => {
+test('alla appspråk går till sin egen webbsida', () => {
   const forcedUrl = new URL('https://wagergolf.se/go?l=de-DE');
   const forcedRequest = req(forcedUrl.toString(), { 'accept-language': 'sv-SE' });
-  assert.strictEqual(pickLang(forcedUrl, forcedRequest, ALLA), 'en');
+  assert.strictEqual(pickLang(forcedUrl, forcedRequest, ALLA), 'de');
 
   const detectedUrl = new URL('https://wagergolf.se/go');
   const detectedRequest = req(detectedUrl.toString(), { 'accept-language': 'fi-FI,fi;q=0.9' });
-  assert.strictEqual(pickLang(detectedUrl, detectedRequest, ALLA), 'en');
+  assert.strictEqual(pickLang(detectedUrl, detectedRequest, ALLA), 'fi');
 });
 
 test('första stödda språket i Accept-Language vinner', () => {
   const url = new URL('https://wagergolf.se/go');
   const request = req(url.toString(), { 'accept-language': 'pl-PL,de-DE;q=0.9,sv;q=0.8' });
-  assert.strictEqual(pickLang(url, request, ALLA), 'en');
+  assert.strictEqual(pickLang(url, request, ALLA), 'de');
 });
 
 test('Accept-Language följer q-värden och ignorerar q=0', () => {
@@ -90,8 +90,8 @@ test('Accept-Language ignorerar ogiltiga q-värden och behåller ordningen vid l
 
 test('GeoIP används när inget webbspråk känns igen', () => {
   const cases = {
-    SE: 'sv', DK: 'da', NO: 'nb', IE: 'en', FI: 'en', NL: 'en', AT: 'en',
-    PT: 'en', BE: 'en', DE: 'en', FR: 'en', ES: 'en', IT: 'en',
+    SE: 'sv', DK: 'da', NO: 'nb', IE: 'en', FI: 'fi', NL: 'nl', AT: 'de',
+    PT: 'pt', BE: 'en', DE: 'de', FR: 'fr', ES: 'es', IT: 'it',
   };
   for (const [country, expected] of Object.entries(cases)) {
     const url = new URL('https://wagergolf.se/go');
@@ -119,6 +119,13 @@ test('publicerat norskt språk leder till den norska startsidan', async () => {
   assert.strictEqual(res.headers.get('Location'), '/no/');
 });
 
+test('de sju nya språken leder till sina egna startsidor', async () => {
+  for (const lang of ['fi', 'nl', 'de', 'fr', 'es', 'it', 'pt']) {
+    const res = await onRequestGet({ request: req(`https://wagergolf.se/go?l=${lang}`) });
+    assert.strictEqual(res.headers.get('Location'), `/${lang}/`, lang);
+  }
+});
+
 test('c ger utm-parametrar på landningssidan', async () => {
   const res = await onRequestGet({
     request: req('https://wagergolf.se/go?c=podd-golfsnack'),
@@ -141,14 +148,14 @@ test('GeoIP-marknaden följer med till landningssidan', async () => {
       'CF-IPCountry': 'AT',
     }),
   });
-  assert.strictEqual(res.headers.get('Location'), '/en/?m=AT');
+  assert.strictEqual(res.headers.get('Location'), '/de/?m=AT');
 });
 
 test('Workers request.cf.country styr marknaden utan GeoIP-header', async () => {
   const res = await onRequestGet({
     request: reqWithCf('https://wagergolf.se/go', 'DE', { 'accept-language': 'pl-PL' }),
   });
-  assert.strictEqual(res.headers.get('Location'), '/en/?m=DE');
+  assert.strictEqual(res.headers.get('Location'), '/de/?m=DE');
 });
 
 test('ogiltig eller tom explicit marknad följer med och kan inte maskeras av GeoIP', async () => {

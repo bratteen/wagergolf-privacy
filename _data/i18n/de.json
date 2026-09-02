@@ -1,0 +1,52 @@
+{
+  "skipLink": "Zum Inhalt springen",
+  "nav": {
+    "features": "Funktionen",
+    "formats": "Spielformen",
+    "download": "Herunterladen",
+    "primaryLabel": "Hauptnavigation",
+    "mobileLabel": "Mobile Navigation",
+    "unavailable": "Hier noch nicht verfügbar",
+    "soon": "Bald"
+  },
+  "breadcrumb": {
+    "home": "Startseite"
+  },
+  "byline": {
+    "by": "Von",
+    "updated": "Aktualisiert"
+  },
+  "faq": {
+    "heading": "Häufige Fragen"
+  },
+  "guide": {
+    "ctaHeading": "{format} nicht mehr von Hand ausrechnen",
+    "ctaText": "Wager Golf berechnet Spielform und Abrechnung automatisch mit dem richtigen WHS-Handicap und zeigt anschließend genau, wer wem was schuldet.",
+    "related": "Weitere Spielformen"
+  },
+  "article": {
+    "related": "Als Nächstes lesen",
+    "ctaText": "Wager Golf berechnet Spielform und Abrechnung automatisch mit dem richtigen WHS-Handicap und zeigt anschließend genau, wer wem was schuldet."
+  },
+  "footer": {
+    "formats": "Spielformen",
+    "glossary": "Golfbegriffe",
+    "about": "Über uns",
+    "privacy": "Datenschutzerklärung",
+    "terms": "Nutzungsbedingungen",
+    "contact": "Kontakt",
+    "tagline": "In Schweden entwickelt, für den ganz normalen Viererflight",
+    "navigationLabel": "Fußzeilennavigation"
+  },
+  "store": {
+    "sub": "LADEN IM",
+    "unavailable": "HIER NICHT VERFÜGBAR"
+  },
+  "switcher": {
+    "label": "Sprache"
+  },
+  "banner": {
+    "text": "Diese Seite ist auch auf {language} verfügbar",
+    "close": "Schließen"
+  }
+}

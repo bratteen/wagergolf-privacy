@@ -43,12 +43,12 @@ repo-konfigurationen inte innehåller något analysscript.
 index.njk              startsidan (mall, ärver _includes/base.njk)
 _includes/base.njk     delad <head>, header, footer, scripts
 _data/site.js          global data (url, App Store-länk, OG-bild, CF-beacon-token)
-_data/routes.js        lokaliserade sökvägssegment per språk (sv, nb, da, en)
+_data/routes.js        lokaliserade sökvägssegment för sajtens elva språk
 _data/i18n/            UI-strängar per språk
 lib/                   delad logik: hreflang, JSON-LD, datum, kampanjmärkning
 functions/go.js        universell kampanjlänk för QR, poddar och tryck
 functions/ladda-ner.js universell nedladdningslänk, väljer butik efter enhet
-spelformer/            innehållsnav: pelarsida + guide per spelform (kommer)
+spelformer/            innehållsnav: pelarsida + guide per spelform
 privacy/index.html     integritetspolicyn, fristående HTML, kopieras orörd
 terms/index.html       användarvillkor, fristående HTML, kopieras orörd
 assets/                bilder, css, self-hosted fonter, OG-bild
@@ -92,16 +92,19 @@ uppdatera preload-länkarna i `_includes/base.njk` vid behov.
 
 ## Lägga till ett språk
 
-Fyra språk är publicerade via `_data/routes.js` (sv, nb, da, en).
-Sökvägarna är marknadsbaserade (`/no/`, `/dk/`,
-`/en/`) medan hreflang är språkbaserad (`nb`, `da`, `en`) — de skiljer sig
+Elva språk är publicerade via `_data/routes.js`: svenska, norskt bokmål,
+danska, engelska, finska, nederländska, tyska, franska, spanska, italienska
+och portugisiska. Sökvägarna är läsbara lokala prefix (`/no/`, `/dk/`,
+`/en/`, `/fi/`, `/nl/`, `/de/`, `/fr/`, `/es/`, `/it/`, `/pt/`) medan
+hreflang är språkbaserad (`nb`, `da`, `en`, `fi`, `nl`, `de`, `fr`, `es`,
+`it`, `pt-PT`) — de skiljer sig
 medvetet, se kommentaren överst i `_data/routes.js`. Ett språk går live
 genom att:
 
 1. Skapa `_data/i18n/<lang>.json` med exakt samma nycklar som `sv.json`.
    `tests/i18n.test.js` låser schemat och stoppar bygget om en nyckel saknas
    eller är överflödig.
-2. Skapa språkets innehållskatalog (`no/`, `dk/` eller `en/`) med en
+2. Skapa språkets innehållskatalog (t.ex. `no/`, `fi/` eller `de/`) med en
    katalogdatafil som sätter `lang` som **vanlig data, inte i
    `eleventyComputed`**.
 
@@ -176,10 +179,11 @@ Nedladdningslänken (`functions/ladda-ner.js`) är en enda endpoint för alla
 13 marknader. Marknad väljs i ordningen explicit `?m=`, Workers verifierade
 `request.cf.country` och därefter `CF-IPCountry`-headern. Saknas ett verifierat
 land öppnas ingen butik. `?l=` anger endast webbspråk, aldrig storefront.
-Bara länder i `PUBLIC_MARKETS` får en butiksomdirigering; övriga hålls kvar på
-rätt landningssida tills versionen faktiskt går att installera där.
-`_data/site.js` och funktionen speglar samma lista och testerna fäller bygget
-om de driver isär.
+Bara länder som är öppna för den efterfrågade plattformen i
+`PUBLIC_MARKETS_BY_PLATFORM` får en butiksomdirigering; övriga hålls kvar på
+rätt landningssida tills versionen faktiskt går att installera där. Unionen
+`PUBLIC_MARKETS` används bara för övergripande webbstatus. `_data/site.js` och
+funktionen speglar båda listorna och testerna fäller bygget om de driver isär.
 
 Använd hreflang-koderna `nb`, `da` och `en` — aldrig `dk` eller `se`. De är
 landskoder (samma som ligger i sökvägen och i App Store-storefronten), inte
@@ -191,9 +195,9 @@ sökvägsprefixet.
 
 ### Publicera eller pausa ett språk
 
-Norska och danska är publicerade. De syns i hreflang, språkväxlare och
-sitemap, och sidorna är indexerbara. Om ett språk tillfälligt måste pausas
-tas det bort från de tre listorna nedan och sajten deployas på nytt.
+Alla elva språk är publicerade. De syns i hreflang, språkväxlare och sitemap,
+och sidorna är indexerbara. Om ett språk tillfälligt måste pausas tas det bort
+från de tre listorna nedan och sajten deployas på nytt.
 
 Att ändra publiceringsstatus kräver samma ändring på tre ställen som måste
 följas åt (`tests/published-in-sync.test.js` fäller bygget annars):
@@ -201,32 +205,34 @@ följas åt (`tests/published-in-sync.test.js` fäller bygget annars):
 1. `_data/routes.js` — lägg till språket i `PUBLISHED`.
 2. `functions/go.js` — samma tillägg.
 3. `functions/i/[[path]].js` — samma tillägg. Kontrollera också att språket
-   finns i `ASSET_FOR`; norska och danska sökvägar är redan förberedda där.
+   finns i `ASSET_FOR`.
 
 Allt annat följer med automatiskt: hreflang, språkväljaren, bannern, sitemap
 och borttagningen av `noindex`. `tests/published-complete.test.js` kontrollerar
 samtidigt att varje svensk sida har en motsvarighet, så ett halvfärdigt språk
 kan inte gå live av misstag.
 
-Verifierat genom torrkörning: med alla fyra i `PUBLISHED` blir det 110 URL:er
-i sitemap, 540 hreflang-alternativ och noll `noindex`.
+Verifierat genom fullbygge: med alla elva i `PUBLISHED` blir det 299 URL:er i
+sitemap, 3 564 hreflang-alternativ och noll `noindex` på de 297
+innehållssidorna.
 
 ### Lokaliserade appskärmbilder
 
-Bilderna i roten av `assets/shots/` är svenska. Norska, danska och engelska
-versioner finns i respektive språkmapp, med rätt valuta och providerneutral
-uppgörelse utanför Sverige. En besökare ska aldrig mötas av ett annat språks
-appgränssnitt eller en betalningsleverantör som inte finns i marknaden.
+Bilderna i roten av `assets/shots/` är svenska. Alla tio andra publicerade
+språk har egna bilder i respektive språkmapp, med rätt valuta och
+providerneutral uppgörelse utanför Sverige. En besökare ska aldrig mötas av
+ett annat språks appgränssnitt eller en betalningsleverantör som inte finns i
+marknaden.
 
 Sidorna refererar bilderna med shortcoden `{% shot "live" %}`, inte med en
-hårdkodad sökväg. Uppslagsordningen är sidans språk, sedan engelska, sedan
-den delade bilden — och svenskan går direkt till den delade, eftersom de
-delade bilderna *är* de svenska.
+hårdkodad sökväg. Alla publicerade språk måste ha `home.webp`, `live.webp` och
+`settlement.webp`; `tests/shot-assets.test.js` stoppar annars bygget. Shortcoden
+har dessutom en defensiv reservordning (sidans språk, engelska, svenska), men
+den får inte användas som publiceringsstrategi.
 
-Det gör hanteringen additiv: ett nytt språk kostar ingenting, sidorna byggs
-och fungerar direkt med reservbilden. Vill du lokalisera lägger du filerna i
-`assets/shots/<lang>/` med samma namn (`live.webp`, `settlement.webp`,
-`home.webp`), och de plockas upp automatiskt överallt — utan att en enda sida
-behöver ändras. Varje bild slås upp för sig, så du kan ta en i taget.
+Vid ett nytt språk läggs filerna i `assets/shots/<lang>/` med samma namn
+(`live.webp`, `settlement.webp`, `home.webp`). De plockas upp automatiskt
+överallt utan att en sida behöver ändras, men alla tre ska vara färdiga och
+verifierade innan språket läggs i `publishedLocales`.
 
 Bara `alt`-texten står kvar per sida, och den är redan översatt.

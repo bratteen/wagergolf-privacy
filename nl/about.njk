@@ -1,0 +1,90 @@
+---
+layout: page-article.njk
+key: page:about
+updated: "2026-09-02"
+permalink: /nl/over-ons/
+title: "Over Wager Golf, de app die het rekenwerk doet | Wager Golf"
+description: "Over Wager Golf en Gustaf Bratt, de golfer achter de app die 21 spelvormen met het juiste WHS-handicap berekent en laat zien wie wie moet betalen."
+ogType: article
+h1: "Over Wager Golf"
+lede: "Wager Golf is gemaakt door een golfer die genoeg had van papier, rekenmachines en discussies op de 19e hole. Dit is het korte verhaal achter de app en de persoon die hem bouwde."
+breadcrumb:
+  - name: "Over ons"
+faq:
+  - q: "Wie heeft Wager Golf gemaakt?"
+    a: "De app is gemaakt door Gustaf Bratt, een Zweedse golfer die met zijn eigen groep om inzetten speelt en genoeg had van het handmatig berekenen van de pot. De gidsen op deze website zijn door dezelfde persoon geschreven, zodat de beschreven regels overeenkomen met de berekening in de app."
+  - q: "Is Wager Golf een gokbedrijf?"
+    a: "Nee. Wager Golf neemt geen inzetten aan en er is geen huis dat wint. De app houdt alleen het spel bij dat jullie onderling hebben afgesproken, berekent met de juiste handicap de eindbalans en laat zien wie wie moet betalen."
+  - q: "Gebruikt de app echt de juiste handicap?"
+    a: "Ja. De baanhandicap wordt volgens WHS berekend voor de gekozen baan en tee. De handicapslagen worden volgens de stroke index over de juiste holes verdeeld. Nettoscores worden hole voor hole vergeleken, zodat spelers van verschillend niveau eerlijk tegen elkaar kunnen spelen."
+ctaHeading: "Wager Golf in 13 markten"
+ctaText: "Versie 1.7.1 is voorbereid voor 13 markten. Winkellinks verschijnen alleen in landen waar de app kan worden geïnstalleerd."
+relatedLinks:
+  - name: "Spelvormen"
+    url: "/nl/spelvormen/"
+  - name: "Golfwoordenlijst"
+    url: "/nl/woordenlijst/"
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "nl",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://wagergolf.se/#person",
+        "name": "Gustaf Bratt",
+        "url": "https://wagergolf.se/nl/over-ons/",
+        "description": "Zweedse golfer en oprichter van Wager Golf.",
+        "knowsAbout": ["golf", "golfspelvormen", "golfhandicap", "WHS"]
+      },
+      {
+        "@type": "AboutPage",
+        "name": "Over Wager Golf",
+        "url": "https://wagergolf.se/nl/over-ons/",
+        "inLanguage": "nl",
+        "isPartOf": { "@id": "https://wagergolf.se/#website" },
+        "about": { "@id": "https://wagergolf.se/#org" },
+        "mainEntity": { "@id": "https://wagergolf.se/#person" }
+      }
+    ]
+  }
+---
+<h2>Waarom de app bestaat</h2>
+<p>Speel je op de golfbaan om inzetten, dan valt er veel te rekenen. Skins gaan mee naar de volgende hole, bij Nassau loopt een press over de tweede negen, daarnaast is er een birdiepot en alles moet met de juiste baanhandicap worden verdeeld. Met papier en een rekenmachine eindigt het vaak in een discussie op de 19e hole, omdat iemand zich de pot anders herinnert en een ander zijn handicapslagen niet kreeg.</p>
+<p>Wager Golf doet het rekenwerk. Jullie kiezen de baan en spelvorm, voeren de scores hole voor hole in en de app houdt de geldstand live bij. Na de ronde laat hij zien wie wie moet betalen. Geen losse briefjes en geen hoofdrekenen.</p>
+<ul>
+<li><strong>21 spelvormen</strong> met automatische berekening van de afrekening, van <a href="{% guideUrl "skins" %}">Skins</a> en <a href="{% guideUrl "matchspel" %}">Matchplay</a> tot <a href="{% guideUrl "nassau" %}">Nassau</a>, teamspellen en sidegames. Vijf hoofdspellen en één optionele sidegame per ronde zijn gratis. Pro geeft toegang tot alle spelvormen en meer combinaties.</li>
+<li><strong>Correct WHS-handicap.</strong> De baanhandicap wordt per baan en tee berekend. De handicapslagen worden volgens de stroke index over de juiste holes verdeeld. Nettoscores worden hole voor hole vergeleken, zodat een gemengde groep eerlijk kan spelen.</li>
+<li><strong>3 028 banen in 13 Europese landen</strong> zijn in versie 1.7.1 opgenomen met par en stroke index. De catalogus is beschikbaar in landen waar de versie is uitgebracht.</li>
+<li><strong>Automatische berekening van de afrekening.</strong> De app beperkt het aantal betalingen en laat precies zien wie welk bedrag aan wie moet betalen. Spelers rekenen rechtstreeks met elkaar af via een betaalmethode die ze zelf kiezen. Wager Golf verwerkt, bewaart of verstuurt nooit inzetgeld.</li>
+</ul>
+<h2>Wie erachter zit</h2>
+<p>Wager Golf is gemaakt door Gustaf Bratt, een Zweedse golfer die met dezelfde groep speelt en dezelfde discussies over de pot kent als veel andere golfers. De app ontstond om een concreet probleem in zijn eigen flight op te lossen, niet als product op een tekentafel. Dat merk je aan de details: de spelvormen die mensen echt spelen zijn opgenomen, de handicap wordt correct volgens WHS berekend en de toon past eerder bij de golfclub dan bij een gokbedrijf.</p>
+<p>Wager Golf is geen gokbedrijf. Er is geen bank die inzetten aanneemt en geen huis dat wint. De app houdt alleen bij wat jullie onderling hebben afgesproken, berekent de balans en laat zien wie wie moet betalen.</p>
+<h2>Waarom de gidsen bestaan</h2>
+<p>Veel online uitleg over golfspelvormen blijft oppervlakkig en de regels verschillen vaak per bron. Hoe gaat een Skin precies mee? Hoe bereken je <a href="{% guideUrl "quota" %}">Quota</a> in een gemengde groep? Wat doet een press bij Nassau?</p>
+<p><a href="/nl/spelvormen/">De gidsen op deze website</a> beantwoorden die vragen grondig. Iedere gids legt uit wat de spelvorm is, hoe je hem speelt, hoe de pot wordt berekend en hoe handicap wordt toegepast, met concrete getallen en voorbeelden. Ze zijn geschreven door dezelfde persoon die de app heeft gemaakt, dus de regels in de tekst zijn de regels waarmee de app rekent.</p>
+<p>Wil je zien hoe een spelvorm in de praktijk werkt, begin dan met de klassiekers: <a href="{% guideUrl "skins" %}">Skins</a>, <a href="{% guideUrl "matchspel" %}">Matchplay</a> en <a href="{% guideUrl "stableford" %}">Stableford</a>.</p>

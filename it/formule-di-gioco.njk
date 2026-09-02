@@ -1,0 +1,82 @@
+---
+layout: base.njk
+key: page:formats
+updated: "2026-09-02"
+title: "Formule di golf: regole e punteggio spiegati | Wager Golf"
+description: "Guide alle formule di golf. Skins, Match play, Nassau, Stableford e altro, con regole, punteggio e uso dell'handicap."
+ogTitle: "Formule di gioco del golf"
+ogDescription: "Regole e punteggio delle formule di golf: Skins, Match play, Nassau, Stableford e altro."
+permalink: /it/formule-di-gioco/
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": { "@type": "ImageObject", "url": "https://wagergolf.se/assets/logo.png", "width": 192, "height": 192 },
+        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "it-IT",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wagergolf.se/it/" },
+          { "@type": "ListItem", "position": 2, "name": "Formule di gioco", "item": "https://wagergolf.se/it/formule-di-gioco/" }
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "name": "Formule di gioco del golf",
+        "url": "https://wagergolf.se/it/formule-di-gioco/",
+        "inLanguage": "it-IT",
+        "about": "Regole, punteggio e handicap delle formule di golf",
+        "isPartOf": { "@id": "https://wagergolf.se/#website" },
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      }
+    ]
+  }
+---
+<main id="main-content" tabindex="-1">
+  <section class="subhero">
+    <div class="subhero-inner">
+      <div class="breadcrumb">
+        <a href="/it/">Home</a><span class="sep">/</span><span>Formule di gioco</span>
+      </div>
+      <h1>Le formule di golf, <span class="accent">spiegate bene.</span></h1>
+      <p>Come funzionano davvero Skins, Match play e Nassau, e come si calcola il punteggio? Qui trovi le guide alle formule di golf, con regole, conteggio e handicap corretto.</p>
+    </div>
+  </section>
+
+  <div class="wrap hub-section">
+    {%- set cats = ["Classiche", "Buca per buca", "Squadre", "Giochi secondari"] %}
+    {%- for cat in cats %}
+    {%- set inCat = collections.guides | byCategory(cat, lang) %}
+    {%- if inCat.length %}
+    <h2 class="hub-cat">{{ cat }}</h2>
+    <div class="hub-grid">
+      {%- for g in inCat %}
+      <a class="hub-card" href="{{ g.url }}">
+        <h3>{{ g.data.format }}{% if g.data.altName %} ({{ g.data.altName }}){% endif %}</h3>
+        <p>{{ g.data.cardText or g.data.lede }}</p>
+        <span class="meta">{{ g.data.players }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+
+  <div class="wrap hub-extra">
+    <p>Non sai cosa giocare? Scopri <a href="/it/formule-di-gioco/scegliere-una-formula/">quale formula si adatta al tuo gruppo</a>, confronta <a href="/it/formule-di-gioco/stableford-vs-stroke-play/">Stableford e Stroke play</a> oppure consulta il <a href="/it/glossario/">glossario del golf</a>.</p>
+  </div>
+</main>

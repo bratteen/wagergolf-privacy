@@ -1,0 +1,88 @@
+---
+layout: base.njk
+key: page:formats
+updated: "2026-09-02"
+title: "Modalidades de golfe: regras e pontuação | Wager Golf"
+description: "Guias de modalidades de golfe. Skins, Jogo por buracos, Nassau, Stableford e mais, com regras, pontuação e utilização do handicap."
+ogTitle: "Modalidades de jogo de golfe"
+ogDescription: "Regras e pontuação das modalidades de golfe: Skins, Jogo por buracos, Nassau, Stableford e muitas outras."
+permalink: /pt/modalidades-de-jogo/
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wagergolf.se/#org",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wagergolf.se/assets/logo.png",
+          "width": 192,
+          "height": 192
+        },
+        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://wagergolf.se/#website",
+        "name": "Wager Golf",
+        "url": "https://wagergolf.se",
+        "inLanguage": "pt-PT",
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://wagergolf.se/pt/" },
+          { "@type": "ListItem", "position": 2, "name": "Modalidades de jogo", "item": "https://wagergolf.se/pt/modalidades-de-jogo/" }
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "name": "Modalidades de jogo de golfe",
+        "url": "https://wagergolf.se/pt/modalidades-de-jogo/",
+        "inLanguage": "pt-PT",
+        "about": "Regras, pontuação e handicap das modalidades de jogo de golfe",
+        "isPartOf": { "@id": "https://wagergolf.se/#website" },
+        "publisher": { "@id": "https://wagergolf.se/#org" }
+      }
+    ]
+  }
+---
+<main id="main-content" tabindex="-1">
+  <section class="subhero">
+    <div class="subhero-inner">
+      <div class="breadcrumb">
+        <a href="/pt/">Início</a><span class="sep">/</span><span>Modalidades de jogo</span>
+      </div>
+      <h1>As modalidades de golfe, <span class="accent">explicadas.</span></h1>
+      <p>Como funcionam realmente os Skins, o Jogo por buracos ou o Nassau, e como se calcula cada resultado? Aqui encontram as regras, a pontuação e a forma correta de aplicar o handicap em cada modalidade.</p>
+    </div>
+  </section>
+
+  <div class="wrap hub-section">
+    {#- As categorias têm de coincidir exatamente com o frontmatter dos guias. -#}
+    {%- set cats = ["Clássicos", "Jogos por buraco", "Equipas", "Jogos secundários"] %}
+    {%- for cat in cats %}
+    {%- set inCat = collections.guides | byCategory(cat, lang) %}
+    {%- if inCat.length %}
+    <h2 class="hub-cat">{{ cat }}</h2>
+    <div class="hub-grid">
+      {%- for g in inCat %}
+      <a class="hub-card" href="{{ g.url }}">
+        <h3>{{ g.data.format }}{% if g.data.altName %} ({{ g.data.altName }}){% endif %}</h3>
+        <p>{{ g.data.cardText or g.data.lede }}</p>
+        <span class="meta">{{ g.data.players }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+
+  <div class="wrap hub-extra">
+    <p>Não sabem o que jogar? Descubram <a href="/pt/modalidades-de-jogo/escolher-modalidade/">que modalidade combina com o vosso grupo</a>, comparem <a href="/pt/modalidades-de-jogo/stableford-vs-jogo-por-pancadas/">Stableford e Jogo por pancadas</a> ou consultem os termos no <a href="/pt/glossario/">glossário de golfe</a>.</p>
+  </div>
+</main>

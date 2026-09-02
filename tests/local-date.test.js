@@ -38,7 +38,7 @@ test('tomt eller trasigt datum kraschar inte bygget', () => {
 });
 
 test('omöjligt datum rullas inte över tyst', () => {
-  // Intl gör "2026-02-31" till 3 mars. Med 84 datumfält efter fyra språk ska
+  // Intl gör "2026-02-31" till 3 mars. Med hundratals datumfält över elva språk ska
   // ett stavfel synas som stavfelet det är, inte som ett annat datum.
   assert.strictEqual(localDate('2026-02-31', 'sv'), '2026-02-31');
   assert.strictEqual(localDate('2026-04-31', 'sv'), '2026-04-31');

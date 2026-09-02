@@ -1,0 +1,52 @@
+{
+  "skipLink": "Ir al contenido",
+  "nav": {
+    "features": "Funciones",
+    "formats": "Modalidades de juego",
+    "download": "Descargar",
+    "primaryLabel": "Navegación principal",
+    "mobileLabel": "Navegación móvil",
+    "unavailable": "Aún no disponible aquí",
+    "soon": "Próximamente"
+  },
+  "breadcrumb": {
+    "home": "Inicio"
+  },
+  "byline": {
+    "by": "Por",
+    "updated": "Actualizado"
+  },
+  "faq": {
+    "heading": "Preguntas frecuentes"
+  },
+  "guide": {
+    "ctaHeading": "No calcules {format} a mano",
+    "ctaText": "Wager Golf calcula automáticamente los resultados de la modalidad y la liquidación con el Hándicap de Juego WHS correcto, y muestra exactamente quién debe pagar a quién.",
+    "related": "Más modalidades de juego"
+  },
+  "article": {
+    "related": "Sigue leyendo",
+    "ctaText": "Wager Golf calcula automáticamente los resultados de la modalidad y la liquidación con el Hándicap de Juego WHS correcto, y muestra exactamente quién debe pagar a quién."
+  },
+  "footer": {
+    "formats": "Modalidades de juego",
+    "glossary": "Glosario",
+    "about": "Acerca de",
+    "privacy": "Política de privacidad",
+    "terms": "Condiciones de uso",
+    "contact": "Contacto",
+    "tagline": "Creado por un golfista, para grupos de golf",
+    "navigationLabel": "Navegación del pie de página"
+  },
+  "store": {
+    "sub": "DESCARGAR",
+    "unavailable": "NO DISPONIBLE AQUÍ"
+  },
+  "switcher": {
+    "label": "Idioma"
+  },
+  "banner": {
+    "text": "Esta página también está disponible en {language}",
+    "close": "Cerrar"
+  }
+}

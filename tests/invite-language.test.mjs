@@ -19,9 +19,9 @@ test('inbjudningssidan kan välja alla språk när de publiceras', () => {
   assert.strictEqual(pickLang('da-DK,da;q=0.9', allLocales), 'da');
   assert.strictEqual(pickLang('nb-NO,nb;q=0.9', allLocales), 'nb');
   assert.strictEqual(pickLang('no-NO,no;q=0.9', allLocales), 'nb');
-  assert.strictEqual(pickLang('de-DE,de;q=0.9', allLocales), 'en');
-  assert.strictEqual(pickLang('fi-FI,fi;q=0.9', allLocales), 'en');
-  assert.strictEqual(pickLang('fr-BE,fr;q=0.9', allLocales), 'en');
+  assert.strictEqual(pickLang('de-DE,de;q=0.9', allLocales), 'de');
+  assert.strictEqual(pickLang('fi-FI,fi;q=0.9', allLocales), 'fi');
+  assert.strictEqual(pickLang('fr-BE,fr;q=0.9', allLocales), 'fr');
 });
 
 test('inbjudningsspråket respekterar q-värden och väljer aldrig q=0', () => {
@@ -34,11 +34,36 @@ test('inbjudningsspråket respekterar q-värden och väljer aldrig q=0', () => {
 test('inbjudningssidan använder marknaden när webbläsarspråket är okänt', () => {
   assert.strictEqual(pickLang('pl-PL', allLocales, 'DK'), 'da');
   assert.strictEqual(pickLang('pl-PL', allLocales, 'NO'), 'nb');
-  assert.strictEqual(pickLang('pl-PL', allLocales, 'DE'), 'en');
+  assert.strictEqual(pickLang('pl-PL', allLocales, 'DE'), 'de');
   assert.strictEqual(pickLang('pl-PL', allLocales, 'US'), 'sv');
 });
 
-test('tysk invite-trafik serveras från engelska fallback-asseten', async () => {
+test('ett uttryckligt invite-språk vinner över webbläsare och land', () => {
+  assert.strictEqual(pickLang('sv-SE', allLocales, 'SE', 'nl-NL'), 'nl');
+  assert.strictEqual(pickLang('de-DE', allLocales, 'DE', 'pt-PT'), 'pt');
+  assert.strictEqual(pickLang('de-DE', allLocales, 'DE', 'no-NO'), 'nb');
+});
+
+test('invite-funktionen serverar språket från l-parametern', async () => {
+  let fetchedPath = '';
+  const request = new Request('https://wagergolf.se/i/Abcd1234?l=fr', {
+    headers: { 'accept-language': 'sv-SE', 'CF-IPCountry': 'SE' },
+  });
+  await onRequest({
+    request,
+    env: {
+      ASSETS: {
+        fetch(assetRequest) {
+          fetchedPath = new URL(assetRequest.url).pathname;
+          return Promise.resolve(new Response('ok'));
+        },
+      },
+    },
+  });
+  assert.strictEqual(fetchedPath, '/fr/i/');
+});
+
+test('tysk invite-trafik serveras från den tyska asseten', async () => {
   let fetchedPath = '';
   const request = new Request('https://wagergolf.se/i/Abcd1234', {
     headers: { 'accept-language': 'de-DE', 'CF-IPCountry': 'DE' },
@@ -54,7 +79,7 @@ test('tysk invite-trafik serveras från engelska fallback-asseten', async () => 
       },
     },
   });
-  assert.strictEqual(fetchedPath, '/en/i/');
+  assert.strictEqual(fetchedPath, '/de/i/');
   assert.strictEqual(response.headers.get('Vary'), 'Accept-Language, CF-IPCountry');
   assert.strictEqual(response.headers.get('Cache-Control'), 'no-store');
   assert.strictEqual(response.headers.get('X-Robots-Tag'), 'noindex, nofollow');

@@ -1,8 +1,13 @@
 {
+  "skipLink": "Hoppa till innehållet",
   "nav": {
     "features": "Funktioner",
     "formats": "Spelformer",
-    "download": "Ladda ner"
+    "download": "Ladda ner",
+    "primaryLabel": "Huvudnavigation",
+    "mobileLabel": "Mobilnavigation",
+    "unavailable": "Inte tillgänglig här än",
+    "soon": "Snart"
   },
   "breadcrumb": {
     "home": "Hem"
@@ -30,10 +35,12 @@
     "privacy": "Integritetspolicy",
     "terms": "Användarvillkor",
     "contact": "Kontakt",
-    "tagline": "Byggd i Sverige, för golfgänget"
+    "tagline": "Byggd i Sverige, för golfgänget",
+    "navigationLabel": "Sidfotsnavigation"
   },
   "store": {
-    "sub": "LADDA NER PÅ"
+    "sub": "LADDA NER PÅ",
+    "unavailable": "EJ TILLGÄNGLIG HÄR"
   },
   "switcher": {
     "label": "Språk"

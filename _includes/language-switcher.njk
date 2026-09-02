@@ -1,27 +1,48 @@
-{#- Språkväljare. Bygger på samma alternates-lista som hreflang, så den alltid
-    länkar till MOTSVARANDE sida i det andra språket och aldrig till startsidan.
-    Att kasta besökaren till startsidan när hen står på en guide är det
-    vanligaste felet i flerspråkiga sajter.
+{#- Språkväljaren bygger normalt på samma alternates-lista som hreflang och
+    länkar till motsvarande sida. Invite-URL:en är dynamisk och ligger utanför
+    collections; där byter en relativ ?l=-länk språk utan att tappa token som
+    ligger kvar i sökvägen.
 
-    Skriver ingenting när det bara finns ett publicerat språk.
+    Elva fullständiga språknamn ryms inte på en rad. Desktop och sidfot
+    använder ett kompakt native details; mobilmenyn visar samma riktiga länkar
+    i ett skrollbart rutnät. -#}
+{%- macro languageOptions(items, current, invite, homeFallback) -%}
+  {%- for item in items -%}
+    {%- if invite or homeFallback -%}
+      {%- set code = item -%}
+      {%- set target = ('?l=' ~ code) if invite else routes.homeFor(code) -%}
+      {%- set targetHreflang = routes.locales[code].hreflang -%}
+    {%- else -%}
+      {%- set code = item.lang -%}
+      {%- set target = item.url -%}
+      {%- set targetHreflang = item.hreflang -%}
+    {%- endif -%}
+    {%- if code == current -%}
+  <span class="lang-current" lang="{{ routes.locales[code].htmlLang }}" aria-current="true">{{ routes.locales[code].label }}</span>
+    {%- else -%}
+  <a href="{{ target }}" hreflang="{{ targetHreflang }}" lang="{{ routes.locales[code].htmlLang }}" data-lang-link="{{ code }}">{{ routes.locales[code].label }}</a>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endmacro -%}
 
-    Elementtaggen styrs av `langSwitchTag`, satt av anropande mall precis
-    innan include (se base.njk): headern inkluderar den inuti
-    <nav class="nav-links">, och ett nästlat <nav>-landmark där är förvirrande
-    för skärmläsare. Footern ligger inte inuti någon annan nav och behåller
-    <nav>. En <div> saknar landmark-roll, så role="group" läggs på i det
-    fallet för att aria-label fortfarande ska ge väljaren ett namn. -#}
+{%- set inviteSwitcher = key == 'page:invite' -%}
+{%- set homeSwitcher = key == 'page:404' -%}
 {%- set alts = collections.all | alternates(key, routes, lang) -%}
-{%- if alts.links.length > 1 %}
-{%- set tag = langSwitchTag or "nav" -%}
-{%- set roleAttr = ' role="group"' if tag == "div" else "" -%}
-<{{ tag }} class="lang-switch"{{ roleAttr | safe }} aria-label="{{ t.switcher.label }}">
-  {%- for a in alts.links %}
-  {%- if a.lang == lang %}
-  <span class="lang-current" aria-current="true">{{ routes.locales[a.lang].label }}</span>
+{%- set switchItems = routes.publishedLocales if inviteSwitcher or homeSwitcher else alts.links -%}
+{%- if switchItems.length > 1 %}
+  {%- if langSwitchMode == "expanded" %}
+<div class="lang-switch lang-switch-expanded" role="group" aria-label="{{ t.switcher.label }}">
+{{ languageOptions(switchItems, lang, inviteSwitcher, homeSwitcher) }}
+</div>
   {%- else %}
-  <a href="{{ a.url }}" hreflang="{{ a.hreflang }}" data-lang-link="{{ a.lang }}">{{ routes.locales[a.lang].label }}</a>
+<details class="lang-switch lang-switch-compact">
+  <summary aria-label="{{ t.switcher.label }}: {{ routes.locales[lang].label }}">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+    <span lang="{{ routes.locales[lang].htmlLang }}">{{ routes.locales[lang].label }}</span>
+  </summary>
+  <div class="lang-options" role="group" aria-label="{{ t.switcher.label }}">
+{{ languageOptions(switchItems, lang, inviteSwitcher, homeSwitcher) }}
+  </div>
+</details>
   {%- endif %}
-  {%- endfor %}
-</{{ tag }}>
 {%- endif -%}

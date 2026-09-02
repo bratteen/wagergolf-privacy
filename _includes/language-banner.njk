@@ -1,6 +1,6 @@
 {#- Föreslår besökarens eget språk vid direkttrafik. Ingen omdirigering:
     Googlebot kryper från USA och skulle vid en redirect bara någonsin se den
-    engelska versionen, vilket lämnar tre språk oindexerade. Google avråder
+    engelska versionen, vilket lämnar tio språk oindexerade. Google avråder
     dessutom explicit från automatisk omdirigering.
 
     Löser bara direkttrafik. Organisk söktrafik landar redan rätt via hreflang,
@@ -29,5 +29,9 @@
     {%- endfor %}
   </template>
 </div>
+{%- endif -%}
+{#- Ladda även på invite-sidor: där finns ingen alternate-graf, men scriptet
+    sparar ett medvetet språkval från den särskilda ?l=-väljaren. -#}
+{%- if routes.publishedLocales.length > 1 %}
 <script defer src="/assets/js/lang-banner.js{% if assets.langBanner %}?v={{ assets.langBanner }}{% endif %}"></script>
 {%- endif -%}

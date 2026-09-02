@@ -12,15 +12,23 @@ const PLAY_STORE_URL =
 // Google Play behöver ingen motsvarighet.
 const APPLE_PROVIDER_TOKEN = "128879444";
 
-// Språk och marknad är två skilda saker. Sajten finns på fyra språk, medan
-// version 1.7.1 är förberedd för 13 storefronts. Engelska är webb-fallback för
-// alla marknader som ännu inte har en egen webböversättning. Butikernas språk
-// kan ändå vara lokalt eftersom appens butikstexter redan är lokaliserade.
+// Språk och marknad är två skilda saker. Sajten finns på samma elva språk som
+// appen, medan version 1.7.1 är förberedd för 13 storefronts. Tyska betjänar
+// både DE och AT. Belgien är flerspråkigt och har engelska som GeoIP-default;
+// webbläsarspråk eller ett uttryckligt språkval väljer nederländska/franska.
 //
-// Releasegrinden har EN source of truth. Lägg till en landskod i PUBLIC_MARKETS
-// först när den aktuella versionen faktiskt går att installera i båda butikerna
-// och servergrinden är öppen. Då börjar /ladda-ner att skicka dit trafik.
-const PUBLIC_MARKETS = new Set(["SE"]);
+// Releasegrinden har EN plattformsspecifik source of truth. Lägg till en
+// landskod först när den aktuella versionen faktiskt går att installera i den
+// butiken. Unionen används bara för övergripande webbstatus; /ladda-ner
+// kontrollerar alltid rätt plattform separat.
+const PUBLIC_MARKETS_BY_PLATFORM = {
+  ios: new Set(["SE"]),
+  android: new Set(),
+};
+const PUBLIC_MARKETS = new Set([
+  ...PUBLIC_MARKETS_BY_PLATFORM.ios,
+  ...PUBLIC_MARKETS_BY_PLATFORM.android,
+]);
 const TARGET_MARKET_CODES = [
   "SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT",
 ];
@@ -30,22 +38,27 @@ const MARKETS = {
   DK: { locale: "da", store: "dk", play: "da", gl: "DK", campaign: "webb-dk", home: "/dk/" },
   NO: { locale: "nb", store: "no", play: "no", gl: "NO", campaign: "webb-no", home: "/no/" },
   IE: { locale: "en", store: "ie", play: "en", gl: "IE", campaign: "webb-ie", home: "/en/" },
-  FI: { locale: "en", store: "fi", play: "fi", gl: "FI", campaign: "webb-fi", home: "/en/" },
-  NL: { locale: "en", store: "nl", play: "nl", gl: "NL", campaign: "webb-nl", home: "/en/" },
-  AT: { locale: "en", store: "at", play: "de", gl: "AT", campaign: "webb-at", home: "/en/" },
-  PT: { locale: "en", store: "pt", play: "pt-PT", gl: "PT", campaign: "webb-pt", home: "/en/" },
+  FI: { locale: "fi", store: "fi", play: "fi", gl: "FI", campaign: "webb-fi", home: "/fi/" },
+  NL: { locale: "nl", store: "nl", play: "nl", gl: "NL", campaign: "webb-nl", home: "/nl/" },
+  AT: { locale: "de", store: "at", play: "de", gl: "AT", campaign: "webb-at", home: "/de/" },
+  PT: { locale: "pt", store: "pt", play: "pt-PT", gl: "PT", campaign: "webb-pt", home: "/pt/" },
   BE: { locale: "en", store: "be", play: "en", gl: "BE", campaign: "webb-be", home: "/en/" },
-  DE: { locale: "en", store: "de", play: "de", gl: "DE", campaign: "webb-de", home: "/en/" },
-  FR: { locale: "en", store: "fr", play: "fr", gl: "FR", campaign: "webb-fr", home: "/en/" },
-  ES: { locale: "en", store: "es", play: "es", gl: "ES", campaign: "webb-es", home: "/en/" },
-  IT: { locale: "en", store: "it", play: "it", gl: "IT", campaign: "webb-it", home: "/en/" },
+  DE: { locale: "de", store: "de", play: "de", gl: "DE", campaign: "webb-de", home: "/de/" },
+  FR: { locale: "fr", store: "fr", play: "fr", gl: "FR", campaign: "webb-fr", home: "/fr/" },
+  ES: { locale: "es", store: "es", play: "es", gl: "ES", campaign: "webb-es", home: "/es/" },
+  IT: { locale: "it", store: "it", play: "it", gl: "IT", campaign: "webb-it", home: "/it/" },
 };
 
-const DEFAULT_MARKET_FOR_LOCALE = { sv: "SE", nb: "NO", da: "DK", en: "IE" };
+const DEFAULT_MARKET_FOR_LOCALE = {
+  sv: "SE", nb: "NO", da: "DK", en: "IE", fi: "FI", nl: "NL",
+  de: "DE", fr: "FR", es: "ES", it: "IT", pt: "PT",
+};
 
 for (const code of TARGET_MARKET_CODES) {
   MARKETS[code].code = code;
   MARKETS[code].public = PUBLIC_MARKETS.has(code);
+  MARKETS[code].iosPublic = PUBLIC_MARKETS_BY_PLATFORM.ios.has(code);
+  MARKETS[code].androidPublic = PUBLIC_MARKETS_BY_PLATFORM.android.has(code);
 }
 
 /** App Store-länk med kampanjmärkning. Faller tillbaka på den rena länken så
@@ -87,6 +100,8 @@ const marketUrls = Object.fromEntries(
       playStore: taggedPlayStoreUrl(market),
       campaign: market.campaign,
       public: market.public,
+      iosPublic: market.iosPublic,
+      androidPublic: market.androidPublic,
     }];
   }),
 );
@@ -103,6 +118,8 @@ const localeRelease = Object.fromEntries(
     const codes = TARGET_MARKET_CODES.filter((code) => MARKETS[code].locale === locale);
     return [locale, {
       public: codes.every((code) => PUBLIC_MARKETS.has(code)),
+      iosPublic: codes.every((code) => PUBLIC_MARKETS_BY_PLATFORM.ios.has(code)),
+      androidPublic: codes.every((code) => PUBLIC_MARKETS_BY_PLATFORM.android.has(code)),
       markets: codes,
       defaultMarket: DEFAULT_MARKET_FOR_LOCALE[locale],
     }];
@@ -110,8 +127,8 @@ const localeRelease = Object.fromEntries(
 );
 
 // Mallarna länkar via Pages Function i stället för direkt till en storefront.
-// Då kan samma engelska sida välja IE, FI, NL osv. via explicit ?m= eller
-// Cloudflares CF-IPCountry utan att hårdkoda ett enda land i knappen.
+// Då kan ett språk som tyska välja rätt DE- eller AT-storefront via explicit
+// ?m= eller Cloudflares CF-IPCountry utan att hårdkoda landet i knappen.
 const downloadUrls = Object.fromEntries(
   Object.keys(DEFAULT_MARKET_FOR_LOCALE).map((locale) => {
     const language = locale === "sv" ? "" : `l=${locale}&`;
@@ -132,6 +149,10 @@ module.exports = {
     courseClaim: "3 000+",
     targetMarketCodes: TARGET_MARKET_CODES,
     publicMarketCodes: [...PUBLIC_MARKETS],
+    publicMarketCodesByPlatform: {
+      ios: [...PUBLIC_MARKETS_BY_PLATFORM.ios],
+      android: [...PUBLIC_MARKETS_BY_PLATFORM.android],
+    },
   },
   markets: MARKETS,
   marketUrls,
