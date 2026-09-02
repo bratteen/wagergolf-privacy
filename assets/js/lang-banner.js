@@ -40,6 +40,7 @@
 
   // Första webbläsarspråket som vi faktiskt har en översättning för.
   var prefs = navigator.languages || [navigator.language || ''];
+  var englishFallbacks = ['fi', 'nl', 'de', 'fr', 'es', 'it', 'pt'];
   var match = null;
   var j;
   for (i = 0; i < prefs.length && !match; i++) {
@@ -48,6 +49,13 @@
       // nb och no är samma skriftspråk för vårt syfte.
       var altBase = alts[j].lang === 'nb' ? 'no' : alts[j].lang;
       if (base === altBase || base === alts[j].lang) { match = alts[j]; break; }
+    }
+    // Webbplatsen har fyra språk. För appens övriga sju språk är den
+    // publicerade engelska sidan den uttryckliga fallbacken.
+    if (!match && englishFallbacks.indexOf(base) !== -1) {
+      for (j = 0; j < alts.length; j++) {
+        if (alts[j].lang === 'en') { match = alts[j]; break; }
+      }
     }
   }
 

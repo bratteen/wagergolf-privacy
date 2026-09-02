@@ -50,4 +50,4 @@ Under ronden sker tre tre-puttar:
 
 Ingen tre-puttar på 17 eller 18, så Anna lämnar sista green med ormen. Hon betalar hela potten på 150 kr, som delas jämnt mellan de tre övriga. Var och en av Björn, Cecilia och David får 50 kr. Netto blir Anna minus 150 kr, de andra plus 50 kr var. Hade ingen tre-puttat alls hade inga pengar rört sig.
 
-Wager Golf räknar potten hål för hål och gör upp summan via Swish när ronden är slut.
+Wager Golf räknar potten hål för hål och visar vem som är skyldig vem när ronden är slut. I Sverige kan den som ska betala öppna Swish med rätt belopp och mottagare.

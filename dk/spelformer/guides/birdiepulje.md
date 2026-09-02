@@ -2,14 +2,14 @@
 slug: birdiepulje
 key: guide:birdiepott
 format: Birdiepulje
-category: Sidebet
+category: Sidespil
 players: "2 til 4 spillere"
 order: 1
 title: "Birdiepulje i golf: regler og opgørelse | Wager Golf"
 description: "Birdiepulje forklaret. Alle lægger en indsats, flest birdies under runden tager puljen. Regler, hvordan eagles tæller og varianten hvor hver birdie betales direkte."
 h1: "Birdiepulje"
 lede: "Alle lægger en indsats i puljen. Flest birdies, når runden er slut, tager hele puljen. Den enkleste måde at sætte lidt ekstra på spil uden at gøre det kompliceret."
-cardText: "Alle satser, flest birdies tager puljen. Det enkleste sidebet."
+cardText: "Alle satser, flest birdies tager puljen. Det enkleste sidespil."
 faq:
   - q: "Tæller en eagle som to birdies?"
     a: "Nej. En eagle eller bedre tæller som én birdie på det hul, altså én betaling per hul. Du får ikke dobbelt, fordi hullet var endnu bedre."
@@ -24,7 +24,7 @@ related: [snake, sandie, golfpoker]
 
 ## Hvad er birdiepulje?
 
-Birdiepulje er det perfekte lille sidebet, let at lægge oven på en hvilken som helst hovedform. Alle lægger en skilling i puljen før runden, og den, der laver flest birdies, tager hele puljen. Det giver en ekstra grund til at gå efter det på de korte huller, og en birdie smager straks lidt sødere.
+Birdiepulje er det perfekte lille sidespil, let at lægge oven på en hvilken som helst hovedform. Alle lægger en skilling i puljen før runden, og den, der laver flest birdies, tager hele puljen. Det giver en ekstra grund til at gå efter det på de korte huller, og en birdie smager straks lidt sødere.
 
 ## Sådan spiller du
 
@@ -38,7 +38,7 @@ Birdiepulje er det perfekte lille sidebet, let at lægge oven på en hvilken som
 
 I stedet for en pulje kan I spille birdies som direkte betaling. Så betaler de andre spillere birdiespilleren indsatsen hver, hver gang nogen laver birdie. Den variant giver hurtigere feedback og kan svinge mere, fordi en spiller, der birder tre huller, henter ind fra alle de andre tre gange.
 
-Wager Golf holder styr på birdies hul for hul, beregner både pulje- og per-birdie-varianten og gør opgørelsen op automatisk, når runden er slut.
+Wager Golf holder styr på birdies hul for hul, beregner både pulje- og per-birdie-varianten og viser, hvem der skylder hvem, når runden er slut.
 
 ## Et eksempel med tal
 
@@ -51,4 +51,4 @@ Under runden laver Anna tre birdies, Bea én, og de andre to ingen. Anna har fle
 - Spiller 3: −50
 - Spiller 4: −50
 
-Summen bliver nul, puljen er puljeneutral. Havde to spillere lavet lige mange birdies, havde de delt puljen, 100 hver, og landet på +50 hver, mens de andre to stadig ligger −50. Wager Golf tæller birdies hul for hul og gør beløbet op, når runden er slut.
+Summen bliver nul, puljen er puljeneutral. Havde to spillere lavet lige mange birdies, havde de delt puljen, 100 hver, og landet på +50 hver, mens de andre to stadig ligger −50. Wager Golf tæller birdies hul for hul og viser, hvem der skylder hvem, når runden er slut.

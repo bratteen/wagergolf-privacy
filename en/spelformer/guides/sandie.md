@@ -52,4 +52,4 @@ After the round it looks like this:
 
 Three players paying 50 each is exactly the 150 coming in to Erik. It balances out. If others in the group make sandies of their own, the amounts offset each other and the net is what shows up at the end.
 
-Wager Golf keeps track of which holes each player was in a bunker, counts sandies as you go and works out the settlement when the round ends.
+Wager Golf keeps track of which holes each player was in a bunker, counts sandies as you go, then works out the final balance and shows who owes whom.

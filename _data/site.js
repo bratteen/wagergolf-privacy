@@ -12,16 +12,41 @@ const PLAY_STORE_URL =
 // Google Play behöver ingen motsvarighet.
 const APPLE_PROVIDER_TOKEN = "128879444";
 
-// En storefront och ett kampanjnamn per marknad. Kampanjnamnen är
-// marknadsbaserade, precis som sökvägarna, eftersom butikernas
-// förvärvsrapporter är indelade per storefront. Utan uppdelningen klumpas all
-// webbtrafik ihop och det går inte att se om Danmark fungerar.
+// Språk och marknad är två skilda saker. Sajten finns på fyra språk, medan
+// version 1.7.1 är förberedd för 13 storefronts. Engelska är webb-fallback för
+// alla marknader som ännu inte har en egen webböversättning. Butikernas språk
+// kan ändå vara lokalt eftersom appens butikstexter redan är lokaliserade.
+//
+// Releasegrinden har EN source of truth. Lägg till en landskod i PUBLIC_MARKETS
+// först när den aktuella versionen faktiskt går att installera i båda butikerna
+// och servergrinden är öppen. Då börjar /ladda-ner att skicka dit trafik.
+const PUBLIC_MARKETS = new Set(["SE"]);
+const TARGET_MARKET_CODES = [
+  "SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT",
+];
+
 const MARKETS = {
-  sv: { store: "se", play: "sv", gl: "SE", campaign: "webb" },
-  nb: { store: "no", play: "no", gl: "NO", campaign: "webb-no" },
-  da: { store: "dk", play: "da", gl: "DK", campaign: "webb-dk" },
-  en: { store: "us", play: "en", gl: "US", campaign: "webb-en" },
+  SE: { locale: "sv", store: "se", play: "sv", gl: "SE", campaign: "webb", home: "/" },
+  DK: { locale: "da", store: "dk", play: "da", gl: "DK", campaign: "webb-dk", home: "/dk/" },
+  NO: { locale: "nb", store: "no", play: "no", gl: "NO", campaign: "webb-no", home: "/no/" },
+  IE: { locale: "en", store: "ie", play: "en", gl: "IE", campaign: "webb-ie", home: "/en/" },
+  FI: { locale: "en", store: "fi", play: "fi", gl: "FI", campaign: "webb-fi", home: "/en/" },
+  NL: { locale: "en", store: "nl", play: "nl", gl: "NL", campaign: "webb-nl", home: "/en/" },
+  AT: { locale: "en", store: "at", play: "de", gl: "AT", campaign: "webb-at", home: "/en/" },
+  PT: { locale: "en", store: "pt", play: "pt-PT", gl: "PT", campaign: "webb-pt", home: "/en/" },
+  BE: { locale: "en", store: "be", play: "en", gl: "BE", campaign: "webb-be", home: "/en/" },
+  DE: { locale: "en", store: "de", play: "de", gl: "DE", campaign: "webb-de", home: "/en/" },
+  FR: { locale: "en", store: "fr", play: "fr", gl: "FR", campaign: "webb-fr", home: "/en/" },
+  ES: { locale: "en", store: "es", play: "es", gl: "ES", campaign: "webb-es", home: "/en/" },
+  IT: { locale: "en", store: "it", play: "it", gl: "IT", campaign: "webb-it", home: "/en/" },
 };
+
+const DEFAULT_MARKET_FOR_LOCALE = { sv: "SE", nb: "NO", da: "DK", en: "IE" };
+
+for (const code of TARGET_MARKET_CODES) {
+  MARKETS[code].code = code;
+  MARKETS[code].public = PUBLIC_MARKETS.has(code);
+}
 
 /** App Store-länk med kampanjmärkning. Faller tillbaka på den rena länken så
  *  länge provider-token saknas.
@@ -54,21 +79,66 @@ function taggedPlayStoreUrl(market) {
   return `https://play.google.com/store/apps/details?${params}`;
 }
 
-const storeUrls = Object.fromEntries(
-  Object.entries(MARKETS).map(([lang, market]) => [
-    lang,
-    {
+const marketUrls = Object.fromEntries(
+  TARGET_MARKET_CODES.map((code) => {
+    const market = MARKETS[code];
+    return [code, {
       appStore: taggedAppStoreUrl(market),
       playStore: taggedPlayStoreUrl(market),
       campaign: market.campaign,
-    },
-  ]),
+      public: market.public,
+    }];
+  }),
+);
+
+const storeUrls = Object.fromEntries(
+  Object.entries(DEFAULT_MARKET_FOR_LOCALE).map(([locale, code]) => [locale, marketUrls[code]]),
+);
+
+// Sammanfattning per webbspråk för rapporter och tester. Synliga CTA:er styrs
+// däremot av besökarens faktiska land via /market-status, eftersom samma
+// engelska sida täcker flera marknader som kan öppnas vid olika tidpunkter.
+const localeRelease = Object.fromEntries(
+  Object.keys(DEFAULT_MARKET_FOR_LOCALE).map((locale) => {
+    const codes = TARGET_MARKET_CODES.filter((code) => MARKETS[code].locale === locale);
+    return [locale, {
+      public: codes.every((code) => PUBLIC_MARKETS.has(code)),
+      markets: codes,
+      defaultMarket: DEFAULT_MARKET_FOR_LOCALE[locale],
+    }];
+  }),
+);
+
+// Mallarna länkar via Pages Function i stället för direkt till en storefront.
+// Då kan samma engelska sida välja IE, FI, NL osv. via explicit ?m= eller
+// Cloudflares CF-IPCountry utan att hårdkoda ett enda land i knappen.
+const downloadUrls = Object.fromEntries(
+  Object.keys(DEFAULT_MARKET_FOR_LOCALE).map((locale) => {
+    const language = locale === "sv" ? "" : `l=${locale}&`;
+    return [locale, {
+      generic: locale === "sv" ? "/ladda-ner" : `/ladda-ner?l=${locale}`,
+      ios: `/ladda-ner?${language}p=ios`,
+      android: `/ladda-ner?${language}p=android`,
+    }];
+  }),
 );
 
 module.exports = {
   name: "Wager Golf",
   url: "https://wagergolf.se",
-  // En butikslänk per marknad. Mallarna använder storeUrls[lang].
+  release: {
+    version: "1.7.1",
+    courseCount: 3028,
+    courseClaim: "3 000+",
+    targetMarketCodes: TARGET_MARKET_CODES,
+    publicMarketCodes: [...PUBLIC_MARKETS],
+  },
+  markets: MARKETS,
+  marketUrls,
+  localeRelease,
+  downloadUrls,
+  // En standardbutik per webbspråk. Engelska går till Irland, aldrig USA.
+  // Själva CTA-mallarna använder downloadUrls så GeoIP kan välja rätt land.
   storeUrls,
   // Alias för svenskan, så äldre referenser inte går sönder.
   appStoreUrl: storeUrls.sv.appStore,
@@ -77,26 +147,23 @@ module.exports = {
   playStoreUrlCanonical: PLAY_STORE_URL,
   api: "https://api.wagergolf.se",
   email: "bratt.gustaf@gmail.com",
-  // Site-bred delningsbild (1200x630). Skapas i Fas 1.
-  ogImage: "https://wagergolf.se/assets/og-image.png",
-  // Cloudflare Web Analytics-beacon. Lämna tom om du aktiverar automatisk
-  // injektion i Cloudflare Pages-dashboarden istället. Fyll i token här för
-  // explicit beacon (Web Analytics > sajt > "JS snippet" > token-värdet).
+  // Site-bred, språk- och leverantörsneutral delningsbild (1200x630).
+  ogImage: "https://wagergolf.se/assets/og-image-v171.png",
+  // Webbstatistik är avstängd även i CSP. Cloudflares automatiska injektion
+  // ska också vara avstängd i Pages-dashboarden.
   cfBeaconToken: "",
   // IndexNow: pingar Bing och Yandex om nya och ändrade sidor vid deploy.
   // Nyckeln verifieras genom att samma värde ligger på /<nyckel>.txt, vilket
   // indexnow-key.njk genererar. Byt nyckel = byt här, filen följer med.
   indexNowKey: "9805c5c7f3a5db12b21946ca4bf08f89",
-  // Umami: cookielös, self-hosted analytics (egen server). Tom websiteId = av.
-  // recorderSrc laddar session replay/heatmap ovanpå script.js (kräver den, läser
-  // sessionen från window.umami). Lämna tom för att stänga av inspelningen.
+  // Webbstatistik och session replay är avstängda. Återaktivera dem först när
+  // besökaren har fått korrekt information och eventuell samtyckeslösning är på
+  // plats. Det är särskilt viktigt för /i/<token>, där URL och sidinnehåll kan
+  // innehålla en privat inbjudan.
   umami: {
-    src: "https://analytics.bratt.se/script.js",
-    recorderSrc: "https://analytics.bratt.se/recorder.js",
-    // Andel besökare som spelas in (0-1). 0 stänger av inspelningen helt.
-    // Inspelaren är 190 kB uppackad, så varje inspelad besökare kostar
-    // bandbredd och lite huvudtråd. Höj om du behöver fler inspelningar.
-    replaySampleRate: 0.25,
-    websiteId: "ae56fbfa-4ce4-480b-af6a-62f20282b414",
+    src: "",
+    recorderSrc: "",
+    replaySampleRate: 0,
+    websiteId: "",
   },
 };

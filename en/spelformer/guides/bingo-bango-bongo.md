@@ -38,4 +38,4 @@ One detail matters above all: the order of play decides everything. Whoever lies
 
 At the end of the round everyone's points are totalled. The points difference between players is converted into money: each pair is compared and the difference times the stake changes hands. Whoever collected the most points takes from those with fewer, and it balances out across the group.
 
-Because no strokes or handicaps are counted, there is no fiddling with stroke index. Wager Golf keeps track of bingo, bango and bongo on every hole and works out the settlement automatically when the round ends.
+Because no strokes or handicaps are counted, there is no fiddling with stroke index. Wager Golf keeps track of bingo, bango and bongo on every hole, then works out the final balance and shows who owes whom.

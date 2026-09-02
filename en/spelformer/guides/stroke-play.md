@@ -35,7 +35,7 @@ Stroke play is golf in its purest form. You count every stroke you take across t
 
 In a mixed group, stroke play is played net. Your handicap strokes are allocated to the hardest holes according to the course's stroke index, and deducted from your gross total. That is how a 20-handicapper and an 8-handicapper can settle on equal terms. Without handicap it is straight gross strokes, so the lowest actual total wins.
 
-Wager Golf adds the strokes up hole by hole, works out the net with the correct WHS strokes and settles the pot automatically, even if you decide to finish early.
+Wager Golf adds the strokes up hole by hole, works out the net with the correct WHS strokes and shows who owes whom, even if you decide to finish early.
 
 ## When does stroke play suit?
 

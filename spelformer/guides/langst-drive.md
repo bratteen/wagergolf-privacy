@@ -53,4 +53,4 @@ Lägger man ihop båda hålen blir det totala nettot över rundan:
 - Erik: −60 kr (−30 på vardera hålet)
 - Den fjärde spelaren: −60 kr (−30 på vardera hålet)
 
-Summan blir 0 kr, en pott-neutral uppgörelse där det vunna alltid motsvarar det förlorade. Wager Golf räknar potterna och visar vem som är skyldig vad, och uppgörelsen sker direkt via Swish.
+Summan blir 0 kr, en pott-neutral uppgörelse där det vunna alltid motsvarar det förlorade. Wager Golf räknar potterna och visar vem som är skyldig vad. I Sverige kan den som ska betala öppna Swish med rätt belopp och mottagare.

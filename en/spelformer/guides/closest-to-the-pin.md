@@ -51,4 +51,4 @@ On the 16th everyone misses the green except Erik, who wins the second pot the s
 - The winner takes the whole pot; the net is the pot minus their own stake
 - Nobody on the green, no winner: the stakes stay put and no money moves
 
-Add both holes together: Anna wins the 7th (+150) but loses her stake on the 16th (−50), netting +100. Erik the same the other way round, netting +100. The other two lose their stake on both holes, −50 plus −50, so −100 each. It balances out: +100, +100, −100, −100. Wager Golf works out the pots hole by hole and settles up.
+Add both holes together: Anna wins the 7th (+150) but loses her stake on the 16th (−50), netting +100. Erik the same the other way round, netting +100. The other two lose their stake on both holes, −50 plus −50, so −100 each. It balances out: +100, +100, −100, −100. Wager Golf works out the pots hole by hole and shows who owes whom.

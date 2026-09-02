@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 key: page:formats
-updated: "2026-06-20"
+updated: "2026-09-02"
 title: "Golfspill og spilleformer: regler og utregning | Wager Golf"
 description: "Guider til golfens spilleformer. Skins, matchspill, Nassau, Stableford og flere, med reglene, hvordan poengene regnes og hvordan du spiller dem med riktig handicap."
 ogTitle: "Spilleformer i golf"
@@ -51,7 +51,7 @@ structuredData: |
     ]
   }
 ---
-<main>
+<main id="main-content" tabindex="-1">
   <section class="subhero">
     <div class="subhero-inner">
       <div class="breadcrumb">
@@ -66,11 +66,11 @@ structuredData: |
     {#- Kategoriene er de samme strengene som guidenes frontmatter, altså
         norsk her og svensk på den svenske pillarsiden. byCategory matcher på
         verdien, så listen må følge språket. -#}
-    {%- set cats = ["Klassikere", "Hullspill", "Lag", "Sidebet"] %}
+    {%- set cats = ["Klassikere", "Hullspill", "Lag", "Sidespill"] %}
     {%- for cat in cats %}
     {%- set inCat = collections.guides | byCategory(cat, lang) %}
     {%- if inCat.length %}
-    <div class="hub-cat">{{ cat }}</div>
+    <h2 class="hub-cat">{{ cat }}</h2>
     <div class="hub-grid">
       {%- for g in inCat %}
       <a class="hub-card" href="{{ g.url }}">

@@ -1,57 +1,131 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import { onRequestGet, marketFor } from '../functions/ladda-ner.js';
+import { createRequire } from 'node:module';
+import {
+  onRequestGet, marketFor, resolveMarket, MARKETS, PUBLIC_MARKETS, TARGET_MARKET_CODES,
+} from '../functions/ladda-ner.js';
+
+const require = createRequire(import.meta.url);
+const site = require('../_data/site.js');
 
 const req = (url, ua = '', headers = {}) =>
   new Request(url, { headers: { 'user-agent': ua, ...headers } });
+
+const reqWithCf = (url, country, ua = '', headers = {}) => {
+  const request = req(url, ua, headers);
+  Object.defineProperty(request, 'cf', { value: { country } });
+  return request;
+};
 
 const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)';
 const ANDROID = 'Mozilla/5.0 (Linux; Android 14; Pixel 8)';
 const DESKTOP = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)';
 
 test('svenska iPhone får den svenska storefronten', async () => {
-  const res = await onRequestGet({ request: req('https://wagergolf.se/ladda-ner', IPHONE) });
+  const res = await onRequestGet({
+    request: reqWithCf('https://wagergolf.se/ladda-ner', 'SE', IPHONE),
+  });
   assert.strictEqual(res.status, 302);
   assert.match(res.headers.get('Location'), /apps\.apple\.com\/se\//);
   assert.match(res.headers.get('Location'), /ct=webb(&|$)/);
 });
 
-test('l väljer marknad för både butik och kampanj', async () => {
+test('stängd språkmarknad hålls kvar på sin startsida', async () => {
   const res = await onRequestGet({
     request: req('https://wagergolf.se/ladda-ner?l=da', IPHONE),
   });
-  assert.match(res.headers.get('Location'), /apps\.apple\.com\/dk\//);
-  assert.match(res.headers.get('Location'), /ct=webb-dk(&|$)/);
+  assert.strictEqual(res.headers.get('Location'), '/dk/#main-content');
 });
 
-test('Android får Play med rätt marknad i referrer', async () => {
+test('explicit plattform fungerar utan mobil user-agent', async () => {
   const res = await onRequestGet({
-    request: req('https://wagergolf.se/ladda-ner?l=nb', ANDROID),
+    request: req('https://wagergolf.se/ladda-ner?m=SE&p=android', DESKTOP),
   });
   const loc = res.headers.get('Location');
   assert.match(loc, /play\.google\.com/);
-  assert.ok(decodeURIComponent(loc).includes('utm_campaign=webb-no'));
+  assert.strictEqual(new URL(loc).searchParams.get('gl'), 'SE');
 });
 
 test('desktop faller tillbaka på språkets startsida, inte roten', async () => {
   const res = await onRequestGet({
     request: req('https://wagergolf.se/ladda-ner?l=da', DESKTOP),
   });
-  assert.strictEqual(res.headers.get('Location'), '/dk/#top');
+  assert.strictEqual(res.headers.get('Location'), '/dk/#main-content');
 });
 
-test('svensk desktop behåller dagens fallback exakt', async () => {
+test('saknad GeoIP håller svensk desktop på sidan utan att öppna butik', async () => {
   const res = await onRequestGet({ request: req('https://wagergolf.se/ladda-ner', DESKTOP) });
-  assert.strictEqual(res.headers.get('Location'), '/#top');
+  assert.strictEqual(res.headers.get('Location'), '/#main-content');
 });
 
-test('okänd marknad faller tillbaka på svenska', () => {
-  assert.strictEqual(marketFor('klingon').campaign, 'webb');
-  assert.strictEqual(marketFor(null).campaign, 'webb');
+test('GeoIP väljer marknad före språkfallback men grinden stoppar IE', async () => {
+  const res = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?l=en&p=ios', DESKTOP, {
+      'CF-IPCountry': 'IE',
+    }),
+  });
+  assert.strictEqual(res.headers.get('Location'), '/en/#main-content');
+});
+
+test('Workers request.cf.country fungerar utan Managed Transform-header', async () => {
+  const res = await onRequestGet({
+    request: reqWithCf('https://wagergolf.se/ladda-ner?l=en&p=ios', 'SE', DESKTOP),
+  });
+  assert.match(res.headers.get('Location'), /apps\.apple\.com\/se\//);
+});
+
+test('explicit marknad har företräde framför GeoIP', async () => {
+  const res = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?m=SE&p=ios', DESKTOP, {
+      'CF-IPCountry': 'IE',
+    }),
+  });
+  assert.match(res.headers.get('Location'), /apps\.apple\.com\/se\//);
+});
+
+test('okänd explicit marknad är fail-closed', async () => {
+  assert.strictEqual(marketFor('US'), null);
+  const res = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?l=en&m=US&p=ios', DESKTOP, {
+      'CF-IPCountry': 'SE',
+    }),
+  });
+  assert.strictEqual(res.headers.get('Location'), '/en/#main-content');
+});
+
+test('GeoIP utanför de 13 marknaderna faller inte vidare till Irland', () => {
+  const resolved = resolveMarket(
+    new URL('https://wagergolf.se/ladda-ner?l=en&p=ios'),
+    new Headers({ 'CF-IPCountry': 'US' }),
+  );
+  assert.strictEqual(resolved.market, null);
+  assert.strictEqual(resolved.invalidExplicitMarket, true);
+});
+
+test('kampanj följer med efter marknadsvalet', async () => {
+  const res = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?m=SE&p=ios&c=Meta%20Launch', DESKTOP),
+  });
+  assert.strictEqual(new URL(res.headers.get('Location')).searchParams.get('ct'), 'meta-launch');
+});
+
+test('funktions- och sajtkonfigurationen innehåller samma marknader och grind', () => {
+  assert.deepStrictEqual(TARGET_MARKET_CODES, site.release.targetMarketCodes);
+  assert.deepStrictEqual(PUBLIC_MARKETS, site.release.publicMarketCodes);
+  for (const code of TARGET_MARKET_CODES) {
+    assert.deepStrictEqual(MARKETS[code], {
+      locale: site.markets[code].locale,
+      store: site.markets[code].store,
+      play: site.markets[code].play,
+      gl: site.markets[code].gl,
+      campaign: site.markets[code].campaign,
+      home: site.markets[code].home,
+    });
+  }
 });
 
 test('svaret får aldrig cachas delat', async () => {
   const res = await onRequestGet({ request: req('https://wagergolf.se/ladda-ner', IPHONE) });
   assert.strictEqual(res.headers.get('Cache-Control'), 'no-store');
-  assert.strictEqual(res.headers.get('Vary'), 'User-Agent');
+  assert.strictEqual(res.headers.get('Vary'), 'User-Agent, CF-IPCountry');
 });

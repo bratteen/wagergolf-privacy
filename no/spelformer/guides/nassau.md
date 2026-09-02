@@ -14,7 +14,7 @@ faq:
   - q: "Hvorfor kalles det tre veddemål i ett?"
     a: "Nassau deler runden i tre kamper: de første ni hullene, de andre ni hullene og alle atten. Hver av dem har sin egen innsats og sin egen vinner, slik at du kan tape ett segment men vinne et annet."
   - q: "Hva er en press i Nassau?"
-    a: "En press er et nytt sidebet som den som ligger under kan starte midt i et segment. Det løper fra hullet du trykker på til segmentets slutt, med samme innsats. Pressen avgjøres separat, slik at du får en sjanse til å ta igjen en dårlig start."
+    a: "En press er et nytt sidespill som den som ligger under kan starte midt i et segment. Det løper fra hullet du trykker på til segmentets slutt, med samme innsats. Pressen avgjøres separat, slik at du får en sjanse til å ta igjen en dårlig start."
   - q: "Hva betyr en 2-2-2 Nassau?"
     a: "At innsatsen er 2 enheter på hvert av de tre veddemålene, altså 2 på første ni, 2 på andre ni og 2 på hele runden. Tallet beskriver bare hvor mye hvert segment er verdt."
   - q: "Krever Nassau 18 hull?"

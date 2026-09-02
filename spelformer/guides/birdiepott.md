@@ -37,7 +37,7 @@ Birdiepott är det perfekta lilla sidobetet, lätt att lägga ovanpå vilken huv
 
 Istället för en pott kan ni köra birdies som direktbetalning. Då betalar de andra spelarna birdie-spelaren insatsen var, varje gång någon gör birdie. Den varianten ger snabbare feedback och kan svänga mer, eftersom en spelare som birdar tre hål plockar in från alla andra tre gånger.
 
-Wager Golf håller reda på birdies hål för hål, räknar både pott- och per-birdie-varianten och gör upp automatiskt när ronden är slut.
+Wager Golf håller reda på birdies hål för hål, räknar både pott- och per-birdie-varianten och räknar ut uppgörelsen automatiskt när ronden är slut.
 
 ## Ett exempel med pengar
 
@@ -50,4 +50,4 @@ Under ronden gör Anna tre birdies, Bea en, och de andra två ingen. Anna har fl
 - Spelare 3: −50 kr
 - Spelare 4: −50 kr
 
-Summan blir noll, potten är pott-neutral. Hade två spelare gjort lika många birdies hade de delat potten, 100 kr var, och landat på +50 kr var medan de andra två fortfarande ligger −50 kr. Wager Golf räknar birdies hål för hål och gör upp summan med Swish när ronden är slut.
+Summan blir noll, potten är pott-neutral. Hade två spelare gjort lika många birdies hade de delat potten, 100 kr var, och landat på +50 kr var medan de andra två fortfarande ligger −50 kr. Wager Golf räknar birdies hål för hål och visar vem som är skyldig vem när ronden är slut. I Sverige kan den som ska betala öppna Swish med rätt belopp och mottagare.

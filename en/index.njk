@@ -1,12 +1,12 @@
 ---
 layout: base.njk
 key: page:home
-updated: "2026-08-08"
+updated: "2026-09-02"
 permalink: /en/
-title: "Wager Golf, golf bets without paper and a calculator"
-description: "Wager Golf keeps the count when the group plays for money. 21 game formats, automatic settlement and the correct WHS handicap on every hole."
+title: "Wager Golf, play for stakes without paper or a calculator"
+description: "Wager Golf keeps the count when the group plays for stakes. Version 1.7.1 has 21 game formats and 3,028 courses across 13 countries."
 ogTitle: "Wager Golf"
-ogDescription: "Golf bets without paper and a calculator. 21 game formats, automatic settlement."
+ogDescription: "Play for stakes without paper or a calculator. 21 game formats and automatic final-balance calculation."
 structuredData: |
   {
     "@context": "https://schema.org",
@@ -22,7 +22,10 @@ structuredData: |
           "width": 192,
           "height": 192
         },
-        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ]
       },
       {
         "@type": "WebSite",
@@ -44,12 +47,16 @@ structuredData: |
         "operatingSystem": "iOS, Android",
         "applicationCategory": "SportsApplication",
         "url": "https://wagergolf.se/en/",
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ],
         "inLanguage": "en",
         "publisher": { "@id": "https://wagergolf.se/#org" },
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "SEK"
+          "priceCurrency": "EUR"
         }
       },
       {
@@ -68,7 +75,7 @@ structuredData: |
             "name": "Is Wager Golf free?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, the app is free to download and play. All 21 game formats and the settlement are included. There is an optional Pro tier, but you do not need to pay anything to settle a round with your group."
+              "text": "Yes. The free tier has five main game formats and lets you play one main game plus one optional side game per round, with automatic final-balance calculation. Pro unlocks all 21 formats, more combinations and full history. Eligible new users get a 14-day free trial; Pro is priced at €4.99 per month or €29.99 per year in the euro markets."
             }
           },
           {
@@ -81,10 +88,18 @@ structuredData: |
           },
           {
             "@type": "Question",
+            "name": "Who is the app for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Wager Golf is intended for people aged 17 or older and private rounds between people who know each other. The app never receives, holds or transfers stakes."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "Will my course work?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "More than 1,000 courses in Sweden, Denmark and Norway are loaded with par and stroke index, so you just pick the course and start scoring."
+              "text": "Version 1.7.1 contains 3,028 courses across Sweden, Denmark, Norway, Ireland, Finland, the Netherlands, Austria, Portugal, Belgium, Germany, France, Spain and Italy. The catalogue is available in countries where the version has launched."
             }
           },
           {
@@ -100,22 +115,23 @@ structuredData: |
     ]
   }
 ---
-  <main id="top">
+  <main id="main-content" data-download-anchor tabindex="-1">
     <!-- HERO -->
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow on-dark">Now on the App Store and Google Play</span>
+          <span class="eyebrow on-dark">Version 1.7.1 for 13 markets</span>
           <h1>Play for <span class="accent">more than pride.</span></h1>
-          <p class="lede">Wager Golf keeps the count when the group settles it on the course. 21 game formats worked out automatically, and the pot squared up by the time the round ends. No paper, no calculator, no arguing at the 19th.</p>
+          <p class="lede">Wager Golf keeps the count when the group plays for stakes. It works out 21 game formats automatically and shows exactly who owes whom when the round ends. No paper, no calculator, no arguing at the 19th.</p>
           <div class="cta-row">
             {% set storePlats = "startsida-hero" %}
             {% include "store-badges.njk" %}
-            <span class="cta-note">Free, for iPhone and Android</span>
+            <span class="cta-note" data-release-open hidden>Free for iPhone and Android in your country.</span>
+            <span class="cta-note" data-release-closed>Not available in this country yet. Store links appear when the app can be installed.</span>
           </div>
           <p class="hero-proof">
             <span class="hero-proof-stars" role="img" aria-label="5 out of 5 stars">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</span>
-            <span class="hero-proof-text">5.0 out of 5 on the App Store</span>
+            <span class="hero-proof-text">5.0 out of 5 on Sweden's App Store</span>
           </p>
         </div>
         <div class="hero-phone">
@@ -139,18 +155,15 @@ structuredData: |
         <div class="stats-grid reveal">
           <div class="stat">
             <div class="num brass">21</div>
-            <div class="label">Game formats with automatic settlement</div>
+            <div class="label">Game formats with automatic final-balance calculation</div>
           </div>
           <div class="stat">
-            <div class="num">1,000+</div>
-            <div class="label">Courses in Sweden, Denmark and Norway with par and stroke index</div>
+            <div class="num">3,028</div>
+            <div class="label">Courses across 13 countries in version 1.7.1</div>
           </div>
-          {#- Svenskans tredje ruta säger "Swish", som bara finns i Sverige.
-              Ersatt med priset, som är sant på alla marknader och redan
-              påstås i FAQ:n. -#}
           <div class="stat">
-            <div class="num" style="font-size:46px">Free</div>
-            <div class="label">Every format and the settlement included</div>
+            <div class="num">5</div>
+            <div class="label">Main game formats free, with automatic final-balance calculation</div>
           </div>
         </div>
       </div>
@@ -198,7 +211,7 @@ structuredData: |
         {% macro stars() %}<div class="voice-stars" role="img" aria-label="5 out of 5 stars">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</div>{% endmacro %}
         <div class="voices-grid reveal">
           <figure class="voice">
-            <blockquote>Works well with lots of formats, and the settlement at the end of the round is seamless.</blockquote>
+            <blockquote>Works well with lots of formats, and the calculation at the end of the round is seamless.</blockquote>
             <figcaption>{{ stars() }}<span class="v-name">Eric K.</span><span class="v-meta">Nacka Golf · App Store</span></figcaption>
           </figure>
           <figure class="voice">
@@ -210,7 +223,7 @@ structuredData: |
             <figcaption>{{ stars() }}<span class="v-name">Philip</span><span class="v-meta">Golfstar · App Store</span></figcaption>
           </figure>
         </div>
-        <p class="voices-note" style="text-align:center;color:#888;font-size:13px;margin-top:18px">Verified App Store reviews, translated from Swedish.</p>
+        <p class="voices-note" style="text-align:center;color:var(--ink-faint);font-size:13px;margin-top:18px">Verified App Store reviews, translated from Swedish.</p>
       </div>
     </section>
 
@@ -237,7 +250,7 @@ structuredData: |
           <p>When the round ends the app works out the net for each player and reduces it all to as few payments as possible. No disputes at the 19th.</p>
         </div>
         <div class="feature-shot">
-          <img src="{% shot "settlement" %}" alt="Automatic settlement" loading="lazy" width="640" height="1306">
+          <img src="{% shot "settlement" %}" alt="Final balance calculated" loading="lazy" width="640" height="1306">
         </div>
       </div>
     </section>
@@ -261,7 +274,7 @@ structuredData: |
         <div class="head reveal">
           <span class="eyebrow on-dark">21 ways to make the round interesting</span>
           <h2>Play it your way</h2>
-          <p>The classics, the hole-by-hole games, the team formats and the side bets, freely combined in the same round. All with proper WHS handicap and automatic settlement.</p>
+          <p>Five main game formats are free, with one main game and one optional side game per round. Pro unlocks all 21, more combinations and full history. All with proper WHS handicap and automatic final-balance calculation.</p>
         </div>
         <div class="card-grid reveal">
           <div class="fcard">
@@ -300,7 +313,7 @@ structuredData: |
     <section class="home-faq">
       <div class="faq-wrap">
         <div class="head reveal">
-          <span class="eyebrow">Before you download</span>
+          <span class="eyebrow">Good to know</span>
           <h2>Common questions</h2>
         </div>
         <div class="faqlist reveal">
@@ -310,15 +323,19 @@ structuredData: |
           </div>
           <div class="faq-item">
             <p class="faq-q">Is it free?</p>
-            <p class="faq-a">Yes, the app is free to download and play. All 21 game formats and the settlement are included. There is an optional Pro tier, but you do not need to pay anything to settle a round with your group.</p>
+            <p class="faq-a">Yes. The free tier has five main game formats and lets you play one main game plus one optional side game per round, with automatic final-balance calculation. Pro unlocks all 21 formats, more combinations and full history. Eligible new users get a 14-day free trial; Pro is priced at €4.99 per month or €29.99 per year in the euro markets.</p>
           </div>
           <div class="faq-item">
             <p class="faq-q">You play for money — is that allowed?</p>
             <p class="faq-a">Wager Golf is not a gambling company and never touches the money. The app simply keeps the count on what you have already agreed between yourselves and makes squaring up straightforward, exactly as you already do after a round.</p>
           </div>
           <div class="faq-item">
+            <p class="faq-q">Who is the app for?</p>
+            <p class="faq-a">Wager Golf is intended for people aged 17 or older and private rounds between people who know each other. The app never receives, holds or transfers stakes.</p>
+          </div>
+          <div class="faq-item">
             <p class="faq-q">Will my course work?</p>
-            <p class="faq-a">More than 1,000 courses in Sweden, Denmark and Norway are loaded with par and stroke index, so you just pick the course and start scoring.</p>
+            <p class="faq-a">Version 1.7.1 contains 3,028 courses across Sweden, Denmark, Norway, Ireland, Finland, the Netherlands, Austria, Portugal, Belgium, Germany, France, Spain and Italy. The catalogue is available in countries where the version has launched.</p>
           </div>
           <div class="faq-item">
             <p class="faq-q">Does the app use the correct handicap?</p>
@@ -332,8 +349,8 @@ structuredData: |
     <section class="closing">
       <div class="wrap reveal">
         <span class="eyebrow">Ready for the next round</span>
-        <h2 style="margin-top:14px">Settle up in <span class="accent">a second.</span></h2>
-        <p>Download it free, add the group and start playing.</p>
+        <h2 style="margin-top:14px">See who owes whom <span class="accent">straight away.</span></h2>
+        <p>Store links appear automatically in countries where the app can be installed.</p>
         {% set storePlats = "startsida-avslut" %}
         {% include "store-badges.njk" %}
       </div>

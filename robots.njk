@@ -11,27 +11,45 @@ Disallow: /go
 # /ladda-ner är en enhetsstyrd omdirigering, inte en sida.
 Disallow: /ladda-ner
 
+# Inbjudningsadresser får hämtas så att sökmotorer kan läsa sidans och svarets
+# noindex-direktiv. Att blockera dem här skulle kunna ge URL-indexering utan
+# innehåll. Själva Function-svaret är noindex, nofollow och no-store.
+
 # AI-sökmotorer och assistenter är uttryckligen välkomna att indexera och
 # citera guiderna (se även /llms.txt).
 User-agent: GPTBot
 Allow: /
+Disallow: /go
+Disallow: /ladda-ner
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /go
+Disallow: /ladda-ner
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /go
+Disallow: /ladda-ner
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /go
+Disallow: /ladda-ner
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /go
+Disallow: /ladda-ner
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /go
+Disallow: /ladda-ner
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /go
+Disallow: /ladda-ner
 
 Sitemap: {{ site.url }}/sitemap.xml

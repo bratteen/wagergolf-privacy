@@ -1,12 +1,12 @@
 ---
 layout: base.njk
 key: page:home
-updated: "2026-08-08"
+updated: "2026-09-02"
 permalink: /dk/
 title: "Wager Golf, golfvæddemål uden papir og lommeregner"
-description: "Wager Golf holder styr på regnestykket, når holdet spiller om penge. 21 spilleformer, automatisk afregning og korrekt WHS-handicap på hvert hul."
+description: "Wager Golf holder styr på regnestykket, når holdet spiller om penge. Version 1.7.1 har 21 spilleformer og 3.028 baner i 13 lande."
 ogTitle: "Wager Golf"
-ogDescription: "Golfvæddemål uden papir og lommeregner. 21 spilleformer, automatisk afregning."
+ogDescription: "Golfvæddemål uden papir og lommeregner. 21 spilleformer og automatisk beregning af opgørelsen."
 structuredData: |
   {
     "@context": "https://schema.org",
@@ -22,7 +22,10 @@ structuredData: |
           "width": 192,
           "height": 192
         },
-        "sameAs": ["https://apps.apple.com/se/app/id6767638917"]
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ]
       },
       {
         "@type": "WebSite",
@@ -44,6 +47,10 @@ structuredData: |
         "operatingSystem": "iOS, Android",
         "applicationCategory": "SportsApplication",
         "url": "https://wagergolf.se/dk/",
+        "sameAs": [
+          "https://apps.apple.com/se/app/id6767638917",
+          "https://play.google.com/store/apps/details?id=com.bratteen.wagergolf"
+        ],
         "inLanguage": "da-DK",
         "publisher": { "@id": "https://wagergolf.se/#org" },
         "offers": {
@@ -68,7 +75,7 @@ structuredData: |
             "name": "Er Wager Golf gratis?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Ja, appen er gratis at hente og spille. Alle 21 spilleformer og afregningen er inkluderet. Der findes et frivilligt Pro-niveau, men du behøver ikke betale noget for at gøre runden op med holdet."
+              "text": "Ja. Gratisniveauet har fem hovedspil og lader jer spille ét hovedspil plus ét valgfrit sidespil pr. runde med automatisk beregning af opgørelsen. Pro låser op for alle 21 spilleformer, flere kombinationer og fuld historik. Berettigede nye brugere får 14 dage gratis. I Danmark koster Pro derefter 39 kr. om måneden eller 199 kr. om året."
             }
           },
           {
@@ -76,7 +83,15 @@ structuredData: |
             "name": "I spiller om penge, er det tilladt?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Wager Golf er ikke en spiludbyder og rører aldrig ved pengene. Appen holder bare styr på det, I allerede har aftalt indbyrdes, og gør det enkelt at gøre op, præcis som når I allerede plejer at gøre op efter runden."
+              "text": "Wager Golf er ikke en spiludbyder og rører aldrig ved pengene. Appen holder bare styr på det, I allerede har aftalt indbyrdes, beregner nettoen og viser, hvem der skylder hvem."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hvem er appen beregnet til?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Wager Golf er beregnet til personer på mindst 17 år og private runder mellem folk, der kender hinanden. Appen modtager, opbevarer eller overfører aldrig indsatser."
             }
           },
           {
@@ -84,7 +99,7 @@ structuredData: |
             "name": "Findes min bane?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Over 1.000 baner i Sverige, Danmark og Norge er lagt ind med par og handicapnøgle, så du vælger bare bane og går i gang med at score."
+              "text": "Version 1.7.1 indeholder 3.028 baner i 13 europæiske lande med par og handicapnøgle. Kataloget er tilgængeligt i de lande, hvor versionen er lanceret."
             }
           },
           {
@@ -100,22 +115,23 @@ structuredData: |
     ]
   }
 ---
-  <main id="top">
+  <main id="main-content" data-download-anchor tabindex="-1">
     <!-- HERO -->
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow on-dark">Nu i App Store og Google Play</span>
+          <span class="eyebrow on-dark">Version 1.7.1 til 13 markeder</span>
           <h1>Spil om <span class="accent">mere end æren.</span></h1>
-          <p class="lede">Wager Golf holder styr på regnestykket, når holdet gør op på banen. 21 spilleformer regnes automatisk, og puljen er gjort op, når runden er slut. Intet papir, ingen lommeregner, ingen skænderier ved 19. hul.</p>
+          <p class="lede">Wager Golf holder styr på regnestykket, når holdet gør op på banen. 21 spilleformer beregnes automatisk, og appen viser, hvem der skylder hvem, når runden er slut. Intet papir, ingen lommeregner, ingen skænderier ved 19. hul.</p>
           <div class="cta-row">
             {% set storePlats = "startsida-hero" %}
             {% include "store-badges.njk" %}
-            <span class="cta-note">Gratis, til iPhone og Android</span>
+            <span class="cta-note" data-release-open hidden>Gratis til iPhone og Android i dit land.</span>
+            <span class="cta-note" data-release-closed>Ikke tilgængelig i dette land endnu. Butikslinkene vises, når appen kan hentes.</span>
           </div>
           <p class="hero-proof">
             <span class="hero-proof-stars" role="img" aria-label="5 ud af 5 stjerner">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</span>
-            <span class="hero-proof-text">5,0 ud af 5 i App Store</span>
+            <span class="hero-proof-text">5,0 ud af 5 i Sveriges App Store</span>
           </p>
         </div>
         <div class="hero-phone">
@@ -139,18 +155,15 @@ structuredData: |
         <div class="stats-grid reveal">
           <div class="stat">
             <div class="num brass">21</div>
-            <div class="label">Spilleformer med automatisk afregning</div>
+            <div class="label">Spilleformer med automatisk beregning af opgørelsen</div>
           </div>
           <div class="stat">
-            <div class="num">1.000+</div>
-            <div class="label">Baner i Sverige, Danmark og Norge med par og handicapnøgle</div>
+            <div class="num">3.028</div>
+            <div class="label">Baner i 13 lande i version 1.7.1</div>
           </div>
-          {#- Svenskans tredje rude siger "Swish", som kun findes i Sverige.
-              Erstattet med prisen, som er sand på alle markeder og allerede
-              nævnes i FAQ'en. -#}
           <div class="stat">
-            <div class="num" style="font-size:46px">Gratis</div>
-            <div class="label">Alle spilleformer og afregningen inkluderet</div>
+            <div class="num">5</div>
+            <div class="label">Hovedspil gratis med automatisk beregning af opgørelsen</div>
           </div>
         </div>
       </div>
@@ -176,7 +189,7 @@ structuredData: |
           </div>
           <div class="step">
             <div class="step-num">03</div>
-            <h3>Gør puljen op</h3>
+            <h3>Se, hvem der skylder hvem</h3>
             <p>Når runden er slut, regner appen ud, hvem der skylder hvem, og viser det rigtige beløb. Ingen diskussioner ved 19. hul.</p>
           </div>
         </div>
@@ -198,7 +211,7 @@ structuredData: |
         {% macro stars() %}<div class="voice-stars" role="img" aria-label="5 ud af 5 stjerner">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</div>{% endmacro %}
         <div class="voices-grid reveal">
           <figure class="voice">
-            <blockquote>Fungerer godt med mange formater og en smidig afregning i slutningen af runden.</blockquote>
+            <blockquote>Fungerer godt med mange formater og en enkel beregning i slutningen af runden.</blockquote>
             <figcaption>{{ stars() }}<span class="v-name">Eric K.</span><span class="v-meta">Nacka Golf · App Store</span></figcaption>
           </figure>
           <figure class="voice">
@@ -210,7 +223,7 @@ structuredData: |
             <figcaption>{{ stars() }}<span class="v-name">Philip</span><span class="v-meta">Golfstar · App Store</span></figcaption>
           </figure>
         </div>
-        <p class="voices-note" style="text-align:center;color:#888;font-size:13px;margin-top:18px">Verificerede App Store-anmeldelser, oversat fra svensk.</p>
+        <p class="voices-note" style="text-align:center;color:var(--ink-faint);font-size:13px;margin-top:18px">Verificerede App Store-anmeldelser, oversat fra svensk.</p>
       </div>
     </section>
 
@@ -237,7 +250,7 @@ structuredData: |
           <p>Når runden er slut, regner appen nettoen ud for hver spiller og samler det hele til så få betalinger som muligt. Ingen diskussioner ved 19. hul.</p>
         </div>
         <div class="feature-shot">
-          <img src="{% shot "settlement" %}" alt="Automatisk afregning" loading="lazy" width="640" height="1306">
+          <img src="{% shot "settlement" %}" alt="Opgørelsen beregnet" loading="lazy" width="640" height="1306">
         </div>
       </div>
     </section>
@@ -261,7 +274,7 @@ structuredData: |
         <div class="head reveal">
           <span class="eyebrow on-dark">21 måder at gøre runden interessant på</span>
           <h2>Spil på jeres måde</h2>
-          <p>Klassikerne, hulspillene, holdformaterne og sidebettene, der frit kan kombineres i samme runde. Alt med rigtigt WHS-handicap og automatisk afregning.</p>
+          <p>Fem hovedspil er gratis med ét hovedspil og ét valgfrit sidespil pr. runde. Pro låser op for alle 21, flere kombinationer og fuld historik. Alt med rigtigt WHS-handicap og automatisk beregning af opgørelsen.</p>
         </div>
         <div class="card-grid reveal">
           <div class="fcard">
@@ -286,7 +299,7 @@ structuredData: |
             </ul>
           </div>
           <div class="fcard">
-            <div class="ftitle">Sidebet</div>
+            <div class="ftitle">Sidespil</div>
             <ul>
               <li><a href="{% guideUrl "birdiepott" %}">Birdiepulje</a></li><li><a href="{% guideUrl "snake" %}">Snake</a></li><li><a href="{% guideUrl "sandie" %}">Sandie</a></li>
               <li><a href="{% guideUrl "narmast-flaggan" %}">Nærmest hullet</a></li><li><a href="{% guideUrl "langst-drive" %}">Længste drive</a></li><li><a href="{% guideUrl "golfpoker" %}">Golfpoker</a></li>
@@ -300,7 +313,7 @@ structuredData: |
     <section class="home-faq">
       <div class="faq-wrap">
         <div class="head reveal">
-          <span class="eyebrow">Før du henter appen</span>
+          <span class="eyebrow">Godt at vide</span>
           <h2>Ofte stillede spørgsmål</h2>
         </div>
         <div class="faqlist reveal">
@@ -310,15 +323,19 @@ structuredData: |
           </div>
           <div class="faq-item">
             <p class="faq-q">Er det gratis?</p>
-            <p class="faq-a">Ja, appen er gratis at hente og spille. Alle 21 spilleformer og afregningen er inkluderet. Der findes et frivilligt Pro-niveau, men du behøver ikke betale noget for at gøre runden op med holdet.</p>
+            <p class="faq-a">Ja. Gratisniveauet har fem hovedspil og lader jer spille ét hovedspil plus ét valgfrit sidespil pr. runde med automatisk beregning af opgørelsen. Pro låser op for alle 21 spilleformer, flere kombinationer og fuld historik. Berettigede nye brugere får 14 dage gratis. I Danmark koster Pro derefter 39 kr. om måneden eller 199 kr. om året.</p>
           </div>
           <div class="faq-item">
             <p class="faq-q">I spiller om penge, er det tilladt?</p>
-            <p class="faq-a">Wager Golf er ikke en spiludbyder og rører aldrig ved pengene. Appen holder bare styr på det, I allerede har aftalt indbyrdes, og gør det enkelt at gøre op, præcis som når I allerede plejer at gøre op efter runden.</p>
+            <p class="faq-a">Wager Golf er ikke en spiludbyder og rører aldrig ved pengene. Appen holder bare styr på det, I allerede har aftalt indbyrdes, beregner nettoen og viser, hvem der skylder hvem.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Hvem er appen beregnet til?</p>
+            <p class="faq-a">Wager Golf er beregnet til personer på mindst 17 år og private runder mellem folk, der kender hinanden. Appen modtager, opbevarer eller overfører aldrig indsatser.</p>
           </div>
           <div class="faq-item">
             <p class="faq-q">Findes min bane?</p>
-            <p class="faq-a">Over 1.000 baner i Sverige, Danmark og Norge er lagt ind med par og handicapnøgle, så du vælger bare bane og går i gang med at score.</p>
+            <p class="faq-a">Version 1.7.1 indeholder 3.028 baner i 13 europæiske lande med par og handicapnøgle. Kataloget er tilgængeligt i de lande, hvor versionen er lanceret.</p>
           </div>
           <div class="faq-item">
             <p class="faq-q">Regner appen med det rigtige handicap?</p>
@@ -332,8 +349,8 @@ structuredData: |
     <section class="closing">
       <div class="wrap reveal">
         <span class="eyebrow">Klar til næste runde</span>
-        <h2 style="margin-top:14px">Gør op på <span class="accent">et sekund.</span></h2>
-        <p>Hent den gratis, tilføj holdet og gå i gang med at spille.</p>
+        <h2 style="margin-top:14px">Se, hvem der skylder hvem, <span class="accent">med det samme.</span></h2>
+        <p>Butikslinkene vises automatisk i de lande, hvor appen kan hentes.</p>
         {% set storePlats = "startsida-avslut" %}
         {% include "store-badges.njk" %}
       </div>

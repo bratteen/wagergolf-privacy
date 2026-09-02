@@ -51,4 +51,4 @@ Efter ronden ser det ut så här:
 
 Tre spelare som betalar 50 kr var blir precis 150 kr in till Erik. Potten går jämnt ut. Gör fler i gänget egna sandies kvittas beloppen mot varandra, och nettot är det som syns till slut.
 
-Wager Golf håller reda på vilka hål var och en legat i bunkern, räknar sandies löpande och gör upp summan med Swish när ronden är slut.
+Wager Golf håller reda på vilka hål var och en legat i bunkern, räknar sandies löpande och visar vem som är skyldig vem när ronden är slut. I Sverige kan den som ska betala öppna Swish med rätt belopp och mottagare.

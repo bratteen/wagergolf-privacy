@@ -50,4 +50,4 @@ På hål 16 missar alla green utom Erik, som vinner den andra potten på samma s
 - Vinnaren får hela potten, netto blir potten minus egen insats
 - Ingen på green, ingen vinnare: insatserna stannar, inga pengar rör sig
 
-Lägg ihop båda hålen: Anna vinner hål 7 (+150) men förlorar sin insats på hål 16 (-50), netto +100. Erik likadant fast tvärtom, netto +100. De andra två förlorar sin insats på vartdera hålet, -50 plus -50, alltså -100 var. Summan går jämnt ut: +100, +100, -100, -100. Wager Golf räknar potterna hål för hål och gör upp med Swish.
+Lägg ihop båda hålen: Anna vinner hål 7 (+150) men förlorar sin insats på hål 16 (-50), netto +100. Erik likadant fast tvärtom, netto +100. De andra två förlorar sin insats på vartdera hålet, -50 plus -50, alltså -100 var. Summan går jämnt ut: +100, +100, -100, -100. Wager Golf räknar potterna hål för hål och visar vem som är skyldig vem. I Sverige kan den som ska betala öppna Swish med rätt belopp och mottagare.

@@ -38,7 +38,7 @@ The birdie pot is the perfect little side bet, easy to lay on top of whatever ma
 
 Instead of a pot you can play birdies as direct payment. The other players each pay the birdie maker the stake, every time anyone makes a birdie. That version gives faster feedback and can swing further, because a player who birdies three holes collects from everyone else three times over.
 
-Wager Golf keeps track of birdies hole by hole, handles both the pot and the per-birdie version and settles automatically when the round ends.
+Wager Golf keeps track of birdies hole by hole, handles both the pot and the per-birdie version and shows who owes whom when the round ends.
 
 ## A worked example
 
@@ -51,4 +51,4 @@ During the round Anna makes three birdies, Bea one, and the other two none. Anna
 - Player 3: −50
 - Player 4: −50
 
-It sums to zero — the pot is pot-neutral. Had two players made the same number of birdies they would have split the pot, 100 each, landing on +50 each while the other two remain 50 down. Wager Golf counts the birdies hole by hole and works out the settlement when the round ends.
+It sums to zero — the pot is pot-neutral. Had two players made the same number of birdies they would have split the pot, 100 each, landing on +50 each while the other two remain 50 down. Wager Golf counts the birdies hole by hole, then works out the final balance and shows who owes whom.

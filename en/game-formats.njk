@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 key: page:formats
-updated: "2026-06-20"
+updated: "2026-09-02"
 title: "Golf game formats: rules and scoring explained | Wager Golf"
 description: "Guides to golf's game formats. Skins, match play, Nassau, Stableford and more, with the rules, how the scoring works and how to play them off handicap."
 ogTitle: "Golf game formats"
@@ -51,7 +51,7 @@ structuredData: |
     ]
   }
 ---
-<main>
+<main id="main-content" tabindex="-1">
   <section class="subhero">
     <div class="subhero-inner">
       <div class="breadcrumb">
@@ -70,7 +70,7 @@ structuredData: |
     {%- for cat in cats %}
     {%- set inCat = collections.guides | byCategory(cat, lang) %}
     {%- if inCat.length %}
-    <div class="hub-cat">{{ cat }}</div>
+    <h2 class="hub-cat">{{ cat }}</h2>
     <div class="hub-grid">
       {%- for g in inCat %}
       <a class="hub-card" href="{{ g.url }}">

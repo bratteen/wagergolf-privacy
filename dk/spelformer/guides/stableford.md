@@ -56,7 +56,7 @@ Det er denne fordeling, der gør, at en 28-handicapper og en 9-handicapper kan s
 
 36 point er referencen. Det betyder, at du i gennemsnit har lavet netto par på hvert hul, altså spillet præcis til dit handicap. Kommer du over 36, har du haft en rigtig god dag. De fleste klubrunder lander et sted mellem 30 og 34.
 
-I et væddemål lægger alle en indsats, og den med flest point, når runden er slut, tager puljen. Er det lige, deles puljen. Wager Golf beregner pointene hul for hul med de rigtige WHS-slag, viser stillingen live og gør puljen op automatisk efter sidste hul.
+I et væddemål lægger alle en indsats, og den med flest point, når runden er slut, tager puljen. Er det lige, deles puljen. Wager Golf beregner pointene hul for hul med de rigtige WHS-slag, viser stillingen live og beregner, hvem der skylder hvem efter sidste hul.
 
 ## Hvornår passer Stableford?
 

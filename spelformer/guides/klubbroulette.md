@@ -49,4 +49,4 @@ Så fördelas de 120 kronorna på det hålet:
 - Anna får potten 120 kr, drar bort sin egen insats 30 kr, och går plus 90 kr.
 - De tre andra betalar sin insats 30 kr var.
 
-Blir nästa hål oavgjort på bästa score händer ingen pengarörelse där, precis som i skins. Wager Golf lottar klubban, räknar nettoscore per hål och summerar potten automatiskt, och gör sedan upp hela kvällen med Swish.
+Blir nästa hål oavgjort på bästa score händer ingen pengarörelse där, precis som i skins. Wager Golf lottar klubban, räknar nettoscore per hål, summerar potten och visar vem som är skyldig vem. I Sverige kan den som ska betala öppna Swish med rätt belopp och mottagare.

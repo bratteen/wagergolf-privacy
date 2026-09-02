@@ -58,7 +58,7 @@ Det är den här fördelningen som gör att en 28-handicappare och en 9-handicap
 
 36 poäng är referensen. Det betyder att du i snitt gjort par netto på varje hål, alltså spelat precis till din handicap. Kommer du över 36 har du haft en riktigt bra dag. De flesta klubbrundor landar någonstans mellan 30 och 34.
 
-I ett vad lägger alla en insats, och den som har flest poäng när ronden är slut tar potten. Är det lika delas potten. Wager Golf räknar poängen hål för hål med rätt WHS-slag, visar ställningen live och gör upp potten automatiskt när ni går in.
+I ett vad lägger alla en insats, och den som har flest poäng när ronden är slut tar potten. Är det lika delas potten. Wager Golf räknar poängen hål för hål med rätt WHS-slag, visar ställningen live och räknar ut vem som är skyldig vem när ni går in.
 
 ## När passar Stableford?
 

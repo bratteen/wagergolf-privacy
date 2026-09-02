@@ -16,12 +16,12 @@
   },
   "guide": {
     "ctaHeading": "Slipp å regne {format} for hånd",
-    "ctaText": "Wager Golf scorer runden automatisk med riktig WHS-handicap og gjør opp potten når runden er over.",
+    "ctaText": "Wager Golf regner ut spilleformen og oppgjøret automatisk med riktig WHS-handicap og viser hvem som skylder hvem.",
     "related": "Flere spilleformer"
   },
   "article": {
     "related": "Les videre",
-    "ctaText": "Wager Golf scorer runden automatisk med riktig WHS-handicap og gjør opp potten når runden er over."
+    "ctaText": "Wager Golf regner ut spilleformen og oppgjøret automatisk med riktig WHS-handicap og viser hvem som skylder hvem."
   },
   "footer": {
     "formats": "Spilleformer",

@@ -2,7 +2,7 @@
 slug: naermest-hullet
 key: guide:narmast-flaggan
 format: Nærmest hullet
-category: Sidebet
+category: Sidespil
 players: "2 til 4 spillere"
 order: 4
 title: "Nærmest hullet: regler for closest to pin | Wager Golf"
@@ -51,4 +51,4 @@ På hul 16 misser alle green undtagen Erik, som vinder den anden pulje på samme
 - Vinderen får hele puljen, nettoen er puljen minus egen indsats
 - Ingen på green, ingen vinder: indsatserne bliver, ingen penge flytter sig
 
-Læg begge huller sammen: Anna vinder hul 7 (+150), men taber sin indsats på hul 16 (-50), netto +100. Erik det samme, bare omvendt, netto +100. De andre to taber deres indsats på hvert af hullerne, -50 plus -50, altså -100 hver. Summen går lige op: +100, +100, -100, -100. Wager Golf beregner puljerne hul for hul og gør beløbet op.
+Læg begge huller sammen: Anna vinder hul 7 (+150), men taber sin indsats på hul 16 (-50), netto +100. Erik det samme, bare omvendt, netto +100. De andre to taber deres indsats på hvert af hullerne, -50 plus -50, altså -100 hver. Summen går lige op: +100, +100, -100, -100. Wager Golf beregner puljerne hul for hul og viser, hvem der skylder hvem.

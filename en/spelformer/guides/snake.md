@@ -51,4 +51,4 @@ Three three-putts happen during the round:
 
 Nobody three-putts on the 17th or 18th, so Anna walks off the last green with the snake. She pays the whole pot of 150, split evenly between the other three. Björn, Cecilia and David each receive 50. Anna is 150 down on the round, the others 50 up each. Had nobody three-putted, no money would have moved at all.
 
-Wager Golf counts the pot hole by hole and works out the settlement when the round ends.
+Wager Golf counts the pot hole by hole, then works out the final balance and shows who owes whom.

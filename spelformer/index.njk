@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 key: page:formats
-updated: "2026-06-20"
+updated: "2026-09-02"
 title: "Golfspel och spelformer: regler och uträkning | Wager Golf"
 description: "Guider till golfens spelformer. Skins, matchspel, Nassau, Stableford och fler, med regler, så räknas det och hur du spelar dem med rätt handicap."
 ogTitle: "Spelformer i golf"
@@ -51,7 +51,7 @@ structuredData: |
     ]
   }
 ---
-<main>
+<main id="main-content" tabindex="-1">
   <section class="subhero">
     <div class="subhero-inner">
       <div class="breadcrumb">
@@ -67,7 +67,7 @@ structuredData: |
     {%- for cat in cats %}
     {%- set inCat = collections.guides | byCategory(cat, lang) %}
     {%- if inCat.length %}
-    <div class="hub-cat">{{ cat }}</div>
+    <h2 class="hub-cat">{{ cat }}</h2>
     <div class="hub-grid">
       {%- for g in inCat %}
       <a class="hub-card" href="{{ g.url }}">

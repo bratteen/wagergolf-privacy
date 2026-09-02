@@ -3,6 +3,11 @@ import assert from 'node:assert';
 import { onRequestGet, sanitizeCampaign, pickLang } from '../functions/go.js';
 
 const req = (url, headers = {}) => new Request(url, { headers });
+const reqWithCf = (url, country, headers = {}) => {
+  const request = req(url, headers);
+  Object.defineProperty(request, 'cf', { value: { country } });
+  return request;
+};
 
 // Full uppsättning för att testa själva språkvalslogiken oberoende av vilka
 // språk som råkar vara publicerade just nu.
@@ -43,6 +48,61 @@ test('no och nb är samma skriftspråk för vårt syfte', () => {
   assert.strictEqual(pickLang(url, request, ALLA), 'nb');
 });
 
+test('appspråk utan egen webbsida får engelsk fallback', () => {
+  const forcedUrl = new URL('https://wagergolf.se/go?l=de-DE');
+  const forcedRequest = req(forcedUrl.toString(), { 'accept-language': 'sv-SE' });
+  assert.strictEqual(pickLang(forcedUrl, forcedRequest, ALLA), 'en');
+
+  const detectedUrl = new URL('https://wagergolf.se/go');
+  const detectedRequest = req(detectedUrl.toString(), { 'accept-language': 'fi-FI,fi;q=0.9' });
+  assert.strictEqual(pickLang(detectedUrl, detectedRequest, ALLA), 'en');
+});
+
+test('första stödda språket i Accept-Language vinner', () => {
+  const url = new URL('https://wagergolf.se/go');
+  const request = req(url.toString(), { 'accept-language': 'pl-PL,de-DE;q=0.9,sv;q=0.8' });
+  assert.strictEqual(pickLang(url, request, ALLA), 'en');
+});
+
+test('Accept-Language följer q-värden och ignorerar q=0', () => {
+  const url = new URL('https://wagergolf.se/go');
+  assert.strictEqual(
+    pickLang(url, req(url.toString(), { 'accept-language': 'de;q=0.2, sv;q=1' }), ALLA),
+    'sv',
+  );
+  assert.strictEqual(
+    pickLang(url, req(url.toString(), { 'accept-language': 'da;q=0, en;q=0.8' }), ALLA),
+    'en',
+  );
+});
+
+test('Accept-Language ignorerar ogiltiga q-värden och behåller ordningen vid lika vikt', () => {
+  const url = new URL('https://wagergolf.se/go');
+  assert.strictEqual(
+    pickLang(url, req(url.toString(), { 'accept-language': 'da;q=oops, nb;q=0.8' }), ALLA),
+    'nb',
+  );
+  assert.strictEqual(
+    pickLang(url, req(url.toString(), { 'accept-language': 'da;q=0.8, en;q=0.8' }), ALLA),
+    'da',
+  );
+});
+
+test('GeoIP används när inget webbspråk känns igen', () => {
+  const cases = {
+    SE: 'sv', DK: 'da', NO: 'nb', IE: 'en', FI: 'en', NL: 'en', AT: 'en',
+    PT: 'en', BE: 'en', DE: 'en', FR: 'en', ES: 'en', IT: 'en',
+  };
+  for (const [country, expected] of Object.entries(cases)) {
+    const url = new URL('https://wagergolf.se/go');
+    const request = req(url.toString(), {
+      'accept-language': 'pl-PL',
+      'CF-IPCountry': country,
+    });
+    assert.strictEqual(pickLang(url, request, ALLA), expected, country);
+  }
+});
+
 test('okänt språk i l faller tillbaka på svenska även när allt är publicerat', () => {
   const url = new URL('https://wagergolf.se/go?l=klingon');
   const request = req('https://wagergolf.se/go?l=klingon');
@@ -74,10 +134,39 @@ test('utan c ges en ren URL utan utm', async () => {
   assert.strictEqual(res.headers.get('Location'), '/');
 });
 
+test('GeoIP-marknaden följer med till landningssidan', async () => {
+  const res = await onRequestGet({
+    request: req('https://wagergolf.se/go', {
+      'accept-language': 'de-DE',
+      'CF-IPCountry': 'AT',
+    }),
+  });
+  assert.strictEqual(res.headers.get('Location'), '/en/?m=AT');
+});
+
+test('Workers request.cf.country styr marknaden utan GeoIP-header', async () => {
+  const res = await onRequestGet({
+    request: reqWithCf('https://wagergolf.se/go', 'DE', { 'accept-language': 'pl-PL' }),
+  });
+  assert.strictEqual(res.headers.get('Location'), '/en/?m=DE');
+});
+
+test('ogiltig eller tom explicit marknad följer med och kan inte maskeras av GeoIP', async () => {
+  const invalid = await onRequestGet({
+    request: reqWithCf('https://wagergolf.se/go?m=DEU', 'SE'),
+  });
+  assert.strictEqual(invalid.headers.get('Location'), '/?m=DEU');
+
+  const empty = await onRequestGet({
+    request: reqWithCf('https://wagergolf.se/go?m=', 'SE'),
+  });
+  assert.strictEqual(empty.headers.get('Location'), '/?m=');
+});
+
 test('svaret får aldrig cachas delat', async () => {
   const res = await onRequestGet({ request: req('https://wagergolf.se/go') });
   assert.strictEqual(res.headers.get('Cache-Control'), 'no-store');
-  assert.strictEqual(res.headers.get('Vary'), 'Accept-Language');
+  assert.strictEqual(res.headers.get('Vary'), 'Accept-Language, CF-IPCountry');
 });
 
 test('en trasig QR-kod landar ändå någonstans vettigt', async () => {

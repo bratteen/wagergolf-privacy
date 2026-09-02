@@ -1,14 +1,12 @@
 // Vilka lokaliserade appskärmbilder som faktiskt finns på disk.
 //
-// Bilderna innehåller appens eget gränssnitt, och det är på svenska. En
-// engelsk besökare som ser "Hål 3" och "spelhcp" mitt i det som ska övertyga
-// hen att ladda ner får svaret gratis: appen är inte på mitt språk.
+// Rotbilderna innehåller det svenska appgränssnittet. Publicerade norska,
+// danska och engelska varianter ligger i egna språkkataloger med rätt valuta
+// och betalningsflöde för respektive exempelmarknad.
 //
-// Att skjuta nya skärmbilder för varje språk är dyrt och blir dyrare för varje
-// marknad. Därför gör mallen valet additivt i stället för blockerande: finns
-// ingen lokaliserad bild används den delade, och sajten fungerar. Släpps en
-// bild in i assets/shots/<lang>/ plockas den upp automatiskt överallt där
-// shot-shortcoden används, utan att en enda sida behöver ändras.
+// Mallen gör valet additivt: finns ingen bild i sidans språk används engelska
+// före den svenska roten. Släpps en bild in i assets/shots/<lang>/ plockas
+// den upp automatiskt överallt där shot-shortcoden används.
 const fs = require("fs");
 const path = require("path");
 
