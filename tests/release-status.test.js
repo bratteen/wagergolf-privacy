@@ -58,44 +58,70 @@ async function run(state, search = '?m=SE', userAgent = DESKTOP, maxTouchPoints 
   };
 }
 
-test('iOS i Sverige öppnar allmän CTA och bara App Store-badgen', async () => {
-  const result = await run({ market: 'SE', public: true, ios: true, android: false }, '?m=SE', IOS);
+test('iOS i Sverige öppnar allmän CTA och båda butiksbadges', async () => {
+  const result = await run({ market: 'SE', public: true, ios: true, android: true }, '?m=SE', IOS);
   assert.ok(result.open.every((node) => node.hidden === false));
   assert.ok(result.closed.every((node) => node.hidden === true));
   assert.ok(result.iosOpen.every((node) => node.hidden === false));
   assert.ok(result.iosClosed.every((node) => node.hidden === true));
-  assert.ok(result.androidOpen.every((node) => node.hidden === true));
-  assert.ok(result.androidClosed.every((node) => node.hidden === false));
+  assert.ok(result.androidOpen.every((node) => node.hidden === false));
+  assert.ok(result.androidClosed.every((node) => node.hidden === true));
   assert.strictEqual(result.attrs['data-release-market'], 'SE');
   assert.match(result.requested, /m=SE/);
   assert.match(result.requested, /l=en/);
 });
 
-test('Android i Sverige hålls stängt medan App Store-statusen bevaras', async () => {
-  const result = await run({ market: 'SE', public: true, ios: true, android: false }, '?m=SE', ANDROID);
-  assert.ok(result.open.every((node) => node.hidden === true));
-  assert.ok(result.closed.every((node) => node.hidden === false));
-  assert.ok(result.iosOpen.every((node) => node.hidden === false));
-  assert.ok(result.androidClosed.every((node) => node.hidden === false));
-});
-
-test('desktop visar att minst en butik är öppen och varje badge får egen status', async () => {
-  const result = await run({ market: 'SE', public: true, ios: true, android: false });
+test('Android i Sverige öppnar allmän CTA och båda butiksbadges', async () => {
+  const result = await run({ market: 'SE', public: true, ios: true, android: true }, '?m=SE', ANDROID);
   assert.ok(result.open.every((node) => node.hidden === false));
   assert.ok(result.closed.every((node) => node.hidden === true));
   assert.ok(result.iosOpen.every((node) => node.hidden === false));
-  assert.ok(result.androidOpen.every((node) => node.hidden === true));
+  assert.ok(result.androidOpen.every((node) => node.hidden === false));
+  assert.ok(result.androidClosed.every((node) => node.hidden === true));
+});
+
+test('desktop visar båda öppna butikerna i Sverige', async () => {
+  const result = await run({ market: 'SE', public: true, ios: true, android: true });
+  assert.ok(result.open.every((node) => node.hidden === false));
+  assert.ok(result.closed.every((node) => node.hidden === true));
+  assert.ok(result.iosOpen.every((node) => node.hidden === false));
+  assert.ok(result.androidOpen.every((node) => node.hidden === false));
+  assert.ok(result.androidClosed.every((node) => node.hidden === true));
 });
 
 test('modern iPadOS med Macintosh-identitet behandlas som iOS', async () => {
   const result = await run(
-    { market: 'SE', public: true, ios: true, android: false },
+    { market: 'SE', public: true, ios: true, android: true },
     '?m=SE',
     DESKTOP,
     5,
   );
   assert.ok(result.open.every((node) => node.hidden === false));
   assert.ok(result.closed.every((node) => node.hidden === true));
+});
+
+test('plattformssplitten håller Android stängt när bara iOS är öppet', async () => {
+  const ios = await run(
+    { market: 'TEST', public: true, ios: true, android: false },
+    '?m=TEST',
+    IOS,
+  );
+  assert.ok(ios.open.every((node) => node.hidden === false));
+  assert.ok(ios.closed.every((node) => node.hidden === true));
+  assert.ok(ios.iosOpen.every((node) => node.hidden === false));
+  assert.ok(ios.androidOpen.every((node) => node.hidden === true));
+  assert.ok(ios.androidClosed.every((node) => node.hidden === false));
+
+  const android = await run(
+    { market: 'TEST', public: true, ios: true, android: false },
+    '?m=TEST',
+    ANDROID,
+  );
+  assert.ok(android.open.every((node) => node.hidden === true));
+  assert.ok(android.closed.every((node) => node.hidden === false));
+  assert.ok(android.iosOpen.every((node) => node.hidden === false));
+  assert.ok(android.androidOpen.every((node) => node.hidden === true));
+  assert.ok(android.androidClosed.every((node) => node.hidden === false));
 });
 
 test('desktop härleder status från plattformarna även om redundant public driver', async () => {

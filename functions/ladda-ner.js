@@ -19,7 +19,7 @@ const APPLE_PROVIDER_TOKEN = '128879444';
 
 export const PUBLIC_MARKETS_BY_PLATFORM = {
   ios: ['SE'],
-  android: [],
+  android: ['SE'],
 };
 export const PUBLIC_MARKETS = [
   ...new Set([

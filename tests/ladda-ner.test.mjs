@@ -38,23 +38,32 @@ test('stängd språkmarknad hålls kvar på sin startsida', async () => {
   assert.strictEqual(res.headers.get('Location'), '/dk/#main-content');
 });
 
-test('explicit iOS fungerar utan mobil user-agent medan Android hålls stängt', async () => {
+test('explicit plattform öppnar rätt svenska butik utan mobil user-agent', async () => {
   const ios = await onRequestGet({
     request: req('https://wagergolf.se/ladda-ner?m=SE&p=ios', DESKTOP),
   });
   assert.match(ios.headers.get('Location'), /apps\.apple\.com\/se\//);
 
-  const res = await onRequestGet({
+  const android = await onRequestGet({
     request: req('https://wagergolf.se/ladda-ner?m=SE&p=android', DESKTOP),
   });
-  assert.strictEqual(res.headers.get('Location'), '/#main-content');
+  const target = new URL(android.headers.get('Location'));
+  assert.strictEqual(target.hostname, 'play.google.com');
+  assert.strictEqual(target.searchParams.get('id'), 'com.bratteen.wagergolf');
+  assert.strictEqual(target.searchParams.get('gl'), 'SE');
+  assert.strictEqual(target.searchParams.get('hl'), 'sv');
 });
 
-test('Android-UA i Sverige hålls kvar tills Google Play har version 1.7.1', async () => {
+test('Android-UA i Sverige öppnar den svenska Google Play-listningen', async () => {
   const res = await onRequestGet({
     request: reqWithCf('https://wagergolf.se/ladda-ner', 'SE', ANDROID),
   });
-  assert.strictEqual(res.headers.get('Location'), '/#main-content');
+  const target = new URL(res.headers.get('Location'));
+  assert.strictEqual(target.hostname, 'play.google.com');
+  assert.strictEqual(target.searchParams.get('id'), 'com.bratteen.wagergolf');
+  assert.strictEqual(target.searchParams.get('gl'), 'SE');
+  assert.strictEqual(target.searchParams.get('hl'), 'sv');
+  assert.match(decodeURIComponent(target.searchParams.get('referrer')), /utm_campaign=webb/);
 });
 
 test('ogiltig explicit plattform är fail-closed och faller inte tillbaka på UA', async () => {
