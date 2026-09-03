@@ -85,8 +85,8 @@ test('Android öppnar rätt Google Play-listning i alla 13 marknader', async () 
   }
 });
 
-test('iOS öppnar rätt App Store i Sverige, Danmark och Norge', async () => {
-  for (const code of ['SE', 'DK', 'NO']) {
+test('iOS öppnar rätt App Store i alla 13 marknader', async () => {
+  for (const code of TARGET_MARKET_CODES) {
     const res = await onRequestGet({
       request: req(`https://wagergolf.se/ladda-ner?m=${code}&p=ios`, DESKTOP),
     });
@@ -95,16 +95,6 @@ test('iOS öppnar rätt App Store i Sverige, Danmark och Norge', async () => {
     assert.strictEqual(target.hostname, 'apps.apple.com', code);
     assert.match(target.pathname, new RegExp(`^/${MARKETS[code].store}/app/id6767638917$`), code);
     assert.strictEqual(target.searchParams.get('ct'), MARKETS[code].campaign, code);
-  }
-});
-
-test('iOS förblir stängt i de tio euromarknaderna', async () => {
-  for (const code of TARGET_MARKET_CODES.filter((market) => !['SE', 'DK', 'NO'].includes(market))) {
-    const res = await onRequestGet({
-      request: req(`https://wagergolf.se/ladda-ner?m=${code}&p=ios`, DESKTOP),
-    });
-    assert.strictEqual(res.status, 302, code);
-    assert.strictEqual(res.headers.get('Location'), `${MARKETS[code].home}#main-content`, code);
   }
 });
 
@@ -155,13 +145,13 @@ test('saknad GeoIP håller svensk desktop på sidan utan att öppna butik', asyn
   assert.strictEqual(res.headers.get('Location'), '/#main-content');
 });
 
-test('GeoIP väljer marknad före språkfallback men iOS-grinden stoppar IE', async () => {
+test('GeoIP väljer marknad före språkfallback och öppnar rätt iOS-butik', async () => {
   const res = await onRequestGet({
     request: req('https://wagergolf.se/ladda-ner?l=en&p=ios', DESKTOP, {
       'CF-IPCountry': 'IE',
     }),
   });
-  assert.strictEqual(res.headers.get('Location'), '/en/#main-content');
+  assert.match(res.headers.get('Location'), /^https:\/\/apps\.apple\.com\/ie\/app\/id6767638917\?/);
 });
 
 test('Workers request.cf.country fungerar utan Managed Transform-header', async () => {

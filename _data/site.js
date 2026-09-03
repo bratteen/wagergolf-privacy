@@ -22,7 +22,7 @@ const APPLE_PROVIDER_TOKEN = "128879444";
 // butiken. Unionen används bara för övergripande webbstatus; /ladda-ner
 // kontrollerar alltid rätt plattform separat.
 const PUBLIC_MARKETS_BY_PLATFORM = {
-  ios: new Set(["SE", "DK", "NO"]),
+  ios: new Set(["SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT"]),
   android: new Set(["SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT"]),
 };
 const PUBLIC_MARKETS = new Set([
