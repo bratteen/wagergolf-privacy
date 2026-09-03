@@ -23,7 +23,7 @@ const APPLE_PROVIDER_TOKEN = "128879444";
 // kontrollerar alltid rätt plattform separat.
 const PUBLIC_MARKETS_BY_PLATFORM = {
   ios: new Set(["SE"]),
-  android: new Set(),
+  android: new Set(["SE"]),
 };
 const PUBLIC_MARKETS = new Set([
   ...PUBLIC_MARKETS_BY_PLATFORM.ios,

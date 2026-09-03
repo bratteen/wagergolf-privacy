@@ -33,15 +33,16 @@ test('kampanjnamnen är marknadsbaserade och engelska standarden är Irland', ()
   assert.strictEqual(site.storeUrls.en.campaign, 'webb-ie');
 });
 
-test('bara App Store i Sverige är öppen tills Google Play har version 1.7.1', () => {
+test('App Store och Google Play är öppna i Sverige', () => {
   assert.deepStrictEqual(site.release.publicMarketCodes, ['SE']);
   assert.deepStrictEqual(site.release.publicMarketCodesByPlatform, {
     ios: ['SE'],
-    android: [],
+    android: ['SE'],
   });
   assert.strictEqual(site.marketUrls.SE.iosPublic, true);
-  assert.strictEqual(site.marketUrls.SE.androidPublic, false);
+  assert.strictEqual(site.marketUrls.SE.androidPublic, true);
   assert.strictEqual(site.localeRelease.sv.public, true);
+  assert.strictEqual(site.localeRelease.sv.androidPublic, true);
   assert.strictEqual(site.localeRelease.nb.public, false);
   assert.strictEqual(site.localeRelease.da.public, false);
   assert.strictEqual(site.localeRelease.en.public, false);
