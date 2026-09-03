@@ -85,8 +85,21 @@ test('Android öppnar rätt Google Play-listning i alla 13 marknader', async () 
   }
 });
 
-test('iOS förblir stängt i de övriga tolv målmarknaderna', async () => {
-  for (const code of TARGET_MARKET_CODES.filter((market) => market !== 'SE')) {
+test('iOS öppnar rätt App Store i Sverige, Danmark och Norge', async () => {
+  for (const code of ['SE', 'DK', 'NO']) {
+    const res = await onRequestGet({
+      request: req(`https://wagergolf.se/ladda-ner?m=${code}&p=ios`, DESKTOP),
+    });
+    const target = new URL(res.headers.get('Location'));
+    assert.strictEqual(res.status, 302, code);
+    assert.strictEqual(target.hostname, 'apps.apple.com', code);
+    assert.match(target.pathname, new RegExp(`^/${MARKETS[code].store}/app/id6767638917$`), code);
+    assert.strictEqual(target.searchParams.get('ct'), MARKETS[code].campaign, code);
+  }
+});
+
+test('iOS förblir stängt i de tio euromarknaderna', async () => {
+  for (const code of TARGET_MARKET_CODES.filter((market) => !['SE', 'DK', 'NO'].includes(market))) {
     const res = await onRequestGet({
       request: req(`https://wagergolf.se/ladda-ner?m=${code}&p=ios`, DESKTOP),
     });

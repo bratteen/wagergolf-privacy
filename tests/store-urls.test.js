@@ -33,20 +33,20 @@ test('kampanjnamnen är marknadsbaserade och engelska standarden är Irland', ()
   assert.strictEqual(site.storeUrls.en.campaign, 'webb-ie');
 });
 
-test('Google Play är öppet i alla 13 marknader medan App Store endast är öppet i Sverige', () => {
+test('Google Play är öppet i alla 13 marknader medan App Store är öppet i Norden', () => {
   assert.deepStrictEqual(site.release.publicMarketCodes, TARGETS);
   assert.deepStrictEqual(site.release.publicMarketCodesByPlatform, {
-    ios: ['SE'],
+    ios: ['SE', 'DK', 'NO'],
     android: TARGETS,
   });
   for (const code of TARGETS) {
     assert.strictEqual(site.marketUrls[code].public, true, `${code}: public`);
-    assert.strictEqual(site.marketUrls[code].iosPublic, code === 'SE', `${code}: iOS`);
+    assert.strictEqual(site.marketUrls[code].iosPublic, ['SE', 'DK', 'NO'].includes(code), `${code}: iOS`);
     assert.strictEqual(site.marketUrls[code].androidPublic, true, `${code}: Android`);
   }
   for (const lang of ['sv', 'nb', 'da', 'en', 'fi', 'nl', 'de', 'fr', 'es', 'it', 'pt']) {
     assert.strictEqual(site.localeRelease[lang].public, true, `${lang}: public`);
-    assert.strictEqual(site.localeRelease[lang].iosPublic, lang === 'sv', `${lang}: iOS`);
+    assert.strictEqual(site.localeRelease[lang].iosPublic, ['sv', 'nb', 'da'].includes(lang), `${lang}: iOS`);
     assert.strictEqual(site.localeRelease[lang].androidPublic, true, `${lang}: Android`);
   }
 });
