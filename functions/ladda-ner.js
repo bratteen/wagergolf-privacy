@@ -19,7 +19,7 @@ const APPLE_PROVIDER_TOKEN = '128879444';
 
 export const PUBLIC_MARKETS_BY_PLATFORM = {
   ios: ['SE'],
-  android: ['SE'],
+  android: ['SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT'],
 };
 export const PUBLIC_MARKETS = [
   ...new Set([
@@ -61,7 +61,7 @@ const PUBLIC_BY_PLATFORM = {
 };
 
 /** Strikt uppslagning. En okänd explicit landkod får aldrig falla tillbaka på
- * Sverige och råka skicka gated trafik till den enda öppna storefronten. */
+ * Sverige och råka skicka gated trafik till en öppen storefront. */
 export function marketFor(value) {
   if (!value) return null;
   const code = String(value).trim().toUpperCase();

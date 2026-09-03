@@ -31,7 +31,7 @@ test('svenska iPhone får den svenska storefronten', async () => {
   assert.match(res.headers.get('Location'), /ct=webb(&|$)/);
 });
 
-test('stängd språkmarknad hålls kvar på sin startsida', async () => {
+test('språk utan verifierad marknad hålls kvar på sin startsida', async () => {
   const res = await onRequestGet({
     request: req('https://wagergolf.se/ladda-ner?l=da', IPHONE),
   });
@@ -64,6 +64,35 @@ test('Android-UA i Sverige öppnar den svenska Google Play-listningen', async ()
   assert.strictEqual(target.searchParams.get('gl'), 'SE');
   assert.strictEqual(target.searchParams.get('hl'), 'sv');
   assert.match(decodeURIComponent(target.searchParams.get('referrer')), /utm_campaign=webb/);
+});
+
+test('Android öppnar rätt Google Play-listning i alla 13 marknader', async () => {
+  for (const code of TARGET_MARKET_CODES) {
+    const res = await onRequestGet({
+      request: req(`https://wagergolf.se/ladda-ner?m=${code}&p=android`, DESKTOP),
+    });
+    const target = new URL(res.headers.get('Location'));
+    assert.strictEqual(res.status, 302, code);
+    assert.strictEqual(target.hostname, 'play.google.com', code);
+    assert.strictEqual(target.searchParams.get('id'), 'com.bratteen.wagergolf', code);
+    assert.strictEqual(target.searchParams.get('gl'), code, code);
+    assert.strictEqual(target.searchParams.get('hl'), MARKETS[code].play, code);
+    assert.strictEqual(
+      new URLSearchParams(target.searchParams.get('referrer')).get('utm_campaign'),
+      MARKETS[code].campaign,
+      code,
+    );
+  }
+});
+
+test('iOS förblir stängt i de övriga tolv målmarknaderna', async () => {
+  for (const code of TARGET_MARKET_CODES.filter((market) => market !== 'SE')) {
+    const res = await onRequestGet({
+      request: req(`https://wagergolf.se/ladda-ner?m=${code}&p=ios`, DESKTOP),
+    });
+    assert.strictEqual(res.status, 302, code);
+    assert.strictEqual(res.headers.get('Location'), `${MARKETS[code].home}#main-content`, code);
+  }
 });
 
 test('ogiltig explicit plattform är fail-closed och faller inte tillbaka på UA', async () => {
@@ -113,7 +142,7 @@ test('saknad GeoIP håller svensk desktop på sidan utan att öppna butik', asyn
   assert.strictEqual(res.headers.get('Location'), '/#main-content');
 });
 
-test('GeoIP väljer marknad före språkfallback men grinden stoppar IE', async () => {
+test('GeoIP väljer marknad före språkfallback men iOS-grinden stoppar IE', async () => {
   const res = await onRequestGet({
     request: req('https://wagergolf.se/ladda-ner?l=en&p=ios', DESKTOP, {
       'CF-IPCountry': 'IE',

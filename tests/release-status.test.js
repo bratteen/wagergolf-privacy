@@ -124,6 +124,32 @@ test('plattformssplitten håller Android stängt när bara iOS är öppet', asyn
   assert.ok(android.androidClosed.every((node) => node.hidden === false));
 });
 
+test('plattformssplitten öppnar Android och håller iOS stängt', async () => {
+  const android = await run(
+    { market: 'DK', public: true, ios: false, android: true },
+    '?m=DK',
+    ANDROID,
+  );
+  assert.ok(android.open.every((node) => node.hidden === false));
+  assert.ok(android.closed.every((node) => node.hidden === true));
+  assert.ok(android.iosOpen.every((node) => node.hidden === true));
+  assert.ok(android.iosClosed.every((node) => node.hidden === false));
+  assert.ok(android.androidOpen.every((node) => node.hidden === false));
+  assert.ok(android.androidClosed.every((node) => node.hidden === true));
+
+  const ios = await run(
+    { market: 'DK', public: true, ios: false, android: true },
+    '?m=DK',
+    IOS,
+  );
+  assert.ok(ios.open.every((node) => node.hidden === true));
+  assert.ok(ios.closed.every((node) => node.hidden === false));
+  assert.ok(ios.iosOpen.every((node) => node.hidden === true));
+  assert.ok(ios.iosClosed.every((node) => node.hidden === false));
+  assert.ok(ios.androidOpen.every((node) => node.hidden === false));
+  assert.ok(ios.androidClosed.every((node) => node.hidden === true));
+});
+
 test('desktop härleder status från plattformarna även om redundant public driver', async () => {
   const result = await run({ market: 'SE', public: true, ios: false, android: false });
   assert.ok(result.open.every((node) => node.hidden === true));
