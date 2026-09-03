@@ -18,14 +18,14 @@ test('explicit marknad använder samma plattformssplit som nedladdningen', async
     market: 'SE', public: true, ios: true, android: true,
   });
   assert.deepStrictEqual((await state('?m=DK', 'SE')).body, {
-    market: 'DK', public: true, ios: false, android: true,
+    market: 'DK', public: true, ios: true, android: true,
   });
 });
 
-test('GeoIP öppnar Android i alla 13 marknader och iOS endast i Sverige', async () => {
+test('GeoIP öppnar båda plattformarna i alla 13 marknader', async () => {
   for (const country of TARGET_MARKET_CODES) {
     assert.deepStrictEqual((await state('', country)).body, {
-      market: country, public: true, ios: country === 'SE', android: true,
+      market: country, public: true, ios: true, android: true,
     }, country);
   }
 });

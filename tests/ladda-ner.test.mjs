@@ -85,13 +85,16 @@ test('Android öppnar rätt Google Play-listning i alla 13 marknader', async () 
   }
 });
 
-test('iOS förblir stängt i de övriga tolv målmarknaderna', async () => {
-  for (const code of TARGET_MARKET_CODES.filter((market) => market !== 'SE')) {
+test('iOS öppnar rätt App Store i alla 13 marknader', async () => {
+  for (const code of TARGET_MARKET_CODES) {
     const res = await onRequestGet({
       request: req(`https://wagergolf.se/ladda-ner?m=${code}&p=ios`, DESKTOP),
     });
+    const target = new URL(res.headers.get('Location'));
     assert.strictEqual(res.status, 302, code);
-    assert.strictEqual(res.headers.get('Location'), `${MARKETS[code].home}#main-content`, code);
+    assert.strictEqual(target.hostname, 'apps.apple.com', code);
+    assert.match(target.pathname, new RegExp(`^/${MARKETS[code].store}/app/id6767638917$`), code);
+    assert.strictEqual(target.searchParams.get('ct'), MARKETS[code].campaign, code);
   }
 });
 
@@ -142,13 +145,13 @@ test('saknad GeoIP håller svensk desktop på sidan utan att öppna butik', asyn
   assert.strictEqual(res.headers.get('Location'), '/#main-content');
 });
 
-test('GeoIP väljer marknad före språkfallback men iOS-grinden stoppar IE', async () => {
+test('GeoIP väljer marknad före språkfallback och öppnar rätt iOS-butik', async () => {
   const res = await onRequestGet({
     request: req('https://wagergolf.se/ladda-ner?l=en&p=ios', DESKTOP, {
       'CF-IPCountry': 'IE',
     }),
   });
-  assert.strictEqual(res.headers.get('Location'), '/en/#main-content');
+  assert.match(res.headers.get('Location'), /^https:\/\/apps\.apple\.com\/ie\/app\/id6767638917\?/);
 });
 
 test('Workers request.cf.country fungerar utan Managed Transform-header', async () => {

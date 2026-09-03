@@ -18,7 +18,7 @@ const PLAY_ID = 'com.bratteen.wagergolf';
 const APPLE_PROVIDER_TOKEN = '128879444';
 
 export const PUBLIC_MARKETS_BY_PLATFORM = {
-  ios: ['SE'],
+  ios: ['SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT'],
   android: ['SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT'],
 };
 export const PUBLIC_MARKETS = [
