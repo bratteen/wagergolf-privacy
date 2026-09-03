@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { onRequestGet } from '../functions/market-status.js';
+import { TARGET_MARKET_CODES } from '../functions/ladda-ner.js';
 
 const request = (query = '', country = '') => new Request(
   `https://wagergolf.se/market-status${query}`,
@@ -12,22 +13,19 @@ async function state(query, country) {
   return { response, body: await response.json() };
 }
 
-test('explicit marknad använder samma Sverige-only-grind som nedladdningen', async () => {
+test('explicit marknad använder samma plattformssplit som nedladdningen', async () => {
   assert.deepStrictEqual((await state('?m=SE', 'DK')).body, {
     market: 'SE', public: true, ios: true, android: true,
   });
   assert.deepStrictEqual((await state('?m=DK', 'SE')).body, {
-    market: 'DK', public: false, ios: false, android: false,
+    market: 'DK', public: true, ios: false, android: true,
   });
 });
 
-test('GeoIP öppnar Sverige och håller övriga målmarknader stängda', async () => {
-  assert.deepStrictEqual((await state('', 'SE')).body, {
-    market: 'SE', public: true, ios: true, android: true,
-  });
-  for (const country of ['DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT']) {
+test('GeoIP öppnar Android i alla 13 marknader och iOS endast i Sverige', async () => {
+  for (const country of TARGET_MARKET_CODES) {
     assert.deepStrictEqual((await state('', country)).body, {
-      market: country, public: false, ios: false, android: false,
+      market: country, public: true, ios: country === 'SE', android: true,
     }, country);
   }
 });
