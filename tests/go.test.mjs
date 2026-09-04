@@ -91,7 +91,7 @@ test('Accept-Language ignorerar ogiltiga q-värden och behåller ordningen vid l
 test('GeoIP används när inget webbspråk känns igen', () => {
   const cases = {
     SE: 'sv', DK: 'da', NO: 'nb', IE: 'en', FI: 'fi', NL: 'nl', AT: 'de',
-    PT: 'pt', BE: 'en', DE: 'de', FR: 'fr', ES: 'es', IT: 'it',
+    PT: 'pt', BE: 'en', DE: 'de', FR: 'fr', ES: 'es', IT: 'it', US: 'en',
   };
   for (const [country, expected] of Object.entries(cases)) {
     const url = new URL('https://wagergolf.se/go');
@@ -149,6 +149,16 @@ test('GeoIP-marknaden följer med till landningssidan', async () => {
     }),
   });
   assert.strictEqual(res.headers.get('Location'), '/de/?m=AT');
+});
+
+test('US-GeoIP går till engelska sidan med US kvar för den stängda grinden', async () => {
+  const res = await onRequestGet({
+    request: req('https://wagergolf.se/go', {
+      'accept-language': 'pl-PL',
+      'CF-IPCountry': 'US',
+    }),
+  });
+  assert.strictEqual(res.headers.get('Location'), '/en/?m=US');
 });
 
 test('Workers request.cf.country styr marknaden utan GeoIP-header', async () => {

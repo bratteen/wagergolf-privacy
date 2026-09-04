@@ -1,5 +1,5 @@
 // /ladda-ner väljer både plattform och rätt storefront. Språk, marknad och
-// release-status är separata: elva webbspråk täcker 13 marknader och bara en
+// release-status är separata: elva webbspråk täcker 14 målmarknader och bara en
 // marknad som uttryckligen är öppen för rätt plattform får en
 // butiksomdirigering.
 //
@@ -28,7 +28,7 @@ export const PUBLIC_MARKETS = [
   ]),
 ];
 export const TARGET_MARKET_CODES = [
-  'SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT',
+  'SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT', 'US',
 ];
 
 export const MARKETS = {
@@ -45,6 +45,7 @@ export const MARKETS = {
   FR: { locale: 'fr', store: 'fr', play: 'fr', gl: 'FR', campaign: 'webb-fr', home: '/fr/' },
   ES: { locale: 'es', store: 'es', play: 'es', gl: 'ES', campaign: 'webb-es', home: '/es/' },
   IT: { locale: 'it', store: 'it', play: 'it', gl: 'IT', campaign: 'webb-it', home: '/it/' },
+  US: { locale: 'en', store: 'us', play: 'en', gl: 'US', campaign: 'webb-us', home: '/en/' },
 };
 
 const DEFAULT_MARKET_FOR_LOCALE = {
@@ -88,7 +89,7 @@ export function resolveMarket(url, headers, cfCountry = '') {
   const geoCode = cfCountry || headers.get('CF-IPCountry');
   if (geoCode) {
     const geo = marketFor(geoCode);
-    // Cloudflare känner ibland igen en besökare utanför de 13 marknaderna.
+    // Cloudflare känner ibland igen en besökare utanför målmarknaderna.
     // En sådan träff får aldrig falla vidare till engelska standardmarknaden
     // Irland och därmed skapa en butikslänk utanför lanseringsområdet.
     return { market: geo, invalidExplicitMarket: !geo };

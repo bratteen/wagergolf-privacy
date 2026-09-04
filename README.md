@@ -176,14 +176,17 @@ för att lägga till ett språk. `/go` och `/i/*` är undantagen: deras
 `PUBLISHED`-listor (steg 6) är egna kopior som måste uppdateras för hand.
 
 Nedladdningslänken (`functions/ladda-ner.js`) är en enda endpoint för alla
-13 marknader. Marknad väljs i ordningen explicit `?m=`, Workers verifierade
+14 målmarknader. Marknad väljs i ordningen explicit `?m=`, Workers verifierade
 `request.cf.country` och därefter `CF-IPCountry`-headern. Saknas ett verifierat
 land öppnas ingen butik. `?l=` anger endast webbspråk, aldrig storefront.
 Bara länder som är öppna för den efterfrågade plattformen i
 `PUBLIC_MARKETS_BY_PLATFORM` får en butiksomdirigering; övriga hålls kvar på
 rätt landningssida tills versionen faktiskt går att installera där. Unionen
-`PUBLIC_MARKETS` används bara för övergripande webbstatus. `_data/site.js` och
-funktionen speglar båda listorna och testerna fäller bygget om de driver isär.
+`PUBLIC_MARKETS` används bara för övergripande webbstatus. USA finns som känd
+target med engelska sidan och färdiga butiksparametrar, men ska saknas i både
+`PUBLIC_MARKETS_BY_PLATFORM.ios` och `.android` tills respektive 1.8.0 faktiskt
+går att installera där. `_data/site.js` och funktionen speglar båda listorna
+och testerna fäller bygget om de driver isär.
 
 Använd hreflang-koderna `nb`, `da` och `en` — aldrig `dk` eller `se`. De är
 landskoder (samma som ligger i sökvägen och i App Store-storefronten), inte

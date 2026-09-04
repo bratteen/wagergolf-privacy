@@ -66,8 +66,8 @@ test('Android-UA i Sverige öppnar den svenska Google Play-listningen', async ()
   assert.match(decodeURIComponent(target.searchParams.get('referrer')), /utm_campaign=webb/);
 });
 
-test('Android öppnar rätt Google Play-listning i alla 13 marknader', async () => {
-  for (const code of TARGET_MARKET_CODES) {
+test('Android öppnar rätt Google Play-listning i alla live-marknader', async () => {
+  for (const code of PUBLIC_MARKETS_BY_PLATFORM.android) {
     const res = await onRequestGet({
       request: req(`https://wagergolf.se/ladda-ner?m=${code}&p=android`, DESKTOP),
     });
@@ -85,8 +85,8 @@ test('Android öppnar rätt Google Play-listning i alla 13 marknader', async () 
   }
 });
 
-test('iOS öppnar rätt App Store i alla 13 marknader', async () => {
-  for (const code of TARGET_MARKET_CODES) {
+test('iOS öppnar rätt App Store i alla live-marknader', async () => {
+  for (const code of PUBLIC_MARKETS_BY_PLATFORM.ios) {
     const res = await onRequestGet({
       request: req(`https://wagergolf.se/ladda-ner?m=${code}&p=ios`, DESKTOP),
     });
@@ -170,20 +170,42 @@ test('explicit marknad har företräde framför GeoIP', async () => {
   assert.match(res.headers.get('Location'), /apps\.apple\.com\/se\//);
 });
 
-test('okänd explicit marknad är fail-closed', async () => {
-  assert.strictEqual(marketFor('US'), null);
+test('US är en känd target men båda plattformarna är fail-closed', async () => {
+  assert.strictEqual(marketFor('US'), MARKETS.US);
+  assert.ok(TARGET_MARKET_CODES.includes('US'));
+  assert.ok(!PUBLIC_MARKETS_BY_PLATFORM.ios.includes('US'));
+  assert.ok(!PUBLIC_MARKETS_BY_PLATFORM.android.includes('US'));
   const res = await onRequestGet({
     request: req('https://wagergolf.se/ladda-ner?l=en&m=US&p=ios', DESKTOP, {
       'CF-IPCountry': 'SE',
     }),
   });
   assert.strictEqual(res.headers.get('Location'), '/en/#main-content');
+
+  const android = await onRequestGet({
+    request: req('https://wagergolf.se/ladda-ner?m=US&p=android', DESKTOP),
+  });
+  assert.strictEqual(android.headers.get('Location'), '/en/#main-content');
 });
 
-test('GeoIP utanför de 13 marknaderna faller inte vidare till Irland', () => {
+test('US-GeoIP väljer engelska targetsidan men läcker ingen butik', async () => {
   const resolved = resolveMarket(
     new URL('https://wagergolf.se/ladda-ner?l=en&p=ios'),
     new Headers({ 'CF-IPCountry': 'US' }),
+  );
+  assert.strictEqual(resolved.market, MARKETS.US);
+  assert.strictEqual(resolved.invalidExplicitMarket, false);
+
+  const res = await onRequestGet({
+    request: reqWithCf('https://wagergolf.se/ladda-ner?p=ios', 'US', DESKTOP),
+  });
+  assert.strictEqual(res.headers.get('Location'), '/en/#main-content');
+});
+
+test('GeoIP utanför målmarknaderna faller inte vidare till Irland', () => {
+  const resolved = resolveMarket(
+    new URL('https://wagergolf.se/ladda-ner?l=en&p=ios'),
+    new Headers({ 'CF-IPCountry': 'CA' }),
   );
   assert.strictEqual(resolved.market, null);
   assert.strictEqual(resolved.invalidExplicitMarket, true);
