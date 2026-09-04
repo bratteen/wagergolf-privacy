@@ -47,19 +47,23 @@ for (const { file, source } of MARKET_COPY_FILES) {
   });
 }
 
-test('lokala gratistilbud använder respektive marknads valuta', () => {
+test('lokala gratistilbud använder respektive entydiga marknads valuta', () => {
   const danish = readFileSync(resolve(ROOT, 'dk/index.njk'), 'utf8');
   const norwegian = readFileSync(resolve(ROOT, 'no/index.njk'), 'utf8');
   const english = readFileSync(resolve(ROOT, 'en/index.njk'), 'utf8');
   assert.ok(danish.includes('"priceCurrency": "DKK"'));
   assert.ok(norwegian.includes('"priceCurrency": "NOK"'));
-  assert.ok(english.includes('"priceCurrency": "EUR"'));
+  assert.ok(!english.includes('"priceCurrency"'));
+  assert.ok(!english.includes('€4.99'));
+  assert.ok(!english.includes('$4.99'));
+  assert.ok(english.includes('Your local App Store or Google Play listing shows the current price'));
 });
 
-test('version 1.7.1-kopian anger 3 028 banor men lovar inte en öppen internationell release', () => {
+test('version 1.8.0-kopian anger över 20 000 banor i 14 länder utan att lova öppen butik', () => {
   for (const { source } of Object.values(HOMES)) {
-    assert.match(source, /3[ ,.\u00a0]028/);
-    assert.match(source, /1\.7\.1/);
+    assert.match(source, /20(?:[ ,.\u00a0]|&nbsp;)000/);
+    assert.match(source, /1\.8\.0/);
+    assert.match(source, /14/);
     assert.ok(!/Now on the App Store|Nå på App Store|Nu i App Store/.test(source));
   }
 });
@@ -86,9 +90,9 @@ test('gratisnivån, Pro och åldersgränsen beskrivs på alla startsidor', () =>
   }
 });
 
-test('alla eurolokaler visar samma belopp med lokalt decimalformat', () => {
-  for (const lang of ['en', 'fi', 'nl', 'de', 'fr', 'es', 'it', 'pt']) {
-    const decimal = lang === 'en' ? '\\.' : ',';
+test('entydiga eurolokaler visar samma belopp med lokalt decimalformat', () => {
+  for (const lang of ['fi', 'nl', 'de', 'fr', 'es', 'it', 'pt']) {
+    const decimal = ',';
     assert.match(HOMES[lang].source, new RegExp(`4${decimal}99`), `${lang}: månadspris`);
     assert.match(HOMES[lang].source, new RegExp(`29${decimal}99`), `${lang}: årspris`);
   }

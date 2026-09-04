@@ -35,7 +35,7 @@ const PUBLISHED = ['sv', 'nb', 'da', 'en', 'fi', 'nl', 'de', 'fr', 'es', 'it', '
 const DEFAULT_LANG = 'sv';
 const MARKET_LANG = {
   SE: 'sv', DK: 'da', NO: 'nb', IE: 'en', FI: 'fi', NL: 'nl', AT: 'de',
-  PT: 'pt', BE: 'en', DE: 'de', FR: 'fr', ES: 'es', IT: 'it',
+  PT: 'pt', BE: 'en', DE: 'de', FR: 'fr', ES: 'es', IT: 'it', US: 'en',
 };
 
 function requestCountry(request) {

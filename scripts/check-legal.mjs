@@ -42,11 +42,11 @@ for (const name of ['privacySource', 'termsSource', 'privacyBuilt', 'termsBuilt'
 
 for (const name of ['privacySource', 'privacyBuilt']) {
   const text = files[name];
-  requireCount(name, text, 'Version 4.2', 4);
-  requireText(name, text, 'Senast uppdaterad: 1 september 2026');
-  requireText(name, text, 'Last updated: September 1, 2026');
-  requireText(name, text, 'Version 4.2 av policyn gäller från 1 september 2026');
-  requireText(name, text, 'Version 4.2 of this policy applies from September 1, 2026');
+  requireCount(name, text, 'Version 4.3', 4);
+  requireText(name, text, 'Senast uppdaterad: 4 september 2026');
+  requireText(name, text, 'Last updated: September 4, 2026');
+  requireText(name, text, 'Version 4.3 av policyn gäller från 4 september 2026');
+  requireText(name, text, 'Version 4.3 of this policy applies from September 4, 2026');
   requireText(name, text, 'aktiverades och verifierades i produktion den 17 juli 2026');
   requireText(name, text, 'activated and verified in production on');
   requireText(name, text, 'automatiskt dataminimerad produktanalys');
@@ -62,8 +62,8 @@ for (const name of ['privacySource', 'privacyBuilt']) {
   requireText(name, text, '<strong>Home market</strong>');
   requireText(name, text, 'netto i rundans valda valuta');
   requireText(name, text, "net amount in the round's selected currency");
-  requireText(name, text, 'över 3 000 golfbanor');
-  requireText(name, text, 'more than 3,000 golf');
+  requireText(name, text, 'över 20 000 golfbanor');
+  requireText(name, text, 'more than 20,000 golf');
   requireText(name, text, 'Privat uppgörelse och Swish');
   requireText(name, text, 'Private settlement and Swish');
   requireText(name, text, 'Swish-funktionen är');
@@ -107,8 +107,8 @@ for (const name of ['privacySource', 'privacyBuilt']) {
   requireText(name, text, 'Meta Platforms');
   requireText(name, text, 'Danmark, Norge, Irland, Finland');
   requireText(name, text, 'Denmark, Norway, Ireland, Finland');
-  requireText(name, text, 'Tyskland, Frankrike, Spanien och Italien');
-  requireText(name, text, 'Germany, France, Spain and Italy');
+  requireText(name, text, 'Tyskland, Frankrike, Spanien, Italien och USA');
+  requireText(name, text, 'Germany, France, Spain, Italy and the United States');
   requireText(name, text, 'kan därför inte');
   requireText(name, text, 'automatiskt hittas');
   requireText(name, text, 'cannot be located automatically');
@@ -116,6 +116,7 @@ for (const name of ['privacySource', 'privacyBuilt']) {
   requireText(name, text, 'https://www.facebook.com/privacy/policy/');
   forbidText(name, text, 'Version 4.0');
   forbidText(name, text, 'Version 4.1');
+  forbidText(name, text, 'Version 4.2');
   forbidText(name, text, 'AppsFlyer Strict');
   forbidText(name, text, 'PostHog används bara om du själv slår på');
   forbidText(name, text, 'frivillig användningsstatistik');
@@ -131,9 +132,9 @@ for (const name of ['privacySource', 'privacyBuilt']) {
 
 for (const name of ['termsSource', 'termsBuilt']) {
   const text = files[name];
-  requireCount(name, text, 'Version 1.3', 2);
-  requireText(name, text, 'Senast uppdaterad: 1 september 2026');
-  requireText(name, text, 'Last updated: September 1, 2026');
+  requireCount(name, text, 'Version 1.4', 2);
+  requireText(name, text, 'Senast uppdaterad: 4 september 2026');
+  requireText(name, text, 'Last updated: September 4, 2026');
   requireText(name, text, '<section lang="en">');
   requireText(name, text, 'alla 21 spelformer');
   requireText(name, text, 'all 21 game formats');
@@ -141,6 +142,8 @@ for (const name of ['termsSource', 'termsBuilt']) {
   requireText(name, text, 'does not cancel the subscription');
   requireText(name, text, 'golfare i Sverige, Danmark, Norge, Irland');
   requireText(name, text, 'golfers in Sweden, Denmark, Norway, Ireland');
+  requireText(name, text, 'Spanien, Italien och USA');
+  requireText(name, text, 'Spain, Italy and the United States');
   requireText(name, text, 'tvingande regler i landet där du har din vanliga');
   requireText(name, text, 'mandatory rules in the country of your habitual');
   requireText(name, text, 'skatte- och rapporteringsregler');
@@ -154,6 +157,7 @@ for (const name of ['termsSource', 'termsBuilt']) {
   requireText(name, text, 'You must be at least 17 years old');
   forbidText(name, text, 'Version 1.1');
   forbidText(name, text, 'Version 1.2');
+  forbidText(name, text, 'Version 1.3');
   forbidText(name, text, 'alla 25 spelformat');
   forbidText(name, text, 'all 25 game formats');
   forbidText(name, text, '49 kr/månad');

@@ -13,9 +13,11 @@ const PLAY_STORE_URL =
 const APPLE_PROVIDER_TOKEN = "128879444";
 
 // Språk och marknad är två skilda saker. Sajten finns på samma elva språk som
-// appen, medan version 1.7.1 är förberedd för 13 storefronts. Tyska betjänar
+// appen, medan version 1.8.0 är förberedd för 14 storefronts. Tyska betjänar
 // både DE och AT. Belgien är flerspråkigt och har engelska som GeoIP-default;
-// webbläsarspråk eller ett uttryckligt språkval väljer nederländska/franska.
+// USA använder också engelska sidan men har egna butiks- och kampanjvärden.
+// Webbläsarspråk eller ett uttryckligt språkval kan fortfarande välja ett
+// annat publicerat webbspråk.
 //
 // Releasegrinden har EN plattformsspecifik source of truth. Lägg till en
 // landskod först när den aktuella versionen faktiskt går att installera i den
@@ -30,7 +32,7 @@ const PUBLIC_MARKETS = new Set([
   ...PUBLIC_MARKETS_BY_PLATFORM.android,
 ]);
 const TARGET_MARKET_CODES = [
-  "SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT",
+  "SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT", "US",
 ];
 
 const MARKETS = {
@@ -47,6 +49,7 @@ const MARKETS = {
   FR: { locale: "fr", store: "fr", play: "fr", gl: "FR", campaign: "webb-fr", home: "/fr/" },
   ES: { locale: "es", store: "es", play: "es", gl: "ES", campaign: "webb-es", home: "/es/" },
   IT: { locale: "it", store: "it", play: "it", gl: "IT", campaign: "webb-it", home: "/it/" },
+  US: { locale: "en", store: "us", play: "en", gl: "US", campaign: "webb-us", home: "/en/" },
 };
 
 const DEFAULT_MARKET_FOR_LOCALE = {
@@ -144,9 +147,9 @@ module.exports = {
   name: "Wager Golf",
   url: "https://wagergolf.se",
   release: {
-    version: "1.7.1",
-    courseCount: 3028,
-    courseClaim: "3 000+",
+    version: "1.8.0",
+    courseCount: 21864,
+    courseClaim: "20 000+",
     targetMarketCodes: TARGET_MARKET_CODES,
     publicMarketCodes: [...PUBLIC_MARKETS],
     publicMarketCodesByPlatform: {
