@@ -126,7 +126,7 @@ structuredData: |
             {% set storePlats = "startsida-hero" %}
             {% include "store-badges.njk" %}
             <span class="cta-note" data-release-open hidden>In deinem Land kostenlos erhältlich.</span>
-            <span class="cta-note" data-release-closed>Für dein Gerät in diesem Land noch nicht verfügbar.</span>
+            <span class="cta-note" data-release-closed data-nosnippet>Für dein Gerät in diesem Land noch nicht verfügbar.</span>
           </div>
           <p class="hero-proof">
             <span class="hero-proof-stars" role="img" aria-label="5 von 5 Sternen">{% for i in range(5) %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>{% endfor %}</span>

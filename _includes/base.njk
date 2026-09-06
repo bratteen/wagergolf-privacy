@@ -18,12 +18,29 @@
   <meta property="og:title" content="{{ ogTitle or title }}">
   <meta property="og:description" content="{{ ogDescription or description }}">
   <meta property="og:type" content="{{ ogType or 'website' }}">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:locale" content="{{ routes.locales[lang].intl | replace('-', '_') }}">
+{%- for a in alts.links %}
+{%- if a.lang != lang %}
+  <meta property="og:locale:alternate" content="{{ routes.locales[a.lang].intl | replace('-', '_') }}">
+{%- endif %}
+{%- endfor %}
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
   <meta property="og:image" content="{{ ogImage or site.ogImage }}">
+  <meta property="og:image:alt" content="{{ ogImageAlt or site.name }}">
+{%- if not ogImage or ogImage == site.ogImage %}
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+{%- endif %}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ ogTitle or title }}">
   <meta name="twitter:description" content="{{ ogDescription or description }}">
   <meta name="twitter:image" content="{{ ogImage or site.ogImage }}">
+  <meta name="twitter:image:alt" content="{{ ogImageAlt or site.name }}">
+{%- if routes.publishedLocales.includes(lang) and not eleventyExcludeFromCollections %}
+  <meta name="robots" content="max-image-preview:large">
+{%- endif %}
 
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
@@ -39,7 +56,7 @@
       fail-closed tills /market-status bekräftar ett öppet land. -#}
   <script defer src="/assets/js/release-status.js{% if assets.releaseStatus %}?v={{ assets.releaseStatus }}{% endif %}"></script>
 
-  {% if structuredData %}<script type="application/ld+json">{{ structuredData | safe }}</script>{% endif %}
+  {% if structuredData %}<script type="application/ld+json">{{ structuredData | articleMetadata({ updated: updated, headline: h1 or title, description: description, image: image or ogImage or site.ogImage, baseUrl: site.url }) | safe }}</script>{% endif %}
   {%- if not routes.publishedLocales.includes(lang) %}
   {#- Språkkatalogerna byggs och deployas även innan språket är publicerat, så
       att en färdig översättning går att granska i skarp miljö. Men sidorna är
@@ -66,7 +83,7 @@
         <a href="{{ routes.homeFor(lang) }}#funktioner">{{ t.nav.features }}</a>
         <a class="nav-keep" href="{{ routes.pathFor(lang, 'formats') }}">{{ t.nav.formats }}</a>
         <a class="nav-cta" data-release-open hidden href="{{ site.downloadUrls[lang].generic }}" data-download-link data-store-link data-ios-url="{{ site.downloadUrls[lang].ios }}" data-android-url="{{ site.downloadUrls[lang].android }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
-        <span class="nav-cta is-disabled" data-release-closed>{{ t.nav.unavailable }}</span>
+        <span class="nav-cta is-disabled" data-release-closed data-nosnippet>{{ t.nav.unavailable }}</span>
         {#- <div>, inte <nav>: den här inkluderingen ligger inuti
             <nav class="nav-links"> ovan, och ett nästlat nav-landmark är
             förvirrande för skärmläsare. Se kommentaren i
@@ -80,7 +97,7 @@
           samtidigt som alla språk ligger kvar som riktiga länkar i DOM:en. -#}
       <div class="mobile-nav">
         <a class="nav-cta" data-release-open hidden href="{{ site.downloadUrls[lang].generic }}" data-download-link data-store-link data-ios-url="{{ site.downloadUrls[lang].ios }}" data-android-url="{{ site.downloadUrls[lang].android }}" data-umami-event="ladda-ner-klick" data-umami-event-plats="nav">{{ t.nav.download }}</a>
-        <span class="nav-cta is-disabled" data-release-closed><span class="mobile-status-long">{{ t.nav.unavailable }}</span><span aria-hidden="true">{{ t.nav.soon }}</span></span>
+        <span class="nav-cta is-disabled" data-release-closed data-nosnippet><span class="mobile-status-long">{{ t.nav.unavailable }}</span><span aria-hidden="true">{{ t.nav.soon }}</span></span>
         <details class="mobile-menu">
           <summary aria-label="Wager Golf: {{ t.nav.formats }}, {{ t.switcher.label }}">
             <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">

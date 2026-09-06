@@ -13,6 +13,14 @@ npm run dev        # 11ty dev-server med live reload på http://localhost:8080
 npm run build      # bygger till _site/
 ```
 
+`npm run check` bygger och kontrollerar även SEO i den färdiga HTML:en:
+sidkarta mot indexerbara sidor, canonical, unika titlar inom varje språk,
+beskrivningar, interna länkar och ankare, bild-/script-/stilmallsfiler,
+delningsmetadata och synk mellan artiklarnas JSON-LD och sidans innehåll.
+Tillfälliga landsmeddelanden ska ha `data-nosnippet`; behåll detta när
+nedladdningsknapparna ändras. Breda artikeltabeller får en fokuserbar rullyta
+genom de gemensamma mallarna.
+
 ## Deploya
 
 ```bash

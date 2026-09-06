@@ -19,7 +19,7 @@ layout: base.njk
 
   <article class="article-wrap">
     <div class="article">
-      {{ content | safe }}
+      {{ content | responsiveTables | safe }}
     </div>
   </article>
 
@@ -36,8 +36,8 @@ layout: base.njk
   {% endif %}
 
   <section class="guide-cta">
-    <h2>{{ t.guide.ctaHeading | replace("{format}", format) }}</h2>
-    <p>{{ t.guide.ctaText }}</p>
+    <h2>{{ (ctaHeading or t.guide.ctaHeading) | replace("{format}", format) }}</h2>
+    <p>{{ ctaText or t.guide.ctaText }}</p>
     {% set storePlats = "guide" %}
     {% include "store-badges.njk" %}
   </section>

@@ -1,6 +1,8 @@
 const { alternatesFor } = require("./lib/alternates.js");
 
 module.exports = function (eleventyConfig) {
+  const { responsiveTables } = require("./lib/responsive-tables.js");
+  eleventyConfig.addFilter("responsiveTables", responsiveTables);
   // Statiska resurser + de fristående juridiska sidorna kopieras rakt av.
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("privacy");
@@ -32,6 +34,10 @@ module.exports = function (eleventyConfig) {
   // lastmod för sitemapen: explicit datum ur frontmatter före filens mtime.
   const { sitemapDate } = require("./lib/sitemap-date.js");
   eleventyConfig.addFilter("sitemapDate", sitemapDate);
+
+  // Håll även handskrivna Article-grafer i synk med sidans synliga metadata.
+  const { articleMetadata } = require("./lib/article-metadata.js");
+  eleventyConfig.addFilter("articleMetadata", articleMetadata);
 
   // Läsbart datum per språk för by-line ("2026-06-20" -> "20 juni 2026").
   const { localDate } = require("./lib/local-date.js");
