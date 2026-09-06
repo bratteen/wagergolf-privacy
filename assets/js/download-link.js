@@ -3,7 +3,7 @@
 //
 //   mobil   -> /ladda-ner med explicit plattform; endpointen väljer sedan rätt
 //              land och butik utan att en stängd storefront kan läcka
-//   desktop -> sidans hero om den finns; på undersidor behålls /ladda-ner,
+//   desktop -> sidans nedladdningskort om det finns; annars /ladda-ner,
 //              som skickar vidare till rätt språkstartsida
 //
 // Här går det också att fånga iPad, som sedan iPadOS 13 uppger sig vara en Mac
@@ -33,9 +33,8 @@
       else if (/iPhone|iPad|iPod/i.test(ua)) target = ios;
       else if (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1) target = ios;
 
-      // Ingen igenkänd mobil: scrolla bara inom sidan om den faktiskt har en
-      // hero med butiksknappar. På guider, Om och andra undersidor behålls den
-      // serverstyrda /ladda-ner-länken så knappen aldrig blir en no-op.
+      // Ingen igenkänd mobil: scrolla bara inom sidan om den faktiskt har ett
+      // nedladdningskort. Annars behålls den serverstyrda /ladda-ner-länken.
       var anchor = document.querySelector('[data-download-anchor]');
       if (target) el.setAttribute('href', target);
       else if (anchor && anchor.id) el.setAttribute('href', '#' + anchor.id);
@@ -58,13 +57,19 @@
   // ändras på alla tre.
   var params = new URLSearchParams(location.search);
   var raw = params.get('c') || params.get('utm_campaign');
+  // Guider delar ett kort kampanjnamn för att inte splittra små volymer per
+  // artikel. En uttrycklig annons-/QR-kampanj har alltid företräde.
+  var defaultCampaign = document.body
+    ? document.body.getAttribute('data-download-campaign')
+    : '';
+  var campaignSource = raw || defaultCampaign;
   var rawMarket = params.get('m');
   var hasMarket = params.has('m');
   // Vidarebefordra även en ogiltig explicit kod så servern kan stoppa den.
   // Om den slängs bort här kan GeoIP annars välja en annan storefront.
   var market = hasMarket ? String(rawMarket || '').slice(0, 16).toUpperCase() : '';
-  var campaign = raw
-    ? String(raw).toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  var campaign = campaignSource
+    ? String(campaignSource).toLowerCase().replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+/, '').slice(0, 40).replace(/-+$/, '')
     : '';
 
@@ -72,18 +77,26 @@
     var stores = document.querySelectorAll('a[data-store-link]');
     for (i = 0; i < stores.length; i++) {
       var href = stores[i].getAttribute('href');
+      // En fragmentlänk behåller sidans query automatiskt. Märk själva
+      // butiksknapparna och låt desktopnav fortsätta scrolla på samma sida.
+      if (!href || href.charAt(0) === '#') continue;
       try {
         var u = new URL(href, location.href);
+        // Sidans generiska guidekampanj får inte skriva över en uttrycklig
+        // kampanj som redan finns på en enskild nedladdningslänk.
+        var linkCampaign = !raw && (u.searchParams.get('c') || u.searchParams.get('utm_campaign'))
+          ? ''
+          : campaign;
         if (u.pathname === '/ladda-ner') {
-          if (campaign) u.searchParams.set('c', campaign);
+          if (linkCampaign) u.searchParams.set('c', linkCampaign);
           if (hasMarket) u.searchParams.set('m', market);
-        } else if (campaign && u.searchParams.has('ct')) {
-          u.searchParams.set('ct', campaign);
+        } else if (linkCampaign && u.searchParams.has('ct')) {
+          u.searchParams.set('ct', linkCampaign);
         }
         var ref = u.searchParams.get('referrer');
-        if (campaign && ref) {
+        if (linkCampaign && ref) {
           var inner = new URLSearchParams(ref);
-          inner.set('utm_campaign', campaign);
+          inner.set('utm_campaign', linkCampaign);
           u.searchParams.set('referrer', inner.toString());
         }
         var next = u.origin === location.origin

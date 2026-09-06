@@ -177,7 +177,7 @@ test('okänd explicit marknad är fail-closed', async () => {
       'CF-IPCountry': 'SE',
     }),
   });
-  assert.strictEqual(res.headers.get('Location'), '/en/#main-content');
+  assert.strictEqual(res.headers.get('Location'), '/en/?m=US#main-content');
 });
 
 test('GeoIP utanför de 13 marknaderna faller inte vidare till Irland', () => {
@@ -194,6 +194,69 @@ test('kampanj följer med efter marknadsvalet', async () => {
     request: req('https://wagergolf.se/ladda-ner?m=SE&p=ios&c=Meta%20Launch', DESKTOP),
   });
   assert.strictEqual(new URL(res.headers.get('Location')).searchParams.get('ct'), 'meta-launch');
+});
+
+test('guidekampanjen går till båda butikerna utan att ändra GeoIP-marknad eller valt språk', async () => {
+  for (const platform of ['ios', 'android']) {
+    const res = await onRequestGet({
+      request: reqWithCf(`https://wagergolf.se/ladda-ner?l=fr&p=${platform}&c=guides`, 'BE', DESKTOP),
+    });
+    const target = new URL(res.headers.get('Location'));
+    if (platform === 'ios') {
+      assert.strictEqual(target.hostname, 'apps.apple.com');
+      assert.match(target.pathname, /^\/be\/app\//);
+      assert.strictEqual(target.searchParams.get('ct'), 'guides');
+    } else {
+      assert.strictEqual(target.hostname, 'play.google.com');
+      assert.strictEqual(target.searchParams.get('gl'), 'BE');
+      assert.strictEqual(target.searchParams.get('hl'), 'fr');
+      assert.strictEqual(new URLSearchParams(target.searchParams.get('referrer')).get('utm_campaign'), 'guides');
+    }
+  }
+});
+
+test('desktop behåller kampanj och explicit marknad genom startsidan till nästa butiksklick', async () => {
+  const res = await onRequestGet({
+    request: reqWithCf('https://wagergolf.se/ladda-ner?l=en&m=FI&c=guides', 'SE', DESKTOP),
+  });
+  assert.strictEqual(res.headers.get('Location'), '/en/?c=guides&m=FI#main-content');
+  const home = new URL(res.headers.get('Location'), 'https://wagergolf.se');
+  const next = new URL('https://wagergolf.se/ladda-ner' + home.search);
+  next.searchParams.set('p', 'android');
+  next.searchParams.set('l', 'en');
+  const store = await onRequestGet({ request: reqWithCf(next.toString(), 'SE', DESKTOP) });
+  const target = new URL(store.headers.get('Location'));
+  assert.strictEqual(target.searchParams.get('gl'), 'FI');
+  assert.strictEqual(target.searchParams.get('hl'), 'en');
+  assert.strictEqual(new URLSearchParams(target.searchParams.get('referrer')).get('utm_campaign'), 'guides');
+});
+
+test('desktop-returen bevarar sanerad kampanj med c före utm_campaign', async () => {
+  for (const [query, expected] of [
+    ['utm_campaign=Meta%20Launch', 'meta-launch'],
+    ['c=QR%20Club&utm_campaign=Meta%20Launch', 'qr-club'],
+  ]) {
+    const res = await onRequestGet({
+      request: req(`https://wagergolf.se/ladda-ner?l=en&${query}`, DESKTOP),
+    });
+    assert.strictEqual(res.headers.get('Location'), `/en/?c=${expected}#main-content`);
+  }
+});
+
+test('guidekampanjer öppnar aldrig US, GB eller en ogiltig explicit marknad', async () => {
+  for (const market of ['US', 'GB', 'USA', '']) {
+    for (const platform of ['ios', 'android']) {
+      const res = await onRequestGet({
+        request: reqWithCf(`https://wagergolf.se/ladda-ner?l=en&m=${market}&p=${platform}&c=guides`, 'SE', IPHONE),
+      });
+      const target = new URL(res.headers.get('Location'), 'https://wagergolf.se');
+      assert.strictEqual(target.origin, 'https://wagergolf.se');
+      assert.strictEqual(target.pathname, '/en/');
+      assert.strictEqual(target.searchParams.get('c'), 'guides');
+      assert.strictEqual(target.searchParams.get('m'), market);
+      assert.strictEqual(resolveMarket(target, new Headers(), 'SE').market, null);
+    }
+  }
 });
 
 test('funktions- och sajtkonfigurationen innehåller samma marknader och grind', () => {

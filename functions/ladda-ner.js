@@ -160,7 +160,14 @@ export function onRequestGet({ request }) {
 
   // Marknad saknas, är okänd eller är fortfarande under granskning: håll kvar
   // besökaren på rätt språkversion. Ingen gated storefront får läcka ut här.
-  let target = `${homeFor(url, market)}#main-content`;
+  // Desktop och stängda marknader kan gå via startsidan innan nästa klick.
+  // Behåll kampanjen och även en ogiltig explicit marknad: annars tappas
+  // attributionen, eller GeoIP kan öppna en annan butik på nästa sida.
+  const homeParams = new URLSearchParams();
+  if (campaign) homeParams.set('c', campaign);
+  if (url.searchParams.has('m')) homeParams.set('m', url.searchParams.get('m'));
+  const homeSearch = homeParams.size ? `?${homeParams}` : '';
+  let target = `${homeFor(url, market)}${homeSearch}#main-content`;
   if (market && platform && PUBLIC_BY_PLATFORM[platform].has(market.gl)) {
     if (platform === 'android') target = playStore(market, campaign, locale);
     else if (platform === 'ios') target = appStore(market, campaign);

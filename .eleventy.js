@@ -3,6 +3,8 @@ const { alternatesFor } = require("./lib/alternates.js");
 module.exports = function (eleventyConfig) {
   const { responsiveTables } = require("./lib/responsive-tables.js");
   eleventyConfig.addFilter("responsiveTables", responsiveTables);
+  const { insertGuidePromotion } = require("./lib/guide-promotion.js");
+  eleventyConfig.addFilter("insertGuidePromotion", insertGuidePromotion);
   // Statiska resurser + de fristående juridiska sidorna kopieras rakt av.
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("privacy");

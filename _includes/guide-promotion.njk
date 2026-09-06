@@ -1,0 +1,16 @@
+<aside class="guide-promo" id="download-app" aria-labelledby="guide-promo-title" data-download-anchor tabindex="-1">
+  <div class="guide-promo-heading">
+    <p class="guide-promo-brand">Wager Golf</p>
+    <h2 id="guide-promo-title">{{ promotion.title }}</h2>
+  </div>
+  <p class="guide-promo-body">{{ promotion.body }}</p>
+  <div class="guide-promo-actions">
+    {% set storePlats = "guide-inline" %}
+    {% include "store-badges.njk" %}
+    <p class="guide-promo-note">{{ promotion.reassurance }}</p>
+  </div>
+  <figure class="guide-promo-preview">
+    <img src="{{ promotion.image }}" alt="{{ promotion.imageAlt }}" width="640" height="1306" loading="lazy" decoding="async">
+    <figcaption>{{ promotion.imageCaption }}</figcaption>
+  </figure>
+</aside>

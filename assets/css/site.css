@@ -420,6 +420,47 @@ footer { background: var(--green-900); color: rgba(245,239,227,0.7); padding: 54
 .article strong { color: var(--ink); }
 .article a { color: var(--green-700); text-decoration: underline; text-underline-offset: 2px; }
 
+/* Appens scorekort nära guidens första praktiska förklaring. */
+.guide-promo {
+  display: grid; grid-template-columns: minmax(0, 1fr) 148px;
+  grid-template-areas: "heading preview" "body preview" "actions preview";
+  gap: 14px 26px; align-items: start;
+  margin: 34px 0 42px; padding: 26px;
+  border: 1px solid var(--line); border-radius: 18px;
+  background: var(--cream-card); scroll-margin-top: 84px;
+}
+.guide-promo:focus-visible { outline: 3px solid var(--green-700); outline-offset: 4px; }
+.guide-promo-heading { grid-area: heading; align-self: end; min-width: 0; }
+.guide-promo .guide-promo-brand {
+  margin: 0 0 10px; color: var(--brass-deep);
+  font: 600 11px/1.4 var(--mono); letter-spacing: 1.5px; text-transform: uppercase;
+}
+.guide-promo h2 { margin: 0; font-size: 29px; line-height: 1.18; overflow-wrap: anywhere; }
+.guide-promo .guide-promo-body { grid-area: body; margin: 0; font-size: 16px; line-height: 1.6; }
+.guide-promo-actions { grid-area: actions; min-width: 0; }
+.guide-promo .store-badges { justify-content: flex-start; gap: 10px; }
+.guide-promo .btn-store { color: var(--cream); background: var(--green-900); text-decoration: none; padding: 12px 15px; }
+.guide-promo .btn-store:hover { background: var(--green-700); }
+.guide-promo .btn-store.is-disabled { opacity: .65; }
+.guide-promo .guide-promo-note { margin: 12px 0 0; font-size: 13px; line-height: 1.5; }
+.guide-promo-preview { grid-area: preview; align-self: center; margin: 0; min-width: 0; }
+.guide-promo-preview img { width: 100%; height: auto; }
+.guide-promo-preview figcaption { margin-top: 8px; color: var(--ink-faint); font-size: 11px; line-height: 1.4; text-align: center; }
+@media (max-width: 620px) {
+  .guide-promo {
+    grid-template-columns: minmax(0, 1fr) 96px;
+    grid-template-areas: "heading preview" "body body" "actions actions";
+    gap: 18px 16px; padding: 20px 18px;
+  }
+  .guide-promo-heading { align-self: center; }
+  .guide-promo h2 { font-size: 25px; }
+  .guide-promo .btn-store { flex: 1 1 145px; justify-content: center; }
+}
+@media (max-width: 380px) {
+  .guide-promo { grid-template-columns: minmax(0, 1fr) 72px; column-gap: 12px; padding-inline: 16px; }
+  .guide-promo h2 { font-size: 23px; }
+}
+
 /* Tabeller i guide-artiklar (t.ex. Stableford-poängtabellen) */
 .article .table-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; margin: 8px 0 24px; }
 .article .table-scroll:focus-visible { outline: 3px solid var(--green-700); outline-offset: 3px; border-radius: 4px; }
