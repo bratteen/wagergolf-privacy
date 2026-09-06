@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { createRequire } from 'node:module';
 import {
   onRequestGet, marketFor, resolveMarket, playStore, MARKETS, PUBLIC_MARKETS,
-  PUBLIC_MARKETS_BY_PLATFORM, TARGET_MARKET_CODES,
+  PUBLIC_MARKETS_BY_PLATFORM, TARGET_MARKET_CODES, UPCOMING_MARKET_CODES,
 } from '../functions/ladda-ner.js';
 
 const require = createRequire(import.meta.url);
@@ -171,19 +171,19 @@ test('explicit marknad har företräde framför GeoIP', async () => {
 });
 
 test('okänd explicit marknad är fail-closed', async () => {
-  assert.strictEqual(marketFor('US'), null);
+  assert.strictEqual(marketFor('CA'), null);
   const res = await onRequestGet({
-    request: req('https://wagergolf.se/ladda-ner?l=en&m=US&p=ios', DESKTOP, {
+    request: req('https://wagergolf.se/ladda-ner?l=en&m=CA&p=ios', DESKTOP, {
       'CF-IPCountry': 'SE',
     }),
   });
-  assert.strictEqual(res.headers.get('Location'), '/en/?m=US#main-content');
+  assert.strictEqual(res.headers.get('Location'), '/en/?m=CA#main-content');
 });
 
 test('GeoIP utanför de 13 marknaderna faller inte vidare till Irland', () => {
   const resolved = resolveMarket(
     new URL('https://wagergolf.se/ladda-ner?l=en&p=ios'),
-    new Headers({ 'CF-IPCountry': 'US' }),
+    new Headers({ 'CF-IPCountry': 'CA' }),
   );
   assert.strictEqual(resolved.market, null);
   assert.strictEqual(resolved.invalidExplicitMarket, true);
@@ -254,16 +254,19 @@ test('guidekampanjer öppnar aldrig US, GB eller en ogiltig explicit marknad', a
       assert.strictEqual(target.pathname, '/en/');
       assert.strictEqual(target.searchParams.get('c'), 'guides');
       assert.strictEqual(target.searchParams.get('m'), market);
-      assert.strictEqual(resolveMarket(target, new Headers(), 'SE').market, null);
+      const resolved = resolveMarket(target, new Headers(), 'SE').market;
+      assert.strictEqual(resolved?.gl ?? null, ['US', 'GB'].includes(market) ? market : null);
+      assert.ok(!PUBLIC_MARKETS_BY_PLATFORM[platform].includes(resolved?.gl));
     }
   }
 });
 
 test('funktions- och sajtkonfigurationen innehåller samma marknader och grind', () => {
   assert.deepStrictEqual(TARGET_MARKET_CODES, site.release.targetMarketCodes);
+  assert.deepStrictEqual(UPCOMING_MARKET_CODES, site.release.upcomingMarketCodes);
   assert.deepStrictEqual(PUBLIC_MARKETS, site.release.publicMarketCodes);
   assert.deepStrictEqual(PUBLIC_MARKETS_BY_PLATFORM, site.release.publicMarketCodesByPlatform);
-  for (const code of TARGET_MARKET_CODES) {
+  for (const code of [...TARGET_MARKET_CODES, ...UPCOMING_MARKET_CODES]) {
     assert.deepStrictEqual(MARKETS[code], {
       locale: site.markets[code].locale,
       store: site.markets[code].store,

@@ -181,3 +181,22 @@ test('ogiltig explicit marknad skickas vidare och kan inte maskeras av GeoIP', a
   assert.ok(result.open.every((node) => node.hidden === true));
   assert.ok(result.closed.every((node) => node.hidden === false));
 });
+
+test('verkligt GB/US-statussvar håller engelska nedladdningsknappar dolda på alla enheter', async () => {
+  const { onRequestGet } = await import('../functions/market-status.js');
+  for (const market of ['GB', 'US']) {
+    const state = await onRequestGet({
+      request: new Request(`https://wagergolf.se/market-status?m=${market}`),
+    }).json();
+    for (const userAgent of [IOS, ANDROID, DESKTOP]) {
+      const result = await run(state, `?m=${market}`, userAgent);
+      assert.ok(result.open.every((node) => node.hidden));
+      assert.ok(result.iosOpen.every((node) => node.hidden));
+      assert.ok(result.androidOpen.every((node) => node.hidden));
+      assert.ok(result.closed.every((node) => !node.hidden));
+      assert.ok(result.iosClosed.every((node) => !node.hidden));
+      assert.ok(result.androidClosed.every((node) => !node.hidden));
+      assert.equal(result.attrs['data-release-market'], market);
+    }
+  }
+});

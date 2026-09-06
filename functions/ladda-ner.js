@@ -30,6 +30,8 @@ export const PUBLIC_MARKETS = [
 export const TARGET_MARKET_CODES = [
   'SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT',
 ];
+// Förberedda, stängda marknader. Detta öppnar varken butik eller releaseclaim.
+export const UPCOMING_MARKET_CODES = ['US', 'GB'];
 
 export const MARKETS = {
   SE: { locale: 'sv', store: 'se', play: 'sv', gl: 'SE', campaign: 'webb', home: '/' },
@@ -45,6 +47,8 @@ export const MARKETS = {
   FR: { locale: 'fr', store: 'fr', play: 'fr', gl: 'FR', campaign: 'webb-fr', home: '/fr/' },
   ES: { locale: 'es', store: 'es', play: 'es', gl: 'ES', campaign: 'webb-es', home: '/es/' },
   IT: { locale: 'it', store: 'it', play: 'it', gl: 'IT', campaign: 'webb-it', home: '/it/' },
+  US: { locale: 'en', store: 'us', play: 'en', gl: 'US', campaign: 'webb-us', home: '/en/' },
+  GB: { locale: 'en', store: 'gb', play: 'en', gl: 'GB', campaign: 'webb-gb', home: '/en/' },
 };
 
 const DEFAULT_MARKET_FOR_LOCALE = {
@@ -166,6 +170,10 @@ export function onRequestGet({ request }) {
   const homeParams = new URLSearchParams();
   if (campaign) homeParams.set('c', campaign);
   if (url.searchParams.has('m')) homeParams.set('m', url.searchParams.get('m'));
+  else if (market && UPCOMING_MARKET_CODES.includes(market.gl)) {
+    // Behåll även GeoIP-upptäckt stängt land genom nästa sid-/språkbyte.
+    homeParams.set('m', market.gl);
+  }
   const homeSearch = homeParams.size ? `?${homeParams}` : '';
   let target = `${homeFor(url, market)}${homeSearch}#main-content`;
   if (market && platform && PUBLIC_BY_PLATFORM[platform].has(market.gl)) {

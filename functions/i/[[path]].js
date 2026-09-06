@@ -16,6 +16,7 @@ const PUBLISHED = ['sv', 'nb', 'da', 'en', 'fi', 'nl', 'de', 'fr', 'es', 'it', '
 const MARKET_LANG = {
   SE: 'sv', DK: 'da', NO: 'nb', IE: 'en', FI: 'fi', NL: 'nl', AT: 'de',
   PT: 'pt', BE: 'en', DE: 'de', FR: 'fr', ES: 'es', IT: 'it',
+  US: 'en', GB: 'en',
 };
 
 /** Sökvägen till den asset som ska serveras för ett språk. Svenskan ligger i
@@ -71,17 +72,21 @@ export function pickLang(header, published = PUBLISHED, country = '', explicit =
     const lang = base === 'no' ? 'nb' : base;
     if (published.includes(lang) && ASSET_FOR[lang]) return lang;
   }
-  const geoLang = MARKET_LANG[String(country || '').toUpperCase()];
+  const geoLang = MARKET_LANG[String(country || '').trim().toUpperCase()];
   if (geoLang && published.includes(geoLang) && ASSET_FOR[geoLang]) return geoLang;
   return 'sv';
 }
 
 export async function onRequest({ request, env }) {
   const url = new URL(request.url);
+  const explicitMarket = String(url.searchParams.get('m') || '').trim().toUpperCase();
+  const country = ['US', 'GB'].includes(explicitMarket)
+    ? explicitMarket
+    : request.cf?.country || request.headers.get('CF-IPCountry');
   const lang = pickLang(
     request.headers.get('accept-language'),
     PUBLISHED,
-    request.cf?.country || request.headers.get('CF-IPCountry'),
+    country,
     url.searchParams.get('l'),
   );
   url.pathname = ASSET_FOR[lang];

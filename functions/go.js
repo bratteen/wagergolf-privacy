@@ -36,6 +36,7 @@ const DEFAULT_LANG = 'sv';
 const MARKET_LANG = {
   SE: 'sv', DK: 'da', NO: 'nb', IE: 'en', FI: 'fi', NL: 'nl', AT: 'de',
   PT: 'pt', BE: 'en', DE: 'de', FR: 'fr', ES: 'es', IT: 'it',
+  US: 'en', GB: 'en',
 };
 
 function requestCountry(request) {
@@ -107,7 +108,9 @@ export function pickLang(url, request, published = PUBLISHED) {
     const lang = normalizeLang(range);
     if (published.includes(lang)) return lang;
   }
-  const geoLang = MARKET_LANG[requestCountry(request)];
+  const explicitMarket = String(url.searchParams.get('m') || '').trim().toUpperCase();
+  const country = ['US', 'GB'].includes(explicitMarket) ? explicitMarket : requestCountry(request);
+  const geoLang = MARKET_LANG[country];
   if (geoLang && published.includes(geoLang)) return geoLang;
   return DEFAULT_LANG;
 }

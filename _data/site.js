@@ -32,6 +32,9 @@ const PUBLIC_MARKETS = new Set([
 const TARGET_MARKET_CODES = [
   "SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT",
 ];
+// Kända kommande marknader är INTE del av den publicerade 1.7.1-releasen.
+// Flytta dem till TARGET först vid separat verifierad butikspromotion.
+const UPCOMING_MARKET_CODES = ["US", "GB"];
 
 const MARKETS = {
   SE: { locale: "sv", store: "se", play: "sv", gl: "SE", campaign: "webb", home: "/" },
@@ -47,6 +50,8 @@ const MARKETS = {
   FR: { locale: "fr", store: "fr", play: "fr", gl: "FR", campaign: "webb-fr", home: "/fr/" },
   ES: { locale: "es", store: "es", play: "es", gl: "ES", campaign: "webb-es", home: "/es/" },
   IT: { locale: "it", store: "it", play: "it", gl: "IT", campaign: "webb-it", home: "/it/" },
+  US: { locale: "en", store: "us", play: "en", gl: "US", campaign: "webb-us", home: "/en/" },
+  GB: { locale: "en", store: "gb", play: "en", gl: "GB", campaign: "webb-gb", home: "/en/" },
 };
 
 const DEFAULT_MARKET_FOR_LOCALE = {
@@ -54,7 +59,7 @@ const DEFAULT_MARKET_FOR_LOCALE = {
   de: "DE", fr: "FR", es: "ES", it: "IT", pt: "PT",
 };
 
-for (const code of TARGET_MARKET_CODES) {
+for (const code of [...TARGET_MARKET_CODES, ...UPCOMING_MARKET_CODES]) {
   MARKETS[code].code = code;
   MARKETS[code].public = PUBLIC_MARKETS.has(code);
   MARKETS[code].iosPublic = PUBLIC_MARKETS_BY_PLATFORM.ios.has(code);
@@ -148,6 +153,7 @@ module.exports = {
     courseCount: 3028,
     courseClaim: "3 000+",
     targetMarketCodes: TARGET_MARKET_CODES,
+    upcomingMarketCodes: UPCOMING_MARKET_CODES,
     publicMarketCodes: [...PUBLIC_MARKETS],
     publicMarketCodesByPlatform: {
       ios: [...PUBLIC_MARKETS_BY_PLATFORM.ios],

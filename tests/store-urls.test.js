@@ -8,7 +8,9 @@ const TARGETS = ['SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR
 
 test('releasekonfigurationen innehåller exakt de 13 beslutade marknaderna', () => {
   assert.deepStrictEqual(site.release.targetMarketCodes, TARGETS);
-  assert.deepStrictEqual(Object.keys(site.markets), TARGETS);
+  assert.deepStrictEqual(site.release.upcomingMarketCodes, ['US', 'GB']);
+  assert.deepStrictEqual(Object.keys(site.markets), [...TARGETS, 'US', 'GB']);
+  assert.deepStrictEqual(Object.keys(site.marketUrls), TARGETS);
 });
 
 test('varje webbspråk har en säker standard-storefront', () => {

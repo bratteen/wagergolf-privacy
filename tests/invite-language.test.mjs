@@ -35,7 +35,9 @@ test('inbjudningssidan använder marknaden när webbläsarspråket är okänt', 
   assert.strictEqual(pickLang('pl-PL', allLocales, 'DK'), 'da');
   assert.strictEqual(pickLang('pl-PL', allLocales, 'NO'), 'nb');
   assert.strictEqual(pickLang('pl-PL', allLocales, 'DE'), 'de');
-  assert.strictEqual(pickLang('pl-PL', allLocales, 'US'), 'sv');
+  assert.strictEqual(pickLang('pl-PL', allLocales, 'US'), 'en');
+  assert.strictEqual(pickLang('pl-PL', allLocales, 'GB'), 'en');
+  assert.strictEqual(pickLang('pl-PL', allLocales, 'CA'), 'sv');
 });
 
 test('ett uttryckligt invite-språk vinner över webbläsare och land', () => {

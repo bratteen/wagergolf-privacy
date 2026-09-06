@@ -31,7 +31,7 @@ test('GeoIP öppnar båda plattformarna i alla 13 marknader', async () => {
 });
 
 test('okänt land är fail-closed och svaret får inte delas mellan länder', async () => {
-  const { response, body } = await state('?m=US', 'SE');
+  const { response, body } = await state('?m=CA', 'SE');
   assert.deepStrictEqual(body, { market: null, public: false, ios: false, android: false });
   assert.strictEqual(response.headers.get('Cache-Control'), 'no-store');
   assert.strictEqual(response.headers.get('Vary'), 'CF-IPCountry');
