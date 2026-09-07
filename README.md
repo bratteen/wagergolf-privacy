@@ -106,6 +106,7 @@ Privacy Control, använder sidans statiska sökväg/titel och tar bort URL-param
 fragment, interna hänvisningar och identifierande eventfält. Externa hänvisningar
 begränsas till ursprung. Bara sidvisningar och de tre nedladdningshändelserna tillåts.
 Privata URL:er, okända händelser och felaktig konfiguration stoppar mätningen.
+Klickmätningen väntar aldrig på statistikservern innan en nedladdningslänk öppnas.
 
 ## Byta typsnitt
 

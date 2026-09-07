@@ -16,6 +16,7 @@ function setup({
 } = {}) {
   const attrs = { 'data-analytics-path': expectedPath, 'data-analytics-title': title };
   const appended = [];
+  const listeners = [];
   const configAttrs = { 'data-analytics-src': analyticsSource, 'data-website-id': website };
   const document = {
     title: 'Private dynamic title must never be sent',
@@ -27,6 +28,7 @@ function setup({
       assert.equal(tag, 'script');
       return { attrs: {}, setAttribute(name, value) { this.attrs[name] = value; } };
     },
+    addEventListener(type, callback, capture) { listeners.push({ type, callback, capture }); },
     head: {
       appendChild(script) {
         assert.equal(typeof context.wagerGolfBeforeSend, 'function', 'hooken måste finnas före leverantörens script');
@@ -52,7 +54,7 @@ function setup({
     url: href, title: 'Untrusted payload title', screen: '1440x900', language: 'en-US',
   };
   return {
-    payload, document, context, appended,
+    payload, document, context, appended, listeners,
     send(type = 'event', value = payload) {
       const result = context.wagerGolfBeforeSend(type, value);
       return result && JSON.parse(JSON.stringify(result));
@@ -197,6 +199,7 @@ test('leverantörens script laddas först efter hooken med alla integritetsspär
   assert.deepEqual(appended[0].attrs, {
     'data-website-id': WEBSITE,
     'data-before-send': 'wagerGolfBeforeSend',
+    'data-auto-track': 'false',
     'data-domains': 'wagergolf.se,www.wagergolf.se',
     'data-exclude-search': 'true',
     'data-exclude-hash': 'true',
@@ -259,4 +262,111 @@ test('varje retur skapas på nytt även när samma payload används flera gånge
   assert.notEqual(first, second);
   assert.equal(second.id, undefined);
   assert.equal(second.screen, undefined);
+});
+
+function downloadTarget(name = 'app-store-klick', place = 'guide-inline') {
+  const attributes = {
+    'data-umami-event': name, 'data-umami-event-plats': place,
+    'data-umami-event-email': 'private@example.test',
+  };
+  const link = {
+    href: '/ladda-ner?l=en&p=ios&c=guides',
+    getAttribute: key => attributes[key] ?? null,
+    closest: selector => selector === 'a[data-umami-event]' ? link : null,
+  };
+  return link;
+}
+
+test('onload skickar exakt en sidvisning och installerar en capture-lyssnare', () => {
+  const { context, appended, listeners } = setup();
+  const calls = [];
+  context.umami = { track(...args) { calls.push(args); return Promise.resolve(); } };
+  appended[0].onload();
+  appended[0].onload();
+  assert.deepEqual(calls, [[]]);
+  assert.equal(listeners.length, 1);
+  assert.equal(listeners[0].type, 'click');
+  assert.equal(listeners[0].capture, true);
+});
+
+test('en nätverkspromise som aldrig avslutas fördröjer eller förändrar inte klicket', () => {
+  const { context, appended, listeners } = setup();
+  const calls = [];
+  context.umami = { track(...args) { calls.push(args); return new Promise(() => {}); } };
+  appended[0].onload();
+  const link = downloadTarget();
+  const nestedSpan = { closest: selector => selector === 'a[data-umami-event]' ? link : null };
+  const event = {
+    target: nestedSpan, defaultPrevented: false, ctrlKey: true,
+    preventDefault() { assert.fail('analytics får inte stoppa länken'); },
+    stopPropagation() { assert.fail('analytics får inte stoppa andra händelsehanterare'); },
+    stopImmediatePropagation() { assert.fail('analytics får inte stoppa andra händelsehanterare'); },
+  };
+  const href = context.location.href;
+  const destination = link.href;
+  assert.equal(listeners[0].callback(event), undefined, 'klicklyssnaren får inte returnera en nätverkspromise');
+  assert.equal(event.defaultPrevented, false);
+  assert.equal(context.location.href, href);
+  assert.equal(link.href, destination);
+  assert.equal(calls.length, 2);
+  assert.deepEqual(JSON.parse(JSON.stringify(calls[1])), ['app-store-klick', { plats: 'guide-inline' }]);
+});
+
+test('de tre markerade nedladdningslänkarna spåras även från nästlade textnoder', () => {
+  const { context, appended, listeners } = setup();
+  const calls = [];
+  context.umami = { track(...args) { calls.push(args); } };
+  appended[0].onload();
+  for (const name of ['app-store-klick', 'play-store-klick', 'ladda-ner-klick']) {
+    const parentElement = downloadTarget(name, 'nav');
+    listeners[0].callback({ target: { nodeType: 3, parentElement } });
+  }
+  assert.deepEqual(JSON.parse(JSON.stringify(calls.slice(1))), [
+    ['app-store-klick', { plats: 'nav' }],
+    ['play-store-klick', { plats: 'nav' }],
+    ['ladda-ner-klick', { plats: 'nav' }],
+  ]);
+});
+
+test('omarkerade, okända eller redan stoppade klick ignoreras', () => {
+  const { context, appended, listeners } = setup();
+  const calls = [];
+  context.umami = { track(...args) { calls.push(args); } };
+  appended[0].onload();
+  for (const event of [
+    null, {}, { target: {} }, { target: { closest: () => null } },
+    { target: downloadTarget('private-event', 'nav') },
+    { target: downloadTarget('app-store-klick', 'private-place') },
+    { target: downloadTarget(), defaultPrevented: true },
+  ]) {
+    listeners[0].callback(event);
+  }
+  assert.deepEqual(calls, [[]]);
+});
+
+test('saknad tracker, nätverksfel och senare GPC hindrar aldrig sidans klick', async () => {
+  const missing = setup();
+  assert.doesNotThrow(() => missing.appended[0].onload());
+  assert.equal(missing.listeners.length, 0);
+
+  const throwing = setup();
+  throwing.context.umami = { track() { throw new Error('network unavailable'); } };
+  assert.doesNotThrow(() => throwing.appended[0].onload());
+  assert.doesNotThrow(() => throwing.listeners[0].callback({ target: downloadTarget() }));
+  delete throwing.context.umami;
+  assert.doesNotThrow(() => throwing.listeners[0].callback({ target: downloadTarget() }));
+
+  const rejected = setup();
+  rejected.context.umami = { track() { return Promise.reject(new Error('network unavailable')); } };
+  rejected.appended[0].onload();
+  rejected.listeners[0].callback({ target: downloadTarget() });
+  await new Promise(resolve => setImmediate(resolve));
+
+  const privatePage = setup();
+  let count = 0;
+  privatePage.context.umami = { track() { count++; } };
+  privatePage.appended[0].onload();
+  privatePage.context.navigator.globalPrivacyControl = true;
+  privatePage.listeners[0].callback({ target: downloadTarget() });
+  assert.equal(count, 1);
 });

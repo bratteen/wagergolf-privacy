@@ -107,11 +107,44 @@
   tracker.referrerPolicy = 'no-referrer';
   tracker.setAttribute('data-website-id', website);
   tracker.setAttribute('data-before-send', 'wagerGolfBeforeSend');
+  tracker.setAttribute('data-auto-track', 'false');
   tracker.setAttribute('data-domains', 'wagergolf.se,www.wagergolf.se');
   tracker.setAttribute('data-exclude-search', 'true');
   tracker.setAttribute('data-exclude-hash', 'true');
   tracker.setAttribute('data-do-not-track', 'true');
   tracker.setAttribute('data-performance', 'false');
   tracker.setAttribute('data-fetch-credentials', 'omit');
+
+  function track(name, data) {
+    try {
+      if (!pageContext() || !window.umami || typeof window.umami.track !== 'function') return;
+      var pending = name ? window.umami.track(name, data) : window.umami.track();
+      if (pending && typeof pending.catch === 'function') pending.catch(function () {});
+    } catch (e) {
+      // Statistik får aldrig påverka butiksknappen om leverantören misslyckas.
+    }
+  }
+
+  var started = false;
+  tracker.onload = function () {
+    if (started || !pageContext() || !window.umami || typeof window.umami.track !== 'function') return;
+    started = true;
+    track();
+    // Umamis automatiska klicklyssnare väntar på nätverkssvaret innan länken
+    // öppnas. Vår lyssnare observerar bara klicket och låter webbläsaren och
+    // sidans övriga händelsehanterare sköta navigationen omedelbart.
+    document.addEventListener('click', function (event) {
+      if (!event || event.defaultPrevented) return;
+      var target = event.target;
+      if (target && target.nodeType === 3) target = target.parentElement;
+      if (!target || typeof target.closest !== 'function') return;
+      var link = target.closest('a[data-umami-event]');
+      if (!link) return;
+      var name = link.getAttribute('data-umami-event');
+      var place = link.getAttribute('data-umami-event-plats');
+      if (names.indexOf(name) === -1 || places.indexOf(place) === -1) return;
+      track(name, { plats: place });
+    }, true);
+  };
   document.head.appendChild(tracker);
 })();
