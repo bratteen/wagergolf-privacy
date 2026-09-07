@@ -37,3 +37,12 @@ Den riktiga Umami-trackern har också körts med guarden i en isolerad VM där
 nätverksanrop fångas, för att kontrollera kompatibilitet och rensade payloads.
 Desktop- och mobilvisning av sidfotens information har granskats visuellt.
 Databasens befintliga historik och serverinställningar har lämnats orörda.
+
+Slutversionen `1dbadca` publicerades som `4f7e3f22.wagergolf.pages.dev`.
+Hela `npm run check` passerade: 306 tester, legal-page-check och HTML-validering.
+Elva HTTP-kontroller av publika/skyddade sidor och stängda US/GB-marknader
+passerade efter publicering. Den riktiga webbläsaren öppnade App Store korrekt.
+Databasen bekräftade därefter både `ladda-ner-klick` och `app-store-klick` samt
+nya sidvisningar den 7 september. Dagens events innehöll inga URL-queries,
+fragment, privata inbjudningsadresser eller referrer-queries. Testtrafiken består
+av tre sidvisningar och två klick vid slutkontrollen 12:07 UTC.
