@@ -93,6 +93,20 @@ Cloudflare Pages kan injicera Web Analytics från dashboarden. De sökvägsspeci
 CSP-reglerna i `_headers` blockerar script på juridiksidorna, men kontrollera
 även dashboardens automatiska Web Analytics-inställning efter deploy.
 
+## Webbstatistik
+
+Umami mäter publika marknadssidor och befintliga nedladdningsknappar. Konfigurationen
+finns i `_data/site.js`; besökarinformationen i `_data/analyticsNotice.js` visas i
+sidfoten på alla publicerade språk. Juridiksidor, privata inbjudningar och felsidor
+saknar mätkod. Sessionsinspelningar och Cloudflare-beacon är avstängda.
+
+`assets/js/analytics-guard.js` installerar ett filter innan Umami får laddas.
+Endast produktionsdomänerna tillåts. Filtret respekterar Do Not Track och Global
+Privacy Control, använder sidans statiska sökväg/titel och tar bort URL-parametrar,
+fragment, interna hänvisningar och identifierande eventfält. Externa hänvisningar
+begränsas till ursprung. Bara sidvisningar och de tre nedladdningshändelserna tillåts.
+Privata URL:er, okända händelser och felaktig konfiguration stoppar mätningen.
+
 ## Byta typsnitt
 
 Redigera `scripts/fetch-fonts.js` (CSS_URL), kör `node scripts/fetch-fonts.js`,

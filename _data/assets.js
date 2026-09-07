@@ -23,6 +23,7 @@ module.exports = {
   css: hash("assets/css/site.css"),
   fonts: hash("assets/fonts/fonts.css"),
   replay: hash("assets/js/replay-sample.js"),
+  analyticsGuard: hash("assets/js/analytics-guard.js"),
   releaseStatus: hash("assets/js/release-status.js"),
   mobileMenu: hash("assets/js/mobile-menu.js"),
   download: hash("assets/js/download-link.js"),

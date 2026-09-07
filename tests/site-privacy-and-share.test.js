@@ -13,23 +13,48 @@ const INVITE_OUTPUTS = routes.publishedLocales.map((lang) => {
   return prefix ? `${prefix}/i/index.html` : 'i/index.html';
 });
 
-test('webbstatistik och session replay är avstängda', () => {
+test('publika sidor laddar endast integritetsfiltret; replay och Cloudflare är avstängda', () => {
   assert.strictEqual(site.cfBeaconToken, '');
   assert.deepStrictEqual(site.umami, {
-    src: '',
+    src: 'https://analytics.bratt.se/script.js',
     recorderSrc: '',
     replaySampleRate: 0,
-    websiteId: '',
+    websiteId: 'ae56fbfa-4ce4-480b-af6a-62f20282b414',
   });
 
-  for (const file of ['index.html', ...INVITE_OUTPUTS]) {
-    const html = fs.readFileSync(path.join(ROOT, '_site', file), 'utf8');
-    assert.ok(!html.includes('analytics.bratt.se'), file);
-    assert.ok(!html.includes('replay-sample.js'), file);
+  const notices = require('../_data/analyticsNotice.js');
+  for (const lang of routes.publishedLocales) {
+    const pathname = routes.homeFor(lang);
+    const html = fs.readFileSync(path.join(ROOT, '_site', pathname, 'index.html'), 'utf8');
+    assert.match(html, /<script defer src="\/assets\/js\/analytics-guard\.js\?v=[a-f0-9]+"/);
+    assert.ok(html.includes(`data-analytics-path="${pathname}"`), lang);
+    assert.ok(html.includes('data-analytics-title="'), lang);
+    assert.ok(html.includes(`data-website-id="${site.umami.websiteId}"`), lang);
+    assert.ok(html.includes(`data-analytics-src="${site.umami.src}"`), lang);
+    assert.ok(html.includes(notices[lang].title), lang);
+    assert.match(html, /<div data-nosnippet>\s*<details class="analytics-notice">/);
+    assert.doesNotMatch(html, /<script[^>]+\ssrc="https:\/\/analytics\.bratt\.se/);
+    assert.doesNotMatch(html, /replay-sample\.js|recorder\.js|cloudflareinsights\.com/);
   }
+});
 
+test('privata inbjudningar, juridiksidor och 404 har ingen mätkod eller sidkonfiguration', () => {
+  for (const file of ['404.html', 'privacy/index.html', 'terms/index.html', ...INVITE_OUTPUTS]) {
+    const html = fs.readFileSync(path.join(ROOT, '_site', file), 'utf8');
+    assert.doesNotMatch(html, /analytics\.bratt\.se|analytics-guard\.js|data-analytics-path|data-analytics-title|replay-sample\.js|cloudflareinsights\.com/, file);
+  }
+});
+
+test('CSP tillåter Umami på marknadssidor och bevarar strikta juridiksidor', () => {
   const headers = fs.readFileSync(path.join(ROOT, '_headers'), 'utf8');
-  assert.ok(!headers.includes('analytics.bratt.se'));
+  const [global, privacy, terms] = headers.split(/\n\n/);
+  assert.match(global, /script-src 'self' https:\/\/analytics\.bratt\.se;/);
+  assert.match(global, /connect-src 'self' https:\/\/api\.wagergolf\.se https:\/\/analytics\.bratt\.se;/);
+  for (const protectedHeaders of [privacy, terms]) {
+    assert.doesNotMatch(protectedHeaders, /analytics\.bratt\.se/);
+    assert.match(protectedHeaders, /script-src 'none';/);
+    assert.match(protectedHeaders, /connect-src 'none';/);
+  }
   assert.ok(!headers.includes('cloudflareinsights.com'));
   assert.ok(!headers.includes('static.cloudflareinsights.com'));
 });

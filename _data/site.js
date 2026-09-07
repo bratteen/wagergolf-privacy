@@ -176,21 +176,21 @@ module.exports = {
   email: "bratt.gustaf@gmail.com",
   // Site-bred, språk- och leverantörsneutral delningsbild (1200x630).
   ogImage: "https://wagergolf.se/assets/og-image-v171.png",
-  // Webbstatistik är avstängd även i CSP. Cloudflares automatiska injektion
-  // ska också vara avstängd i Pages-dashboarden.
+  // Cloudflares automatiska analytics-injektion ska också vara avstängd
+  // i Pages-dashboarden. Endast den avgränsade Umami-mätningen används.
   cfBeaconToken: "",
   // IndexNow: pingar Bing och Yandex om nya och ändrade sidor vid deploy.
   // Nyckeln verifieras genom att samma värde ligger på /<nyckel>.txt, vilket
   // indexnow-key.njk genererar. Byt nyckel = byt här, filen följer med.
   indexNowKey: "9805c5c7f3a5db12b21946ca4bf08f89",
-  // Webbstatistik och session replay är avstängda. Återaktivera dem först när
-  // besökaren har fått korrekt information och eventuell samtyckeslösning är på
-  // plats. Det är särskilt viktigt för /i/<token>, där URL och sidinnehåll kan
-  // innehålla en privat inbjudan.
+  // Publika marknadssidor mäts via analytics-guard.js. Privata inbjudningar,
+  // juridiksidor och felsidor saknar mätkod. Sidfoten beskriver behandlingen.
+  // Guard laddar Umami först efter integritetskontroller och rensar varje event.
+  // Session replay förblir avstängt.
   umami: {
-    src: "",
+    src: "https://analytics.bratt.se/script.js",
     recorderSrc: "",
     replaySampleRate: 0,
-    websiteId: "",
+    websiteId: "ae56fbfa-4ce4-480b-af6a-62f20282b414",
   },
 };
