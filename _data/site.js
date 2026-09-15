@@ -13,7 +13,7 @@ const PLAY_STORE_URL =
 const APPLE_PROVIDER_TOKEN = "128879444";
 
 // Språk och marknad är två skilda saker. Sajten finns på samma elva språk som
-// appen, medan version 1.7.1 är förberedd för 13 storefronts. Tyska betjänar
+// appen, medan nedladdningen stöder 15 storefronts. Tyska betjänar
 // både DE och AT. Belgien är flerspråkigt och har engelska som GeoIP-default;
 // webbläsarspråk eller ett uttryckligt språkval väljer nederländska/franska.
 //
@@ -22,19 +22,19 @@ const APPLE_PROVIDER_TOKEN = "128879444";
 // butiken. Unionen används bara för övergripande webbstatus; /ladda-ner
 // kontrollerar alltid rätt plattform separat.
 const PUBLIC_MARKETS_BY_PLATFORM = {
-  ios: new Set(["SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT"]),
-  android: new Set(["SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT"]),
+  ios: new Set(["SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT", "US", "GB"]),
+  android: new Set(["SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT", "US", "GB"]),
 };
 const PUBLIC_MARKETS = new Set([
   ...PUBLIC_MARKETS_BY_PLATFORM.ios,
   ...PUBLIC_MARKETS_BY_PLATFORM.android,
 ]);
 const TARGET_MARKET_CODES = [
-  "SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT",
+  "SE", "DK", "NO", "IE", "FI", "NL", "AT", "PT", "BE", "DE", "FR", "ES", "IT", "US", "GB",
 ];
-// Kända kommande marknader är INTE del av den publicerade 1.7.1-releasen.
-// Flytta dem till TARGET först vid separat verifierad butikspromotion.
-const UPCOMING_MARKET_CODES = ["US", "GB"];
+// USA och Storbritannien är publicerade på båda plattformarna. Nya förberedda
+// marknader kan läggas här utan att öppna någon butik före deras lansering.
+const UPCOMING_MARKET_CODES = [];
 
 const MARKETS = {
   SE: { locale: "sv", store: "se", play: "sv", gl: "SE", campaign: "webb", home: "/" },
@@ -164,7 +164,7 @@ module.exports = {
   marketUrls,
   localeRelease,
   downloadUrls,
-  // En standardbutik per webbspråk. Engelska går till Irland, aldrig USA.
+  // En standardbutik per webbspråk. Engelska behåller Irland som standard.
   // Själva CTA-mallarna använder downloadUrls så GeoIP kan välja rätt land.
   storeUrls,
   // Alias för svenskan, så äldre referenser inte går sönder.

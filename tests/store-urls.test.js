@@ -4,12 +4,12 @@ const fs = require('node:fs');
 const path = require('node:path');
 const site = require('../_data/site.js');
 
-const TARGETS = ['SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT'];
+const TARGETS = ['SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT', 'US', 'GB'];
 
-test('releasekonfigurationen innehåller exakt de 13 beslutade marknaderna', () => {
+test('releasekonfigurationen innehåller exakt de 15 beslutade marknaderna', () => {
   assert.deepStrictEqual(site.release.targetMarketCodes, TARGETS);
-  assert.deepStrictEqual(site.release.upcomingMarketCodes, ['US', 'GB']);
-  assert.deepStrictEqual(Object.keys(site.markets), [...TARGETS, 'US', 'GB']);
+  assert.deepStrictEqual(site.release.upcomingMarketCodes, []);
+  assert.deepStrictEqual(Object.keys(site.markets), TARGETS);
   assert.deepStrictEqual(Object.keys(site.marketUrls), TARGETS);
 });
 
@@ -35,7 +35,7 @@ test('kampanjnamnen är marknadsbaserade och engelska standarden är Irland', ()
   assert.strictEqual(site.storeUrls.en.campaign, 'webb-ie');
 });
 
-test('App Store och Google Play är öppna i alla 13 marknader', () => {
+test('App Store och Google Play är öppna i alla 15 marknader', () => {
   assert.deepStrictEqual(site.release.publicMarketCodes, TARGETS);
   assert.deepStrictEqual(site.release.publicMarketCodesByPlatform, {
     ios: TARGETS,

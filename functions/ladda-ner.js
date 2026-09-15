@@ -1,5 +1,5 @@
 // /ladda-ner väljer både plattform och rätt storefront. Språk, marknad och
-// release-status är separata: elva webbspråk täcker 13 marknader och bara en
+// release-status är separata: elva webbspråk täcker 15 marknader och bara en
 // marknad som uttryckligen är öppen för rätt plattform får en
 // butiksomdirigering.
 //
@@ -18,8 +18,8 @@ const PLAY_ID = 'com.bratteen.wagergolf';
 const APPLE_PROVIDER_TOKEN = '128879444';
 
 export const PUBLIC_MARKETS_BY_PLATFORM = {
-  ios: ['SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT'],
-  android: ['SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT'],
+  ios: ['SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT', 'US', 'GB'],
+  android: ['SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT', 'US', 'GB'],
 };
 export const PUBLIC_MARKETS = [
   ...new Set([
@@ -28,10 +28,10 @@ export const PUBLIC_MARKETS = [
   ]),
 ];
 export const TARGET_MARKET_CODES = [
-  'SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT',
+  'SE', 'DK', 'NO', 'IE', 'FI', 'NL', 'AT', 'PT', 'BE', 'DE', 'FR', 'ES', 'IT', 'US', 'GB',
 ];
 // Förberedda, stängda marknader. Detta öppnar varken butik eller releaseclaim.
-export const UPCOMING_MARKET_CODES = ['US', 'GB'];
+export const UPCOMING_MARKET_CODES = [];
 
 export const MARKETS = {
   SE: { locale: 'sv', store: 'se', play: 'sv', gl: 'SE', campaign: 'webb', home: '/' },
@@ -92,7 +92,7 @@ export function resolveMarket(url, headers, cfCountry = '') {
   const geoCode = cfCountry || headers.get('CF-IPCountry');
   if (geoCode) {
     const geo = marketFor(geoCode);
-    // Cloudflare känner ibland igen en besökare utanför de 13 marknaderna.
+    // Cloudflare känner ibland igen en besökare utanför de 15 marknaderna.
     // En sådan träff får aldrig falla vidare till engelska standardmarknaden
     // Irland och därmed skapa en butikslänk utanför lanseringsområdet.
     return { market: geo, invalidExplicitMarket: !geo };

@@ -66,7 +66,7 @@ test('Android-UA i Sverige öppnar den svenska Google Play-listningen', async ()
   assert.match(decodeURIComponent(target.searchParams.get('referrer')), /utm_campaign=webb/);
 });
 
-test('Android öppnar rätt Google Play-listning i alla 13 marknader', async () => {
+test('Android öppnar rätt Google Play-listning i alla 15 marknader', async () => {
   for (const code of TARGET_MARKET_CODES) {
     const res = await onRequestGet({
       request: req(`https://wagergolf.se/ladda-ner?m=${code}&p=android`, DESKTOP),
@@ -85,7 +85,7 @@ test('Android öppnar rätt Google Play-listning i alla 13 marknader', async () 
   }
 });
 
-test('iOS öppnar rätt App Store i alla 13 marknader', async () => {
+test('iOS öppnar rätt App Store i alla 15 marknader', async () => {
   for (const code of TARGET_MARKET_CODES) {
     const res = await onRequestGet({
       request: req(`https://wagergolf.se/ladda-ner?m=${code}&p=ios`, DESKTOP),
@@ -180,7 +180,7 @@ test('okänd explicit marknad är fail-closed', async () => {
   assert.strictEqual(res.headers.get('Location'), '/en/?m=CA#main-content');
 });
 
-test('GeoIP utanför de 13 marknaderna faller inte vidare till Irland', () => {
+test('GeoIP utanför de 15 marknaderna faller inte vidare till Irland', () => {
   const resolved = resolveMarket(
     new URL('https://wagergolf.se/ladda-ner?l=en&p=ios'),
     new Headers({ 'CF-IPCountry': 'CA' }),
@@ -243,8 +243,8 @@ test('desktop-returen bevarar sanerad kampanj med c före utm_campaign', async (
   }
 });
 
-test('guidekampanjer öppnar aldrig US, GB eller en ogiltig explicit marknad', async () => {
-  for (const market of ['US', 'GB', 'USA', '']) {
+test('guidekampanjer öppnar aldrig en okänd eller ogiltig explicit marknad', async () => {
+  for (const market of ['CA', 'AU', 'USA', 'UK', '']) {
     for (const platform of ['ios', 'android']) {
       const res = await onRequestGet({
         request: reqWithCf(`https://wagergolf.se/ladda-ner?l=en&m=${market}&p=${platform}&c=guides`, 'SE', IPHONE),
@@ -255,7 +255,7 @@ test('guidekampanjer öppnar aldrig US, GB eller en ogiltig explicit marknad', a
       assert.strictEqual(target.searchParams.get('c'), 'guides');
       assert.strictEqual(target.searchParams.get('m'), market);
       const resolved = resolveMarket(target, new Headers(), 'SE').market;
-      assert.strictEqual(resolved?.gl ?? null, ['US', 'GB'].includes(market) ? market : null);
+      assert.strictEqual(resolved, null);
       assert.ok(!PUBLIC_MARKETS_BY_PLATFORM[platform].includes(resolved?.gl));
     }
   }

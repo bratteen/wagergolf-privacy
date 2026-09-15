@@ -15,25 +15,26 @@ const request = (path, country = '', headers = {}) => {
   return value;
 };
 
-test('US och GB är kända men saknar publika länkar och releaseclaims', () => {
-  assert.deepEqual(UPCOMING_MARKET_CODES, ['US', 'GB']);
+test('US och GB är publika på båda plattformarna och inga marknader väntar', () => {
+  assert.deepEqual(UPCOMING_MARKET_CODES, []);
   assert.deepEqual(site.release.upcomingMarketCodes, UPCOMING_MARKET_CODES);
-  assert.equal(site.release.version, '1.7.1');
-  assert.equal(site.release.courseCount, 3028);
-  assert.equal(site.release.courseClaim, '3 000+');
-  assert.equal(site.release.targetMarketCodes.length, 13);
-  for (const market of UPCOMING_MARKET_CODES) {
+  assert.equal(site.release.targetMarketCodes.length, 15);
+  for (const market of ['US', 'GB']) {
     assert.equal(site.markets[market].locale, 'en');
     assert.equal(site.markets[market].home, '/en/');
-    assert.equal(site.markets[market].public, false);
-    assert.equal(site.markets[market].iosPublic, false);
-    assert.equal(site.markets[market].androidPublic, false);
-    assert.equal(site.marketUrls[market], undefined);
-    assert.equal(site.release.targetMarketCodes.includes(market), false);
+    assert.equal(site.markets[market].public, true);
+    assert.equal(site.markets[market].iosPublic, true);
+    assert.equal(site.markets[market].androidPublic, true);
+    assert.equal(site.markets[market].store, market.toLowerCase());
+    assert.match(site.marketUrls[market].appStore, new RegExp(`^https://apps\\.apple\\.com/${market.toLowerCase()}/`));
+    assert.equal(new URL(site.marketUrls[market].playStore).searchParams.get('gl'), market);
+    assert.equal(site.release.targetMarketCodes.includes(market), true);
     for (const platform of ['ios', 'android']) {
-      assert.equal(PUBLIC_MARKETS_BY_PLATFORM[platform].includes(market), false);
+      assert.equal(PUBLIC_MARKETS_BY_PLATFORM[platform].includes(market), true);
     }
   }
+  // Engelska behåller Irland som standardbutik; USA och Storbritannien nås
+  // bara via uttryckligt land eller GeoIP.
   assert.equal(site.localeRelease.en.public, true);
   assert.equal(site.localeRelease.en.defaultMarket, 'IE');
   assert.equal(site.storeUrls.en.campaign, 'webb-ie');
@@ -42,7 +43,7 @@ test('US och GB är kända men saknar publika länkar och releaseclaims', () => 
 });
 
 for (const market of ['US', 'GB']) {
-  test(`${market} förblir stängt via explicit land, Workers GeoIP och header på båda plattformar`, async () => {
+  test(`${market} öppnar rätt storefront via explicit land, Workers GeoIP och header på båda plattformar`, async () => {
     for (const platform of ['ios', 'android']) {
       const cases = [
         request(`/ladda-ner?m=${market}&p=${platform}&c=guides`, 'IE'),
@@ -52,16 +53,22 @@ for (const market of ['US', 'GB']) {
       for (const value of cases) {
         const response = download({ request: value });
         assert.equal(response.status, 302);
-        const target = new URL(response.headers.get('Location'), ORIGIN);
-        assert.equal(target.origin, ORIGIN);
-        assert.equal(target.pathname, '/en/');
-        assert.equal(target.searchParams.get('m'), market);
-        assert.equal(target.searchParams.get('c'), 'guides');
-        const status = await marketStatus({ request: request('/market-status' + target.search, 'IE') }).json();
-        assert.deepEqual(status, { market, public: false, ios: false, android: false });
+        const target = new URL(response.headers.get('Location'));
+        if (platform === 'ios') {
+          assert.equal(target.hostname, 'apps.apple.com');
+          assert.equal(target.pathname, `/${market.toLowerCase()}/app/id6767638917`);
+          assert.equal(target.searchParams.get('ct'), 'guides');
+        } else {
+          assert.equal(target.hostname, 'play.google.com');
+          assert.equal(target.searchParams.get('gl'), market);
+          assert.equal(target.searchParams.get('hl'), 'en');
+          assert.equal(new URLSearchParams(target.searchParams.get('referrer')).get('utm_campaign'), 'guides');
+        }
         assert.equal(response.headers.get('Cache-Control'), 'no-store');
       }
     }
+    const status = await marketStatus({ request: request(`/market-status?m=${market}`, 'IE') }).json();
+    assert.deepEqual(status, { market, public: true, ios: true, android: true });
   });
 
   test(`${market} QR-länk väljer English och bevarar stängd marknad utan butikshopp`, () => {
