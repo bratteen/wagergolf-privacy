@@ -79,7 +79,7 @@
   </div>
 
   <h1>Integritetspolicy för Wager Golf</h1>
-  <p class="meta">Senast uppdaterad: 1 september 2026 · Version 4.2</p>
+  <p class="meta">Senast uppdaterad: 24 september 2026 · Version 4.3</p>
 
   <h2>Sammanfattning</h2>
   <p>
@@ -101,7 +101,7 @@
 
   <h2>Ikraftträdande och appversioner</h2>
   <p>
-    Version 4.2 av policyn gäller från 1 september 2026. Avsnittet om
+    Version 4.3 av policyn gäller från 24 september 2026. Avsnittet om
     annonsmätning gäller endast appversioner där funktionen ingår; äldre
     appversioner börjar inte samla in dessa uppgifter retroaktivt. Det
     detaljerade, checkpointade
@@ -136,7 +136,7 @@
     </li>
     <li>
       <strong>Handle</strong> (unik <code>@användarnamn</code>): valt vid
-      registrering, visas för andra inloggade användare, används för att
+      registrering (appen föreslår ett utifrån ditt namn, som du kan ändra), visas för andra inloggade användare, används för att
       kompisar ska kunna hitta dig och som supportnamn hos RevenueCat. Handle
       lämnas inte ut via en publik inbjudningslänk.
     </li>
@@ -401,6 +401,19 @@
     telefonens notisinställningar.
   </p>
 
+  <h3>Expo appuppdateringar (EAS Update)</h3>
+  <p>
+    Från appversion 1.9.0 frågar appen vid start
+    <a href="https://docs.expo.dev/eas-update/introduction/">Expo EAS Update</a>
+    om det finns en ny version av appens kod, så att rättningar kan nå dig
+    utan en ny nedladdning från butiken. Förfrågan innehåller IP-adress,
+    plattform, appversion, uppdateringskanal, vilken kodversion som är
+    installerad och ett slumpat installations-ID som Expo använder för att
+    fördela uppdateringar. Installations-ID:t skapas av appen, kopplas inte
+    till ditt Wager Golf-konto och finns kvar tills appen avinstalleras.
+    Inga uppgifter om ditt konto, dina rundor eller insatser skickas.
+  </p>
+
   <h3>GolfAPI.io</h3>
   <p>
     Bandata för över 3 000 golfbanor i de 13 marknader som anges ovan, med par,
@@ -552,7 +565,9 @@
     inget anonymt analysflöde före inloggning. GeoIP, remote config, surveys,
     automatiska URL-/livscykelhändelser, session replay och autocapture är
     avstängda. Ditt Supabase-UUID används som ett pseudonymt distinct ID för
-    att hålla samma kontos events samman.
+    att hålla samma kontos events samman. Den hemmamarknad du valt (en
+    landskod) sparas som egenskap på den pseudonyma analysprofilen, så att
+    statistiken kan delas per land utan GeoIP.
   </p>
   <p>
     GPS-position, valt bana-ID, inbjudningslänk eller token, konto-, runda-
@@ -765,7 +780,7 @@
 
   <section lang="en">
   <h2 id="english">Privacy Policy · Wager Golf</h2>
-  <p class="meta">Last updated: September 1, 2026 · Version 4.2</p>
+  <p class="meta">Last updated: September 24, 2026 · Version 4.3</p>
 
   <h2>Summary</h2>
   <p>
@@ -787,7 +802,7 @@
 
   <h2>Effective date and app versions</h2>
   <p>
-    Version 4.2 of this policy applies from September 1, 2026. The advertising-
+    Version 4.3 of this policy applies from September 24, 2026. The advertising-
     measurement section applies only to app versions that include that feature;
     older app versions do not begin collecting this data retroactively. The
     detailed checkpointed flow in
@@ -822,7 +837,7 @@
     </li>
     <li>
       <strong>Handle</strong> (unique <code>@username</code>): chosen at
-      registration, shown to other signed-in users, used so friends can find
+      registration (the app suggests one based on your name, which you can change), shown to other signed-in users, used so friends can find
       you and as a support display name in RevenueCat. Your handle is not
       returned by a public invitation link.
     </li>
@@ -1087,6 +1102,19 @@
     Your phone's notification settings control what appears on the lock screen.
   </p>
 
+  <h3>Expo app updates (EAS Update)</h3>
+  <p>
+    From app version 1.9.0, the app asks
+    <a href="https://docs.expo.dev/eas-update/introduction/">Expo EAS Update</a>
+    at launch whether a newer version of the app's code is available, so fixes
+    can reach you without a new download from the store. The request contains
+    the IP address, platform, app version, update channel, which code version
+    is installed and a random installation ID that Expo uses to distribute
+    updates. The installation ID is created by the app, is not linked to your
+    Wager Golf account and remains until the app is uninstalled. No data about
+    your account, rounds or stakes is sent.
+  </p>
+
   <h3>GolfAPI.io</h3>
   <p>
     Course data for more than 3,000 golf courses in the 13 markets listed
@@ -1239,7 +1267,9 @@
     anonymous analytics flow before sign-in. GeoIP, remote config, surveys,
     automatic URL/lifecycle events, session replay and autocapture are
     disabled. Your Supabase UUID is used as a pseudonymous distinct ID to
-    group events for the same account.
+    group events for the same account. The home market you selected (a
+    country code) is stored as a property on the pseudonymous analytics
+    profile so statistics can be split by country without GeoIP.
   </p>
   <p>
     GPS position, selected course ID, invitation link or token, account,
