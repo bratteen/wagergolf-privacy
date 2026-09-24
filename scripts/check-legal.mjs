@@ -42,11 +42,15 @@ for (const name of ['privacySource', 'termsSource', 'privacyBuilt', 'termsBuilt'
 
 for (const name of ['privacySource', 'privacyBuilt']) {
   const text = files[name];
-  requireCount(name, text, 'Version 4.2', 4);
-  requireText(name, text, 'Senast uppdaterad: 1 september 2026');
-  requireText(name, text, 'Last updated: September 1, 2026');
-  requireText(name, text, 'Version 4.2 av policyn gäller från 1 september 2026');
-  requireText(name, text, 'Version 4.2 of this policy applies from September 1, 2026');
+  requireCount(name, text, 'Version 4.3', 4);
+  requireText(name, text, 'Senast uppdaterad: 24 september 2026');
+  requireText(name, text, 'Last updated: September 24, 2026');
+  requireText(name, text, 'Version 4.3 av policyn gäller från 24 september 2026');
+  requireText(name, text, 'Version 4.3 of this policy applies from September 24, 2026');
+  requireText(name, text, 'Expo appuppdateringar (EAS Update)');
+  requireText(name, text, 'Expo app updates (EAS Update)');
+  requireText(name, text, 'kopplas inte');
+  requireText(name, text, 'is not linked to your');
   requireText(name, text, 'aktiverades och verifierades i produktion den 17 juli 2026');
   requireText(name, text, 'activated and verified in production on');
   requireText(name, text, 'automatiskt dataminimerad produktanalys');
